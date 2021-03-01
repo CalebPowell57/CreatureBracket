@@ -19,14 +19,22 @@ import { StandingsComponent } from './standings/standings.component';
 import { BracketManagerComponent } from './bracket-manager/bracket-manager.component';
 import { UserBracketComponent } from './user-bracket/user-bracket.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { CreatureSubmissionComponent } from './creature-submission/creature-submission.component';
+import { GlobalBracketComponent } from './global-bracket/global-bracket.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
+    StandingsComponent,
+    BracketManagerComponent,
+    UserBracketComponent,
+    LoginComponent,
     RegisterComponent,
-    LoginComponent
+    NotFoundComponent,
+    CreatureSubmissionComponent,
+    GlobalBracketComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -36,6 +44,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
       { path: 'current-standings', component: StandingsComponent, canActivate: [StandingsGuard] },
       { path: 'user-bracket', component: UserBracketComponent, canActivate: [UserBracketGuard] },
       { path: 'bracket-manager', component: BracketManagerComponent },
+      { path: 'standings', component: StandingsComponent },
       { path: 'login', component: LoginComponent, pathMatch: 'full' },
       { path: 'register', component: RegisterComponent, pathMatch: 'full' },
       { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [RequireAuthenticationGuard] },

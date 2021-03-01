@@ -19,7 +19,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     //});
 
     req = req.clone({
-      url: `api/${req.url}`,
+      url: `${window.origin}/api/${req.url}`,
       withCredentials: true
     });
 

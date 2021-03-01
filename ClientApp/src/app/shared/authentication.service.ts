@@ -32,7 +32,7 @@ export class AuthenticationService {
     //  Type: eType.Super
     //});
 
-    let response = this.http.post<any>(`${window.origin}/Security/Authenticate`, credentials)
+    let response = this.http.post<any>('Security/Authenticate', credentials)
       .pipe(map(user => {
         this.currentUserSubject.next(user);
         return user;

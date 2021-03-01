@@ -9,7 +9,7 @@ namespace CreatureBracket.Controllers
 {
     [AllowAnonymous]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class SecurityController : ControllerBase
     {
         private readonly ILogger<SecurityController> _logger;

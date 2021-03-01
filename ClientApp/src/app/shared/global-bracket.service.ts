@@ -10,7 +10,7 @@ export class GlobalBracketService {
   }
 
   activeBracket() {
-    let response = this.http.get<IBracket>(`${window.origin}/Bracket/Active`)
+    let response = this.http.get<IBracket>('Bracket/Active')
 
     return response;
   }
