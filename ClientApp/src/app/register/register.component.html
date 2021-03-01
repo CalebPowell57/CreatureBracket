@@ -1,0 +1,99 @@
+<h1>Register</h1>
+
+<form #form="ngForm"
+      (ngSubmit)="onSubmit(form)">
+  <div class="form-group">
+    <label for="firstName">First Name</label>
+
+    <input type="text"
+           [(ngModel)]="register.firstName"
+           name="firstName"
+           class="form-control"
+           required
+           autocomplete="off"
+           minLength="3"
+           #firstNameField="ngModel"
+           [class.field-error]="form.submitted && firstNameField.invalid" />
+
+    <div [hidden]="!form.submitted || firstNameField.valid"
+         style="font-size:10pt;color:red;">
+      Please enter a first name that is at least 3 characters long.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="lastName">Last Name</label>
+
+    <input type="text"
+           [(ngModel)]="register.lastName"
+           name="lastName"
+           class="form-control"
+           required
+           autocomplete="off"
+           minLength="3"
+           #lastNameField="ngModel"
+           [class.field-error]="form.submitted && lastNameField.invalid" />
+
+    <div [hidden]="!form.submitted || lastNameField.valid"
+         style="font-size:10pt;color:red;">
+      Please enter a last name that is at least 3 characters long.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="userName">Username</label>
+
+    <input type="text"
+           [(ngModel)]="register.userName"
+           name="userName"
+           class="form-control"
+           required
+           autocomplete="off"
+           minLength="3"
+           #userNameField="ngModel"
+           [class.field-error]="form.submitted && userNameField.invalid" />
+
+    <div [hidden]="!form.submitted || userNameField.valid"
+         style="font-size:10pt;color:red;">
+      Please enter a username that is at least 3 characters long.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="password1">Password</label>
+
+    <input type="password"
+           [(ngModel)]="register.password"
+           name="password1"
+           class="form-control"
+           required
+           minLength="3"
+           #password1Field="ngModel"
+           [class.field-error]="form.submitted && password1Field.invalid" />
+
+    <div [hidden]="!form.submitted || password1Field.valid"
+         style="font-size:10pt;color:red;">
+      Please enter a password that is at least 3 characters long.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="password2">Password</label>
+
+    <input type="password"
+           [(ngModel)]="register.confirmPassword"
+           name="password2"
+           class="form-control"
+           required
+           minLength="3"
+           #password2Field="ngModel"
+           [class.field-error]="form.submitted && password2Field.invalid" />
+
+    <div [hidden]="!form.submitted || password2Field.valid"
+         style="font-size:10pt;color:red;">
+      Please enter a password that is at least 3 characters long.
+    </div>
+  </div>
+
+  <button class="btn btn-primary" type="submit">Register</button>
+</form>

@@ -13,6 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.12" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.3" />
@@ -20,6 +21,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.8.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +30,42 @@
     <Content Remove="$(SpaRoot)**" />
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\app\interfaces\authenticationDTO.interface.ts" />
+    <None Remove="ClientApp\src\app\interfaces\bracket.interface.ts" />
+    <None Remove="ClientApp\src\app\interfaces\user.interface.ts" />
+    <None Remove="ClientApp\src\app\shared\authentication.service.ts" />
+    <None Remove="ClientApp\src\app\shared\global-bracket.service.ts" />
+    <None Remove="ClientApp\src\app\shared\http-request.interceptor.ts" />
+    <None Remove="ClientApp\src\app\shared\requre-authentication.guard.ts" />
+    <None Remove="ClientApp\src\app\standings\standings.guard.ts" />
+    <None Remove="ClientApp\src\app\user-bracket\user-bracket.guard.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\authenticationDTO.interface.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\bracket.interface.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\user.interface.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\global-bracket.service.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\shared\authentication.service.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\shared\http-request.interceptor.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\shared\requre-authentication.guard.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\standings\standings.guard.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\user-bracket\user-bracket.guard.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

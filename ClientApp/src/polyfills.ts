@@ -16,10 +16,23 @@
 
 /***************************************************************************************************
  * BROWSER POLYFILLS
- */
+*/
+//import 'core-js/es2017/symbol';
+//import 'core-js/es2017/object';
+//import 'core-js/es2017/function';
+//import 'core-js/es2017/parse-int';
+//import 'core-js/es2017/parse-float';
+//import 'core-js/es2017/number';
+//import 'core-js/es2017/math';
+//import 'core-js/es2017/string';
+//import 'core-js/es2017/date';
+//import 'core-js/es2017/array';
+//import 'core-js/es2017/regexp';
+//import 'core-js/es2017/map';
+//import 'core-js/es2017/set';
 
 /** IE10 and IE11 requires the following for NgClass support on SVG elements */
-// import 'classlist.js';  // Run `npm install --save classlist.js`.
+ //import 'classlist.js';  // Run `npm install --save classlist.js`.
 
 /**
  * Web Animations `@angular/platform-browser/animations`

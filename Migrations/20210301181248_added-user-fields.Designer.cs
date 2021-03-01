@@ -3,14 +3,16 @@ using System;
 using CreatureBracket.Misc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CreatureBracket.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210301181248_added-user-fields")]
+    partial class addeduserfields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,7 +60,7 @@ namespace CreatureBracket.Migrations
                     b.ToTable("Creatures");
                 });
 
-            modelBuilder.Entity("CreatureBracket.Models.CreatureSubmission", b =>
+            modelBuilder.Entity("CreatureBracket.Models.CreatureRequest", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -80,7 +82,7 @@ namespace CreatureBracket.Migrations
 
                     b.HasIndex("BracketId");
 
-                    b.ToTable("CreatureSubmissions");
+                    b.ToTable("CreatureRequests");
                 });
 
             modelBuilder.Entity("CreatureBracket.Models.Matchup", b =>
@@ -258,7 +260,7 @@ namespace CreatureBracket.Migrations
                     b.Navigation("Bracket");
                 });
 
-            modelBuilder.Entity("CreatureBracket.Models.CreatureSubmission", b =>
+            modelBuilder.Entity("CreatureBracket.Models.CreatureRequest", b =>
                 {
                     b.HasOne("CreatureBracket.Models.Bracket", "Bracket")
                         .WithMany()

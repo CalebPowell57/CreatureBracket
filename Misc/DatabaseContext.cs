@@ -13,8 +13,9 @@ namespace CreatureBracket.Misc
         public DbSet<UserBracket> UserBrackets { get; set; }
         public DbSet<UserRound> UserRounds { get; set; }
         public DbSet<UserMatchup> UserMatchups { get; set; }
-        public DbSet<CreatureRequest> CreatureRequests { get; set; }
+        public DbSet<CreatureSubmission> CreatureSubmissions { get; set; }
         public DbSet<Creature> Creatures { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {

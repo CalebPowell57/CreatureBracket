@@ -17,7 +17,7 @@ namespace CreatureBracket.Models
         public List<Creature> Creatures { get; set; }
 
         [NotMapped]
-        public List<CreatureRequest> CreatureRequests { get; set; }
+        public List<CreatureSubmission> CreatureRequests { get; set; }
 
         [NotMapped]
         public List<Round> Rounds { get; set; }

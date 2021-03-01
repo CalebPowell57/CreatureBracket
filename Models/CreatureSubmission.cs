@@ -2,7 +2,7 @@
 
 namespace CreatureBracket.Models
 {
-    public class CreatureRequest : BaseModel
+    public class CreatureSubmission : BaseModel
     {
         public Guid BracketId { get; set; }
         public string Name { get; set; }
