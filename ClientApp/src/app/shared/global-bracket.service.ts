@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { IBracket } from '../interfaces/bracket.interface';
 
 @Injectable({
@@ -9,9 +10,7 @@ export class GlobalBracketService {
   constructor(private http: HttpClient) {
   }
 
-  activeBracket() {
-    let response = this.http.get<IBracket>('Bracket/Active')
-
-    return response;
+  activeBracket() : Observable<IBracket> {
+    return this.http.get<IBracket>('Bracket/Active');
   }
 }

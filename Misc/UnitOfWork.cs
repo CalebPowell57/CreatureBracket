@@ -11,13 +11,20 @@ namespace CreatureBracket.Misc
 
         public SecurityRepository SecurityRepository { get; private set; }
         public BracketRepository BracketRepository { get; private set; }
+        public CreatureSubmissionRepository CreatureSubmissionRepository { get; private set; }
+        public UserBracketRepository UserBracketRepository { get; private set; }
+        public UserRepository UserRepository { get; private set; }
 
         public UnitOfWork(DatabaseContext context)
         {
             _context = context;
 
             SecurityRepository = new SecurityRepository(_context);
+
             BracketRepository = new BracketRepository(_context);
+            CreatureSubmissionRepository = new CreatureSubmissionRepository(_context);
+            UserBracketRepository = new UserBracketRepository(_context);
+            UserRepository = new UserRepository(_context);
         }
 
         public async Task SaveAsync(/*LogProcess logProcess = LogProcess.Internal*/)

@@ -2,7 +2,7 @@
 
 namespace CreatureBracket.Models
 {
-    interface IBaseModel
+    public interface IBaseModel
     {
         Guid Id { get; set; }
     }

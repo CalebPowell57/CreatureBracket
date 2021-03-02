@@ -17,7 +17,7 @@ namespace CreatureBracket.Repositories
 
         public async Task<AuthenticationResponseDTO> AuthenticateAsync(AuthenticationRequestDTO requestDTO)
         {
-            var user = await _context.Users.SingleOrDefaultAsync(u => u.UserName == requestDTO.UserName);
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.UserName.ToUpper() == requestDTO.UserName.ToUpper());
 
             if (user is null || !Security.Validate(user.Password, requestDTO.Password))
             {

@@ -1,0 +1,13 @@
+<h1>Creature Approval</h1>
+
+<ul>
+  <li *ngFor="let submission of submissions | async"
+      class="listItem"
+      style="min-height: 2.5em;">
+    {{submission.name}} -
+
+    <span style="font-size:12pt;">{{submission.bio}}</span>
+
+    <button class="btn btn-primary" style="float:right;" (click)="onApproveButtonClick(submission)">Approve</button>
+  </li>
+</ul>
