@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { RequireAuthenticationGuard } from './shared/requre-authentication.guard';
 import { StandingsGuard } from './standings/standings.guard';
@@ -25,6 +27,9 @@ import { NgttSingleEliminationTreeModule } from './bracket-generator/single-elim
 import { MatchModule } from './bracket-generator/match/match.module';
 import { NgTournamentTreeModule } from './bracket-generator/tree.module';
 import { CreatureDiscussionColComponent } from './creature-discussion-col/creature-discussion-col.component';
+import { NoPermissionsComponent } from './no-permissions/no-permissions.component';
+import { CreatureApprovalComponent } from './creature-approval/creature-approval.component';
+import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.guard';
 
 @NgModule({
   declarations: [
@@ -39,7 +44,9 @@ import { CreatureDiscussionColComponent } from './creature-discussion-col/creatu
     CreatureSubmissionComponent,
     GlobalBracketComponent,
     BracketManagerComponent,
-    CreatureDiscussionColComponent
+    CreatureDiscussionColComponent,
+    NoPermissionsComponent,
+    CreatureApprovalComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -48,13 +55,20 @@ import { CreatureDiscussionColComponent } from './creature-discussion-col/creatu
     MatchModule,
     NgttSingleEliminationTreeModule,
     NgTournamentTreeModule, 
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right'
+    }),
     RouterModule.forRoot([
-      { path: 'current-standings', component: StandingsComponent, canActivate: [StandingsGuard] },
-      { path: 'user-bracket', component: UserBracketComponent, canActivate: [UserBracketGuard] },
-      { path: 'bracket-manager', component: BracketManagerComponent },
-      { path: 'standings', component: StandingsComponent },
+      { path: 'current-standings', component: StandingsComponent, canActivate: [StandingsGuard, RequireAuthenticationGuard] },
+      { path: 'creature-approval', component: CreatureApprovalComponent, canActivate: [/*RequireSuperPermissionsGuard, */RequireAuthenticationGuard] },
+      { path: 'user-bracket', component: UserBracketComponent, canActivate: [UserBracketGuard, RequireAuthenticationGuard] },
+      { path: 'bracket-manager', component: BracketManagerComponent, canActivate: [/*RequireSuperPermissionsGuard, */RequireAuthenticationGuard] },
+      { path: 'standings', component: StandingsComponent, canActivate: [RequireAuthenticationGuard] },
       { path: 'login', component: LoginComponent, pathMatch: 'full' },
       { path: 'register', component: RegisterComponent, pathMatch: 'full' },
+      { path: 'no-permissions', component: NoPermissionsComponent },
       { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [RequireAuthenticationGuard] },
       { path: '**', component: NotFoundComponent },
     ])

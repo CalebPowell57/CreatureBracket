@@ -28,6 +28,9 @@ namespace CreatureBracket.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid?>("WinnerId")
                         .HasColumnType("TEXT");
 
@@ -75,6 +78,9 @@ namespace CreatureBracket.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -176,10 +182,15 @@ namespace CreatureBracket.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid>("BracketId")
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BracketId");
 
                     b.HasIndex("UserId");
 
@@ -321,11 +332,19 @@ namespace CreatureBracket.Migrations
 
             modelBuilder.Entity("CreatureBracket.Models.UserBracket", b =>
                 {
+                    b.HasOne("CreatureBracket.Models.Bracket", "Bracket")
+                        .WithMany()
+                        .HasForeignKey("BracketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("CreatureBracket.Models.User", "User")
                         .WithMany("Brackets")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Bracket");
 
                     b.Navigation("User");
                 });

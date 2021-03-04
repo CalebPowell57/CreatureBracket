@@ -1,32 +1,87 @@
-<h1>Login</h1>
+<div>
+  <h2>Bracket Manager</h2>
 
-<form #form="ngForm"
-      (ngSubmit)="onSubmit(form)"
-      style="width:20em">
-  <div class="form-group">
-    <label for="userName">Username</label>
+  <div class="horizontalContainer">
+    <div style="width:20%">
+      <div style="margin-bottom:10px;">
+        <button class="btn btn-primary"
+                (click)="onAddButtonClick()">
+          Add
+        </button>
 
-    <input type="text"
-           [(ngModel)]="input.userName"
-           name="userName"
-           class="form-control"
-           required
-           autocomplete="off"
-           minLength="3"
-           #userNameField="ngModel"
-           [class.field-error]="form.submitted && userNameField.invalid" />
+        <button class="btn btn-primary"
+                style="margin-left:10px;"
+                (click)="onDeleteButtonClick()"
+                *ngIf="selectedBracket && !isAddingBracket">
+          Delete
+        </button>
+      </div>
+
+      <input style="width:100%"
+             type="search"
+             [(ngModel)]="filterText"
+             class="form-control"
+             placeholder="Search" />
+      <ul>
+        <li *ngFor="let bracket of filteredBrackets"
+            class="selectableFilterItem"
+            [class.selected]="bracket.id === selectedBracket.id"
+            (click)="onBracketSelected(bracket)"
+            style="font-size:12pt;padding:10px;">
+          {{bracket.title}}
+        </li>
+      </ul>
+    </div>
+
+    <form style="margin-left:20px;"
+          #form="ngForm"
+          (ngSubmit)="onSubmit(form)">
+      <h4>{{selectedBracketText}}</h4>
+
+      <div *ngIf="showForm">
+        <div class="form-group">
+          <label for="title">Title</label>
+
+          <input type="text"
+                 [(ngModel)]="input.title"
+                 name="title"
+                 class="form-control"
+                 required
+                 autocomplete="off"
+                 minLength="3"
+                 #titleField="ngModel"
+                 [class.field-error]="form.submitted && titleField.invalid" />
+          <div [hidden]="!form.submitted || titleField.valid"
+               style="font-size:10pt;color:red;">
+            Please enter a title that is at least 3 characters long.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="creatureEntryDeadline">Creature Entry Deadline</label>
+
+          <input type="datetime-local"
+                 [(ngModel)]="input.creatureEntryDeadline"
+                 class="form-control"
+                 name="creatureEntryDeadline"
+                 required/>
+        </div>
+
+        <div>
+          <button type="submit"
+                  class="btn btn-primary"
+                  style="margin-top:10px;">
+            Save
+          </button>
+
+          <button type="button"
+                  class="btn btn-primary"
+                  style="margin-top:10px;margin-left:10px;"
+                  (click)="onCancelButtonClick()">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </form>
   </div>
-
-  <div class="form-group">
-    <label for="password">Password</label>
-
-    <input type="password"
-           [(ngModel)]="input.password"
-           name="password"
-           class="form-control" />
-  </div>
-
-  <button class="btn btn-primary" type="submit" style="width:100%">Login</button>
-</form>
-
-<a routerLink="/register" routerLinkActive="active">Don't have an account yet?</a>
+</div>

@@ -29,6 +29,7 @@
     "guid-typescript": "^1.0.9",
     "jquery": "3.4.1",
     "ng-tournament-tree": "^2.0.2",
+    "ngx-toastr": "^11.3.3",
     "oidc-client": "^1.9.1",
     "popper.js": "^1.16.0",
     "python2": "0.0.1",

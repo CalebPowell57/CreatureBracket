@@ -7,6 +7,7 @@ namespace CreatureBracket.Misc
     {
         public enum ERoundType { Championship, FinalFour, EliteEight, SweetSixteen, RoundOfThirtyTwo }
         public enum EUserType { Super, Normal }
+        public enum ECreatureSubmissionStatus { Pending, Approved }
 
         public const string JwtLocalAudience = "Creature Bracket Local";//change to whatever my app is called
         public static readonly ReadOnlyCollection<string> JwtAudiences = new ReadOnlyCollection<string>(new List<string> { JwtLocalAudience });

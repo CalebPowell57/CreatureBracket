@@ -1,32 +1,29 @@
-<h1>Login</h1>
+<h1>Creature Submissions</h1>
 
 <form #form="ngForm"
       (ngSubmit)="onSubmit(form)"
       style="width:20em">
   <div class="form-group">
-    <label for="userName">Username</label>
+    <label for="name">Name</label>
 
     <input type="text"
-           [(ngModel)]="input.userName"
-           name="userName"
+           [(ngModel)]="input.name"
+           name="name"
            class="form-control"
            required
            autocomplete="off"
            minLength="3"
-           #userNameField="ngModel"
-           [class.field-error]="form.submitted && userNameField.invalid" />
+           #nameField="ngModel"
+           [class.field-error]="form.submitted && nameField.invalid" />
   </div>
 
   <div class="form-group">
-    <label for="password">Password</label>
+    <label for="bio">BIO</label>
 
-    <input type="password"
-           [(ngModel)]="input.password"
-           name="password"
-           class="form-control" />
+    <textarea [(ngModel)]="input.bio"
+              name="bio"
+              class="form-control"></textarea>
   </div>
 
-  <button class="btn btn-primary" type="submit" style="width:100%">Login</button>
+  <button class="btn btn-primary" type="submit" style="width:100%">Submit</button>
 </form>
-
-<a routerLink="/register" routerLinkActive="active">Don't have an account yet?</a>

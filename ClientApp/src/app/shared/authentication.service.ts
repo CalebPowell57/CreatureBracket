@@ -61,4 +61,12 @@ export class AuthenticationService {
 
     return cookie;
   }
+
+  getUserType(): EType {
+    let userType: EType;
+
+    this.currentUser.pipe(map(x => userType = x.type));
+
+    return userType;
+  }
 }

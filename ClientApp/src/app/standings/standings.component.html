@@ -1,32 +1,18 @@
-<h1>Login</h1>
+<h1>Standings</h1>
 
-<form #form="ngForm"
-      (ngSubmit)="onSubmit(form)"
-      style="width:20em">
-  <div class="form-group">
-    <label for="userName">Username</label>
-
-    <input type="text"
-           [(ngModel)]="input.userName"
-           name="userName"
-           class="form-control"
-           required
-           autocomplete="off"
-           minLength="3"
-           #userNameField="ngModel"
-           [class.field-error]="form.submitted && userNameField.invalid" />
-  </div>
-
-  <div class="form-group">
-    <label for="password">Password</label>
-
-    <input type="password"
-           [(ngModel)]="input.password"
-           name="password"
-           class="form-control" />
-  </div>
-
-  <button class="btn btn-primary" type="submit" style="width:100%">Login</button>
-</form>
-
-<a routerLink="/register" routerLinkActive="active">Don't have an account yet?</a>
+<table>
+  <tr>
+    <th>Rank</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Points</th>
+  </tr>
+  <tr *ngFor="let row of standings | async"
+      class="listItem"
+      style="min-height: 2.5em;padding:10px;">
+    {{row.rank}}
+    {{row.firstName}}
+    {{row.lastName}}
+    {{row.points}}
+  </tr>
+</table>

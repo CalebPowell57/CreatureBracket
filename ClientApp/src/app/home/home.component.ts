@@ -1,27 +1,36 @@
 import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { NgttTournament } from '../interfaces/bracket.interface';
+import { map } from 'rxjs/operators';
+import { EStatus } from '../interfaces/bracket.interface';
+import { GlobalBracketService } from '../shared/global-bracket.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
-  showCreatureSubmission: Observable<boolean>;
-  showGlobalBracket: Observable<boolean>;
-  showFinalStandings: Observable<boolean>;
+  showCreatureSubmission = false;
+  showGlobalBracket = false;
+  showFinalStandings = false;
+  showNoActiveBracket = false;
 
-  constructor() {
-    this.showCreatureSubmission = of(true);
-    this.showGlobalBracket = of(false);
-    this.showFinalStandings = of(false);
+  constructor(private bracketService: GlobalBracketService) {
   }
 
   public singleEliminationTournament: NgttTournament;
 
-
-  ngOnInit() {
+  ngOnInit(): void {
     this.singleEliminationTournament = {rounds};
+    this.bracketService.activeBracket().subscribe(activeBracket => {
+      if (activeBracket) {
+        this.showCreatureSubmission = activeBracket.status === EStatus.Open;
+        this.showGlobalBracket = activeBracket.status === EStatus.Started;
+        this.showFinalStandings = activeBracket.status === EStatus.Completed;
+      } else {
+        this.showNoActiveBracket = true;
+      }
+    });
   }
 }
 

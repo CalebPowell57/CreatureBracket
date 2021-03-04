@@ -8,6 +8,7 @@ namespace CreatureBracket.Models
     {
         public enum EStatus { Open, Started, Completed }
 
+        public string Title { get; set; }
         public EStatus Status { get; set; }
         public DateTime? CreatureEntryDeadline { get; set; }
         public Guid? WinnerId { get; set; }
