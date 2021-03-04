@@ -7,8 +7,13 @@ import { Router } from '@angular/router';
   templateUrl: './user-bracket.component.html'
 })
 export class UserBracketComponent {
+
   constructor(private router: Router) { }
 
   onSubmit(form: NgForm) {
   }
+
+
 }
+
+

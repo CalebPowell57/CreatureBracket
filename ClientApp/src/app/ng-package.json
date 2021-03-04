@@ -1,0 +1,7 @@
+{
+  "$schema": "../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../dist/ng-tournament-tree",
+  "lib": {
+    "entryFile": "./bracket-generator/public-api.ts"
+  }
+}

@@ -27,12 +27,21 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\src\app\bracket-generator\Matches\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\src\app\bracket-generator\Matches\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\bracket-generator\Matches\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="ClientApp\src\app\bracket-generator\Matches\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\bracket-generator\bracket-generator.module.ts" />
+    <None Remove="ClientApp\src\app\bracket-generator\match\match.module.ts" />
+    <None Remove="ClientApp\src\app\bracket-generator\public-api.ts" />
+    <None Remove="ClientApp\src\app\bracket-generator\single-elimination-tree\ngtt-single-elimination.module.ts" />
+    <None Remove="ClientApp\src\app\bracket-generator\tree.module.ts" />
     <None Remove="ClientApp\src\app\interfaces\authenticationDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\bracket.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\user.interface.ts" />
@@ -45,6 +54,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\bracket-generator\match\match.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\bracket-generator\public-api.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\bracket-generator\single-elimination-tree\ngtt-single-elimination.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\bracket-generator\tree.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\authenticationDTO.interface.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\bracket.interface.ts">
       <SubType>Code</SubType>

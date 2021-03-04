@@ -28,8 +28,10 @@
     "core-js": "^3.3.3",
     "guid-typescript": "^1.0.9",
     "jquery": "3.4.1",
+    "ng-tournament-tree": "^2.0.2",
     "oidc-client": "^1.9.1",
     "popper.js": "^1.16.0",
+    "python2": "0.0.1",
     "rxjs": "^6.5.3",
     "zone.js": "0.9.1"
   },
@@ -49,6 +51,7 @@
     "karma-coverage-istanbul-reporter": "~2.1.0",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
+    "ng-packagr": "^11.2.4",
     "typescript": "3.5.3"
   },
   "optionalDependencies": {
