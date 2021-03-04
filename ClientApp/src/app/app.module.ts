@@ -23,6 +23,10 @@ import { UserBracketComponent } from './user-bracket/user-bracket.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CreatureSubmissionComponent } from './creature-submission/creature-submission.component';
 import { GlobalBracketComponent } from './global-bracket/global-bracket.component';
+import { NgttSingleEliminationTreeModule } from './bracket-generator/single-elimination-tree/ngtt-single-elimination.module';
+import { MatchModule } from './bracket-generator/match/match.module';
+import { NgTournamentTreeModule } from './bracket-generator/tree.module';
+import { CreatureDiscussionColComponent } from './creature-discussion-col/creature-discussion-col.component';
 import { NoPermissionsComponent } from './no-permissions/no-permissions.component';
 import { CreatureApprovalComponent } from './creature-approval/creature-approval.component';
 import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.guard';
@@ -33,13 +37,14 @@ import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.
     NavMenuComponent,
     HomeComponent,
     StandingsComponent,
-    BracketManagerComponent,
     UserBracketComponent,
     LoginComponent,
     RegisterComponent,
     NotFoundComponent,
     CreatureSubmissionComponent,
     GlobalBracketComponent,
+    BracketManagerComponent,
+    CreatureDiscussionColComponent,
     NoPermissionsComponent,
     CreatureApprovalComponent
   ],
@@ -47,6 +52,9 @@ import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    MatchModule,
+    NgttSingleEliminationTreeModule,
+    NgTournamentTreeModule, 
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
@@ -62,7 +70,7 @@ import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.
       { path: 'register', component: RegisterComponent, pathMatch: 'full' },
       { path: 'no-permissions', component: NoPermissionsComponent },
       { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [RequireAuthenticationGuard] },
-      { path: '**', component: NotFoundComponent }
+      { path: '**', component: NotFoundComponent },
     ])
   ],
   providers: [{

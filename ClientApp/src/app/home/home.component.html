@@ -2,6 +2,24 @@
 
 <app-global-bracket *ngIf="showGlobalBracket"></app-global-bracket>
 
+<app-standings *ngIf="(showFinalStandings$ | async)"></app-standings>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-9">
+      <ng-container>
+        <ngtt-single-elimination-tree [tournament]="singleEliminationTournament"
+                                      [matchTemplate]="matchTemplate">
+        </ngtt-single-elimination-tree>
+      </ng-container>
+
+      <ng-template #matchTemplate let-match>
+        <tt-match [match]="match"></tt-match>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
 <app-standings *ngIf="showFinalStandings"></app-standings>
 
 <h2 *ngIf="showNoActiveBracket">Wait for a tournament organizer to start the bracket!</h2>
