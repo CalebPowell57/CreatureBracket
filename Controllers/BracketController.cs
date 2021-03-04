@@ -65,5 +65,13 @@ namespace CreatureBracket.Controllers
 
             return Ok(response);
         }
+
+        [HttpGet("GlobalTestData")]
+        public IActionResult GlobalTestData()
+        {
+            var response = _unitOfWork.BracketRepository.GlobalTestData();
+
+            return Ok(response);
+        }
     }
 }
