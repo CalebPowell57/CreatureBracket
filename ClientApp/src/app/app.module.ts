@@ -20,7 +20,6 @@ import { UserBracketComponent } from './user-bracket/user-bracket.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CreatureSubmissionComponent } from './creature-submission/creature-submission.component';
 import { NgTournamentTreeModule } from './bracket-generator/tree.module';
-import { CreatureDiscussionColComponent } from './creature-discussion-col/creature-discussion-col.component';
 import { NoPermissionsComponent } from './no-permissions/no-permissions.component';
 import { CreatureApprovalComponent } from './creature-approval/creature-approval.component';
 import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.guard';
@@ -37,7 +36,6 @@ import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.
     NotFoundComponent,
     CreatureSubmissionComponent,
     BracketManagerComponent,
-    CreatureDiscussionColComponent,
     NoPermissionsComponent,
     CreatureApprovalComponent
   ],

@@ -4,6 +4,7 @@ import { GlobalBracketComponent } from './global-bracket/global-bracket.componen
 import { TreeComponent } from './tree.component';
 import { MatchComponent } from './match/match.component';
 import { SingleEliminationTreeComponent } from './single-elimination-tree/single-elimination-tree.component';
+import { CreatureDiscussionColComponent } from '../creature-discussion-col/creature-discussion-col.component';
 
 
 @NgModule({
@@ -11,10 +12,11 @@ import { SingleEliminationTreeComponent } from './single-elimination-tree/single
     GlobalBracketComponent,
     TreeComponent,
     MatchComponent,
-    SingleEliminationTreeComponent
+    SingleEliminationTreeComponent,
+    CreatureDiscussionColComponent
   ],
   imports: [
-    CommonModule,
+    CommonModule
     ],
   exports: [
     GlobalBracketComponent

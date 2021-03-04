@@ -1,9 +1,13 @@
-<app-creature-submission *ngIf="showCreatureSubmission"></app-creature-submission>
+<div class="col-12">
+  <app-creature-submission *ngIf="showCreatureSubmission"></app-creature-submission>
 
-<app-global-bracket *ngIf="showGlobalBracket"></app-global-bracket>
+  <app-global-bracket *ngIf="showGlobalBracket"></app-global-bracket>
 
-<app-standings *ngIf="(showFinalStandings$ | async)"></app-standings>
+  <app-standings *ngIf="(showFinalStandings$ | async)"></app-standings>
 
-<app-standings *ngIf="showFinalStandings"></app-standings>
+  <app-standings *ngIf="showFinalStandings"></app-standings>
 
-<h2 *ngIf="showNoActiveBracket">Wait for a tournament organizer to start the bracket!</h2>
+  <h2 *ngIf="showNoActiveBracket">Wait for a tournament organizer to start the bracket!</h2>
+</div>
+
+

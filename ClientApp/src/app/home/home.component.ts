@@ -7,6 +7,7 @@ import { GlobalBracketService } from '../shared/global-bracket.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
   showCreatureSubmission = false;

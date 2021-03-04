@@ -6,10 +6,17 @@ a {
   color: #0366d6;
 }
 
+body {
+  background-color: #1f1f1f;
+}
 code {
   color: #e01a76;
 }
 
+.container-fluid, col {
+  padding: 0px;
+  height:100%;
+}
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
