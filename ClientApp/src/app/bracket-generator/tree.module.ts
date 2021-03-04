@@ -1,18 +1,22 @@
 import { NgModule } from '@angular/core';
-import { NgttSingleEliminationTreeModule } from './single-elimination-tree/ngtt-single-elimination.module';
-import { MatchModule } from './match/match.module';
+import { CommonModule } from '@angular/common';
 import { GlobalBracketComponent } from './global-bracket/global-bracket.component';
+import { TreeComponent } from './tree.component';
+import { MatchComponent } from './match/match.component';
+import { SingleEliminationTreeComponent } from './single-elimination-tree/single-elimination-tree.component';
 
 
 @NgModule({
-  declarations: [GlobalBracketComponent],
+  declarations: [
+    GlobalBracketComponent,
+    TreeComponent,
+    MatchComponent,
+    SingleEliminationTreeComponent
+  ],
   imports: [
-    NgttSingleEliminationTreeModule,
-    MatchModule
+    CommonModule,
     ],
   exports: [
-    NgttSingleEliminationTreeModule,
-    MatchModule,
     GlobalBracketComponent
     ]
 })
