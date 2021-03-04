@@ -1,0 +1,18 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-8">
+      <ng-container>
+        <ngtt-single-elimination-tree [tournament]="singleEliminationTournament"
+                                      [matchTemplate]="matchTemplate">
+        </ngtt-single-elimination-tree>
+      </ng-container>
+
+      <ng-template #matchTemplate let-match>
+        <tt-match [match]="match"></tt-match>
+      </ng-template>
+    </div>
+    <div class="col-4">
+      <app-creature-discussion-col></app-creature-discussion-col>
+    </div>
+  </div>
+</div>

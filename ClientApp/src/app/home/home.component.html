@@ -1,25 +1,13 @@
-<app-creature-submission *ngIf="showCreatureSubmission"></app-creature-submission>
+<div class="col-12">
+  <app-creature-submission *ngIf="showCreatureSubmission"></app-creature-submission>
 
-<app-global-bracket *ngIf="showGlobalBracket"></app-global-bracket>
+  <app-global-bracket *ngIf="showGlobalBracket"></app-global-bracket>
 
-<app-standings *ngIf="(showFinalStandings$ | async)"></app-standings>
+  <app-standings *ngIf="(showFinalStandings$ | async)"></app-standings>
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-9">
-      <ng-container>
-        <ngtt-single-elimination-tree [tournament]="singleEliminationTournament"
-                                      [matchTemplate]="matchTemplate">
-        </ngtt-single-elimination-tree>
-      </ng-container>
+  <app-standings *ngIf="showFinalStandings"></app-standings>
 
-      <ng-template #matchTemplate let-match>
-        <tt-match [match]="match"></tt-match>
-      </ng-template>
-    </div>
-  </div>
+  <h2 *ngIf="showNoActiveBracket">Wait for a tournament organizer to start the bracket!</h2>
 </div>
 
-<app-standings *ngIf="showFinalStandings"></app-standings>
 
-<h2 *ngIf="showNoActiveBracket">Wait for a tournament organizer to start the bracket!</h2>

@@ -4,7 +4,7 @@ import { NgttRound, NgttTournament } from '../../interfaces/bracket.interface';
 @Component({
   selector: 'ngtt-single-elimination-tree',
   templateUrl: './single-elimination-tree.component.html',
-  styleUrls: ['./single-elimination-tree.component.css']
+  styleUrls: ['./single-elimination-tree.component.scss']
 })
 export class SingleEliminationTreeComponent implements OnChanges {
 
@@ -15,8 +15,6 @@ export class SingleEliminationTreeComponent implements OnChanges {
   public final: NgttRound;
 
   constructor() { }
-
-
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.hasOwnProperty('tournament') && changes.tournament.currentValue) {

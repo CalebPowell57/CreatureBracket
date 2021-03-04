@@ -38,9 +38,7 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\bracket-generator\bracket-generator.module.ts" />
-    <None Remove="ClientApp\src\app\bracket-generator\match\match.module.ts" />
     <None Remove="ClientApp\src\app\bracket-generator\public-api.ts" />
-    <None Remove="ClientApp\src\app\bracket-generator\single-elimination-tree\ngtt-single-elimination.module.ts" />
     <None Remove="ClientApp\src\app\bracket-generator\tree.module.ts" />
     <None Remove="ClientApp\src\app\bracket-manager\bracket-manager.service.ts" />
     <None Remove="ClientApp\src\app\creature-approval\creature-approval.service.ts" />
@@ -65,9 +63,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\bracket-generator\match\match.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\bracket-generator\public-api.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\bracket-generator\single-elimination-tree\ngtt-single-elimination.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\bracket-generator\tree.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\bracket-manager\bracket-manager.service.ts">
       <SubType>Code</SubType>
