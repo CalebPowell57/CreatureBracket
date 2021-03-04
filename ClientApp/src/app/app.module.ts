@@ -5,13 +5,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { RequireAuthenticationGuard } from './shared/requre-authentication.guard';
 import { StandingsGuard } from './standings/standings.guard';
 import { UserBracketGuard } from './user-bracket/user-bracket.guard';
-
 import { HttpRequestInterceptor } from './shared/http-request.interceptor';
-
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
@@ -22,9 +19,6 @@ import { BracketManagerComponent } from './bracket-manager/bracket-manager.compo
 import { UserBracketComponent } from './user-bracket/user-bracket.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CreatureSubmissionComponent } from './creature-submission/creature-submission.component';
-import { GlobalBracketComponent } from './global-bracket/global-bracket.component';
-import { NgttSingleEliminationTreeModule } from './bracket-generator/single-elimination-tree/ngtt-single-elimination.module';
-import { MatchModule } from './bracket-generator/match/match.module';
 import { NgTournamentTreeModule } from './bracket-generator/tree.module';
 import { CreatureDiscussionColComponent } from './creature-discussion-col/creature-discussion-col.component';
 import { NoPermissionsComponent } from './no-permissions/no-permissions.component';
@@ -42,7 +36,6 @@ import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.
     RegisterComponent,
     NotFoundComponent,
     CreatureSubmissionComponent,
-    GlobalBracketComponent,
     BracketManagerComponent,
     CreatureDiscussionColComponent,
     NoPermissionsComponent,
@@ -52,8 +45,6 @@ import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    MatchModule,
-    NgttSingleEliminationTreeModule,
     NgTournamentTreeModule, 
     ReactiveFormsModule,
     BrowserAnimationsModule,
