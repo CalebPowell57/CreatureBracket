@@ -41,8 +41,10 @@
     <None Remove="ClientApp\src\app\interfaces\bracket.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\creature-submission-DTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\creature-submission.interface.ts" />
+    <None Remove="ClientApp\src\app\interfaces\register-DTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\standings-item-DTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\user.interface.ts" />
+    <None Remove="ClientApp\src\app\register\register.service.ts" />
     <None Remove="ClientApp\src\app\shared\authentication.service.ts" />
     <None Remove="ClientApp\src\app\shared\global-bracket.service.ts" />
     <None Remove="ClientApp\src\app\shared\http-request.interceptor.ts" />
@@ -63,6 +65,9 @@
     <TypeScriptCompile Include="ClientApp\src\app\creature-submission\creature-submission.service.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\register-DTO.interface.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\standings-item-DTO.interface.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -80,6 +85,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\user.interface.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\register\register.service.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\shared\global-bracket.service.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

@@ -1,5 +1,5 @@
-﻿using CreatureBracket.Misc;
-using CreatureBracket.Models;
+﻿using CreatureBracket.DTOs.Requests;
+using CreatureBracket.Misc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -22,10 +22,11 @@ namespace CreatureBracket.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] User user)
+        [AllowAnonymous]
+        [HttpPost("Register")]
+        public async Task<IActionResult> Register([FromBody] RegisterRequestDTO dto)
         {
-            await _unitOfWork.UserRepository.PostAsync(user);
+            _unitOfWork.UserRepository.Register(dto);
             await _unitOfWork.SaveAsync();
 
             return Ok();
