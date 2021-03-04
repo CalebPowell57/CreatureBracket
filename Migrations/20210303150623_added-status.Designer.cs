@@ -3,14 +3,16 @@ using System;
 using CreatureBracket.Misc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CreatureBracket.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210303150623_added-status")]
+    partial class addedstatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -182,15 +184,10 @@ namespace CreatureBracket.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("BracketId")
-                        .HasColumnType("TEXT");
-
                     b.Property<Guid>("UserId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BracketId");
 
                     b.HasIndex("UserId");
 
@@ -332,19 +329,11 @@ namespace CreatureBracket.Migrations
 
             modelBuilder.Entity("CreatureBracket.Models.UserBracket", b =>
                 {
-                    b.HasOne("CreatureBracket.Models.Bracket", "Bracket")
-                        .WithMany()
-                        .HasForeignKey("BracketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("CreatureBracket.Models.User", "User")
                         .WithMany("Brackets")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Bracket");
 
                     b.Navigation("User");
                 });

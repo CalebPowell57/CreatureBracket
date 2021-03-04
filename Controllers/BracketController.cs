@@ -57,5 +57,13 @@ namespace CreatureBracket.Controllers
 
             return Ok(response);
         }
+
+        [HttpGet("Standings")]
+        public async Task<IActionResult> Standings()
+        {
+            var response = await _unitOfWork.BracketRepository.StandingsAsync();
+
+            return Ok(response);
+        }
     }
 }

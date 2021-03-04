@@ -36,10 +36,12 @@
     <None Remove="ClientApp\src\app\bracket-manager\bracket-manager.service.ts" />
     <None Remove="ClientApp\src\app\creature-approval\creature-approval.service.ts" />
     <None Remove="ClientApp\src\app\creature-submission\creature-submission.service.ts" />
+    <None Remove="ClientApp\src\app\interfaces\approve-submission-DTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\authenticationDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\bracket.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\creature-submission-DTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\creature-submission.interface.ts" />
+    <None Remove="ClientApp\src\app\interfaces\standings-item-DTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\user.interface.ts" />
     <None Remove="ClientApp\src\app\shared\authentication.service.ts" />
     <None Remove="ClientApp\src\app\shared\global-bracket.service.ts" />
@@ -47,6 +49,7 @@
     <None Remove="ClientApp\src\app\shared\requre-authentication.guard.ts" />
     <None Remove="ClientApp\src\app\shared\requre-super-permissions.guard.ts" />
     <None Remove="ClientApp\src\app\standings\standings.guard.ts" />
+    <None Remove="ClientApp\src\app\standings\standings.service.ts" />
     <None Remove="ClientApp\src\app\user-bracket\user-bracket.guard.ts" />
   </ItemGroup>
 
@@ -60,7 +63,13 @@
     <TypeScriptCompile Include="ClientApp\src\app\creature-submission\creature-submission.service.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\standings-item-DTO.interface.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\creature-submission-DTO.interface.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\approve-submission-DTO.interface.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\authenticationDTO.interface.ts" />
@@ -84,6 +93,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\shared\requre-authentication.guard.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\standings\standings.service.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\standings\standings.guard.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

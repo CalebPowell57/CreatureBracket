@@ -1,13 +1,39 @@
 <h1>Creature Approval</h1>
 
-<ul>
-  <li *ngFor="let submission of submissions | async"
-      class="listItem"
-      style="min-height: 2.5em;">
-    {{submission.name}} -
+<span *ngIf="(pendingSubmissions | async)?.length === 0 && (approvedSubmissions | async)?.length === 0">No creatures have been submitted yet!</span>
 
-    <span style="font-size:12pt;">{{submission.bio}}</span>
+<div *ngIf="(pendingSubmissions | async)?.length !== 0">
+  <h3>Pending</h3>
 
-    <button class="btn btn-primary" style="float:right;" (click)="onApproveButtonClick(submission)">Approve</button>
-  </li>
-</ul>
+  <ul>
+    <li *ngFor="let submission of pendingSubmissions | async"
+        class="listItem"
+        style="min-height: 2.5em;padding:10px;">
+      <div class="horizontalContainer">
+        <div class="verticalContainer">
+          <span style="font-weight:500; font-size:16pt;">{{submission.name}}</span>
+
+          <span style="font-size:11pt;">{{submission.bio}}</span>
+        </div>
+
+        <button class="btn btn-primary" (click)="onApproveButtonClick(submission)" style="height:40px;margin-left:auto;margin-right:0;margin-bottom:auto;margin-top:auto;">Approve</button>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="(approvedSubmissions | async)?.length !== 0">
+  <h3>Approved</h3>
+
+  <ul>
+    <li *ngFor="let submission of approvedSubmissions | async"
+        class="listItem"
+        style="min-height: 2.5em;padding:10px;">
+      <div class="verticalContainer">
+        <span style="font-weight:500; font-size:16pt;">{{submission.name}}</span>
+
+        <span style="font-size:11pt;">{{submission.bio}}</span>
+      </div>
+    </li>
+  </ul>
+</div>

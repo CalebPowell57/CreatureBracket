@@ -1,4 +1,5 @@
 ﻿using System;
+using static CreatureBracket.Misc.Constants;
 
 namespace CreatureBracket.Models
 {
@@ -8,6 +9,7 @@ namespace CreatureBracket.Models
         public string Name { get; set; }
         public string BIO { get; set; }
         public DateTime EntryDate { get; set; }
+        public ECreatureSubmissionStatus Status { get; set; }
 
         #region navigation properties
         public Bracket Bracket { get; set; }

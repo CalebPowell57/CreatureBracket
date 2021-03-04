@@ -3,7 +3,10 @@ using CreatureBracket.Misc;
 using CreatureBracket.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using static CreatureBracket.Misc.Constants;
 
 namespace CreatureBracket.Repositories
 {
@@ -27,9 +30,16 @@ namespace CreatureBracket.Repositories
             return creatureSubmission;
         }
 
-        public async Task ApproveAsync(Guid submissionId)
+        public async Task ApproveAsync(ApproveSubmissionRequestDTO dto)
         {
-            var submission = await _context.CreatureSubmissions.SingleAsync(x => x.Id == submissionId);
+            var submission = await _context.CreatureSubmissions.SingleAsync(x => x.Id == dto.CreatureSubmissionId);
+
+            var creatures = await _context.Creatures.Where(x => x.BracketId == submission.BracketId).ToListAsync();
+
+            if(creatures.Count >= 64)
+            {
+                throw new Exception("There are already 64 creatures approved for battle!");
+            }
 
             var creature = new Creature
             {
@@ -39,7 +49,18 @@ namespace CreatureBracket.Repositories
                 Name = submission.Name
             };
 
+            submission.Status = ECreatureSubmissionStatus.Approved;
+
             _context.Add(creature);
+        }
+
+        public async Task<List<CreatureSubmission>> ByStatusAsync(ECreatureSubmissionStatus status)
+        {
+            var submissions = await _context.CreatureSubmissions.AsNoTracking()
+                                                                .Where(x => x.Status == status)
+                                                                .ToListAsync();
+
+            return submissions;
         }
     }
 }
