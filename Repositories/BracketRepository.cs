@@ -52,5 +52,60 @@ namespace CreatureBracket.Repositories
 
             return standings;
         }
+
+        public List<RoundResponseDTO> GlobalTestData()
+        {
+            var rounds = new List<RoundResponseDTO>();
+
+            var round1 = GenerateTestRound(32);
+            var round2 = GenerateTestRound(16);
+            var round3 = GenerateTestRound(8);
+            var round4 = GenerateTestRound(4);
+            var round5 = GenerateTestRound(2);
+
+            rounds.Add(round1);
+            rounds.Add(round2);
+            rounds.Add(round3);
+            rounds.Add(round4);
+            rounds.Add(round5);
+
+            return rounds;
+        }
+
+        private RoundResponseDTO GenerateTestRound(int matchupCount)
+        {
+            var round = new RoundResponseDTO
+            {
+                Matchups = new List<MatchupResponseDTO>()
+            };
+
+            var creatureIndex = 1;
+
+            for (int ix = 0; ix < matchupCount; ix++)
+            {
+                var matchup = new MatchupResponseDTO
+                {
+                    Contestants = new List<CreatureResponseDTO>
+                    {
+                        new CreatureResponseDTO
+                        {
+                            Name = $"Creature {creatureIndex}",
+                            BIO = $"This is Creature {creatureIndex}'s bio!"
+                        },
+                        new CreatureResponseDTO
+                        {
+                            Name = $"Creature {creatureIndex + 1}",
+                            BIO = $"This is Creature {creatureIndex + 1}'s bio!"
+                        }
+                    }
+                };
+
+                creatureIndex += 2;
+
+                round.Matchups.Add(matchup);
+            }
+
+            return round;
+        }
     }
 }
