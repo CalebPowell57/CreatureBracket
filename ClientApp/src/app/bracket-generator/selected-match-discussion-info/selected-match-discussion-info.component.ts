@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 @Component({
   selector: 'app-selected-match-discussion-info',
   templateUrl: './selected-match-discussion-info.component.html',
@@ -7,9 +6,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SelectedMatchDiscussionInfoComponent implements OnInit {
 
+
   constructor() { }
 
   ngOnInit() {
+  }
+  ngOnChanges(changes: SimpleChanges) {
+
   }
 
 }

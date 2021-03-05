@@ -3,7 +3,6 @@ import {
   OnInit,
   Input
 } from '@angular/core';
-import { ICreatureSubmissionDTO } from '../../interfaces/creature-submission-DTO.interface'
 
 @Component({
   selector: 'tt-match',
@@ -19,7 +18,4 @@ export class MatchComponent implements OnInit {
   ngOnInit() {
   }
 
-  public onClick(name: string) {
-    
-  }
 }

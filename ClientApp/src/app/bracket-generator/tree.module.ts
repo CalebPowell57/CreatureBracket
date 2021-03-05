@@ -6,7 +6,7 @@ import { MatchComponent } from './match/match.component';
 import { SingleEliminationTreeComponent } from './single-elimination-tree/single-elimination-tree.component';
 import { CreatureDiscussionColComponent } from './creature-discussion-col/creature-discussion-col.component';
 import { SelectedMatchDiscussionInfoComponent } from './selected-match-discussion-info/selected-match-discussion-info.component';
-
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,9 @@ import { SelectedMatchDiscussionInfoComponent } from './selected-match-discussio
     ],
   exports: [
     GlobalBracketComponent
-    ]
+  ],
+  providers: [
+  ]
 })
 export class NgTournamentTreeModule {
 }
