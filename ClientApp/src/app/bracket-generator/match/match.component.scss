@@ -6,6 +6,11 @@
   height: $ngtt-match-wrapper-height;
   background-color: lighten($ngtt-background-primary, 15%);
   border-radius: 6px;
+  
+}
+.ngtt__match-wrapper:hover {
+  background-color: #141414;
+  cursor:pointer;
 }
 
 .ngtt__team-wrapper {
