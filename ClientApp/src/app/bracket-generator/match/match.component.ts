@@ -11,7 +11,7 @@ import {
 })
 export class MatchComponent implements OnInit {
 
-  @Input() match: any;
+  @Input() matchups: any;
 
   constructor() { }
 

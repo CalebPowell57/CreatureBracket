@@ -1,4 +1,4 @@
 export interface ICreatureDTO {
-  name: string;
-  score: string;
+  creatureName: string;
+  votes: string;
 }

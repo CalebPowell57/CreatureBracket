@@ -1,8 +1,9 @@
 import { Component, Input, SimpleChange } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgttTournament } from '../../interfaces/bracket.interface';
+import { NgttRound, NgttTournament } from '../../interfaces/bracket.interface';
 import { ICreatureDTO } from '../../interfaces/CreatureDTO.interface';
+import { GlobalBracketService } from '../../shared/global-bracket.service';
 
 @Component({
   selector: 'app-global-bracket',
@@ -12,151 +13,160 @@ import { ICreatureDTO } from '../../interfaces/CreatureDTO.interface';
 export class GlobalBracketComponent  {
 
   constructor(
+    private bracketService: GlobalBracketService,
     private router: Router) { }
 
-
-  public singleEliminationTournament: NgttTournament;
+  public BracketData: NgttRound;
+  public singleEliminationTournament: NgttTournament; 
 
   onSubmit(form: NgForm) {
   }
   ngOnInit() {
-    this.singleEliminationTournament = {
-      rounds: [
-        {
-          type: 'Winnerbracket',
-          matches: [
-            {
-              teams: [{ name: 'Team  A', score: 1 }, { name: 'Team  B', score: 2 }]
-            },
-            {
-              teams: [{ name: 'Team  C', score: 1 }, { name: 'Team  D', score: 2 }]
-            },
-            {
-              teams: [{ name: 'Team  E', score: 1 }, { name: 'Team  F', score: 2 }]
-            },
-            {
-              teams: [{ name: 'Team  G', score: 1 }, { name: 'Team  H', score: 2 }]
-            }, {
-              teams: [{ name: 'Team  A', score: 1 }, { name: 'Team  B', score: 2 }]
-            },
-            {
-              teams: [{ name: 'Team  C', score: 1 }, { name: 'Team  D', score: 2 }]
-            },
-            {
-              teams: [{ name: 'Team  E', score: 1 }, { name: 'Team  F', score: 2 }]
-            },
-            {
-              teams: [{ name: 'Team  G', score: 1 }, { name: 'Team  H', score: 2 }]
-            },
-            {
-              teams: [{ name: 'Team  A', score: 1 }, { name: 'Team  B', score: 2 }]
-            },
-            {
-              teams: [{ name: 'Team  C', score: 1 }, { name: 'Team  D', score: 2 }]
-            },
-            {
-              teams: [{ name: 'Team  E', score: 1 }, { name: 'Team  F', score: 2 }]
-            },
-            {
-              teams: [{ name: 'Team  G', score: 1 }, { name: 'Team  H', score: 2 }]
-            }, {
-              teams: [{ name: 'Team  A', score: 1 }, { name: 'Team  B', score: 2 }]
-            },
-            {
-              teams: [{ name: 'Team  C', score: 1 }, { name: 'Team  D', score: 2 }]
-            },
-            {
-              teams: [{ name: 'Team  E', score: 1 }, { name: 'Team  F', score: 2 }]
-            },
-            {
-              teams: [{ name: 'Team  G', score: 1 }, { name: 'Team  H', score: 2 }]
-            }
-          ]
-        }, {
-          type: 'Winnerbracket',
-          matches: [
-            {
-              teams: [{ name: 'Team  A', score: 1 }, { name: 'Team  B', score: 2 }]
-            },
-            {
-              teams: [{ name: 'Team  C', score: 1 }, { name: 'Team  D', score: 2 }]
-            },
-            {
-              teams: [{ name: 'Team  E', score: 1 }, { name: 'Team  F', score: 2 }]
-            },
-            {
-              teams: [{ name: 'Team  G', score: 1 }, { name: 'Team  H', score: 2 }]
-            },
-            {
-              teams: [{ name: 'Team  A', score: 1 }, { name: 'Team  B', score: 2 }]
-            },
-            {
-              teams: [{ name: 'Team  C', score: 1 }, { name: 'Team  D', score: 2 }]
-            },
-            {
-              teams: [{ name: 'Team  E', score: 1 }, { name: 'Team  F', score: 2 }]
-            },
-            {
-              teams: [{ name: 'Team  G', score: 1 }, { name: 'Team  H', score: 2 }]
-            }
-          ]
-        },
-        {
-          type: 'Winnerbracket',
-          matches: [
-            {
-              teams: [{ name: 'Team  B', score: 1 }, { name: 'Team  D', score: 2 }]
-            },
-            {
-              teams: [{ name: 'Team  F', score: 1 }, { name: 'Team  H', score: 2 }]
-            },
-            {
-              teams: [{ name: 'Team  B', score: 1 }, { name: 'Team  D', score: 2 }]
-            },
-            {
-              teams: [{ name: 'Team  F', score: 1 }, { name: 'Team  H', score: 2 }]
-            }
-          ]
-        },
-        {
-          type: 'Winnerbracket',
-          matches: [
-            {
-              teams: [{ name: 'Team  B', score: 1 }, { name: 'Team  D', score: 2 }]
-            },
-            {
-              teams: [{ name: 'Team  F', score: 1 }, { name: 'Team  H', score: 2 }]
-            }
-          ]
-        },
-        {
-          type: 'Final',
-          matches: [
-            {
-              teams: [
-                {
-                  name: 'Team  D',
-                  score: 1
-                },
-                {
-                  name: 'Team  H',
-                  score: 2
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
+    this.bracketService.getBracketData()
+      .subscribe(data => this.singleEliminationTournament = data);
+
+    console.log(this.singleEliminationTournament);
+    //this.singleEliminationTournament = this.BracketData;
+    //this.singleEliminationTournament = {
+    //  rounds: [
+    //    {
+    //      type: 'Winnerbracket',
+    //      matchups: [
+    //        {
+    //          contestants: [{ name: 'Creature  A', votes: 1 }, { name: 'Creature  B', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  C', votes: 1 }, { name: 'Creature  D', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  E', votes: 1 }, { name: 'Creature  F', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  G', votes: 1 }, { name: 'Creature  H', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  A', votes: 1 }, { name: 'Creature  B', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  C', votes: 1 }, { name: 'Creature  D', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  E', votes: 1 }, { name: 'Creature  F', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  G', votes: 1 }, { name: 'Creature  H', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  A', votes: 1 }, { name: 'Creature  B', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  C', votes: 1 }, { name: 'Creature  D', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  E', votes: 1 }, { name: 'Creature  F', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  G', votes: 1 }, { name: 'Creature  H', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  A', votes: 1 }, { name: 'Creature  B', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  C', votes: 1 }, { name: 'Creature  D', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  E', votes: 1 }, { name: 'Creature  F', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  G', votes: 1 }, { name: 'Creature  H', votes: 2 }]
+    //        }
+    //      ]
+    //    }, {
+    //      type: 'Winnerbracket',
+    //      matchups: [
+    //        {
+    //          contestants: [{ name: 'Creature  A', votes: 1 }, { name: 'Creature  B', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  C', votes: 1 }, { name: 'Creature  D', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  E', votes: 1 }, { name: 'Creature  F', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  G', votes: 1 }, { name: 'Creature  H', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  A', votes: 1 }, { name: 'Creature  B', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  C', votes: 1 }, { name: 'Creature  D', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  E', votes: 1 }, { name: 'Creature  F', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  G', votes: 1 }, { name: 'Creature  H', votes: 2 }]
+    //        }
+    //      ]
+    //    },
+    //    {
+    //      type: 'Winnerbracket',
+    //      matchups: [
+    //        {
+    //          contestants: [{ name: 'Creature  B', votes: 1 }, { name: 'Creature  D', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  F', votes: 1 }, { name: 'Creature  H', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  B', votes: 1 }, { name: 'Creature  D', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  F', votes: 1 }, { name: 'Creature  H', votes: 2 }]
+    //        }
+    //      ]
+    //    },
+    //    {
+    //      type: 'Winnerbracket',
+    //      matchups: [
+    //        {
+    //          contestants: [{ name: 'Creature  B', votes: 1 }, { name: 'Creature  D', votes: 2 }]
+    //        },
+    //        {
+    //          contestants: [{ name: 'Creature  F', votes: 1 }, { name: 'Creature  H', votes: 2 }]
+    //        }
+    //      ]
+    //    },
+    //    {
+    //      type: 'Final',
+    //      matchups: [
+    //        {
+    //          contestants: [
+    //            {
+    //              name: 'Creature  D',
+    //              votes: 1
+    //            },
+    //            {
+    //              name: 'Creature  H',
+    //              votes: 2
+    //            }
+    //          ]
+    //        }
+    //      ]
+    //    }
+    //  ]
+    //}
   }
   public onClick(match: any) {
-    let creature: ICreatureDTO = {
-      name: match.teams[0].name,
-      score: match.teams[0].score
-    };
-
-    console.log(creature);
-    
+    let creatures: ICreatureDTO[] = [];
+    for (let i = 0; i < 2; i++) {
+      let CreatureInBattle: ICreatureDTO = {
+        creatureName: match.contestants[i].name,
+        votes: match.contestants[i].votes
+      }
+      creatures.push(CreatureInBattle);
+    }; 
   }
 
 }

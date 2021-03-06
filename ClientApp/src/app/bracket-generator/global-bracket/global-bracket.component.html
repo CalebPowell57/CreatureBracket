@@ -8,8 +8,8 @@
         </ngtt-single-elimination-tree>
       </ng-container>
 
-      <ng-template #matchTemplate let-match>
-        <tt-match [match]="match" (click)="onClick(match)" ></tt-match>
+      <ng-template #matchTemplate let-matchups>
+        <tt-match [matchups]="matchups" (click)="onClick(matchups)" ></tt-match>
       </ng-template>
     </div>
     <div class="col-4">

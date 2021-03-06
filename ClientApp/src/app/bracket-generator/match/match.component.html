@@ -1,9 +1,9 @@
 <div class="ngtt__match-wrapper">
-  <ng-container *ngFor="let team of match.teams">
+  <ng-container *ngFor="let contestants of matchups.contestants">
     <div class="ngtt__team-wrapper">
       <div class="ngtt__team-avatar"></div>
-      <h6 class="ngtt__team-title">{{team.name}}</h6>
-      <div class="ngtt__team-score">{{team.score}}</div>
+      <h6 class="ngtt__team-title">{{contestants.name}}</h6>
+      <div class="ngtt__team-score">{{contestants.votes}}</div>
     </div>
   </ng-container>
 </div>

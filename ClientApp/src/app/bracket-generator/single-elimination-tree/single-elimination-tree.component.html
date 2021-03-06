@@ -5,10 +5,10 @@
         <div class="ngtt-se__bracket-wrapper">
           <ng-container *ngFor="let winnersround of winnersBracket; let i = index">
             <div class="ngtt-se__round-wrapper">
-              <ng-container *ngFor="let match of winnersround.matches">
+              <ng-container *ngFor="let matchups of winnersround.matchups">
                 <div class="ngtt-se__match-wrapper">
                   <div class="ngtt-se__match-component-container">
-                    <ng-container *ngTemplateOutlet="matchTemplate; context:{$implicit: match}"></ng-container>
+                    <ng-container *ngTemplateOutlet="matchTemplate; context:{$implicit: matchups}"></ng-container>
                   </div>
                 </div>
               </ng-container>
@@ -18,11 +18,11 @@
             <div class="ngtt-se__round-wrapper">
               <div class="ngtt-se__match-wrapper">
                 <div class="ngtt-se__finale-match-wrapper">
-                  <div class="ngtt-se__finale-component-container" *ngIf="final.matches.length > 0">
-                    <ng-container *ngTemplateOutlet="matchTemplate; context:{$implicit: final.matches[0]}"></ng-container>
+                  <div class="ngtt-se__finale-component-container" *ngIf="final.matchups.length > 0">
+                    <ng-container *ngTemplateOutlet="matchTemplate; context:{$implicit: final.matchups[0]}"></ng-container>
                   </div>
-                  <div class="ngtt-se__match-component-container" *ngIf="final.matches.length > 1">
-                    <ng-container *ngTemplateOutlet="matchTemplate; context:{$implicit: final.matches[1]}"></ng-container>
+                  <div class="ngtt-se__match-component-container" *ngIf="final.matchups.length > 1">
+                    <ng-container *ngTemplateOutlet="matchTemplate; context:{$implicit: final.matchups[1]}"></ng-container>
                   </div>
                 </div>
               </div>
