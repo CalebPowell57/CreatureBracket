@@ -9,7 +9,7 @@ namespace CreatureBracket.Repositories
     {
         public UserRepository(DatabaseContext context) : base(context) { }
 
-        public void Register(RegisterRequestDTO dto)
+        public Guid Register(RegisterRequestDTO dto)
         {
             if(dto.Password1 != dto.Password2)
             {
@@ -23,10 +23,24 @@ namespace CreatureBracket.Repositories
                 LastName = dto.LastName,
                 Password = Security.Hash(dto.Password1),
                 Type = Constants.EUserType.Normal,
-                UserName = dto.UserName
+                EmailAddress = dto.EmailAddress
+            };
+
+            var verifyGuid = Guid.NewGuid();
+
+            var userVerifyRequest = new UserVerifyRequest
+            {
+                Hash = Security.Hash(verifyGuid.ToString()),
+                Id = Guid.NewGuid(),
+                UserId = user.Id,
+                Completed = false,
+                ExpirationDateTime = DateTime.UtcNow.AddDays(2)
             };
 
             _context.Users.Add(user);
+            _context.UserVerifyRequests.Add(userVerifyRequest);
+
+            return verifyGuid;
         }
     }
 }

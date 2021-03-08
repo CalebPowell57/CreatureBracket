@@ -22,6 +22,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.8.0" />
+    <PackageReference Include="SendGrid" Version="9.22.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
   </ItemGroup>
 
@@ -52,6 +53,7 @@
     <None Remove="ClientApp\src\app\interfaces\register-DTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\standings-item-DTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\user.interface.ts" />
+    <None Remove="ClientApp\src\app\interfaces\verifyAccountDTO.interface.ts" />
     <None Remove="ClientApp\src\app\register\register.service.ts" />
     <None Remove="ClientApp\src\app\shared\authentication.service.ts" />
     <None Remove="ClientApp\src\app\shared\global-bracket.service.ts" />
@@ -61,6 +63,8 @@
     <None Remove="ClientApp\src\app\standings\standings.guard.ts" />
     <None Remove="ClientApp\src\app\standings\standings.service.ts" />
     <None Remove="ClientApp\src\app\user-bracket\user-bracket.guard.ts" />
+    <None Remove="ClientApp\src\app\verify-account\verify-account.guard.ts" />
+    <None Remove="ClientApp\src\app\verify-account\verify-account.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -73,6 +77,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\creature-submission\creature-submission.service.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\verifyAccountDTO.interface.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\CreatureDTO.interface.ts" />
@@ -118,9 +125,21 @@
     <TypeScriptCompile Include="ClientApp\src\app\standings\standings.guard.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\verify-account\verify-account.service.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\verify-account\verify-account.guard.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\user-bracket\user-bracket.guard.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ConfirmationRequestBody.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -18,7 +18,6 @@ namespace CreatureBracket.Controllers
         public SecurityController(ILogger<SecurityController> logger, UnitOfWork unitOfWork)
         {
             _logger = logger;
-
             _unitOfWork = unitOfWork;
         }
 
@@ -30,6 +29,15 @@ namespace CreatureBracket.Controllers
 
             //Response.Headers.Add("Set-Cookie", $"access_token={response.JWT}");
             Response.Cookies.Append("access_token", response.JWT);
+
+            return Ok(response);
+        }
+
+        [HttpPost("Verify")]
+        public async Task<IActionResult> Verify([FromBody] VerifyRequestDTO dto)
+        {
+            var response = await _unitOfWork.SecurityRepository.VerifyAsync(dto);
+            await _unitOfWork.SaveAsync();
 
             return Ok(response);
         }

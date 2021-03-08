@@ -17,7 +17,7 @@ export class RegisterComponent {
     lastName: '',
     password1: '',
     password2: '',
-    userName: ''
+    emailAddress: ''
   };
 
   constructor(
@@ -34,14 +34,14 @@ export class RegisterComponent {
         LastName: this.input.lastName,
         Password1: this.input.password1,
         Password2: this.input.password2,
-        UserName: this.input.userName
+        EmailAddress: this.input.emailAddress
       };
 
       this.registerService.register(dto).subscribe(() => {
         this.toastrService.success('You have been successfully registered!', 'Success');
 
         let credDTO: IAuthenticationDTO = {
-          userName: dto.UserName,
+          userName: dto.EmailAddress,
           password: dto.Password1
         };
 
@@ -56,7 +56,7 @@ export class RegisterComponent {
 interface IInput {
   firstName: string;
   lastName: string;
-  userName: string;
+  emailAddress: string;
   password1: string;
   password2: string;
 }

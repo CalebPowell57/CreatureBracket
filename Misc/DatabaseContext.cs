@@ -16,6 +16,7 @@ namespace CreatureBracket.Misc
         public DbSet<CreatureSubmission> CreatureSubmissions { get; set; }
         public DbSet<Creature> Creatures { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<UserVerifyRequest> UserVerifyRequests { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {

@@ -1,7 +1,7 @@
 export interface IRegisterDTO {
   FirstName: string;
   LastName: string;
-  UserName: string;
+  EmailAddress: string;
   Password1: string;
   Password2: string;
 }

@@ -5,10 +5,15 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { RequireAuthenticationGuard } from './shared/requre-authentication.guard';
 import { StandingsGuard } from './standings/standings.guard';
 import { UserBracketGuard } from './user-bracket/user-bracket.guard';
+import { VerifyAccountGuard } from './verify-account/verify-account.guard';
+import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.guard';
+
 import { HttpRequestInterceptor } from './shared/http-request.interceptor';
+
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
@@ -22,7 +27,7 @@ import { CreatureSubmissionComponent } from './creature-submission/creature-subm
 import { NgTournamentTreeModule } from './bracket-generator/tree.module';
 import { NoPermissionsComponent } from './no-permissions/no-permissions.component';
 import { CreatureApprovalComponent } from './creature-approval/creature-approval.component';
-import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.guard';
+import { VerifyAccountComponent } from './verify-account/verify-account.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +42,8 @@ import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.
     CreatureSubmissionComponent,
     BracketManagerComponent,
     NoPermissionsComponent,
-    CreatureApprovalComponent
+    CreatureApprovalComponent,
+    VerifyAccountComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -50,6 +56,7 @@ import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.
       positionClass: 'toast-bottom-right'
     }),
     RouterModule.forRoot([
+      { path: 'verify-account', component: VerifyAccountComponent, canActivate: [VerifyAccountGuard] },
       { path: 'current-standings', component: StandingsComponent, canActivate: [StandingsGuard, RequireAuthenticationGuard] },
       { path: 'creature-approval', component: CreatureApprovalComponent, canActivate: [/*RequireSuperPermissionsGuard, */RequireAuthenticationGuard] },
       { path: 'user-bracket', component: UserBracketComponent, canActivate: [UserBracketGuard, RequireAuthenticationGuard] },

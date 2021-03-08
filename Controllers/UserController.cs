@@ -14,20 +14,23 @@ namespace CreatureBracket.Controllers
     {
         private readonly ILogger<UserController> _logger;
         private readonly UnitOfWork _unitOfWork;
+        private readonly EmailService _emailService;
 
-        public UserController(ILogger<UserController> logger, UnitOfWork unitOfWork)
+        public UserController(ILogger<UserController> logger, UnitOfWork unitOfWork, EmailService emailService)
         {
             _logger = logger;
-
             _unitOfWork = unitOfWork;
+            _emailService = emailService;
         }
 
         [AllowAnonymous]
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDTO dto)
         {
-            _unitOfWork.UserRepository.Register(dto);
+            var verifyGuid = _unitOfWork.UserRepository.Register(dto);
             await _unitOfWork.SaveAsync();
+
+            await _emailService.SendConfirmationRequestAsync(dto.EmailAddress, $"{dto.FirstName} {dto.LastName}", verifyGuid);
 
             return Ok();
         }

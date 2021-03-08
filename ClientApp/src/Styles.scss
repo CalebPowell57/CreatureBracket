@@ -8,6 +8,7 @@ a {
 
 body {
   background-color: #1f1f1f;
+  color: white;
 }
 code {
   color: #e01a76;
@@ -89,4 +90,15 @@ li.listItem {
 
 .field-error {
   border: 1px solid red;
+}
+
+.form-control {
+  background-color: #292929;
+  color: white;
+  border-color: #141414;
+}
+
+.form-control:focus {
+  background-color: #292929;
+  color:white;
 }
