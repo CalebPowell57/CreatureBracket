@@ -18,7 +18,7 @@ export class GlobalBracketComponent  {
 
   public BracketData: NgttRound;
   public singleEliminationTournament: NgttTournament;
-
+  public SelectedMatchup: ICreatureDTO[] = [];
   onSubmit(form: NgForm) {
   }
   ngOnInit() {
@@ -26,14 +26,15 @@ export class GlobalBracketComponent  {
       this.singleEliminationTournament = data;
     });
   }
-  public onClick(match: any) {
-    let creatures: ICreatureDTO[] = [];
+  public onClick(matchup: any) {
+
+
     for (let i = 0; i < 2; i++) {
       let CreatureInBattle: ICreatureDTO = {
-        creatureName: match.contestants[i].name,
-        votes: match.contestants[i].votes
+        creatureName: matchup.contestants[i].name,
+        votes: matchup.contestants[i].votes
       }
-      creatures.push(CreatureInBattle);
+      this.SelectedMatchup.push(CreatureInBattle);
     }; 
   }
 

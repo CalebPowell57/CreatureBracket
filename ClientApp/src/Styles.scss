@@ -21,6 +21,9 @@ code {
 .ContainerNoPadding, .RowNoPadding, .ColNoPadding{
     padding:0px;
 }
+.ColPadding{
+    padding:5px;
+}
 .Nav-Col, Nav-Row { //custom class held in app.component.html col-12 for the navigation row.
   padding: 0px;
   background-color: black;
