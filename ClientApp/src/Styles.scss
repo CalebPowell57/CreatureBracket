@@ -14,9 +14,16 @@ code {
   color: #e01a76;
 }
 
-.container-fluid, col {
-  padding: 0px;
+.container-fluid {
+  /*padding: 0px;*/
   height:100%;
+}
+.ContainerNoPadding, .RowNoPadding, .ColNoPadding{
+    padding:0px;
+}
+.Nav-Col, Nav-Row { //custom class held in app.component.html col-12 for the navigation row.
+  padding: 0px;
+  background-color: black;
 }
 .btn-primary {
   color: #fff;

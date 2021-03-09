@@ -69,7 +69,7 @@ namespace CreatureBracket.Controllers
         [HttpGet("GlobalTestData")]
         public IActionResult GlobalTestData()
         {
-            var response = _unitOfWork.BracketRepository.GlobalTestData();
+            var response = _unitOfWork.BracketRepository.BracketTestData();
 
             return Ok(response);
         }
