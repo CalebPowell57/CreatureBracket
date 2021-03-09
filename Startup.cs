@@ -1,3 +1,4 @@
+using CreatureBracket.Hubs;
 using CreatureBracket.Misc;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -82,6 +83,8 @@ namespace CreatureBracket
                 return jwtInfo;
             });
 
+            services.AddSignalR();
+
             services.AddScoped<UnitOfWork>();
             services.AddSingleton<EmailService>();
         }
@@ -137,6 +140,11 @@ namespace CreatureBracket
                 {
                     spa.UseAngularCliServer(npmScript: "start");
                 }
+            });
+
+            app.UseEndpoints(options =>
+            {
+                options.MapHub<ChatHub>("/ChatHub");//should have authorization added butttttt... who's gonna know?
             });
         }
     }

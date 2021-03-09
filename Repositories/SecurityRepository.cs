@@ -23,6 +23,10 @@ namespace CreatureBracket.Repositories
             {
                 throw new Exception("Invalid username or password.");
             }
+            else if(!user.Verified)
+            {
+                throw new Exception("This user has not been verified. Check your email to verify your account.");
+            }
 
             var claims = new[]
             {

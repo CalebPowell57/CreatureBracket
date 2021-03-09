@@ -47,6 +47,7 @@
     <None Remove="ClientApp\src\app\interfaces\approve-submission-DTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\authenticationDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\bracket.interface.ts" />
+    <None Remove="ClientApp\src\app\interfaces\chat-message.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\creature-submission-DTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\creature-submission.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\CreatureDTO.interface.ts" />
@@ -79,6 +80,9 @@
     <TypeScriptCompile Include="ClientApp\src\app\creature-submission\creature-submission.service.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\chat-message.interface.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\verifyAccountDTO.interface.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -104,6 +108,9 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\user.interface.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\register\register.service.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\shared\chat.service.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\shared\global-bracket.service.ts">

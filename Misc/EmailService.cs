@@ -22,24 +22,25 @@ namespace CreatureBracket.Misc
             return response;
         }
 
-        public async Task<Response> SendConfirmationRequestAsync(string emailAddress, string toName, Guid verifyGuid)
+        public async Task<Response> SendConfirmationRequestAsync(string emailAddress, string toName, string key, string baseUrl)
         {
             var client = new SendGridClient(_apiKey);
             var subject = "Please verify your Creature Bracket account";
             var to = new EmailAddress(emailAddress, toName);
-            var htmlContent = GetConfirmationRequestContent(emailAddress, verifyGuid);
+            var htmlContent = GetConfirmationRequestContent(baseUrl, key);
             var msg = MailHelper.CreateSingleEmail(_sender, to, subject, "", htmlContent);
             var response = await client.SendEmailAsync(msg);
 
             return response;
         }
 
-        private string GetConfirmationRequestContent(string emailAddress, Guid verifyGuid)
+        private string GetConfirmationRequestContent(string baseUrl, string key)
         {
             var body = File.ReadAllText("ConfirmationRequestBody.html");
 
-            body = body.Replace("{{emailAddress}}", emailAddress)
-                       .Replace("{{verifyGuid}}", verifyGuid.ToString());
+            var verifyRoute = $"https://localhost:44316/verify-account?key={key}";
+
+            body = body.Replace("{{verify-route}}", verifyRoute);
 
             return body;
         }

@@ -11,7 +11,7 @@ namespace CreatureBracket.Repositories
     {
         public UserRepository(DatabaseContext context) : base(context) { }
 
-        public Guid Register(RegisterRequestDTO dto)
+        public string Register(RegisterRequestDTO dto)
         {
             if(dto.Password1 != dto.Password2)
             {
@@ -28,11 +28,11 @@ namespace CreatureBracket.Repositories
                 EmailAddress = dto.EmailAddress
             };
 
-            var verifyGuid = Guid.NewGuid();
+            var key = Guid.NewGuid().ToString().Replace("-", "");
 
             var userVerifyRequest = new UserVerifyRequest
             {
-                Hash = Security.Hash(verifyGuid.ToString()),
+                Key = Security.Hash(key),
                 Id = Guid.NewGuid(),
                 UserId = user.Id,
                 Completed = false,
@@ -42,32 +42,30 @@ namespace CreatureBracket.Repositories
             _context.Users.Add(user);
             _context.UserVerifyRequests.Add(userVerifyRequest);
 
-            return verifyGuid;
+            return key;
         }
 
-        public async Task<bool> VerifyAsync(VerifyRequestDTO dto)
+        public async Task VerifyAsync(VerifyRequestDTO dto)
         {
-            var userVerifyRequest = await _context.UserVerifyRequests.SingleOrDefaultAsync(x => x.Hash == Security.Hash(dto.VerifyGuid.ToString()) && x.User.EmailAddress.ToLower() == dto.EmailAddress.ToLower());
+            var userVerifyRequest = await _context.UserVerifyRequests.SingleOrDefaultAsync(x => x.Key == Security.Hash(dto.Key.ToString()));
 
             if (userVerifyRequest is null)
             {
-                throw new Exception($"No {dto.EmailAddress} user found!");
+                throw new Exception($"No user found!");
             }
             else if (userVerifyRequest.ExpirationDateTime < DateTime.UtcNow)
             {
-                throw new Exception($"The registration request for {dto.EmailAddress} has expired!");
+                throw new Exception($"The registration request key has expired!");
             }
             else if (userVerifyRequest.User.Verified)
             {
-                throw new Exception($"{dto.EmailAddress} has already been verified!");
+                throw new Exception($"This user has already been verified!");
             }
             else
             {
                 userVerifyRequest.Completed = true;
                 userVerifyRequest.User.Verified = true;
             }
-
-            return true;
         }
     }
 }

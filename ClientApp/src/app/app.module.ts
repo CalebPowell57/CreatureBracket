@@ -29,6 +29,7 @@ import { NoPermissionsComponent } from './no-permissions/no-permissions.componen
 import { CreatureApprovalComponent } from './creature-approval/creature-approval.component';
 import { VerifyAccountComponent } from './verify-account/verify-account.component';
 import { SuccessfulAccountCreationComponent } from './successful-account-creation/successful-account-creation.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { SuccessfulAccountCreationComponent } from './successful-account-creatio
     NoPermissionsComponent,
     CreatureApprovalComponent,
     VerifyAccountComponent,
-    SuccessfulAccountCreationComponent
+    SuccessfulAccountCreationComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
