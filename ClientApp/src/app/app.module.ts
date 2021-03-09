@@ -28,6 +28,7 @@ import { NgTournamentTreeModule } from './bracket-generator/tree.module';
 import { NoPermissionsComponent } from './no-permissions/no-permissions.component';
 import { CreatureApprovalComponent } from './creature-approval/creature-approval.component';
 import { VerifyAccountComponent } from './verify-account/verify-account.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SuccessfulAccountCreationComponent } from './successful-account-creation/successful-account-creation.component';
 import { ChatComponent } from './chat/chat.component';
 
@@ -55,6 +56,7 @@ import { ChatComponent } from './chat/chat.component';
     FormsModule,
     NgTournamentTreeModule, 
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
