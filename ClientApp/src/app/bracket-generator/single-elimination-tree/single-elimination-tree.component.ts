@@ -14,6 +14,8 @@ export class SingleEliminationTreeComponent implements OnChanges {
   @Input() tournament: NgttTournament;
 
 
+  //public winnersBracket: NgttRound[];
+  //public final: NgttRound;
   public winnersBracket: NgttRound[];
   public final: NgttRound;
 
@@ -22,25 +24,18 @@ export class SingleEliminationTreeComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes.hasOwnProperty('tournament') && changes.tournament.currentValue) {
       this.winnersBracket = this.tournament.rounds.filter(round => {
-        return round.type === 'Winnerbracket';
+        if (round.matchups.length > 1) {
+          return round;
+        }
       });
-    }
-    console.log(this.winnersBracket);
+      console.log(this.winnersBracket);
       this.final = this.tournament.rounds.filter(round => {
-        return round.type === 'Final';
+        if (round.matchups.length === 1) {
+          return round
+        }
       }).shift();
       console.log(this.final);
+    }
+
   }
-  //public onClick(match: ICreatureDTO) {
-  //  this.selectedMatchInfo = {
-  //    match: [{
-
-  //    }
-
-  //    ]
-  //  }
-  //  //this.selectedMatchInfo = this.clickedMatch.match.filter(teams => {
-
-  //  //})
-  //}
 }

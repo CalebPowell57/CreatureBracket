@@ -14,7 +14,7 @@ export class GlobalBracketService {
     return this.http.get<IBracket>('Bracket/Active');
   }
 
-  getBracketData(): Observable<NgttTournament> {
+  getBracketData() : Observable<NgttTournament> {
     return this.http.get<NgttTournament>('Bracket/GlobalTestData');
   }
 }

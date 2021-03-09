@@ -53,6 +53,16 @@ namespace CreatureBracket.Repositories
             return standings;
         }
 
+        public BracketResponseDTO BracketTestData()
+        {
+            var bracket = new BracketResponseDTO
+            {
+                Rounds = GlobalTestData()
+            };
+
+            return bracket;
+
+        }
         public List<RoundResponseDTO> GlobalTestData()
         {
             var rounds = new List<RoundResponseDTO>();
@@ -62,12 +72,14 @@ namespace CreatureBracket.Repositories
             var round3 = GenerateTestRound(8);
             var round4 = GenerateTestRound(4);
             var round5 = GenerateTestRound(2);
+            var round6 = GenerateTestRound(1);
 
             rounds.Add(round1);
             rounds.Add(round2);
             rounds.Add(round3);
             rounds.Add(round4);
             rounds.Add(round5);
+            rounds.Add(round6);
 
             return rounds;
         }

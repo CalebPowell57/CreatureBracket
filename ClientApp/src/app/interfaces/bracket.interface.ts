@@ -9,9 +9,6 @@ export interface IBracket {
   creatureEntryDeadline: Date;
   winnerId: Guid;
 }
-export interface BracketData {
-
-}
 export interface NgttTournament {
   rounds: NgttRound[];
 }
@@ -21,6 +18,5 @@ export interface NgttRound {
    * The type determines where in which branch to place a match.
    * SingleElimination-Trees only consist of a winnerbracket and a final
    */
-  type: 'Winnerbracket' | 'Final';
   matchups: any[];
 }
