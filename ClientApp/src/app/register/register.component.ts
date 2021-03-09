@@ -40,14 +40,7 @@ export class RegisterComponent {
       this.registerService.register(dto).subscribe(() => {
         this.toastrService.success('You have been successfully registered!', 'Success');
 
-        let credDTO: IAuthenticationDTO = {
-          userName: dto.EmailAddress,
-          password: dto.Password1
-        };
-
-        this.authenticationService.login(credDTO).subscribe(() => {
-          this.router.navigate(['']);
-        });
+        this.router.navigate(['successful-account-creation']);
       });
     }
   }

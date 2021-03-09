@@ -38,8 +38,8 @@ namespace CreatureBracket.Misc
         {
             var body = File.ReadAllText("ConfirmationRequestBody.html");
 
-            body.Replace("{{emailAddress}}", emailAddress);
-            body.Replace("{{verifyId}}", verifyGuid.ToString());
+            body = body.Replace("{{emailAddress}}", emailAddress)
+                       .Replace("{{verifyGuid}}", verifyGuid.ToString());
 
             return body;
         }

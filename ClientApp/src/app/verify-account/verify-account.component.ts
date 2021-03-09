@@ -12,8 +12,10 @@ export class VerifyAccountComponent {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      this.verifyAccountService.verify({ emailAddress: params[0], verifyGuid: params[1] });
-    })
+      this.verifyAccountService.verify({ EmailAddress: params.emailAddress, VerifyGuid: params.verifyGuid }).subscribe(x => {
+        
+      });
+    });
   }
 }
 

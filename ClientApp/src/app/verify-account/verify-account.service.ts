@@ -10,7 +10,7 @@ export class VerifyAccountService {
   }
 
   verify(dto: IVerifyAccountDTO) {
-    let response = this.http.post('User/Verify', dto)
+    let response = this.http.post('User/Verify', dto);
 
     return response;
   }

@@ -15,31 +15,6 @@ namespace CreatureBracket.Repositories
     {
         public SecurityRepository(DatabaseContext context) : base(context) { }
 
-        public async Task<bool> VerifyAsync(VerifyRequestDTO dto)
-        {
-            var userVerifyRequest = await _context.UserVerifyRequests.SingleOrDefaultAsync(x => x.Hash == Security.Hash(dto.Hash.ToString()) && x.User.EmailAddress.ToLower() == dto.EmailAddress.ToLower());
-
-            if(userVerifyRequest is null)
-            {
-                throw new Exception($"No {dto.EmailAddress} user found!");
-            }
-            else if (userVerifyRequest.ExpirationDateTime < DateTime.UtcNow)
-            {
-                throw new Exception($"The registration request for {dto.EmailAddress} has expired!");
-            }
-            else if(userVerifyRequest.User.Verified)
-            {
-                throw new Exception($"{dto.EmailAddress} has already been verified!");
-            }
-            else
-            {
-                userVerifyRequest.Completed = true;
-                userVerifyRequest.User.Verified = true;
-            }
-
-            return true;
-        }
-
         public async Task<AuthenticationResponseDTO> AuthenticateAsync(AuthenticationRequestDTO requestDTO)
         {
             var user = await _context.Users.SingleOrDefaultAsync(u => u.EmailAddress.ToUpper() == requestDTO.UserName.ToUpper());

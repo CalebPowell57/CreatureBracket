@@ -28,6 +28,7 @@ import { NgTournamentTreeModule } from './bracket-generator/tree.module';
 import { NoPermissionsComponent } from './no-permissions/no-permissions.component';
 import { CreatureApprovalComponent } from './creature-approval/creature-approval.component';
 import { VerifyAccountComponent } from './verify-account/verify-account.component';
+import { SuccessfulAccountCreationComponent } from './successful-account-creation/successful-account-creation.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { VerifyAccountComponent } from './verify-account/verify-account.componen
     BracketManagerComponent,
     NoPermissionsComponent,
     CreatureApprovalComponent,
-    VerifyAccountComponent
+    VerifyAccountComponent,
+    SuccessfulAccountCreationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -56,6 +58,7 @@ import { VerifyAccountComponent } from './verify-account/verify-account.componen
       positionClass: 'toast-bottom-right'
     }),
     RouterModule.forRoot([
+      { path: 'successful-account-creation', component: SuccessfulAccountCreationComponent },
       { path: 'verify-account', component: VerifyAccountComponent, canActivate: [VerifyAccountGuard] },
       { path: 'current-standings', component: StandingsComponent, canActivate: [StandingsGuard, RequireAuthenticationGuard] },
       { path: 'creature-approval', component: CreatureApprovalComponent, canActivate: [/*RequireSuperPermissionsGuard, */RequireAuthenticationGuard] },

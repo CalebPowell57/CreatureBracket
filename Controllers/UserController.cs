@@ -34,5 +34,15 @@ namespace CreatureBracket.Controllers
 
             return Ok();
         }
+
+        [AllowAnonymous]
+        [HttpPost("Verify")]
+        public async Task<IActionResult> Verify([FromBody] VerifyRequestDTO dto)
+        {
+            var response = await _unitOfWork.UserRepository.VerifyAsync(dto);
+            await _unitOfWork.SaveAsync();
+
+            return Ok(response);
+        }
     }
 }
