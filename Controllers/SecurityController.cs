@@ -32,14 +32,5 @@ namespace CreatureBracket.Controllers
 
             return Ok(response);
         }
-
-        [HttpPost("Verify")]
-        public async Task<IActionResult> Verify([FromBody] VerifyRequestDTO dto)
-        {
-            var response = await _unitOfWork.SecurityRepository.VerifyAsync(dto);
-            await _unitOfWork.SaveAsync();
-
-            return Ok(response);
-        }
     }
 }

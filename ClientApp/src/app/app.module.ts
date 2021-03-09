@@ -29,6 +29,7 @@ import { NoPermissionsComponent } from './no-permissions/no-permissions.componen
 import { CreatureApprovalComponent } from './creature-approval/creature-approval.component';
 import { VerifyAccountComponent } from './verify-account/verify-account.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SuccessfulAccountCreationComponent } from './successful-account-creation/successful-account-creation.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BracketManagerComponent,
     NoPermissionsComponent,
     CreatureApprovalComponent,
-    VerifyAccountComponent
+    VerifyAccountComponent,
+    SuccessfulAccountCreationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -58,6 +60,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       positionClass: 'toast-bottom-right'
     }),
     RouterModule.forRoot([
+      { path: 'successful-account-creation', component: SuccessfulAccountCreationComponent },
       { path: 'verify-account', component: VerifyAccountComponent, canActivate: [VerifyAccountGuard] },
       { path: 'current-standings', component: StandingsComponent, canActivate: [StandingsGuard, RequireAuthenticationGuard] },
       { path: 'creature-approval', component: CreatureApprovalComponent, canActivate: [/*RequireSuperPermissionsGuard, */RequireAuthenticationGuard] },

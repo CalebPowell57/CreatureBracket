@@ -13,10 +13,10 @@ export class VerifyAccountGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (next.params['emailAddress'] && next.params['verifyGuid']) {
+    if (next.queryParams['emailAddress'] && next.queryParams['verifyGuid']) {
       return true;
     } else {
-      this.toastrService.error('Invalid parameters.', 'Routing error');
+      this.toastrService.error('Invalid Parameters.', 'Routing error');
 
       return false;
     }
