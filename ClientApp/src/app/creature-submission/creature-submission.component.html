@@ -4,6 +4,21 @@
       (ngSubmit)="onSubmit(form)"
       style="width:20em">
   <div class="form-group">
+    <button (click)="choosePhoto()" class="btn btn-primary" style="margin-bottom: 10px;">Choose Photo</button>
+
+    <input id="select-file" hidden type="file" (change)="fileChangeEvent($event)">
+
+    <image-cropper [imageChangedEvent]="imageChangedEvent"
+                   [maintainAspectRatio]="true"
+                   [aspectRatio]="1"
+                   format="png"
+                   (imageCropped)="imageCropped($event)"
+                   (imageLoaded)="imageLoaded()"
+                   (cropperReady)="cropperReady()"
+                   (loadImageFailed)="loadImageFailed()"></image-cropper>
+
+    <img [src]="croppedImage" style="border-radius:50%;width:20em;"/>
+
     <label for="name">Name</label>
 
     <input type="text"

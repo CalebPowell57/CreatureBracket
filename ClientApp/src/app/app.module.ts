@@ -30,6 +30,7 @@ import { CreatureApprovalComponent } from './creature-approval/creature-approval
 import { VerifyAccountComponent } from './verify-account/verify-account.component';
 import { SuccessfulAccountCreationComponent } from './successful-account-creation/successful-account-creation.component';
 import { ChatComponent } from './chat/chat.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { ChatComponent } from './chat/chat.component';
     NgTournamentTreeModule, 
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    ImageCropperModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
     }),

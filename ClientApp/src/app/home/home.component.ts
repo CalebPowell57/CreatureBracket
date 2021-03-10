@@ -22,8 +22,8 @@ export class HomeComponent {
   ngOnInit(): void {
     this.bracketService.activeBracket().subscribe(activeBracket => {
       if (activeBracket) {
-        this.showCreatureSubmission = activeBracket.status === EStatus.Started;
-        this.showGlobalBracket = activeBracket.status === EStatus.Open;
+        this.showCreatureSubmission = activeBracket.status === EStatus.Open;
+        this.showGlobalBracket = activeBracket.status === EStatus.Started;
         this.showFinalStandings = activeBracket.status === EStatus.Completed;
       } else {
         this.showNoActiveBracket = true;

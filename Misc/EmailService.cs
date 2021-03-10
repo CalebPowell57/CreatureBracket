@@ -26,6 +26,7 @@ namespace CreatureBracket.Misc
         {
             var client = new SendGridClient(_apiKey);
             var subject = "Please verify your Creature Bracket account";
+
             var to = new EmailAddress(emailAddress, toName);
             var htmlContent = GetConfirmationRequestContent(baseUrl, key);
             var msg = MailHelper.CreateSingleEmail(_sender, to, subject, "", htmlContent);
