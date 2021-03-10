@@ -46,8 +46,16 @@ namespace CreatureBracket.Controllers
         [HttpPost("Approve")]
         public async Task<IActionResult> Approve([FromBody] ApproveSubmissionRequestDTO dto)
         {
-            await _unitOfWork.CreatureSubmissionRepository.ApproveAsync(dto);
+            var isLast = await _unitOfWork.CreatureSubmissionRepository.ApproveAsync(dto);
+
             await _unitOfWork.SaveAsync();
+
+            if (isLast)
+            {
+                await _unitOfWork.BracketRepository.SeedCreaturesAsync();//remove once seeding view has been created.
+                await _unitOfWork.BracketRepository.StartAsync();
+                await _unitOfWork.SaveAsync();
+            }
 
             return Ok();
         }

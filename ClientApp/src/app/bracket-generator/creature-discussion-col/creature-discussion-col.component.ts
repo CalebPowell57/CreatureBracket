@@ -1,9 +1,6 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, OnChanges, SimpleChanges, Output } from '@angular/core';
-import { type } from 'os';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ICreatureDTO } from '../../interfaces/CreatureDTO.interface';
-import { GlobalBracketComponent } from '../global-bracket/global-bracket.component'
-import { Observable, Subject, Subscription } from 'rxjs';
+import { ChangeDetectionStrategy, Component, Input, Output, SimpleChanges } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-creature-discussion-col',

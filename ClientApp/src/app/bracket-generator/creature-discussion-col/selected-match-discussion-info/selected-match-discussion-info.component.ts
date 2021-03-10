@@ -1,6 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges, OnChanges, OnDestroy, ChangeDetectionStrategy, NgZone, ChangeDetectorRef } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { on } from 'cluster';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ICreatureDTO } from '../../../interfaces/CreatureDTO.interface';
 @Component({

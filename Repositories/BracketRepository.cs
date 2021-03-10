@@ -2,6 +2,7 @@
 using CreatureBracket.Misc;
 using CreatureBracket.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace CreatureBracket.Repositories
                 return null;
             }
 
-            var activeBracket = await _context.Brackets.AsNoTracking().OrderBy(x => x.CreatureEntryDeadline).Take(1).SingleAsync();
+            var activeBracket = await _context.Brackets.OrderBy(x => x.CreatureEntryDeadline).Take(1).SingleAsync();
 
             return activeBracket;
         }
@@ -51,6 +52,184 @@ namespace CreatureBracket.Repositories
             }
 
             return standings;
+        }
+
+        public async Task SeedCreaturesAsync()
+        {
+            var active = await ActiveAsync();
+
+            var creatures = await _context.Creatures.Where(x => x.BracketId == active.Id).ToListAsync();
+
+            if(creatures.Count != 16)
+            {
+                throw new System.Exception("There are not 16 creatures approved for the tournament!");
+            }
+
+            creatures.Randomize();
+
+            for(int ix = 0; ix < creatures.Count; ix++)
+            {
+                creatures[ix].Seed = ix;
+            }
+        }
+
+        public async Task StartAsync()
+        {
+            var active = await ActiveAsync();
+
+            active.Status = Bracket.EStatus.Started;
+
+            var creatures = await _context.Creatures.Where(x => x.BracketId == active.Id).ToListAsync();
+
+            var round = new Round
+            {
+                Id = Guid.NewGuid(),
+                BracketId = active.Id,
+                Rank = 3,//switch to 1
+                CreatureCount = 16//switch to 64
+            };
+
+            var matchups = new List<Matchup>();
+
+            for(int ix = 0; ix < 8; ix++)//switch to 32
+            {
+                var creature1 = creatures.Single(x => x.Seed == ix * 2);
+                var creature2 = creatures.Single(x => x.Seed == (ix * 2) + 1);
+
+                var matchup = new Matchup
+                {
+                    Id = Guid.NewGuid(),
+                    Creature1Id = creature1.Id,
+                    Creature2Id = creature2.Id,
+                    RoundId = round.Id,
+                    LoserId = null,
+                    WinnerId = null,
+                    Creature1Votes = 0,
+                    Creature2Votes = 0
+                };
+
+                matchups.Add(matchup);
+            }
+
+            _context.Rounds.Add(round);
+            _context.Matchups.AddRange(matchups);
+        }
+
+        public async Task<BracketResponseDTO> GlobalAsync()
+        {
+            var active = await ActiveAsync();
+
+            var rounds = await _context.Rounds.Include(x => x.Matchups)
+                                                .ThenInclude(x => x.Creature1)
+                                              .Include(x => x.Matchups)
+                                                .ThenInclude(x => x.Creature2)
+                                              .Where(x => x.BracketId == active.Id).ToListAsync();
+
+            //var round1 = rounds.SingleOrDefault(x => x.Rank == 1);
+            //var round1DTO = RoundToDTO(round1);
+
+            //var round2 = rounds.SingleOrDefault(x => x.Rank == 2);
+            //var round2DTO = RoundToDTO(round2);
+
+            var round3 = rounds.SingleOrDefault(x => x.Rank == 3);
+            var round3Tuple = RoundToDTO(round3);
+            var round3DTO = round3Tuple.Item1;
+
+            var round4 = rounds.SingleOrDefault(x => x.Rank == 4);
+            var round4Tuple = RoundToDTO(round4, round3Tuple.Item2);
+            var round4DTO = round4Tuple.Item1;
+
+            var round5 = rounds.SingleOrDefault(x => x.Rank == 5);
+            var round5Tuple = RoundToDTO(round5, round4Tuple.Item2);
+            var round5DTO = round5Tuple.Item1;
+
+            var round6 = rounds.SingleOrDefault(x => x.Rank == 6);
+            var round6Tuple = RoundToDTO(round6, round5Tuple.Item2);
+            var round6DTO = round6Tuple.Item1;
+
+            var result = new BracketResponseDTO
+            {
+                Rounds = new List<RoundResponseDTO>
+                {
+                    //round1DTO,
+                    //round2DTO,
+                    round3DTO,
+                    round4DTO,
+                    round5DTO,
+                    round6DTO
+                }
+            };
+
+            return result;
+        }
+
+        public Tuple<RoundResponseDTO, int> RoundToDTO(Round round, int? lastRoundCreatureCount = null)
+        {
+            var roundDTO = new RoundResponseDTO
+            {
+                Matchups = new List<MatchupResponseDTO>()
+            };
+
+            if (round != null)
+            {
+                foreach (var matchup in round.Matchups)
+                {
+                    var matchupDTO = new MatchupResponseDTO
+                    {
+                        Contestants = new List<CreatureResponseDTO>
+                        {
+                            new CreatureResponseDTO
+                            {
+                                BIO = matchup.Creature1.BIO,
+                                Image = matchup.Creature1.Image,
+                                Name = matchup.Creature1.Name
+                            },
+                            new CreatureResponseDTO
+                            {
+                                BIO = matchup.Creature2.BIO,
+                                Image = matchup.Creature2.Image,
+                                Name = matchup.Creature2.Name
+                            }
+                        }
+                    };
+
+                    roundDTO.Matchups.Add(matchupDTO);
+                }
+            }
+            else if(lastRoundCreatureCount.HasValue)
+            {
+                for (var ix = 0; ix < lastRoundCreatureCount / 4; ix++)
+                {
+                    var matchupDTO = new MatchupResponseDTO
+                    {
+                        Contestants = new List<CreatureResponseDTO>
+                        {
+                            new CreatureResponseDTO
+                            {
+                                BIO = "N/A",
+                                Image = "",
+                                Name = "Undecided"
+                            },
+                            new CreatureResponseDTO
+                            {
+                                BIO = "N/A",
+                                Image = "",
+                                Name = "Undecided"
+                            }
+                        }
+                    };
+
+                    roundDTO.Matchups.Add(matchupDTO);
+                }
+            }
+            else
+            {
+                throw new Exception("lastRoundCreatureCount must not be null if round is null! (BracketRepository.RoundToDTO())");
+            }
+
+            var creatureCount = round is null ? lastRoundCreatureCount.Value / 2 : round.CreatureCount;
+
+            return Tuple.Create(roundDTO, creatureCount);
         }
 
         public BracketResponseDTO BracketTestData()

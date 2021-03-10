@@ -31,7 +31,7 @@ namespace CreatureBracket.Repositories
             return creatureSubmission;
         }
 
-        public async Task ApproveAsync(ApproveSubmissionRequestDTO dto)
+        public async Task<bool> ApproveAsync(ApproveSubmissionRequestDTO dto)
         {
             var submission = await _context.CreatureSubmissions.SingleAsync(x => x.Id == dto.CreatureSubmissionId);
 
@@ -48,12 +48,15 @@ namespace CreatureBracket.Repositories
                 Id = Guid.NewGuid(),
                 BracketId = submission.BracketId,
                 Name = submission.Name,
-                Image = submission.Image
+                Image = submission.Image,
+                Seed = null
             };
 
             submission.Status = ECreatureSubmissionStatus.Approved;
 
             _context.Add(creature);
+
+            return creatures.Count == 15;//this is the last creature. write code that's more readable
         }
 
         public async Task<List<CreatureSubmission>> ByStatusAsync(ECreatureSubmissionStatus status)
