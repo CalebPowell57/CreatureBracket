@@ -7,6 +7,7 @@ namespace CreatureBracket.Models
         public Guid BracketId { get; set; }
         public string Name { get; set; }
         public string BIO { get; set; }
+        public string Image { get; set; }
 
         #region navigation properties
         public Bracket Bracket { get; set; }

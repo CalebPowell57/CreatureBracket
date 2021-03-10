@@ -8,6 +8,7 @@ namespace CreatureBracket.Models
         public Guid BracketId { get; set; }
         public string Name { get; set; }
         public string BIO { get; set; }
+        public string Image { get; set; }
         public DateTime EntryDate { get; set; }
         public ECreatureSubmissionStatus Status { get; set; }
 

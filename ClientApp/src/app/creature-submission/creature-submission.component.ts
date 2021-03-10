@@ -10,7 +10,10 @@ import { ImageCroppedEvent } from 'ngx-image-cropper';
   templateUrl: './creature-submission.component.html'
 })
 export class CreatureSubmissionComponent {
+  showCropper = false;
   input: IInput = {name: "", bio: ""};
+  imageChangedEvent: any = '';
+  croppedImage: string = '';
 
   constructor(
     private router: Router,
@@ -19,17 +22,16 @@ export class CreatureSubmissionComponent {
   ) { }
 
   onSubmit(form: NgForm) {
-    this.creatureSubmissionService.create({ name: this.input.name, bio: this.input.bio })
+    this.creatureSubmissionService.create({ name: this.input.name, bio: this.input.bio, image: this.croppedImage })
       .subscribe(
         () => {
           this.input.name = "";
           this.input.bio = "";
+          this.croppedImage = "";
+          this.showCropper = false;
         }
       );
   }
-
-  imageChangedEvent: any = '';
-  croppedImage: any = '';
 
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
@@ -38,7 +40,7 @@ export class CreatureSubmissionComponent {
     this.croppedImage = event.base64;
   }
   imageLoaded(image: HTMLImageElement) {
-    // show cropper
+    this.showCropper = true;
   }
   cropperReady() {
     // cropper ready

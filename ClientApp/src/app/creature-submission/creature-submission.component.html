@@ -1,10 +1,10 @@
-<h1>Creature Submissions</h1>
+<h1>Creature Submission</h1>
 
 <form #form="ngForm"
       (ngSubmit)="onSubmit(form)"
       style="width:20em">
   <div class="form-group">
-    <button (click)="choosePhoto()" class="btn btn-primary" style="margin-bottom: 10px;">Choose Photo</button>
+    <button (click)="choosePhoto()" class="btn btn-primary" type="button" style="margin-bottom: 10px;">Upload Photo</button>
 
     <input id="select-file" hidden type="file" (change)="fileChangeEvent($event)">
 
@@ -15,10 +15,13 @@
                    (imageCropped)="imageCropped($event)"
                    (imageLoaded)="imageLoaded()"
                    (cropperReady)="cropperReady()"
-                   (loadImageFailed)="loadImageFailed()"></image-cropper>
+                   (loadImageFailed)="loadImageFailed()"
+                   [hidden]="!showCropper"></image-cropper>
 
-    <img [src]="croppedImage" style="border-radius:50%;width:20em;"/>
+    <img [src]="croppedImage" style="border-radius:50%;width:20em;" />
+  </div>
 
+  <div class="form-group">
     <label for="name">Name</label>
 
     <input type="text"

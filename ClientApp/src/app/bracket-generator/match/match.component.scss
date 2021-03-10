@@ -24,12 +24,10 @@
 
 .ngtt__team-avatar {
   margin-left: 12px;
-  height: 25px;
-  width: 25px;
-  border-radius: 25px;
   background-color: darkgray;
   display: inline-block;
   flex-shrink: 1;
+  border-radius: 50%;
 }
 
 .ngtt__team-title {

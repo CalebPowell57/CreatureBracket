@@ -22,7 +22,8 @@ namespace CreatureBracket.Repositories
                 BIO = dto.BIO,
                 BracketId = bracketId,
                 EntryDate = DateTime.UtcNow,
-                Name = dto.Name
+                Name = dto.Name,
+                Image = dto.Image
             };
 
             _context.CreatureSubmissions.Add(creatureSubmission);
@@ -46,7 +47,8 @@ namespace CreatureBracket.Repositories
                 BIO = submission.BIO,
                 Id = Guid.NewGuid(),
                 BracketId = submission.BracketId,
-                Name = submission.Name
+                Name = submission.Name,
+                Image = submission.Image
             };
 
             submission.Status = ECreatureSubmissionStatus.Approved;
