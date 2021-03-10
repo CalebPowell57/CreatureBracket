@@ -9,4 +9,5 @@ export interface ICreatureSubmission {
   bio: string;
   entryDate: Date;
   status: eCreatureSubmissionStatus;
+  image: string;
 }

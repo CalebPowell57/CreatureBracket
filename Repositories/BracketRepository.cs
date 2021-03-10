@@ -67,15 +67,15 @@ namespace CreatureBracket.Repositories
         {
             var rounds = new List<RoundResponseDTO>();
 
-            var round1 = GenerateTestRound(32);
-            var round2 = GenerateTestRound(16);
+            //var round1 = GenerateTestRound(32);
+            //var round2 = GenerateTestRound(16);
             var round3 = GenerateTestRound(8);
             var round4 = GenerateTestRound(4);
             var round5 = GenerateTestRound(2);
             var round6 = GenerateTestRound(1);
 
-            rounds.Add(round1);
-            rounds.Add(round2);
+            //rounds.Add(round1);
+            //rounds.Add(round2);
             rounds.Add(round3);
             rounds.Add(round4);
             rounds.Add(round5);

@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Toast, ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 import { eCreatureSubmissionStatus, ICreatureSubmission } from '../interfaces/creature-submission.interface';
 import { CreatureApprovalService } from './creature-approval.service';
 
@@ -11,8 +9,8 @@ import { CreatureApprovalService } from './creature-approval.service';
   templateUrl: './creature-approval.component.html'
 })
 export class CreatureApprovalComponent {
-  pendingSubmissions: Observable<ICreatureSubmission[]>;
-  approvedSubmissions: Observable<ICreatureSubmission[]>;
+  pendingSubmissions: ICreatureSubmission[];
+  approvedSubmissions: ICreatureSubmission[];
 
   constructor(
     private router: Router,
@@ -21,21 +19,21 @@ export class CreatureApprovalComponent {
   ) { }
 
   ngOnInit() {
-    this.pendingSubmissions = this.creatureApprovalService.getSubmissionsById(eCreatureSubmissionStatus.Pending);
-    this.approvedSubmissions = this.creatureApprovalService.getSubmissionsById(eCreatureSubmissionStatus.Approved);
+    this.creatureApprovalService.getSubmissionsById(eCreatureSubmissionStatus.Pending).subscribe(x => {
+      this.pendingSubmissions = x;
+    });
+    this.creatureApprovalService.getSubmissionsById(eCreatureSubmissionStatus.Approved).subscribe(x => {
+      this.approvedSubmissions = x;
+    });
   }
 
   onApproveButtonClick(submission: ICreatureSubmission) {
     this.creatureApprovalService.approve(submission.id).subscribe(() => {
       this.toastrService.success(`${submission.name} has been approved for the tournament!`, 'Success');
 
-      this.pendingSubmissions = this.pendingSubmissions.pipe(map(x => {
-        return x.filter(y => y.id !== submission.id);
-      }));
+      this.pendingSubmissions = this.pendingSubmissions.filter(y => y.id !== submission.id);
 
-      this.approvedSubmissions = this.approvedSubmissions.pipe(map(x => {
-        return x;
-      }));
+      this.approvedSubmissions.push(submission);
     });
   }
 }

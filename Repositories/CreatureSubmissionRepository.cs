@@ -37,9 +37,9 @@ namespace CreatureBracket.Repositories
 
             var creatures = await _context.Creatures.Where(x => x.BracketId == submission.BracketId).ToListAsync();
 
-            if(creatures.Count >= 64)
+            if(creatures.Count >= 16)
             {
-                throw new Exception("There are already 64 creatures approved for battle!");
+                throw new Exception("There are already 16 creatures approved for battle!");
             }
 
             var creature = new Creature
