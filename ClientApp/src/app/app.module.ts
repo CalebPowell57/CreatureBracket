@@ -28,8 +28,9 @@ import { NgTournamentTreeModule } from './bracket-generator/tree.module';
 import { NoPermissionsComponent } from './no-permissions/no-permissions.component';
 import { CreatureApprovalComponent } from './creature-approval/creature-approval.component';
 import { VerifyAccountComponent } from './verify-account/verify-account.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SuccessfulAccountCreationComponent } from './successful-account-creation/successful-account-creation.component';
+import { ChatComponent } from './chat/chat.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { SuccessfulAccountCreationComponent } from './successful-account-creatio
     NoPermissionsComponent,
     CreatureApprovalComponent,
     VerifyAccountComponent,
-    SuccessfulAccountCreationComponent
+    SuccessfulAccountCreationComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -55,7 +57,7 @@ import { SuccessfulAccountCreationComponent } from './successful-account-creatio
     NgTournamentTreeModule, 
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    BrowserAnimationsModule,
+    ImageCropperModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
     }),

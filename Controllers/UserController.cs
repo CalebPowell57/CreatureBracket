@@ -27,10 +27,12 @@ namespace CreatureBracket.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDTO dto)
         {
-            var verifyGuid = _unitOfWork.UserRepository.Register(dto);
+            var verifyKey = _unitOfWork.UserRepository.Register(dto);
             await _unitOfWork.SaveAsync();
 
-            await _emailService.SendConfirmationRequestAsync(dto.EmailAddress, $"{dto.FirstName} {dto.LastName}", verifyGuid);
+            var baseUrl = $"{Request.Scheme}://{Request.Host}";
+
+            await _emailService.SendConfirmationRequestAsync(dto.EmailAddress, $"{dto.FirstName} {dto.LastName}", verifyKey, baseUrl);
 
             return Ok();
         }
@@ -39,10 +41,10 @@ namespace CreatureBracket.Controllers
         [HttpPost("Verify")]
         public async Task<IActionResult> Verify([FromBody] VerifyRequestDTO dto)
         {
-            var response = await _unitOfWork.UserRepository.VerifyAsync(dto);
+            await _unitOfWork.UserRepository.VerifyAsync(dto);
             await _unitOfWork.SaveAsync();
 
-            return Ok(response);
+            return Ok();
         }
     }
 }

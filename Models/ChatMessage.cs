@@ -2,12 +2,11 @@
 
 namespace CreatureBracket.Models
 {
-    public class UserVerifyRequest : BaseModel
+    public class ChatMessage : BaseModel
     {
         public Guid UserId { get; set; }
-        public string Key { get; set; }
-        public bool Completed { get; set; }
-        public DateTime ExpirationDateTime { get; set; }
+        public string Message { get; set; }
+        public DateTime SystemDateTime { get; set; }
 
         #region navigation properties
         public User User { get; set; }

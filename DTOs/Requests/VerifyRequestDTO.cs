@@ -4,7 +4,6 @@ namespace CreatureBracket.DTOs.Requests
 {
     public class VerifyRequestDTO
     {
-        public string EmailAddress { get; set; }
-        public Guid VerifyGuid { get; set; }
+        public string Key { get; set; }
     }
 }
