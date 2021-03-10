@@ -1,9 +1,14 @@
 <div class="ngtt__match-wrapper">
   <ng-container *ngFor="let contestant of matchups.contestants">
     <div class="ngtt__team-wrapper">
-      <img [src]="contestant.image" width="35" height="35" class="ngtt__team-avatar"/>
+      <img [src]="contestant.image" width="35" height="35" class="ngtt__team-avatar" />
       <h6 class="ngtt__team-title">{{contestant.name}}</h6>
       <!--<div class="ngtt__team-score">{{contestant.votes}}</div>-->
     </div>
+  </ng-container>
+  <ng-container *ngIf="!matchups.contestants">
+    <span style="margin:auto; font-size: 16pt;">
+      Undecided
+    </span>
   </ng-container>
 </div>

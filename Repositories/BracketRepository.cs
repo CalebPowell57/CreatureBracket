@@ -202,21 +202,7 @@ namespace CreatureBracket.Repositories
                 {
                     var matchupDTO = new MatchupResponseDTO
                     {
-                        Contestants = new List<CreatureResponseDTO>
-                        {
-                            new CreatureResponseDTO
-                            {
-                                BIO = "N/A",
-                                Image = "",
-                                Name = "Undecided"
-                            },
-                            new CreatureResponseDTO
-                            {
-                                BIO = "N/A",
-                                Image = "",
-                                Name = "Undecided"
-                            }
-                        }
+                        Contestants = null
                     };
 
                     roundDTO.Matchups.Add(matchupDTO);
