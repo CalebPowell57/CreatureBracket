@@ -7,6 +7,7 @@ import { SingleEliminationTreeComponent } from './single-elimination-tree/single
 import { CreatureDiscussionColComponent } from './creature-discussion-col/creature-discussion-col.component';
 import { SelectedMatchDiscussionInfoComponent } from './creature-discussion-col/selected-match-discussion-info/selected-match-discussion-info.component';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { RouterModule } from '@angular/router';
     SelectedMatchDiscussionInfoComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
     ],
   exports: [
     GlobalBracketComponent
