@@ -2,8 +2,10 @@
   background-color: #141414;
   height: 100%;
 }
-app-selected-match-discussion-info{
-    position:fixed;
+app-selected-match-discussion-info, app-chat {
+  position: fixed;
+  height: 100%;
+  padding-top:15px;
 }
 .h1 {
   color: grey;

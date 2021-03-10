@@ -8,6 +8,7 @@ import { CreatureDiscussionColComponent } from './creature-discussion-col/creatu
 import { SelectedMatchDiscussionInfoComponent } from './creature-discussion-col/selected-match-discussion-info/selected-match-discussion-info.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ChatComponent } from './creature-discussion-col/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FormsModule } from '@angular/forms';
     MatchComponent,
     SingleEliminationTreeComponent,
     CreatureDiscussionColComponent,
-    SelectedMatchDiscussionInfoComponent
+    SelectedMatchDiscussionInfoComponent,
+    ChatComponent
   ],
   imports: [
     CommonModule,

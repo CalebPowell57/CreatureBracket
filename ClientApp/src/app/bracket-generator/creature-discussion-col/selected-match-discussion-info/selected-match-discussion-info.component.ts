@@ -1,6 +1,4 @@
 import { Component, OnInit, Input, SimpleChanges, OnChanges, OnDestroy, ChangeDetectionStrategy, NgZone, ChangeDetectorRef } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { on } from 'cluster';
 import { Subject } from 'rxjs';
 import { ICreatureDTO } from '../../../interfaces/CreatureDTO.interface';
 @Component({
@@ -19,11 +17,13 @@ export class SelectedMatchDiscussionInfoComponent {
     this.selectedMatch.subscribe(event => {
       this.creature1 = {
         Name: event.contestants[0].name,
-        Bio: event.contestants[0].bio
+        Bio: event.contestants[0].bio,
+        Image: event.contestants[0].image
       }
       this.creature2 = {
         Name: event.contestants[1].name,
-        Bio: event.contestants[1].bio
+        Bio: event.contestants[1].bio,
+        Image: event.contestants[1].image
       }
       this.cdr.detectChanges();
     })

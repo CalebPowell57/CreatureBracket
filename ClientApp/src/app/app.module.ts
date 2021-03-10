@@ -29,7 +29,6 @@ import { NoPermissionsComponent } from './no-permissions/no-permissions.componen
 import { CreatureApprovalComponent } from './creature-approval/creature-approval.component';
 import { VerifyAccountComponent } from './verify-account/verify-account.component';
 import { SuccessfulAccountCreationComponent } from './successful-account-creation/successful-account-creation.component';
-import { ChatComponent } from './chat/chat.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
@@ -47,8 +46,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     NoPermissionsComponent,
     CreatureApprovalComponent,
     VerifyAccountComponent,
-    SuccessfulAccountCreationComponent,
-    ChatComponent
+    SuccessfulAccountCreationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

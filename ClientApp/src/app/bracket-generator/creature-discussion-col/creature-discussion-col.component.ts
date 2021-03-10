@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, OnChanges, SimpleChanges, Output } from '@angular/core';
-import { type } from 'os';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ICreatureDTO } from '../../interfaces/CreatureDTO.interface';
 import { GlobalBracketComponent } from '../global-bracket/global-bracket.component'
