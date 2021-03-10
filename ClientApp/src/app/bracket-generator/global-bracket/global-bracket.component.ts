@@ -21,7 +21,6 @@ export class GlobalBracketComponent {
   public singleEliminationTournament: NgttTournament;
   public SelectedMatchup: ICreatureDTO[] = [];
 
-  //@Output() passMatch: EventEmitter<any> = new EventEmitter();
   @Output() passMatch: Subject<any> = new Subject();
 
   ngOnInit() {
