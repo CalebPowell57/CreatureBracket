@@ -1,6 +1,7 @@
-import { Component, Input, SimpleChange } from '@angular/core';
+import { Component, Input, Output, SimpleChange, EventEmitter, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 import { NgttRound, NgttTournament } from '../../interfaces/bracket.interface';
 import { ICreatureDTO } from '../../interfaces/CreatureDTO.interface';
 import { GlobalBracketService } from '../../shared/global-bracket.service';
@@ -10,7 +11,7 @@ import { GlobalBracketService } from '../../shared/global-bracket.service';
   templateUrl: './global-bracket.component.html',
   styleUrls: ['./global-bracket.component.scss']
 })
-export class GlobalBracketComponent  {
+export class GlobalBracketComponent {
 
   constructor(
     private bracketService: GlobalBracketService,
@@ -19,23 +20,16 @@ export class GlobalBracketComponent  {
   public BracketData: NgttRound;
   public singleEliminationTournament: NgttTournament;
   public SelectedMatchup: ICreatureDTO[] = [];
-  onSubmit(form: NgForm) {
-  }
+
+  //@Output() passMatch: EventEmitter<any> = new EventEmitter();
+  @Output() passMatch: Subject<any> = new Subject();
+
   ngOnInit() {
     this.bracketService.getBracketData().subscribe(data => {
       this.singleEliminationTournament = data;
     });
   }
   public onClick(matchup: any) {
-
-
-    for (let i = 0; i < 2; i++) {
-      let CreatureInBattle: ICreatureDTO = {
-        creatureName: matchup.contestants[i].name,
-        votes: matchup.contestants[i].votes
-      }
-      this.SelectedMatchup.push(CreatureInBattle);
-    }; 
+    this.passMatch.next(matchup);
   }
-
 }
