@@ -6,7 +6,9 @@
   height: $ngtt-match-wrapper-height;
   background-color: lighten($ngtt-background-primary, 15%);
   border-radius: 6px;
-  
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-right: 8px;
 }
 .ngtt__match-wrapper:hover {
   background-color: #141414;
@@ -18,7 +20,6 @@
   width: 100%;
   height: 50px;
   flex-direction: row;
-  padding: 12px 6px;
   align-items: center;
 }
 
@@ -31,7 +32,7 @@
 }
 
 .ngtt__team-title {
-  margin-left: 12px;
+  margin-left: 8px;
   color: antiquewhite;
   font-weight: lighter;
   display: inline-block;
@@ -39,6 +40,10 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  font-size: 10pt;
+  height: 16px;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .ngtt__team-score {
