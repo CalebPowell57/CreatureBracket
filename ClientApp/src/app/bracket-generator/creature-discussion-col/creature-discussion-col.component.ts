@@ -4,7 +4,6 @@ import {
   Input,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { type } from 'os';
 import {
   animate, state, style, transition, trigger
 } from '@angular/animations';
