@@ -4,5 +4,6 @@
     {
         public string EmailAddress { get; set; }
         public string ToName { get; set; }
+        public string SendGridApiKey { get; set; }
     }
 }

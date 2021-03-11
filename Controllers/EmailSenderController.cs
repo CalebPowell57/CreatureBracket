@@ -26,7 +26,7 @@ namespace CreatureBracket.Controllers
         [HttpPost("Test")]
         public async Task<IActionResult> Test([FromBody] EmailTestRequestDTO dto)
         {
-            var response = await _emailService.SendTestAsync(dto.EmailAddress, dto.ToName);
+            var response = await _emailService.SendTestAsync(dto.SendGridApiKey, dto.EmailAddress, dto.ToName);
 
             return Ok(response);
         }
