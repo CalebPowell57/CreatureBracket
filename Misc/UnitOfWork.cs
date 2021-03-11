@@ -16,6 +16,7 @@ namespace CreatureBracket.Misc
         public UserRepository UserRepository { get; private set; }
         public ChatMessageRepository ChatMessageRepository { get; private set; }
         public RegistryRepository RegistryRepository { get; private set; }
+        public RoundRepository RoundRepository { get; private set; }
 
         public UnitOfWork(DatabaseContext context)
         {
@@ -29,6 +30,7 @@ namespace CreatureBracket.Misc
             UserRepository = new UserRepository(_context);
             ChatMessageRepository = new ChatMessageRepository(_context);
             RegistryRepository = new RegistryRepository(_context);
+            RoundRepository = new RoundRepository(_context);
         }
 
         public async Task SaveAsync(/*LogProcess logProcess = LogProcess.Internal*/)

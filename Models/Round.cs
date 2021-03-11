@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace CreatureBracket.Models
@@ -8,6 +9,7 @@ namespace CreatureBracket.Models
         public Guid BracketId { get; set; }
         public int Rank { get; set; }
         public int CreatureCount { get; set; }
+        public bool Completed { get; set; }
 
         #region navigation properties
         public Bracket Bracket { get; set; }

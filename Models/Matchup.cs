@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace CreatureBracket.Models
 {
@@ -17,6 +18,7 @@ namespace CreatureBracket.Models
         public Creature Creature2 { get; set; }
         public Creature Winner { get; set; }
         public Creature Loser { get; set; }
+        [JsonIgnore]
         public Round Round { get; set; }
         #endregion
     }

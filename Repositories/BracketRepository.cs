@@ -86,7 +86,8 @@ namespace CreatureBracket.Repositories
                 Id = Guid.NewGuid(),
                 BracketId = active.Id,
                 Rank = 3,//switch to 1
-                CreatureCount = 16//switch to 64
+                CreatureCount = 16,//switch to 64
+                Completed = false
             };
 
             var matchups = new List<Matchup>();
@@ -163,7 +164,7 @@ namespace CreatureBracket.Repositories
             return result;
         }
 
-        public Tuple<RoundResponseDTO, int> RoundToDTO(Round round, int? lastRoundCreatureCount = null)
+        private Tuple<RoundResponseDTO, int> RoundToDTO(Round round, int? lastRoundCreatureCount = null)
         {
             var roundDTO = new RoundResponseDTO
             {

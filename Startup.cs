@@ -87,6 +87,7 @@ namespace CreatureBracket
 
             services.AddScoped<UnitOfWork>();
             services.AddSingleton<EmailService>();
+            services.AddHostedService<BattleService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
