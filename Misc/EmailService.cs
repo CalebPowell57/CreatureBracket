@@ -1,6 +1,5 @@
 ﻿using SendGrid;
 using SendGrid.Helpers.Mail;
-using System;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -8,12 +7,11 @@ namespace CreatureBracket.Misc
 {
     public class EmailService
     {
-        private readonly string _apiKey = "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";
         private readonly EmailAddress _sender = new EmailAddress("cpowell@kalos-inc.com", "Creature Bracket");
 
-        public async Task<Response> SendTestAsync(string emailAddress, string toName)
+        public async Task<Response> SendTestAsync(string sendGridApiKey, string emailAddress, string toName)
         {
-            var client = new SendGridClient(_apiKey);
+            var client = new SendGridClient(sendGridApiKey);
             var subject = "This is a test";
             var to = new EmailAddress(emailAddress, toName);
             var msg = MailHelper.CreateSingleEmail(_sender, to, subject, "Test message.", "");
@@ -22,9 +20,9 @@ namespace CreatureBracket.Misc
             return response;
         }
 
-        public async Task<Response> SendConfirmationRequestAsync(string emailAddress, string toName, string key, string baseUrl)
+        public async Task<Response> SendConfirmationRequestAsync(string sendGridApiKey, string emailAddress, string toName, string key, string baseUrl)
         {
-            var client = new SendGridClient(_apiKey);
+            var client = new SendGridClient(sendGridApiKey);
             var subject = "Please verify your Creature Bracket account";
 
             var to = new EmailAddress(emailAddress, toName);
