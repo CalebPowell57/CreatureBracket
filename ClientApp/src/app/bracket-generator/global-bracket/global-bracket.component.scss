@@ -2,4 +2,16 @@
 @import '../../styles/ngtt-variables.scss';
 @import '../../styles/ngtt-single-elimination-styles.scss';
 
+.chatBubble {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background-color: #454545;
+  border-radius: 50%;
+}
+.bubble {
+  border-radius: 50%;
+  width:75px;
+}
+
 
