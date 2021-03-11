@@ -19,9 +19,9 @@ export class GlobalBracketComponent {
 
   public BracketData: NgttRound;
   public singleEliminationTournament: NgttTournament;
-  public SelectedMatchup: ICreatureDTO[] = [];
 
   @Output() passMatch: Subject<any> = new Subject();
+  @Output() selectedComponent: string;
 
   ngOnInit() {
     this.bracketService.getBracketData().subscribe(data => {
@@ -29,6 +29,8 @@ export class GlobalBracketComponent {
     });
   }
   public onClick(matchup: any) {
+    this.selectedComponent = "CreatureInformation";
     this.passMatch.next(matchup);
+
   }
 }

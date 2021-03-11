@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ICreatureDTO } from '../../../interfaces/CreatureDTO.interface';
 @Component({
@@ -10,27 +10,26 @@ import { ICreatureDTO } from '../../../interfaces/CreatureDTO.interface';
 export class SelectedMatchDiscussionInfoComponent {
   constructor(private cdr: ChangeDetectorRef) { }
   @Input() selectedMatch: Subject<any>;
-  public creature1: ICreatureDTO;
-  public creature2: ICreatureDTO;
+  @Input() creature1: ICreatureDTO;
+  @Input() creature2: ICreatureDTO;
+  //public creature1: ICreatureDTO;
+  //public creature2: ICreatureDTO;
 
   ngOnInit() {
-    this.selectedMatch.subscribe(event => {
-      this.creature1 = {
-        Name: event.contestants[0].name,
-        Bio: event.contestants[0].bio,
-        Image: event.contestants[0].image
-      }
-      this.creature2 = {
-        Name: event.contestants[1].name,
-        Bio: event.contestants[1].bio,
-        Image: event.contestants[1].image
-      }
-      this.cdr.detectChanges();
-    })
+    //this.selectedMatch.subscribe(event => {
+    //  this.creature1 = {
+    //    Name: event.contestants[0].name,
+    //    Bio: event.contestants[0].bio,
+    //    Image: event.contestants[0].image
+    //  }
+    //  this.creature2 = {
+    //    Name: event.contestants[1].name,
+    //    Bio: event.contestants[1].bio,
+    //    Image: event.contestants[1].image
+    //  }
+    //  this.cdr.detectChanges();
+    //})
   }
 
 
-  ngOnDestroy(){
-    this.selectedMatch.unsubscribe();
-  } 
 }
