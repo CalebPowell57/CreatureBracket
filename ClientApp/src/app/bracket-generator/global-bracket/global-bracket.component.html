@@ -1,7 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-9">
-
+    <div class="col-9" [ngStyle]="bracketStyle">
       <ng-container>
         <ngtt-single-elimination-tree [tournament]="singleEliminationTournament"
                                       [matchTemplate]="matchTemplate">
@@ -19,9 +18,13 @@
       <div class="chatBubble" (click)="chatClick()">
         <img src="../../../assets/SamplePhotos/chat.png" class="img-fluid bubble" />
       </div>
+      <div class="btn-group">
+        <button type="button" class="btn btn-secondary" (click)="zoomIn()" [disabled]="!zoomInEnabled">Zoom In</button>
+        <button type="button" class="btn btn-secondary" (click)="zoomOut()" [disabled]="!zoomOutEnabled">Zoom Out</button>
+      </div>
     </div>
     <div *ngIf="colActive" class="col-3">
-      <app-creature-discussion-col [selectedComponent]="selectedComponent" [passMatch]="passMatch" ></app-creature-discussion-col>
+      <app-creature-discussion-col [selectedComponent]="selectedComponent" [passMatch]="passMatch"></app-creature-discussion-col>
     </div>
   </div>
 </div>
