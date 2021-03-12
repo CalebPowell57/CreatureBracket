@@ -9,6 +9,7 @@ import { SelectedMatchDiscussionInfoComponent } from './creature-discussion-col/
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ChatComponent } from './creature-discussion-col/chat/chat.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ChatComponent } from './creature-discussion-col/chat/chat.component';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
     ],
   exports: [
     GlobalBracketComponent

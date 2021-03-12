@@ -17,7 +17,7 @@
 
 .ngtt__team-wrapper {
   display: flex;
-  width: 100%;
+  width: 75%;
   height: 50px;
   flex-direction: row;
   align-items: center;
@@ -50,4 +50,16 @@
   padding: 0 20px 0 10px;
   flex-shrink: 1;
 }
+.voteButton {
+  background-color: black;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-left:5px;
+  padding-right:5px;
+}
+
+
 
