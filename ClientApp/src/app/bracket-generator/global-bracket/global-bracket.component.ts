@@ -13,6 +13,12 @@ import { GlobalBracketService } from '../../shared/global-bracket.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GlobalBracketComponent {
+  zoomInEnabled = false;
+  zoomOutEnabled = true;
+  zoom = 100;
+  bracketStyle = {
+    zoom: '100%'
+  };
 
   constructor(
     private bracketService: GlobalBracketService,
@@ -43,5 +49,33 @@ export class GlobalBracketComponent {
   public chatClick() {
     this.selectedComponent = "Discussion";
     this.colActive = true;
+  }
+
+  zoomIn() {
+    this.zoomOutEnabled = true;
+
+    this.zoom += 20;
+
+    this.bracketStyle = {
+      zoom: `${this.zoom}%`
+    };
+
+    if (this.zoom === 100) {
+      this.zoomInEnabled = false;
+    }
+  }
+
+  zoomOut() {
+    this.zoomInEnabled = true;
+
+    this.zoom -= 20;
+
+    this.bracketStyle = {
+      zoom: `${this.zoom}%`
+    };
+
+    if (this.zoom === 40) {
+      this.zoomOutEnabled = false;
+    }
   }
 }
