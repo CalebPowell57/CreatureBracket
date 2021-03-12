@@ -24,7 +24,28 @@
 .chat-date-time{
     color: darkgray;
 }
-.col-12 {
+/*.col-12 {
   margin-top:auto;
-  padding-bottom:20%;
+  padding-bottom:17%;
+}*/
+/*.container-fluid{
+  overflow-y:scroll;
+  padding-bottom:15px;
+  padding-top:15px;
+}*/
+.container-fluid, .row {
+  padding-bottom: 15px;
+  padding-top:0px;
 }
+.scroll {
+    max-height:875px;
+  overflow-y: scroll;
+}
+.form-control{
+    margin-bottom:15%;
+}
+/*.form-control{
+    position:absolute;
+    margin-top:auto;
+    padding-bottom:20%;
+}*/

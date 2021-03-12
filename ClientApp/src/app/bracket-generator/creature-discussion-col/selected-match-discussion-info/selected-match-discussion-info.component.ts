@@ -12,24 +12,7 @@ export class SelectedMatchDiscussionInfoComponent {
   @Input() selectedMatch: Subject<any>;
   @Input() creature1: ICreatureDTO;
   @Input() creature2: ICreatureDTO;
-  //public creature1: ICreatureDTO;
-  //public creature2: ICreatureDTO;
 
   ngOnInit() {
-    //this.selectedMatch.subscribe(event => {
-    //  this.creature1 = {
-    //    Name: event.contestants[0].name,
-    //    Bio: event.contestants[0].bio,
-    //    Image: event.contestants[0].image
-    //  }
-    //  this.creature2 = {
-    //    Name: event.contestants[1].name,
-    //    Bio: event.contestants[1].bio,
-    //    Image: event.contestants[1].image
-    //  }
-    //  this.cdr.detectChanges();
-    //})
   }
-
-
 }

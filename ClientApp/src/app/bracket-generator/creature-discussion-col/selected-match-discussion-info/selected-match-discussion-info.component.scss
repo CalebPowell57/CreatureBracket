@@ -1,6 +1,7 @@
-/*.container-fluid {
-  background-color: #141414;
-}*/
+.container-fluid {
+  overflow-y: scroll;
+  max-height: 955px;
+}
 p, h2 {
   color: white;
   text-align: center;
@@ -20,13 +21,6 @@ img {
   margin-left: auto;
   margin-right: auto;
 }
-container-fluid{
-    height:100%;
-}
-creature-col {
-  height: 50%;
-}
-
 textarea {
   position: center;
   display: block;

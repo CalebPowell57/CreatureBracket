@@ -11,7 +11,16 @@
 }
 .bubble {
   border-radius: 50%;
-  width:75px;
+  width:50px;
 }
+.chatBubble:hover {
+  background-color: #141414;
+  cursor: pointer;
+}
+.ngtt-single-elimination-tree{
+    position:absolute;
+    overflow-y:scroll;
+}
+
 
 
