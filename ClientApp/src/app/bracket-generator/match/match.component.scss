@@ -9,19 +9,15 @@
   padding-top: 4px;
   padding-bottom: 4px;
   padding-right: 4px;
+  border-left: solid green 5px;
 }
 
 .ngtt__match-wrapper:hover {
-  box-shadow : 0px 0px 2px 1px darkslategray;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .ngtt__match-wrapper.needsVote {
-  box-shadow: 0px 0px 2px 1px orange;
-}
-
-.ngtt__match-wrapper.needsVote:hover {
-  box-shadow: 0px 0px 2px 1px darkslategray;
+  border-left: solid orange 5px;
 }
 
 .ngtt__match-wrapper .hidden{
@@ -32,8 +28,12 @@
   visibility: visible;
 }
 
+.ngtt__match-wrapper.undecided {
+  border-left: 0;
+}
+
 .ngtt__match-wrapper.undecided:hover {
-  box-shadow: 0px 0px 0px transparent;
+  border-left: 0;
   cursor: default;
 }
 

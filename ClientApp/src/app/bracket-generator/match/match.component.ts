@@ -1,11 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { Component, Input } from '@angular/core';
 @Component({
   selector: 'tt-match',
   templateUrl: './match.component.html',
   styleUrls: ['./match.component.scss']
 })
-export class MatchComponent implements OnInit {
+export class MatchComponent {
 
   @Input() matchups: any;
 
