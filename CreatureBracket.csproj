@@ -144,6 +144,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="ClientApp\src\assets\checkmark.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ClientApp\src\assets\circle.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="ConfirmationRequestBody.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
