@@ -33,6 +33,7 @@ export class ChatComponent {
 
       this.chatText = '';
     }
+    this.cdr.detectChanges();
   }
 
   private subscribeToEvents(): void {
