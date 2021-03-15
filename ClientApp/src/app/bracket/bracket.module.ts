@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GlobalBracketComponent } from './global-bracket/global-bracket.component';
+import { BracketComponent } from './bracket/bracket.component';
 import { MatchComponent } from './bracketComponents/match/match.component';
 import { SingleEliminationTreeComponent } from './bracketComponents/single-elimination-tree/single-elimination-tree.component';
 import { CreatureDiscussionColComponent } from './bracketComponents/creature-discussion-col/creature-discussion-col.component';
@@ -14,7 +14,7 @@ import { UserBracketComponent } from './user-bracket/user-bracket.component';
 
 @NgModule({
   declarations: [
-    GlobalBracketComponent,
+    BracketComponent,
     UserBracketComponent,
     MatchComponent,
     SingleEliminationTreeComponent,
@@ -25,10 +25,13 @@ import { UserBracketComponent } from './user-bracket/user-bracket.component';
   imports: [
     CommonModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RouterModule.forRoot([
+      { path: 'user-bracket', component: UserBracketComponent}
+      ])
     ],
   exports: [
-    GlobalBracketComponent,
+    BracketComponent,
     UserBracketComponent
   ],
   providers: [

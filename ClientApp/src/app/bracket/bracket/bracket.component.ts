@@ -7,11 +7,11 @@ import { ICreatureDTO } from '../../interfaces/CreatureDTO.interface';
 import { GlobalBracketService } from '../../shared/global-bracket.service';
 
 @Component({
-  selector: 'app-global-bracket',
-  templateUrl: './global-bracket.component.html',
-  styleUrls: ['./global-bracket.component.scss'],
+  selector: 'app-bracket',
+  templateUrl: './bracket.component.html',
+  styleUrls: ['./bracket.component.scss'],
 })
-export class GlobalBracketComponent {
+export class BracketComponent {
   zoomInEnabled = false;
   zoomOutEnabled = true;
   zoom = 100;
@@ -46,7 +46,7 @@ export class GlobalBracketComponent {
   public onMatchClick(matchup: any) {
     this.selectedComponent = "CreatureInformation";
     this.colActive = true;
-    //this.cdr.detectChanges();
+    this.cdr.detectChanges();
     this.passMatch.next(matchup);
 
   }

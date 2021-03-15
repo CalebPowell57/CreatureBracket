@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { Guid } from 'guid-typescript';
-import { IVote } from '../../interfaces/vote.interface';
+import { IVote } from '../../../interfaces/vote.interface';
 import { MatchService } from './match.service';
 @Component({
   selector: 'tt-match',

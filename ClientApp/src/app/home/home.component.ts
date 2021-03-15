@@ -23,9 +23,9 @@ export class HomeComponent {
     this.bracketService.activeBracket().subscribe(activeBracket => {
       if (activeBracket) {
         this.showCreatureSubmission = activeBracket.status === EStatus.Open;
-        //this.showGlobalBracket = activeBracket.status === EStatus.Started;
+        this.showGlobalBracket = activeBracket.status === EStatus.Started;
         this.showFinalStandings = activeBracket.status === EStatus.Completed;
-        this.showUserBracket = activeBracket.status === EStatus.Started;
+        //this.showUserBracket = activeBracket.status === EStatus.Started;
       } else {
         this.showNoActiveBracket = true;
       }

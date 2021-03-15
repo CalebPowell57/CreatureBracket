@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, SimpleChanges, TemplateRef } from '@angular/core';
 import { NgttRound, NgttTournament } from '../../../interfaces/bracket.interface';
-import { GlobalBracketComponent } from '../../global-bracket/global-bracket.component'
+import { BracketComponent } from '../../bracket/bracket.component'
 import { Observable } from 'rxjs';
 
 @Component({
