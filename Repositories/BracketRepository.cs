@@ -205,14 +205,16 @@ namespace CreatureBracket.Repositories
                                 CreatureId = matchup.Creature1Id,
                                 BIO = matchup.Creature1.BIO,
                                 Image = matchup.Creature1.Image,
-                                Name = matchup.Creature1.Name
+                                Name = matchup.Creature1.Name,
+                                Winner = matchup.WinnerId == matchup.Creature1Id
                             },
                             new CreatureResponseDTO
                             {
                                 CreatureId = matchup.Creature2Id,
                                 BIO = matchup.Creature2.BIO,
                                 Image = matchup.Creature2.Image,
-                                Name = matchup.Creature2.Name
+                                Name = matchup.Creature2.Name,
+                                Winner = matchup.WinnerId == matchup.Creature2Id
                             }
                         },
                         Vote = vote is null ? null : new VoteResponseDTO
