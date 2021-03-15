@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -70,8 +71,8 @@ namespace CreatureBracket.Misc
                 {
                     foreach (var matchup in activeRound.Matchups)
                     {
-                        var creature1Armies = matchup.Creature1Votes + 1;//add one in case of creature1 having no votes
-                        var creature2Armies = matchup.Creature2Votes + 1;//add one in case of creature2 having no votes
+                        var creature1Armies = matchup.Votes.Where(x => x.CreatureId == matchup.Creature1Id).Count() + 1;//add one in case of creature1 having no votes
+                        var creature2Armies = matchup.Votes.Where(x => x.CreatureId == matchup.Creature2Id).Count() + 1;//add one in case of creature2 having no votes
 
                         var underdog = GetUnderdog(matchup);
 
@@ -148,17 +149,19 @@ namespace CreatureBracket.Misc
 
         private Creature GetUnderdog(Matchup matchup)
         {
-            double totalVotes = matchup.Creature1Votes + matchup.Creature2Votes;
+            double totalVotes = matchup.Votes.Count;
             var differentialCap = Math.Ceiling(totalVotes / 7);//round up the total votes divided by seven to get the differential cap in which an underdog is determined if the differential between votes is equal to or less than the differential cap, there is no underdog
-            var differential = Math.Abs(matchup.Creature1Votes - matchup.Creature2Votes);
+            var creature1VoteCount = matchup.Votes.Where(x => x.CreatureId == matchup.Creature1Id).Count();
+            var creature2VoteCount = matchup.Votes.Where(x => x.CreatureId == matchup.Creature2Id).Count();
+            var differential = Math.Abs(creature1VoteCount - creature2VoteCount);
 
             Creature underdog;
 
-            if (matchup.Creature1Votes > matchup.Creature2Votes && differential > differentialCap)
+            if (creature1VoteCount > creature2VoteCount && differential > differentialCap)
             {
                 underdog = matchup.Creature2;
             }
-            else if (matchup.Creature2Votes > matchup.Creature1Votes && differential > differentialCap)
+            else if (creature2VoteCount > creature1VoteCount && differential > differentialCap)
             {
                 underdog = matchup.Creature1;
             }

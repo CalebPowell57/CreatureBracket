@@ -121,8 +121,6 @@ namespace CreatureBracket.Repositories
                     RoundId = round.Id,
                     LoserId = null,
                     WinnerId = null,
-                    Creature1Votes = 0,
-                    Creature2Votes = 0,
                     SystemDateTime = DateTime.UtcNow
                 };
 

@@ -11,8 +11,6 @@ namespace CreatureBracket.Models
         public Guid Creature2Id { get; set; }
         public Guid? WinnerId { get; set; }
         public Guid? LoserId { get; set; }
-        public int Creature1Votes { get; set; }
-        public int Creature2Votes { get; set; }
         public DateTime SystemDateTime { get; set; }
 
         #region navigation properties

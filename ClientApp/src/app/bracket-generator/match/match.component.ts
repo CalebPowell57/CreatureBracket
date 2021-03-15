@@ -33,6 +33,8 @@ export class MatchComponent {
       UserId: Guid.parse('54E715D0-2B42-4B19-A36B-E4ADA9DC2594').toString()
     };
 
+    this.matchups.vote.voteId = vote.Id;
+
     this.matchService.post(vote).subscribe(() => {
       this.creatureVotedForId = creature.creatureId;
       this.cdr.detectChanges();
