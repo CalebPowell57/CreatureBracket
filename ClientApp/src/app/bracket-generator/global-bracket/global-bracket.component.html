@@ -10,21 +10,44 @@
       <ng-template #matchTemplate let-matchups>
         <tt-match [matchups]="matchups" (click)="onClick(matchups)"></tt-match>
       </ng-template>
-      <div *ngIf="colActive && selectedComponent === 'CreatureInformation'" class="chatBubble" (click)="chatClick()">
-        <img src="../../../assets/SamplePhotos/chat.png" class="img-fluid bubble" />
+
+
+      <div *ngIf="colActive">
+        <div *ngIf="selectedComponent === 'CreatureInformation'" class="chatBubble ExpandedCol hvr-skew-backward">
+          <img src="../../../assets/chat-bubble.png" class="img-fluid" (click)="chatClick()" />
+        </div>
+        <div class="zoomButtons ExpandedCol">
+          <div class="btn-group">
+            <button type="button" class="btn btn-outline-secondary">
+              <img src="../../../assets/zoom-in-White.png" (click)="zoomIn()" class="img-fluid zoomButton" />
+            </button>
+            <button type="button" class="btn btn-outline-secondary">
+              <img src="../../../assets/zoom-out-White.png" (click)="zoomOut()" class="img-fluid zoomButton" />
+            </button>
+          </div>
+        </div>
       </div>
     </div>
     <div *ngIf="!colActive" class="col-3">
-      <div class="chatBubble" (click)="chatClick()">
-        <img src="../../../assets/SamplePhotos/chat.png" class="img-fluid bubble" />
+      <div class="chatBubble CollapsedCol hvr-skew-backward">
+        <img src="../../../assets/chat-bubble.png" class="img-fluid" (click)="chatClick()" />
       </div>
-      <div class="btn-group">
-        <button type="button" class="btn btn-secondary" (click)="zoomIn()" [disabled]="!zoomInEnabled">Zoom In</button>
-        <button type="button" class="btn btn-secondary" (click)="zoomOut()" [disabled]="!zoomOutEnabled">Zoom Out</button>
+      <div class="zoomButtons CollapsedCol">
+        <div class="btn-group">
+          <button type="button" class="btn btn-outline-secondary">
+            <img src="../../../assets/zoom-in-White.png" (click)="zoomIn()" class="img-fluid zoomButton" />
+          </button>
+          <button type="button" class="btn btn-outline-secondary">
+            <img src="../../../assets/zoom-out-White.png" (click)="zoomOut()" class="img-fluid zoomButton" />
+          </button>
+        </div>
+        <!--<img src="../../../assets/zoom-in-White.png" (click)="zoomIn()" class="img-fluid zoomButton" />
+        <span class="magnifyingSeparator">\</span>
+        <img src="../../../assets/zoom-out-White.png"  (click)="zoomOut()" class="img-fluid zoomButton"/>-->
       </div>
     </div>
-    <div *ngIf="colActive" class="col-3">
-      <app-creature-discussion-col [selectedComponent]="selectedComponent" [passMatch]="passMatch"></app-creature-discussion-col>
+      <div *ngIf="colActive" class="col-3 contentDiscussionCol">
+        <app-creature-discussion-col [selectedComponent]="selectedComponent" [passMatch]="passMatch"></app-creature-discussion-col>
+      </div>
     </div>
-  </div>
 </div>

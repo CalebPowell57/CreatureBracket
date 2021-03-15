@@ -1,11 +1,11 @@
-/*.container-fluid, .row {
-  overflow-y:scroll;
-}*/
+.container-fluid, .row {
+  
+}
 
 app-selected-match-discussion-info, app-chat {
   background-color: #141414;
   position: fixed;
-  /*height: 100%;*/
+  height: 100%;
   /*overflow-y: scroll;*/
   padding-top: 15px;
 }
