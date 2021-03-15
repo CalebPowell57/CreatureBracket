@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { GlobalBracketService } from '../shared/global-bracket.service';
+import { GlobalBracketService } from '../../shared/global-bracket.service';
 
 @Injectable({
   providedIn: 'root'

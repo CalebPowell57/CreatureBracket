@@ -1,4 +1,4 @@
-import { Component, Input, Output, SimpleChange, EventEmitter, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, Output, SimpleChange, EventEmitter, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -7,12 +7,11 @@ import { ICreatureDTO } from '../../interfaces/CreatureDTO.interface';
 import { GlobalBracketService } from '../../shared/global-bracket.service';
 
 @Component({
-  selector: 'app-global-bracket',
-  templateUrl: './global-bracket.component.html',
-  styleUrls: ['./global-bracket.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-bracket',
+  templateUrl: './bracket.component.html',
+  styleUrls: ['./bracket.component.scss'],
 })
-export class GlobalBracketComponent {
+export class BracketComponent {
   zoomInEnabled = false;
   zoomOutEnabled = true;
   zoom = 100;
@@ -20,35 +19,46 @@ export class GlobalBracketComponent {
     zoom: '100%'
   };
 
-  constructor(
-    private bracketService: GlobalBracketService,
-    private router: Router,
-    private cdr: ChangeDetectorRef) { }
-
   public BracketData: NgttRound;
   public singleEliminationTournament: NgttTournament;
 
-  //@Output() creature1: ICreatureDTO;
-  //@Output() creature2: ICreatureDTO;
   @Output() passMatch: Subject<any> = new Subject();
   @Output() selectedComponent: string;
   colActive = false;
+ 
+
+  constructor(
+    private bracketService: GlobalBracketService,
+    private router: Router,
+    private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.bracketService.getBracketData().subscribe(data => {
       this.singleEliminationTournament = data;
+      if (this.singleEliminationTournament.rounds[0].matchups.length >= 16) {
+        this.zoomOut(40);
+      }
+      else {
+        this.zoomOut(undefined);
+      }
     });
   }
-  public onClick(matchup: any) {
+  public onMatchClick(matchup: any) {
     this.selectedComponent = "CreatureInformation";
     this.colActive = true;
     this.cdr.detectChanges();
     this.passMatch.next(matchup);
 
   }
-  public chatClick() {
-    this.selectedComponent = "Discussion";
-    this.colActive = true;
+  public onchatClick() {
+    if (this.colActive === false || this.selectedComponent != "Discussion") {
+      this.selectedComponent = "Discussion";
+      this.colActive = true;
+    }
+    else {
+      this.selectedComponent = "";
+      this.colActive = false;
+    }
   }
 
   zoomIn() {
@@ -65,10 +75,14 @@ export class GlobalBracketComponent {
     }
   }
 
-  zoomOut() {
+  zoomOut(zoomInit: number) {
     this.zoomInEnabled = true;
-
-    this.zoom -= 20;
+    if (zoomInit === undefined) {
+      this.zoom -= 20;
+    }
+    else {
+      this.zoom -= zoomInit;
+    }
 
     this.bracketStyle = {
       zoom: `${this.zoom}%`

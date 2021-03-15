@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { RequireAuthenticationGuard } from './shared/requre-authentication.guard';
 import { StandingsGuard } from './standings/standings.guard';
-import { UserBracketGuard } from './user-bracket/user-bracket.guard';
+import { UserBracketGuard } from './bracket/user-bracket/user-bracket.guard';
 import { VerifyAccountGuard } from './verify-account/verify-account.guard';
 import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.guard';
 
@@ -21,10 +21,9 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { StandingsComponent } from './standings/standings.component';
 import { BracketManagerComponent } from './bracket-manager/bracket-manager.component';
-import { UserBracketComponent } from './user-bracket/user-bracket.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CreatureSubmissionComponent } from './creature-submission/creature-submission.component';
-import { NgTournamentTreeModule } from './bracket-generator/tree.module';
+import { BracketModule } from './bracket/bracket.module';
 import { NoPermissionsComponent } from './no-permissions/no-permissions.component';
 import { CreatureApprovalComponent } from './creature-approval/creature-approval.component';
 import { VerifyAccountComponent } from './verify-account/verify-account.component';
@@ -37,7 +36,6 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     NavMenuComponent,
     HomeComponent,
     StandingsComponent,
-    UserBracketComponent,
     LoginComponent,
     RegisterComponent,
     NotFoundComponent,
@@ -52,7 +50,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    NgTournamentTreeModule, 
+    BracketModule, 
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ImageCropperModule,
@@ -64,7 +62,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
       { path: 'verify-account', component: VerifyAccountComponent, canActivate: [VerifyAccountGuard] },
       { path: 'current-standings', component: StandingsComponent, canActivate: [StandingsGuard, RequireAuthenticationGuard] },
       { path: 'creature-approval', component: CreatureApprovalComponent, canActivate: [/*RequireSuperPermissionsGuard, */RequireAuthenticationGuard] },
-      { path: 'user-bracket', component: UserBracketComponent, canActivate: [UserBracketGuard, RequireAuthenticationGuard] },
+      //{ path: 'user-bracket', component: UserBracketComponent, canActivate: [UserBracketGuard, RequireAuthenticationGuard] },
       { path: 'bracket-manager', component: BracketManagerComponent, canActivate: [/*RequireSuperPermissionsGuard, */RequireAuthenticationGuard] },
       { path: 'standings', component: StandingsComponent, canActivate: [RequireAuthenticationGuard] },
       { path: 'login', component: LoginComponent, pathMatch: 'full' },

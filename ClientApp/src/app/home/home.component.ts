@@ -12,6 +12,7 @@ import { GlobalBracketService } from '../shared/global-bracket.service';
 export class HomeComponent {
   showCreatureSubmission = false;
   showGlobalBracket = false;
+  showUserBracket = false;
   showFinalStandings = false;
   showNoActiveBracket = false;
 
@@ -24,6 +25,7 @@ export class HomeComponent {
         this.showCreatureSubmission = activeBracket.status === EStatus.Open;
         this.showGlobalBracket = activeBracket.status === EStatus.Started;
         this.showFinalStandings = activeBracket.status === EStatus.Completed;
+        //this.showUserBracket = activeBracket.status === EStatus.Started;
       } else {
         this.showNoActiveBracket = true;
       }

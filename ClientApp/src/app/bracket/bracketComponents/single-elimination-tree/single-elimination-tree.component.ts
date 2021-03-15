@@ -1,6 +1,6 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, TemplateRef } from '@angular/core';
-import { NgttRound, NgttTournament } from '../../interfaces/bracket.interface';
-import { GlobalBracketComponent } from '../global-bracket/global-bracket.component'
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, SimpleChanges, TemplateRef } from '@angular/core';
+import { NgttRound, NgttTournament } from '../../../interfaces/bracket.interface';
+import { BracketComponent } from '../../bracket/bracket.component'
 import { Observable } from 'rxjs';
 
 @Component({
@@ -16,8 +16,6 @@ export class SingleEliminationTreeComponent implements OnChanges {
   public winnersBracket: NgttRound[];
   public final: NgttRound;
 
-  constructor() { }
-  
   ngOnChanges(changes: SimpleChanges) {
     if (changes.hasOwnProperty('tournament') && changes.tournament.currentValue) {
       this.winnersBracket = this.tournament.rounds.filter(round => {
@@ -33,6 +31,5 @@ export class SingleEliminationTreeComponent implements OnChanges {
       }).shift();
       console.log(this.final);
     }
-
   }
 }

@@ -1,13 +1,12 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, Output, SimpleChanges } from '@angular/core';
 import { Subject } from 'rxjs';
-import { ICreatureDTO } from '../../interfaces/CreatureDTO.interface'
+import { ICreatureDTO } from '../../../interfaces/CreatureDTO.interface'
 
 @Component({
   selector: 'app-creature-discussion-col',
   templateUrl: './creature-discussion-col.component.html',
   styleUrls: ['./creature-discussion-col.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('slide', [
       state('left', style({ transform: 'translateX(50%)' })),
@@ -38,7 +37,6 @@ export class CreatureDiscussionColComponent {
           Bio: event.contestants[1].bio,
           Image: event.contestants[1].image
         }
-        this.cdr.detectChanges();
       })
       this.selectedMatch.next(event);
     })

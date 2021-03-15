@@ -2,7 +2,9 @@
   <div class="col-12 ColNoPadding">
     <app-creature-submission *ngIf="showCreatureSubmission"></app-creature-submission>
 
-    <app-global-bracket *ngIf="showGlobalBracket"></app-global-bracket>
+    <app-bracket *ngIf="showGlobalBracket"></app-bracket>
+
+    <app-user-bracket *ngIf="showUserBracket"></app-user-bracket>
 
     <app-standings *ngIf="(showFinalStandings$ | async)"></app-standings>
 
