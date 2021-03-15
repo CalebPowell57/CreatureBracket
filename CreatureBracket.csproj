@@ -160,6 +160,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ClientApp\src\assets\zoom-out.png">
+    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="ClientApp\src\assets\checkmark.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
