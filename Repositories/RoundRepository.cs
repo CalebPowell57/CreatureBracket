@@ -22,6 +22,11 @@ namespace CreatureBracket.Repositories
                                              .Take(1)
                                              .SingleOrDefaultAsync();
 
+            if (round != null)
+            {
+                round.Matchups = round.Matchups.OrderBy(x => x.SystemDateTime).ToList();
+            }
+
             return round;
         }
     }

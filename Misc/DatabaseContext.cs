@@ -19,6 +19,7 @@ namespace CreatureBracket.Misc
         public DbSet<UserVerifyRequest> UserVerifyRequests { get; set; }
         public DbSet<ChatMessage> ChatMessages { get; set; }
         public DbSet<RegistryItem> Registry { get; set; }
+        public DbSet<Vote> Votes { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
@@ -29,6 +30,14 @@ namespace CreatureBracket.Misc
         {
             modelBuilder.Entity<RegistryItem>()
                             .HasIndex(x => x.Key)
+                            .IsUnique();
+
+            modelBuilder.Entity<User>()
+                            .HasIndex(x => x.EmailAddress)
+                            .IsUnique();
+
+            modelBuilder.Entity<Vote>()
+                            .HasIndex(x => new { x.MatchupId, x.UserId })
                             .IsUnique();
         }
     }

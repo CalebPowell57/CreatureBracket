@@ -1,4 +1,5 @@
-﻿using CreatureBracket.DTOs.Responses;
+﻿using CreatureBracket.DTOs.Requests;
+using CreatureBracket.DTOs.Responses;
 using CreatureBracket.Misc;
 using CreatureBracket.Models;
 using Microsoft.EntityFrameworkCore;
@@ -76,26 +77,41 @@ namespace CreatureBracket.Repositories
         public async Task StartAsync()
         {
             var active = await ActiveAsync();
-
             active.Status = Bracket.EStatus.Started;
 
+            await CreateNewRoundAsync();
+        }
+
+        public async Task CreateNewRoundAsync(Round lastRound = null)
+        {
+            var active = await ActiveAsync();
+
             var creatures = await _context.Creatures.Where(x => x.BracketId == active.Id).ToListAsync();
+
+            var rank = lastRound is null ? 1 : lastRound.Rank + 1;
+            var creatureCount = lastRound is null ? 16 : lastRound.CreatureCount / 2;
+                                                  //64
+            var matchupCount = creatureCount / 2;
 
             var round = new Round
             {
                 Id = Guid.NewGuid(),
                 BracketId = active.Id,
-                Rank = 3,//switch to 1
-                CreatureCount = 16,//switch to 64
-                Completed = false
+                Rank = rank,
+                CreatureCount = creatureCount,
+                VoteDeadline = DateTime.UtcNow.Date.AddDays(3)
             };
 
             var matchups = new List<Matchup>();
 
-            for(int ix = 0; ix < 8; ix++)//switch to 32
+            for (int ix = 0; ix < matchupCount; ix++)
             {
-                var creature1 = creatures.Single(x => x.Seed == ix * 2);
-                var creature2 = creatures.Single(x => x.Seed == (ix * 2) + 1);
+                var creature1 = lastRound is null ? 
+                                    creatures.Single(x => x.Seed == ix * 2) : 
+                                    lastRound.Matchups[ix * 2].Winner;
+                var creature2 = lastRound is null ? 
+                                    creatures.Single(x => x.Seed == (ix * 2) + 1) : 
+                                    lastRound.Matchups[(ix * 2) + 1].Winner;
 
                 var matchup = new Matchup
                 {
@@ -106,7 +122,8 @@ namespace CreatureBracket.Repositories
                     LoserId = null,
                     WinnerId = null,
                     Creature1Votes = 0,
-                    Creature2Votes = 0
+                    Creature2Votes = 0,
+                    SystemDateTime = DateTime.UtcNow
                 };
 
                 matchups.Add(matchup);
@@ -116,7 +133,7 @@ namespace CreatureBracket.Repositories
             _context.Matchups.AddRange(matchups);
         }
 
-        public async Task<BracketResponseDTO> GlobalAsync()
+        public async Task<BracketResponseDTO> GlobalAsync(Guid userId)
         {
             var active = await ActiveAsync();
 
@@ -124,6 +141,8 @@ namespace CreatureBracket.Repositories
                                                 .ThenInclude(x => x.Creature1)
                                               .Include(x => x.Matchups)
                                                 .ThenInclude(x => x.Creature2)
+                                              .Include(x => x.Matchups)
+                                                .ThenInclude(x => x.Votes)
                                               .Where(x => x.BracketId == active.Id).ToListAsync();
 
             //var round1 = rounds.SingleOrDefault(x => x.Rank == 1);
@@ -133,19 +152,19 @@ namespace CreatureBracket.Repositories
             //var round2DTO = RoundToDTO(round2);
 
             var round3 = rounds.SingleOrDefault(x => x.Rank == 3);
-            var round3Tuple = RoundToDTO(round3);
+            var round3Tuple = RoundToDTO(round3, userId);
             var round3DTO = round3Tuple.Item1;
 
             var round4 = rounds.SingleOrDefault(x => x.Rank == 4);
-            var round4Tuple = RoundToDTO(round4, round3Tuple.Item2);
+            var round4Tuple = RoundToDTO(round4, userId, round3Tuple.Item2);
             var round4DTO = round4Tuple.Item1;
 
             var round5 = rounds.SingleOrDefault(x => x.Rank == 5);
-            var round5Tuple = RoundToDTO(round5, round4Tuple.Item2);
+            var round5Tuple = RoundToDTO(round5, userId, round4Tuple.Item2);
             var round5DTO = round5Tuple.Item1;
 
             var round6 = rounds.SingleOrDefault(x => x.Rank == 6);
-            var round6Tuple = RoundToDTO(round6, round5Tuple.Item2);
+            var round6Tuple = RoundToDTO(round6, userId, round5Tuple.Item2);
             var round6DTO = round6Tuple.Item1;
 
             var result = new BracketResponseDTO
@@ -164,7 +183,7 @@ namespace CreatureBracket.Repositories
             return result;
         }
 
-        private Tuple<RoundResponseDTO, int> RoundToDTO(Round round, int? lastRoundCreatureCount = null)
+        private Tuple<RoundResponseDTO, int> RoundToDTO(Round round, Guid userId, int? lastRoundCreatureCount = null)
         {
             var roundDTO = new RoundResponseDTO
             {
@@ -173,24 +192,35 @@ namespace CreatureBracket.Repositories
 
             if (round != null)
             {
-                foreach (var matchup in round.Matchups)
+                foreach (var matchup in round.Matchups.OrderBy(x => x.SystemDateTime))
                 {
+                    var vote = matchup.Votes.SingleOrDefault(x => x.UserId == userId);
+
                     var matchupDTO = new MatchupResponseDTO
                     {
+                        Current = round.VoteDeadline > DateTime.UtcNow,
+                        MatchupId = matchup.Id,
                         Contestants = new List<CreatureResponseDTO>
                         {
                             new CreatureResponseDTO
                             {
+                                CreatureId = matchup.Creature1Id,
                                 BIO = matchup.Creature1.BIO,
                                 Image = matchup.Creature1.Image,
                                 Name = matchup.Creature1.Name
                             },
                             new CreatureResponseDTO
                             {
+                                CreatureId = matchup.Creature2Id,
                                 BIO = matchup.Creature2.BIO,
                                 Image = matchup.Creature2.Image,
                                 Name = matchup.Creature2.Name
                             }
+                        },
+                        Vote = vote is null ? null : new VoteResponseDTO
+                        {
+                            CreatureId = vote.CreatureId,
+                            VoteId = vote.Id
                         }
                     };
 

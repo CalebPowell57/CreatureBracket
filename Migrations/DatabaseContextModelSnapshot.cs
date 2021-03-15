@@ -144,6 +144,9 @@ namespace CreatureBracket.Migrations
                     b.Property<Guid>("RoundId")
                         .HasColumnType("TEXT");
 
+                    b.Property<DateTime>("SystemDateTime")
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid?>("WinnerId")
                         .HasColumnType("TEXT");
 
@@ -191,14 +194,14 @@ namespace CreatureBracket.Migrations
                     b.Property<Guid>("BracketId")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("Completed")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("CreatureCount")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Rank")
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("VoteDeadline")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -233,6 +236,9 @@ namespace CreatureBracket.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EmailAddress")
+                        .IsUnique();
+
                     b.ToTable("Users");
                 });
 
@@ -266,16 +272,7 @@ namespace CreatureBracket.Migrations
                     b.Property<Guid>("Creature1Id")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Creature1Votes")
-                        .HasColumnType("INTEGER");
-
                     b.Property<Guid>("Creature2Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Creature2Votes")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<Guid?>("LoserId")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("UserRoundId")
@@ -289,8 +286,6 @@ namespace CreatureBracket.Migrations
                     b.HasIndex("Creature1Id");
 
                     b.HasIndex("Creature2Id");
-
-                    b.HasIndex("LoserId");
 
                     b.HasIndex("UserRoundId");
 
@@ -341,6 +336,33 @@ namespace CreatureBracket.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserVerifyRequests");
+                });
+
+            modelBuilder.Entity("CreatureBracket.Models.Vote", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("CreatureId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("MatchupId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatureId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("MatchupId", "UserId")
+                        .IsUnique();
+
+                    b.ToTable("Votes");
                 });
 
             modelBuilder.Entity("CreatureBracket.Models.ChatMessage", b =>
@@ -459,10 +481,6 @@ namespace CreatureBracket.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CreatureBracket.Models.Creature", "Loser")
-                        .WithMany()
-                        .HasForeignKey("LoserId");
-
                     b.HasOne("CreatureBracket.Models.UserRound", "Round")
                         .WithMany("Matchups")
                         .HasForeignKey("UserRoundId")
@@ -476,8 +494,6 @@ namespace CreatureBracket.Migrations
                     b.Navigation("Creature1");
 
                     b.Navigation("Creature2");
-
-                    b.Navigation("Loser");
 
                     b.Navigation("Round");
 
@@ -504,6 +520,38 @@ namespace CreatureBracket.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CreatureBracket.Models.Vote", b =>
+                {
+                    b.HasOne("CreatureBracket.Models.Creature", "Creature")
+                        .WithMany()
+                        .HasForeignKey("CreatureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CreatureBracket.Models.Matchup", "Matchup")
+                        .WithMany("Votes")
+                        .HasForeignKey("MatchupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CreatureBracket.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Creature");
+
+                    b.Navigation("Matchup");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CreatureBracket.Models.Matchup", b =>
+                {
+                    b.Navigation("Votes");
                 });
 
             modelBuilder.Entity("CreatureBracket.Models.Round", b =>

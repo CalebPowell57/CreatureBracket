@@ -11,28 +11,20 @@ namespace CreatureBracket.Misc
     public class BattleService : IHostedService, IDisposable
     {
         private readonly ILogger<BattleService> _logger;
-        private UnitOfWork _unitOfWork;
         private Timer _timer;
-        private IServiceScope _scope;
         private Random _rng = new Random();
-
-        //remove
-        private DateTime _votingDeadline = DateTime.UtcNow.AddSeconds(15);
-        //remove
+        private IServiceScopeFactory _serviceScopeFactory;
 
         public BattleService(IServiceScopeFactory serviceScopeFactory)
         {
-            _scope = serviceScopeFactory.CreateScope();
-            var unitOfWork = _scope.ServiceProvider.GetService<UnitOfWork>();
-
-            _unitOfWork = unitOfWork;
+            _serviceScopeFactory = serviceScopeFactory;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
             //_logger.LogInformation("Battle Service started.");
 
-            _timer = new Timer(Execute, null, TimeSpan.Zero, TimeSpan.FromSeconds(5));
+            _timer = new Timer(Execute, null, TimeSpan.Zero, TimeSpan.FromSeconds(15));
 
             return Task.CompletedTask;
         }
@@ -51,74 +43,106 @@ namespace CreatureBracket.Misc
         {
             StopTimer();
 
-            var activeBracket = await _unitOfWork.BracketRepository.ActiveAsync();
-            var activeRound = await _unitOfWork.RoundRepository.ActiveAsync(activeBracket.Id);
-
-            //use activeRound.VotingDeadline
-            if(_votingDeadline < DateTime.UtcNow && !activeRound.Completed)
+            using (var scope = _serviceScopeFactory.CreateScope())
             {
-                foreach (var matchup in activeRound.Matchups)
+                var unitOfWork = scope.ServiceProvider.GetService<UnitOfWork>();
+
+                var activeBracket = await unitOfWork.BracketRepository.ActiveAsync();
+
+                if(activeBracket is null)
                 {
-                    var creature1Armies = matchup.Creature1Votes + 1;//add one in case of creature1 having no votes
-                    var creature2Armies = matchup.Creature2Votes + 1;//add one in case of creature2 having no votes
+                    StartTimer();
 
-                    var underdog = GetUnderdog(matchup);
+                    return;
+                }
 
-                    var winnerDetermined = false;
+                var activeRound = await unitOfWork.RoundRepository.ActiveAsync(activeBracket.Id);
 
-                    while(!winnerDetermined)
-                    { 
-                        var armyTaken = false;
+                if (activeRound is null)
+                {
+                    StartTimer();
 
-                        while (!armyTaken)
+                    return;
+                }
+
+                //use activeRound.VotingDeadline
+                if (activeRound.VoteDeadline < DateTime.UtcNow)
+                {
+                    foreach (var matchup in activeRound.Matchups)
+                    {
+                        var creature1Armies = matchup.Creature1Votes + 1;//add one in case of creature1 having no votes
+                        var creature2Armies = matchup.Creature2Votes + 1;//add one in case of creature2 having no votes
+
+                        var underdog = GetUnderdog(matchup);
+
+                        var winnerDetermined = false;
+
+                        while (!winnerDetermined)
                         {
-                            var creature1Roll = _rng.Next(1, 11);//10 sided die roll
-                            var creature2Roll = _rng.Next(1, 11);//10 sided die roll
+                            var armyTaken = false;
 
-                            if (creature1Roll > creature2Roll)
+                            while (!armyTaken)
                             {
-                                creature2Armies--;
-                                armyTaken = true;
-                            }
-                            else if (creature2Roll > creature1Roll)
-                            {
-                                creature1Armies--;
-                                armyTaken = true;
-                            }
-                            else
-                            {
-                                if (underdog == matchup.Creature1)
+                                var creature1Roll = _rng.Next(1, 11);//10 sided die roll
+                                var creature2Roll = _rng.Next(1, 11);//10 sided die roll
+
+                                if (creature1Roll > creature2Roll)
                                 {
                                     creature2Armies--;
                                     armyTaken = true;
                                 }
-                                else if (underdog == matchup.Creature2)
+                                else if (creature2Roll > creature1Roll)
                                 {
                                     creature1Armies--;
                                     armyTaken = true;
                                 }
+                                else
+                                {
+                                    if (underdog == matchup.Creature1)
+                                    {
+                                        creature2Armies--;
+                                        armyTaken = true;
+                                    }
+                                    else if (underdog == matchup.Creature2)
+                                    {
+                                        creature1Armies--;
+                                        armyTaken = true;
+                                    }
+                                }
+                            }
+
+                            if (creature1Armies <= 0)
+                            {
+                                matchup.LoserId = matchup.Creature1Id;
+                                matchup.Loser = matchup.Creature1;
+                                matchup.WinnerId = matchup.Creature2Id;
+                                matchup.Winner = matchup.Creature2;
+                                winnerDetermined = true;
+                            }
+                            else if (creature2Armies <= 0)
+                            {
+                                matchup.LoserId = matchup.Creature2Id;
+                                matchup.Loser = matchup.Creature2;
+                                matchup.WinnerId = matchup.Creature1Id;
+                                matchup.Winner = matchup.Creature1;
+                                winnerDetermined = true;
                             }
                         }
-
-                        if(creature1Armies <= 0)
-                        {
-                            matchup.LoserId = matchup.Creature1Id;
-                            matchup.WinnerId = matchup.Creature2Id;
-                            winnerDetermined = true;
-                        }
-                        else if (creature2Armies <= 0)
-                        {
-                            matchup.LoserId = matchup.Creature2Id;
-                            matchup.WinnerId = matchup.Creature1Id;
-                            winnerDetermined = true;
-                        }
                     }
+
+                    if (activeRound.Matchups.Count > 1)
+                    {
+                        await unitOfWork.BracketRepository.CreateNewRoundAsync(activeRound);
+                    }
+                    else
+                    {
+                        //do finale logic
+                    }
+
+                    await unitOfWork.SaveAsync();
                 }
-
-                activeRound.Completed = true;
-                await _unitOfWork.SaveAsync();
             }
-
+            
             StartTimer();
         }
 
@@ -159,7 +183,6 @@ namespace CreatureBracket.Misc
         public void Dispose()
         {
             _timer?.Dispose();
-            _scope?.Dispose();
         }
     }
 }
