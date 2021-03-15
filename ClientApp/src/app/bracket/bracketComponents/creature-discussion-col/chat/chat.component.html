@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <div class="row h-75">
+    <div id="chatScroll" class="col-12 scroll d-flex flex-column-reverse">
+      <ul>
+        <li *ngFor="let chatMessage of chatMessages"
+            class="chat-bubble"
+            [class.current]="chatMessage.userId.toString().toUpperCase() === userId.toString().toUpperCase()">
+          <div class="verticalContainer">
+            <div>
+              <span class="chat-user" *ngIf="chatMessage.userId.toString().toUpperCase() !== userId.toString().toUpperCase()">{{chatMessage.user}}</span>
+              <span class="chat-date-time">{{chatMessage.systemDateTime | date:"longDate" }} {{chatMessage.systemDateTime | date:"shortTime" }}</span>
+            </div>
+            {{chatMessage.message}}
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row h-25">
+    <div class="col-12">
+      <form #form="ngForm"
+            (ngSubmit)="onSubmit(form)">
+        <input type="text"
+               [(ngModel)]="chatText"
+               name="message"
+               class="form-control"
+               autocomplete="off"
+               minLength="3"
+               placeholder="Type your message here" />
+      </form>
+    </div>
+  </div>
+</div>
+

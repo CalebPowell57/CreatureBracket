@@ -1,0 +1,14 @@
+<div class="container-fluid">
+  <div class="row" >
+    <div class="col-12" [ngSwitch]="selectedComponent">
+      <app-selected-match-discussion-info *ngSwitchCase="'CreatureInformation'" [creature1]="creature1" [creature2]="creature2"></app-selected-match-discussion-info>
+      <app-chat *ngSwitchCase="'Discussion'"></app-chat>
+      <div *ngSwitchDefault></div>
+    </div>
+  </div>
+</div>
+
+
+
+  
+

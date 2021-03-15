@@ -4,6 +4,8 @@
 
     <app-global-bracket *ngIf="showGlobalBracket"></app-global-bracket>
 
+    <app-user-bracket *ngIf="showUserBracket"></app-user-bracket>
+
     <app-standings *ngIf="(showFinalStandings$ | async)"></app-standings>
 
     <app-standings *ngIf="showFinalStandings"></app-standings>

@@ -28,19 +28,18 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
-    <Compile Remove="ClientApp\src\app\bracket-generator\Matches\**" />
+    <Compile Remove="ClientApp\src\app\bracket\Matches\**" />
     <Content Remove="$(SpaRoot)**" />
-    <Content Remove="ClientApp\src\app\bracket-generator\Matches\**" />
-    <EmbeddedResource Remove="ClientApp\src\app\bracket-generator\Matches\**" />
+    <Content Remove="ClientApp\src\app\bracket\Matches\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\bracket\Matches\**" />
     <None Remove="$(SpaRoot)**" />
-    <None Remove="ClientApp\src\app\bracket-generator\Matches\**" />
+    <None Remove="ClientApp\src\app\bracket\Matches\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\app\bracket-generator\bracket-generator.module.ts" />
-    <None Remove="ClientApp\src\app\bracket-generator\public-api.ts" />
-    <None Remove="ClientApp\src\app\bracket-generator\tree.module.ts" />
+    <None Remove="ClientApp\src\app\bracket\bracket-generator.module.ts" />
+    <None Remove="ClientApp\src\app\bracket\bracket.module.ts" />
     <None Remove="ClientApp\src\app\bracket-manager\bracket-manager.service.ts" />
     <None Remove="ClientApp\src\app\creature-approval\creature-approval.service.ts" />
     <None Remove="ClientApp\src\app\creature-submission\creature-submission.service.ts" />
@@ -63,14 +62,13 @@
     <None Remove="ClientApp\src\app\shared\requre-super-permissions.guard.ts" />
     <None Remove="ClientApp\src\app\standings\standings.guard.ts" />
     <None Remove="ClientApp\src\app\standings\standings.service.ts" />
-    <None Remove="ClientApp\src\app\user-bracket\user-bracket.guard.ts" />
+    <None Remove="ClientApp\src\app\bracket\user-bracket\user-bracket.guard.ts" />
     <None Remove="ClientApp\src\app\verify-account\verify-account.guard.ts" />
     <None Remove="ClientApp\src\app\verify-account\verify-account.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\bracket-generator\public-api.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\bracket-generator\tree.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\bracket\bracket.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\bracket-manager\bracket-manager.service.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -138,16 +136,13 @@
     <TypeScriptCompile Include="ClientApp\src\app\verify-account\verify-account.guard.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="ClientApp\src\app\user-bracket\user-bracket.guard.ts">
+    <TypeScriptCompile Include="ClientApp\src\app\bracket\user-bracket\user-bracket.guard.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
   </ItemGroup>
 
   <ItemGroup>
     <None Update="ClientApp\src\assets\chat-bubble.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="ClientApp\src\assets\SamplePhotos\BalrogCropped.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ClientApp\src\assets\zoom-in-White.png">
