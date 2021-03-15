@@ -9,7 +9,7 @@ namespace CreatureBracket.Models
         public Guid BracketId { get; set; }
         public int Rank { get; set; }
         public int CreatureCount { get; set; }
-        public bool Completed { get; set; }
+        public DateTime VoteDeadline { get; set; }
 
         #region navigation properties
         public Bracket Bracket { get; set; }

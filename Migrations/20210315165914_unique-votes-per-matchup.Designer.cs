@@ -3,14 +3,16 @@ using System;
 using CreatureBracket.Misc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CreatureBracket.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210315165914_unique-votes-per-matchup")]
+    partial class uniquevotespermatchup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -144,9 +146,6 @@ namespace CreatureBracket.Migrations
                     b.Property<Guid>("RoundId")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("SystemDateTime")
-                        .HasColumnType("TEXT");
-
                     b.Property<Guid?>("WinnerId")
                         .HasColumnType("TEXT");
 
@@ -194,14 +193,14 @@ namespace CreatureBracket.Migrations
                     b.Property<Guid>("BracketId")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("Completed")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("CreatureCount")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Rank")
                         .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("VoteDeadline")
-                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 

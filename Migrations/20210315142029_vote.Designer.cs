@@ -3,14 +3,16 @@ using System;
 using CreatureBracket.Misc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CreatureBracket.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210315142029_vote")]
+    partial class vote
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -144,9 +146,6 @@ namespace CreatureBracket.Migrations
                     b.Property<Guid>("RoundId")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("SystemDateTime")
-                        .HasColumnType("TEXT");
-
                     b.Property<Guid?>("WinnerId")
                         .HasColumnType("TEXT");
 
@@ -194,14 +193,14 @@ namespace CreatureBracket.Migrations
                     b.Property<Guid>("BracketId")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("Completed")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("CreatureCount")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Rank")
                         .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("VoteDeadline")
-                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -235,9 +234,6 @@ namespace CreatureBracket.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EmailAddress")
-                        .IsUnique();
 
                     b.ToTable("Users");
                 });
@@ -357,10 +353,9 @@ namespace CreatureBracket.Migrations
 
                     b.HasIndex("CreatureId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("MatchupId");
 
-                    b.HasIndex("MatchupId", "UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("Votes");
                 });
@@ -531,7 +526,7 @@ namespace CreatureBracket.Migrations
                         .IsRequired();
 
                     b.HasOne("CreatureBracket.Models.Matchup", "Matchup")
-                        .WithMany("Votes")
+                        .WithMany()
                         .HasForeignKey("MatchupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -547,11 +542,6 @@ namespace CreatureBracket.Migrations
                     b.Navigation("Matchup");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("CreatureBracket.Models.Matchup", b =>
-                {
-                    b.Navigation("Votes");
                 });
 
             modelBuilder.Entity("CreatureBracket.Models.Round", b =>
