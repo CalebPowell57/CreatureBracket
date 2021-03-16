@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
-      <app-bracket [isGlobal]="false"></app-bracket>
+      <app-bracket [isGlobal]="false" (userBracketSaveEvent)="saveBracketRankings($event)"></app-bracket>
     </div>
   </div>
 </div>

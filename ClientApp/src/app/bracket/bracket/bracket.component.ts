@@ -21,9 +21,10 @@ export class BracketComponent {
 
   public BracketData: NgttRound;
   public singleEliminationTournament: NgttTournament;
-
+  @Input() userBracketFlag: boolean;
   @Output() passMatch: Subject<any> = new Subject();
   @Output() selectedComponent: string;
+  @Output() userBracketSaveEvent: EventEmitter<any> =  new EventEmitter();
 
   @Input() isGlobal: boolean;
 
@@ -106,5 +107,9 @@ export class BracketComponent {
     if (this.zoom === 40) {
       this.zoomOutEnabled = false;
     }
+  }
+
+  userBracketSaveClick() {
+    this.userBracketSaveEvent.emit("Save Clicked");
   }
 }

@@ -7,7 +7,7 @@
             <div class="ngtt-se__round-wrapper">
               <ng-container *ngFor="let matchup of round.matchups">
                 <div class="ngtt-se__match-wrapper">
-                  <div class="ngtt-se__match-component-container">
+                  <div class="ngtt-se__match-component-container animate__animated animate__backInRight">
                     <ng-container *ngTemplateOutlet="matchTemplate; context:{$implicit: matchup, tournament: tournament, isGlobal: isGlobal}"></ng-container>
                   </div>
                 </div>
@@ -18,7 +18,7 @@
             <div class="ngtt-se__round-wrapper">
               <div class="ngtt-se__match-wrapper grow">
                 <div class="ngtt-se__finale-match-wrapper">
-                  <div class="ngtt-se__finale-component-container" *ngIf="final.matchups.length > 0">
+                  <div class="ngtt-se__finale-component-container animate__animated animate__backInRight" *ngIf="final.matchups.length > 0">
                     <ng-container *ngTemplateOutlet="matchTemplate; context:{$implicit: final.matchups[0], tournament: tournament, isGlobal: isGlobal}"></ng-container>
                   </div>
                   <div class="ngtt-se__match-component-container" *ngIf="final.matchups.length > 1">

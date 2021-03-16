@@ -8,6 +8,10 @@
   width:75px;
 }
 
+.userBracketSaveButton {
+  position: fixed;
+  bottom: 25px;
+}
 .ExpandedCol {
   right:26%;
 }
@@ -35,9 +39,12 @@
   top:8%;
 }
 .zoomButton{
-  height:30px;
+  height:40px;
   color:white;
   padding:0px;
+}
+.btn-group, .btn-outline-secondary{
+    padding:0px;
 }
 .zoomButton:hover {
   cursor: pointer;
