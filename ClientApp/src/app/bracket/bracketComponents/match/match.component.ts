@@ -9,7 +9,7 @@ import { MatchService } from './match.service';
 })
 export class MatchComponent {
 
-  @Input() matchups: any;
+  @Input() matchup: any;
 
   private creatureVotedForId: string;
 
@@ -18,22 +18,22 @@ export class MatchComponent {
     private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
-    if (this.matchups.vote) {
-      this.creatureVotedForId = this.matchups.vote.creatureId;
+    if (this.matchup.vote) {
+      this.creatureVotedForId = this.matchup.vote.creatureId;
     }
   }
 
   vote(creature: any) {
-    let voteId = this.matchups.vote === null ? Guid.create().toString() : this.matchups.vote.voteId;
+    let voteId = this.matchup.vote === null ? Guid.create().toString() : this.matchup.vote.voteId;
 
     let vote: IVote = {
       CreatureId: creature.creatureId,
       Id: voteId,
-      MatchupId: this.matchups.matchupId,
+      MatchupId: this.matchup.matchupId,
       UserId: Guid.parse('54E715D0-2B42-4B19-A36B-E4ADA9DC2594').toString()
     };
 
-    this.matchups.vote.voteId = vote.Id;
+    this.matchup.vote = { voteId: vote.Id, creatureId: creature.creatureId };
 
     this.matchService.post(vote).subscribe(() => {
       this.creatureVotedForId = creature.creatureId;

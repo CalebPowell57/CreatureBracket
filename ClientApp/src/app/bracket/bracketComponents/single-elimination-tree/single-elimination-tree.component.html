@@ -3,12 +3,12 @@
     <div class="col-12">
       <div class="ngtt-se__container" id="bracketContainer">
         <div class="ngtt-se__bracket-wrapper">
-          <ng-container *ngFor="let winnersround of winnersBracket; let i = index">
+          <ng-container *ngFor="let round of rounds; let i = index">
             <div class="ngtt-se__round-wrapper">
-              <ng-container *ngFor="let matchups of winnersround.matchups">
+              <ng-container *ngFor="let matchup of round.matchups">
                 <div class="ngtt-se__match-wrapper">
                   <div class="ngtt-se__match-component-container">
-                    <ng-container *ngTemplateOutlet="matchTemplate; context:{$implicit: matchups}"></ng-container>
+                    <ng-container *ngTemplateOutlet="matchTemplate; context:{$implicit: matchup}"></ng-container>
                   </div>
                 </div>
               </ng-container>
