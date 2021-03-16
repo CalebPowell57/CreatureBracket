@@ -5,8 +5,9 @@
       <ng-container>
         <ngtt-single-elimination-tree [tournament]="singleEliminationTournament" [matchTemplate]="matchTemplate"></ngtt-single-elimination-tree>
       </ng-container>
-      <ng-template #matchTemplate let-matchups>
-        <tt-match [matchups]="matchups" (click)="onMatchClick(matchups)"></tt-match>
+
+      <ng-template #matchTemplate let-matchup>
+        <tt-match [matchup]="matchup" (click)="onMatchClick(matchup)"></tt-match>
       </ng-template>
     </div>
     <div *ngIf="colActive" class="col-1">
