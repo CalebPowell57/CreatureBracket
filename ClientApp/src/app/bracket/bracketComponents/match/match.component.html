@@ -1,13 +1,13 @@
-<div class="ngtt__match-wrapper animate__animated animate__backInRight" [class.needsVote]="!creatureVotedForId && matchup.contestants" [class.undecided]="!matchup.contestants || !matchup.current">
+<div class="ngtt__match-wrapper" [class.needsVote]="!creatureVotedForId && matchup.contestants" [class.undecided]="!matchup.contestants || !matchup.current">
   <ng-container *ngFor="let contestant of matchup.contestants">
     <div class="ngtt__team-wrapper" [class.winner]="contestant.winner" [class.first]="contestant === matchup.contestants[0]" [class.last]="contestant === matchup.contestants[1]">
       <img [src]="contestant.image" width="35" height="35" class="ngtt__team-avatar"/>
       <h6 class="ngtt__team-title" >{{contestant.name}}</h6>
 
-      <div style="width:50px;height:100%;" *ngIf="matchup.current">
-        <input type="radio" name="vote" style="opacity: 0; position: absolute; width: 26px; height: 26px; margin-left: 11px; margin-top: 11px;" (change)="vote(contestant)"/>
+      <div class=" voteDiv animate__animated animate__fadeInRight" style="width:50px;height:100%;" *ngIf="matchup.current">
+        <input type="radio" name="vote" style="opacity: 0; position: absolute; width: 26px; height: 26px; margin-left: 11px; margin-top: 11px;" (change)="vote(contestant)" />
 
-        <img [hidden]="creatureVotedForId !== contestant.creatureId" src="../../../assets/checkmark.png" width="32" height="32" style="margin-left:8px;margin-top:8px;"/>
+        <img class="check animate__animated animate__fadeIn" [hidden]="creatureVotedForId !== contestant.creatureId" src="../../../assets/checkmark.png" width="32" height="32" style="margin-left:8px;margin-top:8px;"/>
 
         <img class="hidden" [hidden]="creatureVotedForId === contestant.creatureId" src="../../../assets/circle.png" width="32" height="32" style="margin-left:8px;margin-top:8px;"/>
       </div>
