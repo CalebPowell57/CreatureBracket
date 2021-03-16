@@ -129,14 +129,8 @@ namespace CreatureBracket.Migrations
                     b.Property<Guid>("Creature1Id")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Creature1Votes")
-                        .HasColumnType("INTEGER");
-
                     b.Property<Guid>("Creature2Id")
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("Creature2Votes")
-                        .HasColumnType("INTEGER");
 
                     b.Property<Guid?>("LoserId")
                         .HasColumnType("TEXT");

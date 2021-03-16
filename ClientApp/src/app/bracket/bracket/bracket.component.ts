@@ -21,9 +21,10 @@ export class BracketComponent {
 
   public BracketData: NgttRound;
   public singleEliminationTournament: NgttTournament;
-
+  @Input() userBracketFlag: boolean;
   @Output() passMatch: Subject<any> = new Subject();
   @Output() selectedComponent: string;
+  @Output() userBracketSaveEvent: EventEmitter<any> =  new EventEmitter();
   colActive = false;
  
 
@@ -35,6 +36,9 @@ export class BracketComponent {
   ngOnInit() {
     this.bracketService.getBracketData().subscribe(data => {
       this.singleEliminationTournament = data;
+      if (this.userBracketFlag === undefined) {
+        this.userBracketFlag = false;
+      }
       if (this.singleEliminationTournament.rounds[0].matchups.length >= 16) {
         this.zoomOut(40);
       }
@@ -91,5 +95,9 @@ export class BracketComponent {
     if (this.zoom === 40) {
       this.zoomOutEnabled = false;
     }
+  }
+
+  userBracketSaveClick() {
+    this.userBracketSaveEvent.emit("Save Clicked");
   }
 }

@@ -6,14 +6,12 @@
   height: $ngtt-match-wrapper-height;
   background-color: lighten($ngtt-background-primary, 5%);
   border-radius: 6px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-right: 4px;
   border-left: solid green 5px;
 }
 
 .ngtt__match-wrapper:hover {
   cursor: pointer;
+  box-shadow: 0 0 4px 4px darkslategray;
 }
 
 .ngtt__match-wrapper.needsVote {
@@ -34,15 +32,28 @@
 
 .ngtt__match-wrapper.undecided:hover {
   border-left: 0;
-  cursor: default;
 }
 
 .ngtt__team-wrapper {
   display: flex;
   width: 100%;
-  height: 46px;
   flex-direction: row;
   align-items: center;
+  height: 50%;
+}
+
+.ngtt__team-wrapper.winner {
+  background-color: darkslategray;
+}
+
+.ngtt__team-wrapper.winner.first {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.ngtt__team-wrapper.winner.last {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 
 .ngtt__team-avatar {
@@ -67,22 +78,3 @@
   margin-top: auto;
   margin-bottom: auto;
 }
-
-.ngtt__team-score {
-  padding: 0 20px 0 10px;
-  flex-shrink: 1;
-}
-
-.voteButton {
-  background-color: black;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  margin-top: auto;
-  margin-bottom: auto;
-  padding-left:5px;
-  padding-right:5px;
-}
-
-
-

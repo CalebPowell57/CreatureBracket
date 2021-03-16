@@ -17,6 +17,8 @@ namespace CreatureBracket.Repositories
                                                 .ThenInclude(x => x.Creature1)
                                              .Include(x => x.Matchups)
                                                 .ThenInclude(x => x.Creature2)
+                                             .Include(x => x.Matchups)
+                                                .ThenInclude(x => x.Votes)
                                              .Where(x => x.BracketId == activeBracketId)
                                              .OrderByDescending(x => x.Rank)
                                              .Take(1)
