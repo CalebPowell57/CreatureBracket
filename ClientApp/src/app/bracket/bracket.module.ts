@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BracketComponent } from './bracket/bracket.component';
 import { MatchComponent } from './bracketComponents/match/match.component';
+import { UserMatchComponent } from './bracketComponents/user-match/user-match.component';
 import { SingleEliminationTreeComponent } from './bracketComponents/single-elimination-tree/single-elimination-tree.component';
 import { CreatureDiscussionColComponent } from './bracketComponents/creature-discussion-col/creature-discussion-col.component';
 import { SelectedMatchDiscussionInfoComponent } from './bracketComponents/creature-discussion-col/selected-match-discussion-info/selected-match-discussion-info.component';
@@ -17,6 +18,7 @@ import { UserBracketComponent } from './user-bracket/user-bracket.component';
     BracketComponent,
     UserBracketComponent,
     MatchComponent,
+    UserMatchComponent,
     SingleEliminationTreeComponent,
     CreatureDiscussionColComponent,
     SelectedMatchDiscussionInfoComponent,

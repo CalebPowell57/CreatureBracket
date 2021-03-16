@@ -20,4 +20,10 @@ export class GlobalBracketService {
 
     return this.http.get<NgttTournament>('Bracket/Global', { params: params });
   }
+
+  getMyBracket(): Observable<NgttTournament> {
+    let params = new HttpParams().set('userId', Guid.parse('54E715D0-2B42-4B19-A36B-E4ADA9DC2594').toString());
+
+    return this.http.get<NgttTournament>('UserBracket/MyBracket', { params: params });
+  }
 }

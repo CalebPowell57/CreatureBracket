@@ -3,6 +3,7 @@ using CreatureBracket.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Threading.Tasks;
 
 namespace CreatureBracket.Controllers
@@ -20,6 +21,15 @@ namespace CreatureBracket.Controllers
             _logger = logger;
 
             _unitOfWork = unitOfWork;
+        }
+
+        [HttpGet("MyBracket")]
+        public async Task<IActionResult> MyBracket([FromQuery] Guid userId)
+        {
+            var activeBracket = await _unitOfWork.BracketRepository.ActiveAsync();
+            var myBracket = await _unitOfWork.UserBracketRepository.MyBracketAsync(userId, activeBracket.Id);
+
+            return Ok(myBracket);
         }
 
         [HttpPost]

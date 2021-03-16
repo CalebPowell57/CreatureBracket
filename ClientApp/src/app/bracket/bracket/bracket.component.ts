@@ -24,6 +24,9 @@ export class BracketComponent {
 
   @Output() passMatch: Subject<any> = new Subject();
   @Output() selectedComponent: string;
+
+  @Input() isGlobal: boolean;
+
   colActive = false;
  
 
@@ -33,15 +36,27 @@ export class BracketComponent {
     private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.bracketService.getBracketData().subscribe(data => {
-      this.singleEliminationTournament = data;
-      if (this.singleEliminationTournament.rounds[0].matchups.length >= 16) {
-        this.zoomOut(40);
-      }
-      else {
-        this.zoomOut(undefined);
-      }
-    });
+    if (this.isGlobal) {
+      this.bracketService.getBracketData().subscribe(data => {
+        this.singleEliminationTournament = data;
+        if (this.singleEliminationTournament.rounds[0].matchups.length >= 16) {
+          this.zoomOut(40);
+        }
+        else {
+          this.zoomOut(undefined);
+        }
+      });
+    } else {
+      this.bracketService.getMyBracket().subscribe(data => {
+        this.singleEliminationTournament = data;
+        if (this.singleEliminationTournament.rounds[0].matchups.length >= 16) {
+          this.zoomOut(40);
+        }
+        else {
+          this.zoomOut(undefined);
+        }
+      });
+    }
   }
   public onMatchClick(matchup: any) {
     this.selectedComponent = "CreatureInformation";

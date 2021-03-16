@@ -1,0 +1,85 @@
+@import '../../../styles/ngtt-variables';
+
+.ngtt__match-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: $ngtt-match-wrapper-width;
+  height: $ngtt-match-wrapper-height;
+  background-color: lighten($ngtt-background-primary, 5%);
+  border-radius: 6px;
+  border-left: solid green 5px;
+}
+
+.ngtt__match-wrapper:hover {
+  cursor: pointer;
+  box-shadow: 0 0 4px 4px darkslategray;
+}
+
+.ngtt__match-wrapper.needsSelection {
+  border-left: solid goldenrod 5px;
+}
+
+.ngtt__match-wrapper.unset {
+  border-left: 0;
+}
+
+.ngtt__match-wrapper.unset:hover {
+  box-shadow: 0 0 0px 0px transparent;
+}
+
+.ngtt__match-wrapper .hidden {
+  visibility: hidden;
+}
+
+.ngtt__match-wrapper:hover .hidden {
+  visibility: visible;
+}
+
+.ngtt__team-wrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  height: 50%;
+}
+
+.ngtt__team-wrapper.selected1 {
+  background-color: darkslategray;
+  border-top-right-radius: 6px;
+}
+
+.ngtt__team-wrapper.selected2 {
+  background-color: darkslategray;
+  border-bottom-right-radius: 6px;
+}
+
+.ngtt__team-avatar {
+  margin-left: 12px;
+  background-color: darkgray;
+  display: inline-block;
+  flex-shrink: 1;
+  border-radius: 50%;
+}
+
+.ngtt__team-avatar.loser {
+  opacity: .5;
+}
+
+.ngtt__team-title {
+  margin-left: 8px;
+  color: antiquewhite;
+  font-weight: lighter;
+  display: inline-block;
+  flex-grow: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 10pt;
+  height: 17px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.ngtt__team-title.loser {
+  text-decoration: line-through;
+}

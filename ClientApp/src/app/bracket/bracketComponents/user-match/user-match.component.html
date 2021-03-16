@@ -1,0 +1,35 @@
+<div class="ngtt__match-wrapper" [class.unset]="matchup.creature1 === null || matchup.creature2 === null" [class.needsSelection]="!matchup.creature1?.winner && !matchup.creature2?.winner">
+  <ng-container>
+    <div class="ngtt__team-wrapper" *ngIf="matchup.creature1" [class.selected1]="matchup.creature1.winner">
+      <img [src]="matchup.creature1.image" width="35" height="35" class="ngtt__team-avatar" />
+      <h6 class="ngtt__team-title" [class.loser]="!matchup.creature1.winner">{{matchup.creature1.name}}</h6>
+
+      <div style="width:50px;height:100%;" *ngIf="matchup.creature1 && matchup.creature2">
+        <input type="radio" name="vote" style="opacity: 0; position: absolute; width: 26px; height: 26px; margin-left: 11px; margin-top: 11px;" (change)="select(matchup.creature1)" />
+
+        <img [hidden]="creatureVotedForId !== matchup.creature1.creatureId" src="../../../assets/checkmark.png" width="32" height="32" style="margin-left:8px;margin-top:8px;" />
+
+        <img class="hidden" [hidden]="creatureVotedForId === matchup.creature1.creatureId" src="../../../assets/circle.png" width="32" height="32" style="margin-left:8px;margin-top:8px;" />
+      </div>
+    </div>
+
+    <span *ngIf="!matchup.creature1" style="font-style:italic; color: gray; margin:auto auto auto 20px;">Empty</span>
+  </ng-container>
+
+  <ng-container>
+    <div class="ngtt__team-wrapper" *ngIf="matchup.creature2" [class.selected2]="matchup.creature2.winner">
+      <img [src]="matchup.creature2.image" width="35" height="35" class="ngtt__team-avatar" />
+      <h6 class="ngtt__team-title" [class.loser]="!matchup.creature2.winner">{{matchup.creature2.name}}</h6>
+
+      <div style="width:50px;height:100%;" *ngIf="matchup.creature1 && matchup.creature2">
+        <input type="radio" name="vote" style="opacity: 0; position: absolute; width: 26px; height: 26px; margin-left: 11px; margin-top: 11px;" (change)="select(matchup.creature2)" />
+
+        <img [hidden]="creatureVotedForId !== matchup.creature2.creatureId" src="../../../assets/checkmark.png" width="32" height="32" style="margin-left:8px;margin-top:8px;" />
+
+        <img class="hidden" [hidden]="creatureVotedForId === matchup.creature2.creatureId" src="../../../assets/circle.png" width="32" height="32" style="margin-left:8px;margin-top:8px;" />
+      </div>
+    </div>
+
+    <span *ngIf="!matchup.creature2" style="font-style:italic; color: gray; margin:auto auto auto 20px;">Empty</span>
+  </ng-container>
+</div>

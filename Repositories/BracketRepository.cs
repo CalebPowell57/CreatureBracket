@@ -185,12 +185,17 @@ namespace CreatureBracket.Repositories
         {
             var roundDTO = new RoundResponseDTO
             {
-                Matchups = new List<MatchupResponseDTO>()
+                Matchups = new List<MatchupResponseDTO>(),
+                Rank = 1
             };
 
             if (round != null)
             {
-                foreach (var matchup in round.Matchups.OrderBy(x => x.SystemDateTime))
+                roundDTO.Rank = round.Rank;
+
+                var matchups = round.Matchups.OrderBy(x => x.SystemDateTime).ToList();
+
+                foreach (var matchup in matchups)
                 {
                     var vote = matchup.Votes.SingleOrDefault(x => x.UserId == userId);
 
@@ -221,7 +226,9 @@ namespace CreatureBracket.Repositories
                         {
                             CreatureId = vote.CreatureId,
                             VoteId = vote.Id
-                        }
+                        },
+                        RoundRank = round.Rank,
+                        MatchupSeed = matchups.IndexOf(matchup) + 1
                     };
 
                     roundDTO.Matchups.Add(matchupDTO);
@@ -233,7 +240,12 @@ namespace CreatureBracket.Repositories
                 {
                     var matchupDTO = new MatchupResponseDTO
                     {
-                        Contestants = null
+                        Contestants = null,
+                        Current = true,
+                        MatchupSeed = ix + 1,
+                        RoundRank = 1,
+                        Unset = true,
+                        Vote = null,
                     };
 
                     roundDTO.Matchups.Add(matchupDTO);

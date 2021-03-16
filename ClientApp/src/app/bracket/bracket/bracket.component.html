@@ -3,12 +3,14 @@
     <div class="col-8" [ngStyle]="bracketStyle"><!--Column holds bracket component-->
       <ng-container>
         <ngtt-single-elimination-tree [tournament]="singleEliminationTournament"
-                                      [matchTemplate]="matchTemplate">
+                                      [matchTemplate]="matchTemplate"
+                                      [isGlobal]="isGlobal">
         </ngtt-single-elimination-tree>
       </ng-container>
 
-      <ng-template #matchTemplate let-matchup>
-        <tt-match [matchup]="matchup" (click)="onMatchClick(matchup)"></tt-match>
+      <ng-template #matchTemplate let-matchup let-tournament="tournament" let-isGlobal="isGlobal">
+        <tt-match *ngIf="isGlobal" [matchup]="matchup" (click)="onMatchClick(matchup)"></tt-match>
+        <tt-user-match *ngIf="!isGlobal" [matchup]="matchup" [tournament]="tournament" (click)="onMatchClick(matchup)"></tt-user-match>
       </ng-template>
     </div>
     <div *ngIf="colActive" class="col-1"> <!--Column only holds zoom/chat buttons when content column is expanded-->

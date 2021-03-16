@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { Guid } from 'guid-typescript';
+import { NgttTournament } from 'ng-tournament-tree';
 import { IVote } from '../../../interfaces/vote.interface';
 import { MatchService } from './match.service';
 @Component({

@@ -10,6 +10,7 @@ export class SingleEliminationTreeComponent implements OnChanges {
 
   @Input() matchTemplate: TemplateRef<any>;
   @Input() tournament: NgttTournament;
+  @Input() isGlobal: boolean;
 
   public rounds: NgttRound[] = [];
   public final: NgttRound = { matchups: [] };

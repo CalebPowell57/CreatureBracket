@@ -64,6 +64,10 @@
   border-radius: 50%;
 }
 
+.ngtt__team-avatar.loser {
+  opacity: .5;
+}
+
 .ngtt__team-title {
   margin-left: 8px;
   color: antiquewhite;
@@ -77,4 +81,8 @@
   height: 17px;
   margin-top: auto;
   margin-bottom: auto;
+}
+
+.ngtt__team-title.loser {
+    text-decoration: line-through;
 }
