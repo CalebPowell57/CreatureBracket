@@ -1,4 +1,4 @@
-<div class="ngtt__match-wrapper" [class.needsVote]="!creatureVotedForId && matchup.contestants" [class.undecided]="!matchup.contestants || !matchup.current">
+<div class="ngtt__match-wrapper animate__animated animate__backInRight" [class.needsVote]="!creatureVotedForId && matchup.contestants" [class.undecided]="!matchup.contestants || !matchup.current">
   <ng-container *ngFor="let contestant of matchup.contestants">
     <div class="ngtt__team-wrapper" [class.winner]="contestant.winner" [class.first]="contestant === matchup.contestants[0]" [class.last]="contestant === matchup.contestants[1]">
       <img [src]="contestant.image" width="35" height="35" class="ngtt__team-avatar"/>

@@ -22,7 +22,7 @@
           <button type="button" class="userBracketSaveButton ExpandedCol btn btn-secondary" (click)="userBracketSaveClick($event)">Save</button>
         </div>
       </ng-template>
-      <div class="zoomButtons ExpandedCol">
+      <div class="zoomButtons ExpandedCol animate__animated animate__fadeInRight">
         <div class="btn-group">
           <button type="button" class="btn btn-outline-secondary">
             <img src="../../../assets/zoom-in-White.png" (click)="zoomIn()" class="img-fluid zoomButton" />
@@ -36,8 +36,8 @@
     <div *ngIf="!colActive" class="col-4">
       <!--Column only holds zoom/chat buttons when content column is collapsed-->
       <div *ngIf="!userBracketFlag; else userBracketSaveButton ">
-        <div class="chatBubble CollapsedCol hvr-skew-backward">
-          <img src="../../../assets/chat-bubble.png" class="img-fluid" (click)="onchatClick()" />
+        <div class="chatBubble CollapsedCol hvr-skew-backward animate__animated animate__fadeIn">
+          <img src="../../../assets/chat-bubble.png" class="img-fluid animate__animated animate__fadeIn" (click)="onchatClick()" />
         </div>
       </div>
       <ng-template #userBracketSaveButton>
@@ -45,7 +45,7 @@
           <button type="button" class="userBracketSaveButton CollapsedCol btn btn-secondary" (click)="userBracketSaveClick($event)">Save</button>
         </div>
       </ng-template>
-      <div class="zoomButtons CollapsedCol">
+      <div class="zoomButtons CollapsedCol animate__animated animate__fadeIn">
         <div class="btn-group">
           <button type="button" class="btn btn-outline-secondary">
             <img src="../../../assets/zoom-in-White.png" (click)="zoomIn()" class="img-fluid zoomButton" />
@@ -56,7 +56,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="colActive" class="col-3 contentDiscussionCol">
+    <div *ngIf="colActive" class="col-3 contentDiscussionCol animate__animated animate__fadeInRight">
       <!--Column holds creature info/discussion components-->
       <app-creature-discussion-col [selectedComponent]="selectedComponent" [passMatch]="passMatch"></app-creature-discussion-col>
     </div>
