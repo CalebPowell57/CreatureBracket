@@ -9,6 +9,5 @@ namespace CreatureBracket.DTOs.Responses
         public string BIO { get; set; }
         public string Image { get; set; }
         public bool Winner { get; set; }
-        public bool Unset { get; set; }
     }
 }

@@ -53,6 +53,10 @@
     <None Remove="ClientApp\src\app\interfaces\register-DTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\standings-item-DTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\user.interface.ts" />
+    <None Remove="ClientApp\src\app\interfaces\UserBracketDTO.interface.ts" />
+    <None Remove="ClientApp\src\app\interfaces\UserCreatureDTO.interface.ts" />
+    <None Remove="ClientApp\src\app\interfaces\UserMatchupDTO.interface.ts" />
+    <None Remove="ClientApp\src\app\interfaces\UserRoundDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\verifyAccountDTO.interface.ts" />
     <None Remove="ClientApp\src\app\register\register.service.ts" />
     <None Remove="ClientApp\src\app\shared\authentication.service.ts" />
@@ -81,6 +85,10 @@
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\chat-message.interface.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\UserCreatureDTO.interface.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\UserMatchupDTO.interface.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\UserRoundDTO.interface.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\UserBracketDTO.interface.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\verifyAccountDTO.interface.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

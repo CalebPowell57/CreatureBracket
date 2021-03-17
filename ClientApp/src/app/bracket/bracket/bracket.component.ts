@@ -1,9 +1,9 @@
 import { Component, Input, Output, SimpleChange, EventEmitter, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
-import { NgttRound, NgttTournament } from '../../interfaces/bracket.interface';
-import { ICreatureDTO } from '../../interfaces/CreatureDTO.interface';
+import { IUserBracketDTO } from '../../interfaces/UserBracketDTO.interface';
 import { GlobalBracketService } from '../../shared/global-bracket.service';
 
 @Component({
@@ -19,28 +19,27 @@ export class BracketComponent {
     zoom: '100%'
   };
 
-  public BracketData: NgttRound;
-  public singleEliminationTournament: NgttTournament;
-  @Input() userBracketFlag: boolean;
+  public bracket: IUserBracketDTO;
   @Output() passMatch: Subject<any> = new Subject();
   @Output() selectedComponent: string;
-  @Output() userBracketSaveEvent: EventEmitter<any> =  new EventEmitter();
+  @Output() userBracketSaveEvent: EventEmitter<any> = new EventEmitter();
 
   @Input() isGlobal: boolean;
 
   colActive = false;
- 
+
 
   constructor(
     private bracketService: GlobalBracketService,
     private router: Router,
-    private cdr: ChangeDetectorRef) {}
+    private cdr: ChangeDetectorRef,
+    private toastrService: ToastrService) { }
 
   ngOnInit() {
     if (this.isGlobal) {
       this.bracketService.getBracketData().subscribe(data => {
-        this.singleEliminationTournament = data;
-        if (this.singleEliminationTournament.rounds[0].matchups.length >= 16) {
+        this.bracket = data;
+        if (this.bracket.rounds[0].matchups.length >= 16) {
           this.zoomOut(40);
         }
         else {
@@ -49,8 +48,8 @@ export class BracketComponent {
       });
     } else {
       this.bracketService.getMyBracket().subscribe(data => {
-        this.singleEliminationTournament = data;
-        if (this.singleEliminationTournament.rounds[0].matchups.length >= 16) {
+        this.bracket = data;
+        if (this.bracket.rounds[0].matchups.length >= 16) {
           this.zoomOut(40);
         }
         else {
@@ -110,6 +109,9 @@ export class BracketComponent {
   }
 
   userBracketSaveClick() {
-    this.userBracketSaveEvent.emit("Save Clicked");
+    //this.userBracketSaveEvent.emit("Save Clicked");
+    this.bracketService.saveMyBracket(this.bracket).subscribe(() => {
+      this.toastrService.success('Your bracket was successfully saved!', 'Success');
+    });
   }
 }

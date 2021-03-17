@@ -263,11 +263,14 @@ namespace CreatureBracket.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("Creature1Id")
+                    b.Property<Guid?>("Creature1Id")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("Creature2Id")
+                    b.Property<Guid?>("Creature2Id")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Seed")
+                        .HasColumnType("INTEGER");
 
                     b.Property<Guid>("UserRoundId")
                         .HasColumnType("TEXT");
@@ -294,7 +297,7 @@ namespace CreatureBracket.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("RoundType")
+                    b.Property<int>("Rank")
                         .HasColumnType("INTEGER");
 
                     b.Property<Guid>("UserBracketId")
@@ -465,15 +468,11 @@ namespace CreatureBracket.Migrations
                 {
                     b.HasOne("CreatureBracket.Models.Creature", "Creature1")
                         .WithMany()
-                        .HasForeignKey("Creature1Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Creature1Id");
 
                     b.HasOne("CreatureBracket.Models.Creature", "Creature2")
                         .WithMany()
-                        .HasForeignKey("Creature2Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Creature2Id");
 
                     b.HasOne("CreatureBracket.Models.UserRound", "Round")
                         .WithMany("Matchups")
