@@ -23,11 +23,10 @@ export class UserMatchComponent {
   select(creature: any) {
     this.creatureVotedForId = creature.creatureId;
     creature.winner = true;
-    if (this.matchup.creature1 === creature) {
-      this.matchup.creature2.winner = false;
-    } else {
-      this.matchup.creature1.winner = false;
-    }
+    this.matchup.unset = false;
+
+    let loser = this.matchup.creature1 === creature ? this.matchup.creature2 : this.matchup.creature1;
+    loser.winner = false;
 
     let rounds = this.tournament.rounds.filter(x => x.rank === this.matchup.roundRank + 1);
 
@@ -52,35 +51,35 @@ export class UserMatchComponent {
         nextMatchup.creature1.winner = false;
       }
 
-      this.clearFutureMatches(nextMatchup);
+      this.clearFutureMatches(nextMatchup, loser);
     }
     else {
       //
     }
   }
 
-  clearFutureMatches(matchup: any) {
+  clearFutureMatches(matchup: any, creature: any) {
     while (true) {
       let rounds = this.tournament.rounds.filter(x => x.rank === matchup.roundRank + 1);
 
       if (rounds.length) {
         let round = rounds[0];
 
-        let index = this.matchup.matchupSeed / 2;
+        let index = matchup.matchupSeed / 2;
 
-        let isCurrentMatchupOdd = this.matchup.matchupSeed % 2 != 0;
+        let isCurrentMatchupOdd = matchup.matchupSeed % 2 != 0;
 
         if (isCurrentMatchupOdd) {
-          index = (this.matchup.matchupSeed - 1) / 2;
+          index = (matchup.matchupSeed - 1) / 2;
         }
+
+        matchup.unset = true;
 
         let nextMatchup = round.matchups[index];
 
-        let isNextMatchupOdd = nextMatchup.matchupSeed % 2 != 0;
-
-        if (isNextMatchupOdd) {
+        if (isCurrentMatchupOdd && nextMatchup.creature2.creatureId === creature.creatureId) {
           nextMatchup.creature2 = null;
-        } else {
+        } else if (nextMatchup.creature1.creatureId === creature.creatureId) {
           nextMatchup.creature1 = null;
         }
 
