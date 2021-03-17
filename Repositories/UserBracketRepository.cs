@@ -46,7 +46,7 @@ namespace CreatureBracket.Repositories
                             Creature2 = null,
                             MatchupSeed = ix,
                             RoundRank = roundRank,
-                            Unset = roundRank > 1
+                            Unset = false
                         };
 
                         if(roundRank <= 1)
