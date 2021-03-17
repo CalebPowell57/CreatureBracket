@@ -19,6 +19,7 @@ export class CreatureDiscussionColComponent {
   constructor(private cdr: ChangeDetectorRef) {}
   @Input() passMatch: Subject<any>;
   @Input() selectedComponent: string;
+  @Input() selectedAnimationClass: string;
   @Output() selectedMatch: Subject<any> = new Subject();
   @Output() creature1: ICreatureDTO;
   @Output() creature2: ICreatureDTO;
@@ -40,6 +41,7 @@ export class CreatureDiscussionColComponent {
       })
       this.selectedMatch.next(event);
     })
+    console.log(this.selectedComponent);
   }
   ngOnDestroy() {
     this.selectedMatch.unsubscribe();
