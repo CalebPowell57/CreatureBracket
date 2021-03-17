@@ -27,7 +27,8 @@ export class BracketComponent {
   @Input() isGlobal: boolean;
 
   colActive = false;
-
+  contentColumnCommand: string;
+  isColInit = false;
 
   constructor(
     private bracketService: GlobalBracketService,
@@ -57,23 +58,16 @@ export class BracketComponent {
         }
       });
     }
+    this.discussionCreatureColumnState("pageLoad");
   }
   public onMatchClick(matchup: any) {
-    this.selectedComponent = "CreatureInformation";
-    this.colActive = true;
+    this.discussionCreatureColumnState("CreatureInformation");
     this.cdr.detectChanges();
     this.passMatch.next(matchup);
 
   }
   public onchatClick() {
-    if (this.colActive === false || this.selectedComponent != "Discussion") {
-      this.selectedComponent = "Discussion";
-      this.colActive = true;
-    }
-    else {
-      this.selectedComponent = "";
-      this.colActive = false;
-    }
+    this.discussionCreatureColumnState("Discussion");
   }
 
   zoomIn() {
@@ -113,5 +107,32 @@ export class BracketComponent {
     this.bracketService.saveMyBracket(this.bracket).subscribe(() => {
       this.toastrService.success('Your bracket was successfully saved!', 'Success');
     });
+  }
+
+  public discussionCreatureColumnState(contentRequested: string) {
+    if (this.selectedComponent === contentRequested && contentRequested != "CreatureInformation") {
+      this.contentColumnCommand = "closeColumn"
+      this.colActive = false;
+      this.isColInit = true;
+      this.selectedComponent = "";
+    }
+    else if (contentRequested === "pageLoad") {
+      this.colActive = false;
+      this.contentColumnCommand = contentRequested;
+      this.isColInit = true;
+    }
+    else if (this.isColInit === true) {
+      this.colActive = true;
+      this.contentColumnCommand = "content";
+      this.selectedComponent = contentRequested;
+      this.selectedAnimationClass = "init";
+      this.isColInit = false;
+    }
+    else {
+      this.colActive = true;
+      this.contentColumnCommand = "content";
+      this.selectedComponent = contentRequested;
+      this.selectedAnimationClass = contentRequested;
+    }
   }
 }

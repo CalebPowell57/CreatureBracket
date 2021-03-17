@@ -66,9 +66,9 @@
         </div>
       </div>
     </div>
-    <div *ngIf="colActive" class="col-3 contentDiscussionCol animate__animated animate__fadeInRight">
+    <div [ngClass]="contentColumnCommand"  class="col-3 contentDiscussionCol">
       <!--Column holds creature info/discussion components-->
-      <app-creature-discussion-col [selectedComponent]="selectedComponent" [passMatch]="passMatch"></app-creature-discussion-col>
-    </div>
+         <app-creature-discussion-col [selectedAnimationClass]="selectedAnimationClass" [selectedComponent]="selectedComponent" [passMatch]="passMatch"></app-creature-discussion-col>
+      </div>
   </div>
 </div>
