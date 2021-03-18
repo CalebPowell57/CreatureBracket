@@ -30,12 +30,15 @@ export class BracketComponent {
 
   colActive = false;
   contentColumnCommand: string;
-  isColInit = false;
+  isColInit: boolean;
+  matchUpId: string;
+  hasChatBeenDisplayed: boolean;
+  creatureVotedForClassSelection: string;
 
   constructor(
     private bracketService: GlobalBracketService,
     private router: Router,
-    private cdr: ChangeDetectorRef) {}
+    private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     if (this.isGlobal) {
@@ -59,16 +62,21 @@ export class BracketComponent {
         }
       });
     }
-    this.discussionCreatureColumnState("pageLoad");
+    this.discussionCreatureColumnState("pageLoad", undefined, undefined);
   }
   public onMatchClick(matchup: any) {
-    this.discussionCreatureColumnState("CreatureInformation");
+    if (matchup.vote != null) {
+      this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, matchup.vote.creatureId);
+    }
+    else {
+      this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, undefined);
+    }
     this.cdr.detectChanges();
     this.passMatch.next(matchup);
 
   }
   public onchatClick() {
-    this.discussionCreatureColumnState("Discussion");
+    this.discussionCreatureColumnState("Discussion", undefined, undefined);
   }
 
   zoomIn() {
@@ -107,30 +115,41 @@ export class BracketComponent {
     this.userBracketSaveEvent.emit("Save Clicked");
   }
 
-  public discussionCreatureColumnState(contentRequested: string) {
-    if (this.selectedComponent === contentRequested && contentRequested != "CreatureInformation") {
-      this.contentColumnCommand = "closeColumn"
+  public discussionCreatureColumnState(contentRequested: string, requestedMathId: string, CreatureVotedFor: string) {
+    if (this.selectedComponent === contentRequested && contentRequested != "CreatureInformation" ||
+      this.matchUpId === requestedMathId && requestedMathId != undefined &&  this.creatureVotedForClassSelection === CreatureVotedFor) {
+      this.contentColumnCommand = "closeColumn";
+      this.selectedAnimationClass = "closeColumn";
       this.colActive = false;
-      this.isColInit = true;
+      this.isColInit = false;
       this.selectedComponent = "";
+      this.matchUpId = "";
+      this.creatureVotedForClassSelection = CreatureVotedFor;
     }
     else if (contentRequested === "pageLoad") {
       this.colActive = false;
       this.contentColumnCommand = contentRequested;
-      this.isColInit = true;
+      this.selectedAnimationClass = undefined;
+      this.isColInit = false;
+      this.matchUpId = requestedMathId;
     }
-    else if (this.isColInit === true) {
+    else if (this.isColInit === false ||
+             this.selectedAnimationClass === "init" && this.matchUpId != undefined && requestedMathId != undefined) {
       this.colActive = true;
       this.contentColumnCommand = "content";
       this.selectedComponent = contentRequested;
       this.selectedAnimationClass = "init";
-      this.isColInit = false;
+      this.isColInit = true;
+      this.matchUpId = requestedMathId;
+      this.creatureVotedForClassSelection = CreatureVotedFor;
     }
     else {
       this.colActive = true;
       this.contentColumnCommand = "content";
       this.selectedComponent = contentRequested;
       this.selectedAnimationClass = contentRequested;
+      this.matchUpId = requestedMathId;
+      this.creatureVotedForClassSelection = CreatureVotedFor;
     }
   }
 }
