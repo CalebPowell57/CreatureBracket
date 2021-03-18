@@ -1,5 +1,5 @@
-﻿using CreatureBracket.Misc;
-using CreatureBracket.Models;
+﻿using CreatureBracket.DTOs.Responses;
+using CreatureBracket.Misc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -32,10 +32,22 @@ namespace CreatureBracket.Controllers
             return Ok(myBracket);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] UserBracket bracket)
+        [HttpPost("Save")]
+        public async Task<IActionResult> Save([FromBody] UserBracketResponseDTO dto)
         {
-            await _unitOfWork.UserBracketRepository.PostAsync(bracket);
+            var activeBracket = await _unitOfWork.BracketRepository.ActiveAsync();
+
+            var userBracket = await _unitOfWork.UserBracketRepository.ExistingUserBracket(activeBracket.Id, dto.UserId);
+
+            if (userBracket is null)
+            {
+                _unitOfWork.UserBracketRepository.AddUserBracketFromDTO(dto, activeBracket.Id);
+            }
+            else
+            {
+                _unitOfWork.UserBracketRepository.DeserializeUserBracketFromDTO(dto, userBracket);
+            }
+
             await _unitOfWork.SaveAsync();
 
             return Ok();

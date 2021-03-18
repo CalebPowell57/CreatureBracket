@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges, TemplateRef } from '@angular/core';
-import { NgttRound, NgttTournament } from '../../../interfaces/bracket.interface';
+import { IUserBracketDTO } from '../../../interfaces/UserBracketDTO.interface';
+import { IUserRoundDTO } from '../../../interfaces/UserRoundDTO.interface';
 
 @Component({
   selector: 'ngtt-single-elimination-tree',
@@ -9,11 +10,11 @@ import { NgttRound, NgttTournament } from '../../../interfaces/bracket.interface
 export class SingleEliminationTreeComponent implements OnChanges {
 
   @Input() matchTemplate: TemplateRef<any>;
-  @Input() tournament: NgttTournament;
+  @Input() tournament: IUserBracketDTO;
   @Input() isGlobal: boolean;
 
-  public rounds: NgttRound[] = [];
-  public final: NgttRound = { matchups: [] };
+  public rounds: IUserRoundDTO[] = [];
+  public final: IUserRoundDTO = { matchups: [], rank: 0 };
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.hasOwnProperty('tournament') && changes.tournament.currentValue) {

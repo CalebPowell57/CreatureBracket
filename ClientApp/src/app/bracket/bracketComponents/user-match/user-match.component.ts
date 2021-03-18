@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NgttTournament } from 'ng-tournament-tree';
+import { IUserBracketDTO } from '../../../interfaces/UserBracketDTO.interface';
 @Component({
   selector: 'tt-user-match',
   templateUrl: './user-match.component.html',
@@ -8,7 +8,7 @@ import { NgttTournament } from 'ng-tournament-tree';
 export class UserMatchComponent {
 
   @Input() matchup: any;
-  @Input() tournament: NgttTournament;
+  @Input() tournament: IUserBracketDTO;
 
   private creatureVotedForId: string;
 
@@ -77,9 +77,9 @@ export class UserMatchComponent {
 
         let nextMatchup = round.matchups[index];
 
-        if (isCurrentMatchupOdd && nextMatchup.creature2.creatureId === creature.creatureId) {
+        if (isCurrentMatchupOdd && nextMatchup.creature2 !== null && nextMatchup.creature2.creatureId === creature.creatureId) {
           nextMatchup.creature2 = null;
-        } else if (nextMatchup.creature1.creatureId === creature.creatureId) {
+        } else if (nextMatchup.creature1 !== null && nextMatchup.creature1.creatureId === creature.creatureId) {
           nextMatchup.creature1 = null;
         }
 
