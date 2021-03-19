@@ -151,7 +151,7 @@ export class BracketComponent {
     else if (this.isColInit === false ||
              this.selectedAnimationClass === "init" && this.matchUpId != undefined && requestedMathId != undefined) {
       this.colActive = true;
-      this.contentColumnCommand = "content";
+      this.contentColumnCommand = "init";
       this.selectedComponent = contentRequested;
       this.selectedAnimationClass = "init";
       this.isColInit = true;
