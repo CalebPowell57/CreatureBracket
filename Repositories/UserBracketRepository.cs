@@ -52,7 +52,8 @@ namespace CreatureBracket.Repositories
                             Creature2 = null,
                             MatchupSeed = ix,
                             RoundRank = roundRank,
-                            Unset = true
+                            Unset = true,
+                            MatchupId = Guid.NewGuid()
                         };
 
                         if (roundRank <= 1)
@@ -125,7 +126,8 @@ namespace CreatureBracket.Repositories
                             },
                             Unset = matchup.Creature1 is null || matchup.Creature2 is null || !matchup.WinnerId.HasValue,
                             MatchupSeed = matchup.Seed,
-                            RoundRank = round.Rank
+                            RoundRank = round.Rank,
+                            MatchupId = matchup.Id
                         };
 
                         roundDTO.Matchups.Add(matchupDTO);

@@ -1,45 +1,47 @@
-<h1>Creature Approval</h1>
+<div style="width:60%;margin-left:auto;margin-right:auto;">
+  <h1>Creature Approval</h1>
 
-<span *ngIf="pendingSubmissions?.length === 0 && approvedSubmissions?.length === 0">No creatures have been submitted yet!</span>
+  <span *ngIf="pendingSubmissions?.length === 0 && approvedSubmissions?.length === 0">No creatures have been submitted yet!</span>
 
-<div *ngIf="pendingSubmissions?.length !== 0">
-  <h3>Pending</h3>
+  <div *ngIf="pendingSubmissions?.length !== 0">
+    <h3>Pending</h3>
 
-  <ul>
-    <li *ngFor="let submission of pendingSubmissions"
-        class="listItem"
-        style="min-height: 2.5em;padding:10px;">
-      <div class="horizontalContainer">
-        <img [src]="submission.image" width="70" height="70" style="border-radius:50%; margin-top:auto; margin-bottom:auto; margin-right:1em;"/>
+    <ul>
+      <li *ngFor="let submission of pendingSubmissions"
+          class="listItem"
+          style="min-height: 2.5em;padding:10px;">
+        <div class="horizontalContainer">
+          <img [src]="submission.image" width="70" height="70" style="border-radius:50%; margin-top:auto; margin-bottom:auto; margin-right:1em;" />
 
-        <div class="verticalContainer">
-          <span style="font-weight:500; font-size:16pt;">{{submission.name}}</span>
+          <div class="verticalContainer">
+            <span style="font-weight:500; font-size:16pt;">{{submission.name}}</span>
 
-          <span style="font-size:11pt;">{{submission.bio}}</span>
+            <span style="font-size:11pt;">{{submission.bio}}</span>
+          </div>
+
+          <button class="btn btn-primary" (click)="onApproveButtonClick(submission)" style="height:40px;margin-left:auto;margin-right:0;margin-bottom:auto;margin-top:auto;">Approve</button>
         </div>
+      </li>
+    </ul>
+  </div>
 
-        <button class="btn btn-primary" (click)="onApproveButtonClick(submission)" style="height:40px;margin-left:auto;margin-right:0;margin-bottom:auto;margin-top:auto;">Approve</button>
-      </div>
-    </li>
-  </ul>
-</div>
+  <div *ngIf="approvedSubmissions?.length !== 0">
+    <h3>Approved</h3>
 
-<div *ngIf="approvedSubmissions?.length !== 0">
-  <h3>Approved</h3>
+    <ul>
+      <li *ngFor="let submission of approvedSubmissions"
+          class="listItem"
+          style="min-height: 2.5em;padding:10px;">
+        <div class="horizontalContainer">
+          <img [src]="submission.image" width="70" height="70" style="border-radius:50%; margin-top:auto; margin-bottom:auto; margin-right:1em;" />
 
-  <ul>
-    <li *ngFor="let submission of approvedSubmissions"
-        class="listItem"
-        style="min-height: 2.5em;padding:10px;">
-      <div class="horizontalContainer">
-        <img [src]="submission.image" width="70" height="70" style="border-radius:50%; margin-top:auto; margin-bottom:auto; margin-right:1em;" />
+          <div class="verticalContainer">
+            <span style="font-weight:500; font-size:16pt;">{{submission.name}}</span>
 
-        <div class="verticalContainer">
-          <span style="font-weight:500; font-size:16pt;">{{submission.name}}</span>
-
-          <span style="font-size:11pt;">{{submission.bio}}</span>
+            <span style="font-size:11pt;">{{submission.bio}}</span>
+          </div>
         </div>
-      </div>
-    </li>
-  </ul>
+      </li>
+    </ul>
+  </div>
 </div>

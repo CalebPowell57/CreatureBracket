@@ -1,4 +1,6 @@
-﻿namespace CreatureBracket.DTOs.Responses
+﻿using System;
+
+namespace CreatureBracket.DTOs.Responses
 {
     public class UserMatchupResponseDTO
     {
@@ -7,5 +9,6 @@
         public int RoundRank { get; set; }
         public int MatchupSeed { get; set; }
         public bool Unset { get; set; }
+        public Guid MatchupId { get; set; }
     }
 }

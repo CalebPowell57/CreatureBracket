@@ -6,4 +6,5 @@ export interface IUserMatchupDTO {
   roundRank: number;
   matchupSeed: number;
   unset: boolean;
+  matchupId: string;
 }

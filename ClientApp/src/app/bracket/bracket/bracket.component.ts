@@ -112,7 +112,20 @@ export class BracketComponent {
 
   userBracketSaveClick() {
     //this.userBracketSaveEvent.emit("Save Clicked");
-    this.bracketService.saveMyBracket(this.bracket).subscribe(() => {
+    let bracket = Object.assign({}, this.bracket);
+
+    bracket.rounds = Object.assign([], bracket.rounds);
+
+    bracket.rounds.forEach(x => x.matchups = Object.assign([], x.matchups));
+
+    bracket.rounds.forEach(x => x.matchups.forEach(y => {
+      y.creature1 = Object.assign({}, y.creature1);
+      y.creature2 = Object.assign({}, y.creature2);
+      y.creature1.image = null;
+      y.creature2.image = null;
+    }))
+
+    this.bracketService.saveMyBracket(bracket).subscribe(() => {
       this.toastrService.success('Your bracket was successfully saved!', 'Success');
     });
   }
