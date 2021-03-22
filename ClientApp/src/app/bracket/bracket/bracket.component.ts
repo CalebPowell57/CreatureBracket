@@ -1,9 +1,12 @@
 import { Component, Input, Output, SimpleChange, EventEmitter, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Guid } from 'guid-typescript';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { IUserBracketDTO } from '../../interfaces/UserBracketDTO.interface';
+import { IUserMatchupDTO } from '../../interfaces/UserMatchupDTO.interface';
+import { IUserRoundDTO } from '../../interfaces/UserRoundDTO.interface';
 import { GlobalBracketService } from '../../shared/global-bracket.service';
 
 @Component({
@@ -63,17 +66,22 @@ export class BracketComponent {
     }
     this.discussionCreatureColumnState("pageLoad", undefined, undefined);
   }
+
   public onMatchClick(matchup: any) {
     if (matchup.vote != null) {
       this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, matchup.vote.creatureId);
-    }
-    else {
-      this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, undefined);
-    }
-    this.cdr.detectChanges();
-    this.passMatch.next(matchup);
 
+      this.passMatch.next(matchup);
+    }
+    else if (this.isGlobal || (!this.isGlobal && matchup.creature1 !== null && matchup.creature2 !== null)) {
+      this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, undefined);
+
+      this.passMatch.next(matchup);
+    }
+
+    this.cdr.detectChanges();
   }
+
   public onchatClick() {
     this.discussionCreatureColumnState("Discussion", undefined, undefined);
   }
@@ -112,18 +120,52 @@ export class BracketComponent {
 
   userBracketSaveClick() {
     //this.userBracketSaveEvent.emit("Save Clicked");
-    let bracket = Object.assign({}, this.bracket);
+    let bracket: IUserBracketDTO = {
+      rounds: [],
+      userId: Guid.parse('54E715D0-2B42-4B19-A36B-E4ADA9DC2594').toString()
+    };
 
-    bracket.rounds = Object.assign([], bracket.rounds);
+    this.bracket.rounds.forEach(x => {
+      let round: IUserRoundDTO = {
+        matchups: [],
+        rank: x.rank
+      };
 
-    bracket.rounds.forEach(x => x.matchups = Object.assign([], x.matchups));
+      x.matchups.forEach(y => {
+        let matchup: IUserMatchupDTO = {
+          creature1: null,
+          creature2: null,
+          matchupId: y.matchupId,
+          matchupSeed: y.matchupSeed,
+          roundRank: y.roundRank,
+          unset: y.unset
+        };
 
-    bracket.rounds.forEach(x => x.matchups.forEach(y => {
-      y.creature1 = Object.assign({}, y.creature1);
-      y.creature2 = Object.assign({}, y.creature2);
-      y.creature1.image = null;
-      y.creature2.image = null;
-    }))
+        if (y.creature1 !== null) {
+          matchup.creature1 = {
+            bio: y.creature1.bio,
+            creatureId: y.creature1.creatureId,
+            image: null,
+            name: y.creature1.name,
+            winner: y.creature1.winner
+          };
+        }
+
+        if (y.creature2 !== null) {
+          matchup.creature2 = {
+            bio: y.creature2.bio,
+            creatureId: y.creature2.creatureId,
+            image: null,
+            name: y.creature2.name,
+            winner: y.creature2.winner
+          };
+        }
+
+        round.matchups.push(matchup);
+      });
+
+      bracket.rounds.push(round);
+    });
 
     this.bracketService.saveMyBracket(bracket).subscribe(() => {
       this.toastrService.success('Your bracket was successfully saved!', 'Success');
@@ -132,7 +174,7 @@ export class BracketComponent {
 
   public discussionCreatureColumnState(contentRequested: string, requestedMathId: string, CreatureVotedFor: string) {
     if (this.selectedComponent === contentRequested && contentRequested != "CreatureInformation" ||
-      this.matchUpId === requestedMathId && requestedMathId != undefined &&  this.creatureVotedForClassSelection === CreatureVotedFor) {
+      this.matchUpId === requestedMathId && requestedMathId != undefined && this.creatureVotedForClassSelection === CreatureVotedFor) {
       this.contentColumnCommand = "closeColumn";
       this.selectedAnimationClass = "closeColumn";
       this.colActive = false;
@@ -149,7 +191,7 @@ export class BracketComponent {
       this.matchUpId = requestedMathId;
     }
     else if (this.isColInit === false ||
-             this.selectedAnimationClass === "init" && this.matchUpId != undefined && requestedMathId != undefined) {
+      this.selectedAnimationClass === "init" && this.matchUpId != undefined && requestedMathId != undefined) {
       this.colActive = true;
       this.contentColumnCommand = "init";
       this.selectedComponent = contentRequested;

@@ -29,8 +29,6 @@ export class GlobalBracketService {
   }
 
   saveMyBracket(bracket: IUserBracketDTO) {
-    bracket.userId = Guid.parse('54E715D0-2B42-4B19-A36B-E4ADA9DC2594').toString();
-
     return this.http.post('UserBracket/Save', bracket);
   }
 }

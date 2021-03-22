@@ -25,7 +25,7 @@
               <li class="nav-item" [routerLinkActive]="['link-active']">
                 <a class="nav-link text-dark" [routerLink]="['/bracket-manager']">Bracket Manager</a>
               </li>
-              <li class="nav-item" [routerLinkActive]="['link-active']">
+              <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="showCreatureApproval">
                 <a class="nav-link text-dark" [routerLink]="['/creature-approval']">Creature Approval</a>
               </li>
               <li class="nav-item" [routerLinkActive]="['link-active']">

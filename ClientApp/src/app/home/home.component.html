@@ -4,10 +4,6 @@
 
     <app-bracket *ngIf="showGlobalBracket" [isGlobal]="true"></app-bracket>
 
-    <app-user-bracket *ngIf="showUserBracket"></app-user-bracket>
-
-    <app-standings *ngIf="(showFinalStandings$ | async)"></app-standings>
-
     <app-standings *ngIf="showFinalStandings"></app-standings>
 
     <h2 *ngIf="showNoActiveBracket">Wait for a tournament organizer to start the bracket!</h2>

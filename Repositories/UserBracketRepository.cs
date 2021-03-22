@@ -150,7 +150,7 @@ namespace CreatureBracket.Repositories
                                                                 .ThenInclude(x => x.Creature2)
                                                          .SingleOrDefaultAsync(x => x.UserId == userId && x.BracketId == activeBracketId);
 
-            if(userBracket != null)
+            if (userBracket != null)
             {
                 userBracket.Rounds = userBracket.Rounds.OrderBy(x => x.Rank).ToList();
                 userBracket.Rounds.ForEach(x => x.Matchups = x.Matchups.OrderBy(y => y.Seed).ToList());
@@ -211,17 +211,17 @@ namespace CreatureBracket.Repositories
             _context.UserBrackets.Add(userBracket);
         }
 
-        public void DeserializeUserBracketFromDTO(UserBracketResponseDTO dto, UserBracket userBracket)
+        public async Task UpdateMatchupsAsync(UserBracketResponseDTO dto, Guid userBracketId)
         {
+            var matchups = await _context.UserMatchups.Where(x => x.Round.UserBracketId == userBracketId).ToListAsync();
+
             foreach (var roundDTO in dto.Rounds)
             {
-                var userRound = userBracket.Rounds.Single(x => x.Rank == roundDTO.Rank);
-
                 foreach (var matchupDTO in roundDTO.Matchups)
                 {
                     Guid? winnerId = null;
 
-                    if(matchupDTO.Creature1 != null && matchupDTO.Creature1.Winner)
+                    if (matchupDTO.Creature1 != null && matchupDTO.Creature1.Winner)
                     {
                         winnerId = matchupDTO.Creature1.CreatureId;
                     }
@@ -230,11 +230,35 @@ namespace CreatureBracket.Repositories
                         winnerId = matchupDTO.Creature2.CreatureId;
                     }
 
-                    var userMatchup = userRound.Matchups.Single(x => x.Round.Rank == matchupDTO.RoundRank && x.Seed == matchupDTO.MatchupSeed);
+                    var matchup = matchups.Single(x => x.Round.Rank == matchupDTO.RoundRank && x.Seed == matchupDTO.MatchupSeed);
 
-                    userMatchup.Creature1Id = matchupDTO.Creature1?.CreatureId;
-                    userMatchup.Creature2Id = matchupDTO.Creature2?.CreatureId;
-                    userMatchup.WinnerId = winnerId;
+                    if (matchupDTO.Creature1 != null)
+                    {
+                        try
+                        {
+                            var creature = await _context.Creatures.SingleAsync(x => x.Id == matchupDTO.Creature1.CreatureId);
+                        }
+                        catch (Exception e)
+                        {
+                            var b = e;
+                        }
+                    }
+
+                    if (matchupDTO.Creature2 != null)
+                    {
+                        try
+                        {
+                            var creature = await _context.Creatures.SingleAsync(x => x.Id == matchupDTO.Creature2.CreatureId);
+                        }
+                        catch (Exception e)
+                        {
+                            var b = e;
+                        }
+                    }
+
+                    matchups.Single(x => x.Round.Rank == matchupDTO.RoundRank && x.Seed == matchupDTO.MatchupSeed).Creature1Id = matchupDTO.Creature1 is null ? (Guid?)null : Guid.Parse(matchupDTO.Creature1?.CreatureId.ToString().ToUpper());
+                    matchups.Single(x => x.Round.Rank == matchupDTO.RoundRank && x.Seed == matchupDTO.MatchupSeed).Creature2Id = matchupDTO.Creature2 is null ? (Guid?)null : Guid.Parse(matchupDTO.Creature2?.CreatureId.ToString().ToUpper());
+                    matchup.WinnerId = winnerId is null ? (Guid?)null : Guid.Parse(winnerId?.ToString().ToUpper());
                 }
             }
         }

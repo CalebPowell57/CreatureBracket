@@ -24,7 +24,7 @@
       </div>
       <ng-template #userBracketSaveButton>
         <div class="btn-group">
-          <button type="button" class="userBracketSaveButton ExpandedCol btn btn-secondary animate__animated animate__fadeInRight" (click)="userBracketSaveClick($event)">Save</button>
+          <button type="button" class="userBracketSaveButton ExpandedCol btn btn-primary animate__animated animate__fadeInRight" (click)="userBracketSaveClick($event)">Save</button>
         </div>
       </ng-template>
       <div class=" animate__animated animate__fadeInRight zoomButtons ExpandedCol">
@@ -50,7 +50,7 @@
       </div>
       <ng-template #userBracketSaveButton>
         <div class="btn-group">
-          <button type="button" class="userBracketSaveButton CollapsedCol btn btn-secondary animate__animated animate__fadeIn" (click)="userBracketSaveClick($event)">Save</button>
+          <button type="button" class="userBracketSaveButton CollapsedCol btn btn-primary animate__animated animate__fadeIn" (click)="userBracketSaveClick($event)">Save</button>
         </div>
       </ng-template>
       <div class=" animate__animated animate__fadeIn zoomButtons CollapsedCol">
@@ -68,7 +68,7 @@
     </div>
     <div [ngClass]="contentColumnCommand"  class="col-3 contentDiscussionCol">
       <!--Column holds creature info/discussion components-->
-         <app-creature-discussion-col [selectedAnimationClass]="selectedAnimationClass" [selectedComponent]="selectedComponent" [passMatch]="passMatch"></app-creature-discussion-col>
+         <app-creature-discussion-col [selectedAnimationClass]="selectedAnimationClass" [selectedComponent]="selectedComponent" [passMatch]="passMatch" [isGlobal]="isGlobal"></app-creature-discussion-col>
       </div>
   </div>
 </div>

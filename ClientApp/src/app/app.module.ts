@@ -11,6 +11,7 @@ import { StandingsGuard } from './standings/standings.guard';
 import { UserBracketGuard } from './bracket/user-bracket/user-bracket.guard';
 import { VerifyAccountGuard } from './verify-account/verify-account.guard';
 import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.guard';
+import { CreatureApprovalGuard } from './creature-approval/creature-approval.guard';
 
 import { HttpRequestInterceptor } from './shared/http-request.interceptor';
 
@@ -61,7 +62,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
       { path: 'successful-account-creation', component: SuccessfulAccountCreationComponent },
       { path: 'verify-account', component: VerifyAccountComponent, canActivate: [VerifyAccountGuard] },
       { path: 'current-standings', component: StandingsComponent, canActivate: [StandingsGuard, RequireAuthenticationGuard] },
-      { path: 'creature-approval', component: CreatureApprovalComponent, canActivate: [/*RequireSuperPermissionsGuard, */RequireAuthenticationGuard] },
+      { path: 'creature-approval', component: CreatureApprovalComponent, canActivate: [/*RequireSuperPermissionsGuard, */RequireAuthenticationGuard, CreatureApprovalGuard] },
       //{ path: 'user-bracket', component: UserBracketComponent, canActivate: [UserBracketGuard, RequireAuthenticationGuard] },
       { path: 'bracket-manager', component: BracketManagerComponent, canActivate: [/*RequireSuperPermissionsGuard, */RequireAuthenticationGuard] },
       { path: 'standings', component: StandingsComponent, canActivate: [RequireAuthenticationGuard] },

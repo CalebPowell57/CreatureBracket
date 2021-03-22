@@ -45,10 +45,17 @@ namespace CreatureBracket.Controllers
             }
             else
             {
-                _unitOfWork.UserBracketRepository.DeserializeUserBracketFromDTO(dto, userBracket);
+                await _unitOfWork.UserBracketRepository.UpdateMatchupsAsync(dto, userBracket.Id);
             }
 
-            await _unitOfWork.SaveAsync();
+            try
+            {
+                await _unitOfWork.SaveAsync();
+            }
+            catch (Exception e)
+            {
+                var b = e;
+            }
 
             return Ok();
         }

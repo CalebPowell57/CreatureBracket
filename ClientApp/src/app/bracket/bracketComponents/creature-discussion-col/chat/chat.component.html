@@ -8,7 +8,7 @@
           <div class="verticalContainer">
             <div>
               <span class="chat-user" *ngIf="chatMessage.userId.toString().toUpperCase() !== userId.toString().toUpperCase()">{{chatMessage.user}}</span>
-              <span class="chat-date-time">{{chatMessage.systemDateTime | date:"longDate" }} {{chatMessage.systemDateTime | date:"shortTime" }}</span>
+              <span class="chat-date-time">{{chatMessage.systemDateTime | date:"longDate" }} at {{chatMessage.systemDateTime | date:"shortTime" }}</span>
             </div>
             {{chatMessage.message}}
           </div>

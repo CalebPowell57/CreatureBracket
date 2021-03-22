@@ -23,13 +23,11 @@ export class SingleEliminationTreeComponent implements OnChanges {
           return round;
         }
       });
-      console.log(this.rounds);
       this.final = this.tournament.rounds.filter(round => {
         if (round.matchups.length === 1) {
           return round
         }
       }).shift();
-      console.log(this.final);
     }
   }
 }
