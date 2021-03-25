@@ -1,6 +1,6 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-8" [ngStyle]="bracketStyle">
+<div class="container-fluid d-flex h-100 flex-column">
+  <div class="row h-100">
+    <div class="col-8 h-100" [ngStyle]="bracketStyle">
       <!--Column holds bracket component-->
       <ng-container>
         <ngtt-single-elimination-tree [tournament]="bracket"
@@ -66,9 +66,9 @@
         </div>
       </div>
     </div>
-    <div [ngClass]="contentColumnCommand"  class="col-3 contentDiscussionCol">
+    <div [ngClass]="contentColumnCommand"  class="col-3 contentDiscussionCol ">
       <!--Column holds creature info/discussion components-->
-         <app-creature-discussion-col [selectedAnimationClass]="selectedAnimationClass" [selectedComponent]="selectedComponent" [passMatch]="passMatch" [isGlobal]="isGlobal"></app-creature-discussion-col>
+         <app-creature-discussion-col  [selectedAnimationClass]="selectedAnimationClass" [selectedComponent]="selectedComponent" [passMatch]="passMatch" [isGlobal]="isGlobal"></app-creature-discussion-col>
       </div>
   </div>
 </div>

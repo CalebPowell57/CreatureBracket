@@ -97,19 +97,27 @@
 
 /*CreatureInfo/Discussion Column*/
 
-.contentDiscussionCol {
+/*.contentDiscussionCol, .app-creature-discussion-col {
   position: fixed;
   width: 30%;
   right: 0px;
   top: 55px;
-  height: 100%;
+  height:inherit;
+  overflow: hidden;
+  background-color: #141414;
+}*/
+.contentDiscussionCol, .app-creature-discussion-col {
+  position: fixed;
+  top: 56px;
+  right: 0px;
+  bottom: 0px;
   background-color: #141414;
 }
 
-.closeColumn{
-    animation-name:fadeOutRight;
-    animation-duration:1s;
-    animation-fill-mode:forwards;
+.closeColumn {
+  animation-name: fadeOutRight;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
 }
 .init {
   animation-name: fadeInRight;
