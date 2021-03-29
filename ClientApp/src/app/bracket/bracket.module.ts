@@ -29,7 +29,7 @@ import { UserBracketComponent } from './user-bracket/user-bracket.component';
     FormsModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
-      { path: 'user-bracket', component: UserBracketComponent}
+      { path: 'user-bracket', component: UserBracketComponent }//add user-bracket.guard
       ])
     ],
   exports: [

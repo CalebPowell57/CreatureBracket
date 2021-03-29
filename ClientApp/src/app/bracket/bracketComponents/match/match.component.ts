@@ -12,7 +12,7 @@ export class MatchComponent {
 
   @Input() matchup: any;
 
-  private creatureVotedForId: string;
+  creatureVotedForId: string;
 
   public constructor(
     private matchService: MatchService,

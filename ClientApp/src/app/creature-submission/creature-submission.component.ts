@@ -39,7 +39,7 @@ export class CreatureSubmissionComponent {
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
   }
-  imageLoaded(image: HTMLImageElement) {
+  imageLoaded() {
     this.showCropper = true;
   }
   cropperReady() {

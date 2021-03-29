@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { EStatus } from '../interfaces/bracket.interface';
-import { AuthenticationService } from '../shared/authentication.service';
 import { GlobalBracketService } from '../shared/global-bracket.service';
 
 @Component({
@@ -13,13 +11,12 @@ export class NavMenuComponent {
   showCreatureApproval = true;
 
   constructor(
-    private authenticationService: AuthenticationService,
     private bracketService: GlobalBracketService) { }
 
   ngOnInit() {
-    this.bracketService.activeBracket().subscribe(x => {
-      this.showCreatureApproval = x.status === EStatus.Open;//add permissions check as well
-    });
+    //this.bracketService.activeBracket().subscribe(x => {
+    //  this.showCreatureApproval = x.status === EStatus.Open;//add permissions check as well
+    //});
   }
 
   collapse() {

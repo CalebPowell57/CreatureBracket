@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CreatureBracket.Controllers
 {
-    [Authorize(Policy = Constants.AuthPolicyUserCredentials)]
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class CreatureController : ControllerBase

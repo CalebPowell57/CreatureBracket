@@ -9,7 +9,7 @@ using static CreatureBracket.Misc.Constants;
 
 namespace CreatureBracket.Controllers
 {
-    [Authorize(Policy = Constants.AuthPolicyUserCredentials)]
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class CreatureSubmissionController : ControllerBase
