@@ -73,11 +73,18 @@ export class BracketComponent {
 
       this.passMatch.next(matchup);
     }
-    else if (this.isGlobal || (!this.isGlobal && matchup.creature1 !== null && matchup.creature2 !== null)) {
-      this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, undefined);
-
-      this.passMatch.next(matchup);
+    else if (!this.isGlobal && matchup.creature1 !== null && matchup.creature2 !== null) {
+      if (matchup.creature1.winner) {
+        this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, matchup.creature1.creatureId);
+      }
+      else if (matchup.creature2.winner) {
+        this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, matchup.creature2.creatureId);
+      }
     }
+    else {
+      this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, undefined);
+    }
+    this.passMatch.next(matchup);
 
     this.cdr.detectChanges();
   }
@@ -172,9 +179,9 @@ export class BracketComponent {
     });
   }
 
-  public discussionCreatureColumnState(contentRequested: string, requestedMathId: string, CreatureVotedFor: string) {
+  public discussionCreatureColumnState(contentRequested: string, requestedMatchId: string, CreatureVotedFor: string) {
     if (this.selectedComponent === contentRequested && contentRequested != "CreatureInformation" ||
-      this.matchUpId === requestedMathId && requestedMathId != undefined && this.creatureVotedForClassSelection === CreatureVotedFor) {
+      this.matchUpId === requestedMatchId && requestedMatchId != undefined && this.creatureVotedForClassSelection === CreatureVotedFor) {
       this.contentColumnCommand = "closeColumn";
       this.selectedAnimationClass = "closeColumn";
       this.colActive = false;
@@ -188,16 +195,16 @@ export class BracketComponent {
       this.contentColumnCommand = contentRequested;
       this.selectedAnimationClass = undefined;
       this.isColInit = false;
-      this.matchUpId = requestedMathId;
+      this.matchUpId = requestedMatchId;
     }
     else if (this.isColInit === false ||
-      this.selectedAnimationClass === "init" && this.matchUpId != undefined && requestedMathId != undefined) {
+      this.selectedAnimationClass === "init" && this.matchUpId != undefined && requestedMatchId != undefined) {
       this.colActive = true;
       this.contentColumnCommand = "init";
       this.selectedComponent = contentRequested;
       this.selectedAnimationClass = "init";
       this.isColInit = true;
-      this.matchUpId = requestedMathId;
+      this.matchUpId = requestedMatchId;
       this.creatureVotedForClassSelection = CreatureVotedFor;
     }
     else {
@@ -205,7 +212,7 @@ export class BracketComponent {
       this.contentColumnCommand = "content";
       this.selectedComponent = contentRequested;
       this.selectedAnimationClass = contentRequested;
-      this.matchUpId = requestedMathId;
+      this.matchUpId = requestedMatchId;
       this.creatureVotedForClassSelection = CreatureVotedFor;
     }
   }

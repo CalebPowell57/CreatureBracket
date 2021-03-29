@@ -1,5 +1,5 @@
-<div class="container-fluid">
-  <div class="row h-75">
+<div class="container-fluid h-100" style="padding-top:15px">
+  <div class="row chat scroll d-flex flex-column-reverse">
     <div id="chatScroll" class="col-12 scroll d-flex flex-column-reverse">
       <ul>
         <li *ngFor="let chatMessage of chatMessages"
@@ -16,7 +16,7 @@
       </ul>
     </div>
   </div>
-  <div class="row h-25 mt-auto">
+  <div class="row mt-auto">
     <div class="col-12">
       <form #form="ngForm"
             (ngSubmit)="onSubmit(form)">

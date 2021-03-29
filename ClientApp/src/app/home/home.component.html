@@ -1,11 +1,13 @@
-<div class="container-fluid ContainerNoPadding">
-  <div class="col-12 ColNoPadding">
-    <app-creature-submission *ngIf="showCreatureSubmission"></app-creature-submission>
+<div class="container-fluid ContainerNoPadding h-100">
+  <div class="row h-100">
+    <div class="col-12 ColNoPadding h-100">
+      <app-creature-submission *ngIf="showCreatureSubmission"></app-creature-submission>
 
-    <app-bracket *ngIf="showGlobalBracket" [isGlobal]="true"></app-bracket>
+      <app-bracket *ngIf="showGlobalBracket" [isGlobal]="true"></app-bracket>
 
-    <app-standings *ngIf="showFinalStandings"></app-standings>
+      <app-standings *ngIf="showFinalStandings"></app-standings>
 
-    <h2 *ngIf="showNoActiveBracket">Wait for a tournament organizer to start the bracket!</h2>
+      <h2 *ngIf="showNoActiveBracket">Wait for a tournament organizer to start the bracket!</h2>
+    </div>
   </div>
 </div>

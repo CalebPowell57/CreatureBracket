@@ -15,15 +15,20 @@ export class UserMatchComponent {
   public constructor() { }
 
   ngOnInit() {
-    if (this.matchup.vote) {
-      this.creatureVotedForId = this.matchup.vote.creatureId;
+    if (this.matchup) {
+      if (this.matchup.creature1 != null && this.matchup.creature1.winner ) {
+        this.creatureVotedForId = this.matchup.creature2.creatureId;
+      }
+      else if (this.matchup.creature2 != null && this.matchup.creature2.winner) {
+        this.creatureVotedForId = this.matchup.creature2.creatureId;
+      }
     }
   }
 
   select(creature: any) {
     this.creatureVotedForId = creature.creatureId;
     creature.winner = true;
-    this.matchup.unset = false;
+    this.matchup.unset = true;
 
     let loser = this.matchup.creature1 === creature ? this.matchup.creature2 : this.matchup.creature1;
     loser.winner = false;

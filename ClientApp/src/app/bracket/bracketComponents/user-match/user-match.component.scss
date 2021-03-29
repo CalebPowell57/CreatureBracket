@@ -8,12 +8,13 @@
   background-color: lighten($ngtt-background-primary, 5%);
   border-radius: 6px;
   border-left: solid green 5px;
+  overflow: hidden;
 }
 
-.ngtt__match-wrapper:hover {
+/*.ngtt__match-wrapper:hover {
   cursor: pointer;
   box-shadow: 0 0 4px 4px darkslategray;
-}
+}*/
 
 .ngtt__match-wrapper.needsSelection {
   border-left: solid goldenrod 5px;
@@ -23,18 +24,18 @@
   border-left: 0;
 }
 
-.ngtt__match-wrapper.unset:hover {
+/*.ngtt__match-wrapper.unset:hover {
   box-shadow: 0 0 0px 0px transparent;
   cursor: default;
-}
+}*/
 
 .ngtt__match-wrapper .hidden {
   visibility: hidden;
 }
 
-.ngtt__match-wrapper:hover .hidden {
+/*.ngtt__match-wrapper:hover .hidden {
   visibility: visible;
-}
+}*/
 
 .ngtt__team-wrapper {
   display: flex;
@@ -82,4 +83,80 @@
 
 .ngtt__team-title.loser {
   text-decoration: line-through;
+}
+
+.checkBox:hover {
+  background-color: darkgrey;
+}
+
+.ngtt__match-wrapper:hover {
+  cursor: pointer;
+  box-shadow: 0 0 4px 4px darkslategray;
+}
+
+.ngtt__match-wrapper:hover .voteDiv {
+  animation-name: fadeInRight;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.ngtt__match-wrapper:not( :hover) .voteDiv {
+  animation-name: fadeOutRight;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.voteDiv {
+  max-height: inherit;
+  max-width: inherit;
+  box-sizing: border-box;
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeOutRight {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+}
+.checkBox {
+  border-color: darkgrey;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 25%;
+  width: 25px;
+  height: 25px;
+  margin-top: 12px;
+  margin-bottom: 11px;
+  position: absolute;
+}
+
+.checkmark {
+  position: absolute;
+  transform: rotate(45deg);
+  height: 24px;
+  width: 12px;
+  border-bottom: 7px solid green;
+  border-right: 7px solid green;
+  overflow: visible;
+  margin-left: 12px;
+  margin-top: 6px;
 }

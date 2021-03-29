@@ -2,118 +2,51 @@
 
 app-selected-match-discussion-info, app-chat {
   background-color: #141414;
-  position: fixed;
+  /*position: fixed;*/
   height: 100%;
   /*overflow-y: scroll;*/
-  padding-top: 15px;
+  padding-left:0px;
+  padding-right:0px;
 }
+
 .h1 {
   color: grey;
 }
-@keyframes fadeInDownBig {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -2000px, 0);
-    transform: translate3d(0, -2000px, 0);
-  }
 
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-@keyframes fadeInDownBig2 {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -2000px, 0);
-    transform: translate3d(0, -2000px, 0);
-  }
 
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
-
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes fadeInDown2 {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
-
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
 .Discussion {
-  animation-name: fadeInDown;
+  animation-name: fadeIn;
   animation-duration: 1s;
   animation-fill-mode: forwards;
   animation-play-state: running;
 }
-@keyframes backInDown {
-  0% {
-    -webkit-transform: translateY(-1200px) scale(0.7);
-    transform: translateY(-1200px) scale(0.7);
-    opacity: 0.7;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
 
-  80% {
-    -webkit-transform: translateY(0px) scale(0.7);
-    transform: translateY(0px) scale(0.7);
-    opacity: 0.7;
-  }
-
-  100% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
+  to {
     opacity: 1;
   }
 }
+
 
 .CreatureInformation {
-  animation-name: fadeInDown2;
+  animation-name: fadeIn2;
   animation-duration: 1s;
   animation-fill-mode: forwards;
   animation-play-state: running;
 }
-@keyframes backInDown2 {
-  0% {
-    -webkit-transform: translateY(-1200px) scale(0.7);
-    transform: translateY(-1200px) scale(0.7);
-    opacity: 0.7;
+@keyframes fadeIn2 {
+  from {
+    opacity: 0;
   }
 
-  80% {
-    -webkit-transform: translateY(0px) scale(0.7);
-    transform: translateY(0px) scale(0.7);
-    opacity: 0.7;
-  }
-
-  100% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
+  to {
     opacity: 1;
   }
 }
+
 
 .init {
   animation-name: fadeInRight;
@@ -151,17 +84,7 @@ app-selected-match-discussion-info, app-chat {
   }
 }
 
-@keyframes zoomIn {
-  from {
-    opacity: 0;
-    -webkit-transform: scale3d(0.3, 0.3, 0.3);
-    transform: scale3d(0.3, 0.3, 0.3);
-  }
 
-  50% {
-    opacity: 1;
-  }
-}
 
 
 
