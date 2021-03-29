@@ -6,11 +6,13 @@ import { CreatureApprovalService } from './creature-approval.service';
 
 @Component({
   selector: 'app-creature-approval',
-  templateUrl: './creature-approval.component.html'
+  templateUrl: './creature-approval.component.html',
+  styleUrls: ['./creature-approval.component.scss'],
 })
 export class CreatureApprovalComponent {
   pendingSubmissions: ICreatureSubmission[];
   approvedSubmissions: ICreatureSubmission[];
+  Pending_ApprovedSubmissions: ICreatureSubmission[];
 
   constructor(
     private router: Router,
@@ -20,10 +22,10 @@ export class CreatureApprovalComponent {
 
   ngOnInit() {
     this.creatureApprovalService.getSubmissionsById(eCreatureSubmissionStatus.Pending).subscribe(x => {
-      this.pendingSubmissions = x;
+      this.Pending_ApprovedSubmissions = x;
     });
     this.creatureApprovalService.getSubmissionsById(eCreatureSubmissionStatus.Approved).subscribe(x => {
-      this.approvedSubmissions = x;
+      this.Pending_ApprovedSubmissions = this.Pending_ApprovedSubmissions.concat(x);
     });
   }
 

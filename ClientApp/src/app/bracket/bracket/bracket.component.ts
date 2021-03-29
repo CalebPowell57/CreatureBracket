@@ -70,22 +70,24 @@ export class BracketComponent {
   public onMatchClick(matchup: any) {
     if (matchup.vote != null) {
       this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, matchup.vote.creatureId);
-
-      this.passMatch.next(matchup);
     }
-    else if (!this.isGlobal && matchup.creature1 !== null && matchup.creature2 !== null) {
-      if (matchup.creature1.winner) {
-        this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, matchup.creature1.creatureId);
+    else if (matchup.creature1 !== null && matchup.creature2 !== null) {
+      if (!this.isGlobal) {
+        if (matchup.creature1.winner) {
+          this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, matchup.creature1.creatureId);
+        }
+        else if (matchup.creature2.winner) {
+          this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, matchup.creature2.creatureId);
+        }
+        else {
+          this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, undefined);
+        }
       }
-      else if (matchup.creature2.winner) {
-        this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, matchup.creature2.creatureId);
+      else {
+        this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, undefined);
       }
-    }
-    else {
-      this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, undefined);
     }
     this.passMatch.next(matchup);
-
     this.cdr.detectChanges();
   }
 

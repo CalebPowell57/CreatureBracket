@@ -1,0 +1,110 @@
+.creatureImage {
+  border-style: ridge;
+  border-color: black;
+  border-width: 5px;
+  border-radius: 50%;
+  width: 45%;
+  z-index:-1;
+
+}
+.SubmittedCreatures {
+  padding-top: 10px;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+.imgContainer{
+    position:relative;
+}
+.ApprovedIcon {
+  background-color: #92c353;
+  border-color: #1f1f1f;
+  border-width:5px;
+  border-style:solid;
+  border-radius: 50%;
+  width: 12%;
+  height: 26%;
+  position: absolute;
+  bottom: 3%;
+  right: 31%;
+}
+.ApprovedIcon:hover {
+  cursor: pointer;
+}
+.ApprovedIcon:hover .tooltiptext, .PendingIcon:hover .tooltiptext {
+  visibility: visible;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: -25px;
+  left: 105%;
+}
+
+
+.PendingIcon {
+  background-color: black;
+  border-color: #1f1f1f;
+  border-width: 5px;
+  border-style: solid;
+  border-radius: 50%;
+  width: 12%;
+  height: 26%;
+  position: absolute;
+  bottom: 3%;
+  right: 31%;
+}
+.PendingIcon:hover {
+  cursor: pointer;
+}
+.checkmark {
+  position: absolute;
+  transform: rotate(45deg);
+  height: 50%;
+  width: 25%;
+  border-bottom: 2px solid #201f1f;
+  border-right: 2px solid #201f1f;
+  overflow: visible;
+  bottom: 30%;
+  left: 40%;
+}
+
+
+.pendingImage{
+    position:absolute;
+    height:95%;
+    left:4%;
+    bottom:10%;
+
+}
+

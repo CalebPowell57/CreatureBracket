@@ -5,24 +5,18 @@ a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
-  color:grey;
+  color: whitesmoke;
 }
-/*.container-fluid {
-  padding: 0px;
-}
-*/
 html {
   font-size: 14px;
 }
 
-/*@media () {
-  html {
-    font-size: 16px;
-  }
-}*/
-
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+.nav-link {
+  /*color: #afb0b8;*/
+  color: whitesmoke;
 }
 
 
