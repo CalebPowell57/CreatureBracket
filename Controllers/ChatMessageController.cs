@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CreatureBracket.Controllers
 {
-    [Authorize(Policy = Constants.AuthPolicyUserCredentials)]
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class ChatMessageController : ControllerBase

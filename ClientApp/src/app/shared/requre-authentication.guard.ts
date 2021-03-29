@@ -1,23 +1,29 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { AuthenticationService } from './authentication.service';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { MsalService } from '@azure/msal-angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RequireAuthenticationGuard implements CanActivate {
   constructor(private router: Router,
-    private authenticationService: AuthenticationService) { }
+    private authService: MsalService) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.authenticationService.getAccessToken()) {
-      return true;
-    } else {
-      this.router.navigate(['/login']);
-      return false;
-    }
+    state: RouterStateSnapshot): Promise<boolean> {
+    return this.authService.acquireTokenSilent({ scopes: ["profile", "openid"] })
+      .then(tokenResponse => {
+        return true;
+      })
+      .catch(error => {
+        if (error.errorCode === 'user_login_error') {
+          this.router.navigate(['/unauthorized']);
+        } else {
+          console.error(error);
+        }
+
+        return false;
+      });
   }
 }

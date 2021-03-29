@@ -3,15 +3,12 @@ using CreatureBracket.Misc;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Text;
+using Microsoft.Identity.Web;
 
 namespace CreatureBracket
 {
@@ -39,55 +36,23 @@ namespace CreatureBracket
                 options.UseSqlite("Data Source=main.db");
             });
 
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromDays(1);
-            });
-
-            //add jwt authentication
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                    .AddJwtBearer(options =>
-                    {
-                        options.TokenValidationParameters = new TokenValidationParameters
-                        {
-                            ValidateIssuer = true,
-                            ValidateAudience = true,
-                            ValidateLifetime = true,
-                            ValidateIssuerSigningKey = true,
-                            ValidIssuer = Constants.SecurityIssuer,
-                            ValidAudiences = Constants.JwtAudiences,
-                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Constants.SecurityKey))
-                        };
-                    });
-
+                    .AddMicrosoftIdentityWebApi(Configuration);
             //add authorization policies
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy(Constants.AuthPolicyUserCredentials, policy =>
-                                  policy.RequireClaim(Constants.AuthTypeClaim, Constants.AuthTypeUserCredentials));
-            });
-
-            //add authorization info
-            services.AddScoped<JwtInfo>(provider =>
-            {
-                var accessor = provider.GetService<IHttpContextAccessor>();
-
-                var jwtInfo = new JwtInfo();
-
-                if (accessor != null && accessor.HttpContext != null)
-                {
-                    jwtInfo.Configure(accessor.HttpContext.User);
-                }
-
-                return jwtInfo;
-            });
+            services.AddAuthorization();
 
             services.AddSignalR();
 
             services.AddScoped<UnitOfWork>();
             services.AddSingleton<EmailService>();
             services.AddHostedService<BattleService>();
+
+            services.AddCors(o => o.AddPolicy("default", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -110,6 +75,8 @@ namespace CreatureBracket
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseCors("default");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

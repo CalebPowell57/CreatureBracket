@@ -13,6 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureAD.UI" Version="3.1.12" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.12" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.3" />
@@ -21,6 +22,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Identity.Web" Version="1.8.1" />
+    <PackageReference Include="Microsoft.Identity.Web.UI" Version="1.8.1" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.8.0" />
     <PackageReference Include="SendGrid" Version="9.22.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
@@ -59,8 +62,6 @@
     <None Remove="ClientApp\src\app\interfaces\UserMatchupDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\UserRoundDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\verifyAccountDTO.interface.ts" />
-    <None Remove="ClientApp\src\app\register\register.service.ts" />
-    <None Remove="ClientApp\src\app\shared\authentication.service.ts" />
     <None Remove="ClientApp\src\app\shared\global-bracket.service.ts" />
     <None Remove="ClientApp\src\app\shared\http-request.interceptor.ts" />
     <None Remove="ClientApp\src\app\shared\requre-authentication.guard.ts" />
@@ -68,6 +69,7 @@
     <None Remove="ClientApp\src\app\standings\standings.guard.ts" />
     <None Remove="ClientApp\src\app\standings\standings.service.ts" />
     <None Remove="ClientApp\src\app\bracket\user-bracket\user-bracket.guard.ts" />
+    <None Remove="ClientApp\src\app\unauthorized\unauthorized.guard.ts" />
     <None Remove="ClientApp\src\app\verify-account\verify-account.guard.ts" />
     <None Remove="ClientApp\src\app\verify-account\verify-account.service.ts" />
   </ItemGroup>
@@ -117,16 +119,10 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\user.interface.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\register\register.service.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\shared\chat.service.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\shared\global-bracket.service.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="ClientApp\src\app\shared\authentication.service.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\shared\http-request.interceptor.ts">
@@ -140,6 +136,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\standings\standings.guard.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\unauthorized\unauthorized.guard.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\verify-account\verify-account.service.ts">
