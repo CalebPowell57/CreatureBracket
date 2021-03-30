@@ -70,9 +70,6 @@
     <None Remove="ClientApp\src\app\standings\standings.guard.ts" />
     <None Remove="ClientApp\src\app\standings\standings.service.ts" />
     <None Remove="ClientApp\src\app\bracket\user-bracket\user-bracket.guard.ts" />
-    <None Remove="ClientApp\src\app\unauthorized\unauthorized.guard.ts" />
-    <None Remove="ClientApp\src\app\verify-account\verify-account.guard.ts" />
-    <None Remove="ClientApp\src\app\verify-account\verify-account.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -139,15 +136,6 @@
     <TypeScriptCompile Include="ClientApp\src\app\standings\standings.guard.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="ClientApp\src\app\unauthorized\unauthorized.guard.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="ClientApp\src\app\verify-account\verify-account.service.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="ClientApp\src\app\verify-account\verify-account.guard.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\bracket\user-bracket\user-bracket.guard.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -155,6 +143,9 @@
 
   <ItemGroup>
     <None Update="ClientApp\src\assets\chat-bubble.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ClientApp\src\assets\lock.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ClientApp\src\assets\zoom-in-White.png">

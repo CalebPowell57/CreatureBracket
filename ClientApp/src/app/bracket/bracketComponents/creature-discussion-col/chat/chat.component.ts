@@ -13,6 +13,7 @@ import { ChatService } from '../../../../shared/chat.service';
 export class ChatComponent {
   chatMessages: IChatMessage[];
   chatText = '';
+  accountId = this.authService.getAccount().accountIdentifier;
 
   constructor(private chatService: ChatService,
               private authService: MsalService) {

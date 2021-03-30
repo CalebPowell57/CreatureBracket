@@ -10,7 +10,6 @@ import { MsalInterceptor, MsalModule } from '@azure/msal-angular';
 import { RequireAuthenticationGuard } from './shared/requre-authentication.guard';
 import { StandingsGuard } from './standings/standings.guard';
 import { UserBracketGuard } from './bracket/user-bracket/user-bracket.guard';
-import { VerifyAccountGuard } from './verify-account/verify-account.guard';
 import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.guard';
 import { CreatureApprovalGuard } from './creature-approval/creature-approval.guard';
 
@@ -26,11 +25,7 @@ import { CreatureSubmissionComponent } from './creature-submission/creature-subm
 import { BracketModule } from './bracket/bracket.module';
 import { NoPermissionsComponent } from './no-permissions/no-permissions.component';
 import { CreatureApprovalComponent } from './creature-approval/creature-approval.component';
-import { VerifyAccountComponent } from './verify-account/verify-account.component';
-import { SuccessfulAccountCreationComponent } from './successful-account-creation/successful-account-creation.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
-import { UnauthorizedGuard } from './unauthorized/unauthorized.guard';
 import { SeedingViewComponent } from './seeding-view/seeding-view.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
@@ -46,9 +41,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     BracketManagerComponent,
     NoPermissionsComponent,
     CreatureApprovalComponent,
-    VerifyAccountComponent,
-    UnauthorizedComponent,
-    SuccessfulAccountCreationComponent,
     SeedingViewComponent
   ],
   imports: [
@@ -63,12 +55,9 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       positionClass: 'toast-bottom-right'
     }),
     RouterModule.forRoot([
-      { path: 'successful-account-creation', component: SuccessfulAccountCreationComponent },
-      { path: 'verify-account', component: VerifyAccountComponent, canActivate: [VerifyAccountGuard] },
-      { path: 'unauthorized', component: UnauthorizedComponent, canActivate: [UnauthorizedGuard] },
       { path: 'current-standings', component: StandingsComponent, canActivate: [StandingsGuard, RequireAuthenticationGuard] },
-      { path: 'creature-approval', component: CreatureApprovalComponent, canActivate: [/*RequireSuperPermissionsGuard, */RequireAuthenticationGuard, CreatureApprovalGuard] },
-      { path: 'bracket-manager', component: BracketManagerComponent, canActivate: [/*RequireSuperPermissionsGuard, */RequireAuthenticationGuard] },
+      { path: 'creature-approval', component: CreatureApprovalComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard, CreatureApprovalGuard] },
+      { path: 'bracket-manager', component: BracketManagerComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard] },
       { path: 'standings', component: StandingsComponent, canActivate: [RequireAuthenticationGuard] },
       { path: 'no-permissions', component: NoPermissionsComponent },
       { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [RequireAuthenticationGuard] },
