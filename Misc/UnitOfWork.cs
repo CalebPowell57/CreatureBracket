@@ -12,7 +12,6 @@ namespace CreatureBracket.Misc
         public BracketRepository BracketRepository { get; private set; }
         public CreatureSubmissionRepository CreatureSubmissionRepository { get; private set; }
         public UserBracketRepository UserBracketRepository { get; private set; }
-        public UserRepository UserRepository { get; private set; }
         public ChatMessageRepository ChatMessageRepository { get; private set; }
         public RegistryRepository RegistryRepository { get; private set; }
         public RoundRepository RoundRepository { get; private set; }
@@ -26,7 +25,6 @@ namespace CreatureBracket.Misc
             BracketRepository = new BracketRepository(_context);
             CreatureSubmissionRepository = new CreatureSubmissionRepository(_context);
             UserBracketRepository = new UserBracketRepository(_context);
-            UserRepository = new UserRepository(_context);
             ChatMessageRepository = new ChatMessageRepository(_context);
             RegistryRepository = new RegistryRepository(_context);
             RoundRepository = new RoundRepository(_context);

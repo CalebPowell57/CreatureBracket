@@ -15,7 +15,7 @@ namespace CreatureBracket.Repositories
         {
             var chatMessageDTOs = new List<ChatMessageDTO>();
 
-            var chatMessages = await _context.ChatMessages.Include(x => x.User).ToListAsync();
+            var chatMessages = await _context.ChatMessages.ToListAsync();
 
             foreach(var chatMessage in chatMessages)
             {
@@ -24,8 +24,8 @@ namespace CreatureBracket.Repositories
                     ChatMessageId = chatMessage.Id,
                     Message = chatMessage.Message,
                     SystemDateTime = chatMessage.SystemDateTime,
-                    User = $"{chatMessage.User.FirstName} {chatMessage.User.LastName}",
-                    UserId = chatMessage.UserId
+                    User = "Test Test",//$"{chatMessage.User.FirstName} {chatMessage.User.LastName}",//we need to store user info somehow
+                    AccountId = chatMessage.AccountId
                 };
 
                 chatMessageDTOs.Add(chatMessageDTO);

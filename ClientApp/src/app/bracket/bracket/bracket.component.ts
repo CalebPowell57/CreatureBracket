@@ -1,6 +1,7 @@
 import { Component, Input, Output, SimpleChange, EventEmitter, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MsalService } from '@azure/msal-angular';
 import { Guid } from 'guid-typescript';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
@@ -40,7 +41,8 @@ export class BracketComponent {
     private bracketService: GlobalBracketService,
     private router: Router,
     private cdr: ChangeDetectorRef,
-    private toastrService: ToastrService) { }
+    private toastrService: ToastrService,
+    private authService: MsalService) { }
 
   ngOnInit() {
     if (this.isGlobal) {
@@ -127,9 +129,11 @@ export class BracketComponent {
 
   userBracketSaveClick() {
     //this.userBracketSaveEvent.emit("Save Clicked");
+    const account = this.authService.getAccount();
+
     let bracket: IUserBracketDTO = {
       rounds: [],
-      userId: Guid.parse('54E715D0-2B42-4B19-A36B-E4ADA9DC2594').toString()
+      accountId: account.accountIdentifier
     };
 
     this.bracket.rounds.forEach(x => {

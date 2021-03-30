@@ -37,14 +37,14 @@ namespace CreatureBracket.Repositories
 
             var standings = new List<StandingsItemDTO>();
 
-            var userBrackets = await _context.UserBrackets.Include(x => x.User).Where(x => x.BracketId == activeBracket.Id).ToListAsync();
+            var userBrackets = await _context.UserBrackets.Where(x => x.BracketId == activeBracket.Id).ToListAsync();
 
             foreach (var userBracket in userBrackets)
             {
                 var standingItem = new StandingsItemDTO
                 {
-                    FirstName = userBracket.User.FirstName,
-                    LastName = userBracket.User.LastName,
+                    FirstName = "",//we need to store users names or something
+                    LastName = "",//we need to store users names or something
                     Points = 0,
                     Rank = 1
                 };
@@ -131,7 +131,7 @@ namespace CreatureBracket.Repositories
             _context.Matchups.AddRange(matchups);
         }
 
-        public async Task<BracketResponseDTO> GlobalAsync(Guid userId)
+        public async Task<BracketResponseDTO> GlobalAsync(Guid accountId)
         {
             var active = await ActiveAsync();
 
@@ -143,45 +143,47 @@ namespace CreatureBracket.Repositories
                                                 .ThenInclude(x => x.Votes)
                                               .Where(x => x.BracketId == active.Id).ToListAsync();
 
-            //var round1 = rounds.SingleOrDefault(x => x.Rank == 1);
-            //var round1DTO = RoundToDTO(round1);
+            var round1 = rounds.SingleOrDefault(x => x.Rank == 1);
+            var round1Tuple = RoundToDTO(round1, accountId);
+            var round1DTO = round1Tuple.Item1;
 
-            //var round2 = rounds.SingleOrDefault(x => x.Rank == 2);
-            //var round2DTO = RoundToDTO(round2);
+            var round2 = rounds.SingleOrDefault(x => x.Rank == 2);
+            var round2Tuple = RoundToDTO(round2, accountId, round1Tuple.Item2);
+            var round2DTO = round2Tuple.Item1;
 
             var round3 = rounds.SingleOrDefault(x => x.Rank == 3);
-            var round3Tuple = RoundToDTO(round3, userId);
+            var round3Tuple = RoundToDTO(round3, accountId, round2Tuple.Item2);
             var round3DTO = round3Tuple.Item1;
 
             var round4 = rounds.SingleOrDefault(x => x.Rank == 4);
-            var round4Tuple = RoundToDTO(round4, userId, round3Tuple.Item2);
+            var round4Tuple = RoundToDTO(round4, accountId, round3Tuple.Item2);
             var round4DTO = round4Tuple.Item1;
 
-            var round5 = rounds.SingleOrDefault(x => x.Rank == 5);
-            var round5Tuple = RoundToDTO(round5, userId, round4Tuple.Item2);
-            var round5DTO = round5Tuple.Item1;
+            //var round5 = rounds.SingleOrDefault(x => x.Rank == 5);
+            //var round5Tuple = RoundToDTO(round5, accountId, round4Tuple.Item2);
+            //var round5DTO = round5Tuple.Item1;
 
-            var round6 = rounds.SingleOrDefault(x => x.Rank == 6);
-            var round6Tuple = RoundToDTO(round6, userId, round5Tuple.Item2);
-            var round6DTO = round6Tuple.Item1;
+            //var round6 = rounds.SingleOrDefault(x => x.Rank == 6);
+            //var round6Tuple = RoundToDTO(round6, accountId, round5Tuple.Item2);
+            //var round6DTO = round6Tuple.Item1;
 
             var result = new BracketResponseDTO
             {
                 Rounds = new List<RoundResponseDTO>
                 {
-                    //round1DTO,
-                    //round2DTO,
+                    round1DTO,
+                    round2DTO,
                     round3DTO,
                     round4DTO,
-                    round5DTO,
-                    round6DTO
+                    //round5DTO,
+                    //round6DTO
                 }
             };
 
             return result;
         }
 
-        private Tuple<RoundResponseDTO, int> RoundToDTO(Round round, Guid userId, int? lastRoundCreatureCount = null)
+        private Tuple<RoundResponseDTO, int> RoundToDTO(Round round, Guid accountId, int? lastRoundCreatureCount = null)
         {
             var roundDTO = new RoundResponseDTO
             {
@@ -197,7 +199,7 @@ namespace CreatureBracket.Repositories
 
                 foreach (var matchup in matchups)
                 {
-                    var vote = matchup.Votes.SingleOrDefault(x => x.UserId == userId);
+                    var vote = matchup.Votes.SingleOrDefault(x => x.AccountId == accountId);
 
                     var matchupDTO = new MatchupResponseDTO
                     {

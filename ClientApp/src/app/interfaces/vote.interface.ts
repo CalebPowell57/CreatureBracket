@@ -1,6 +1,6 @@
 export interface IVote {
   Id: string;
-  UserId: string;
+  AccountId: string;
   MatchupId: string;
   CreatureId: string;
 }

@@ -15,8 +15,6 @@ namespace CreatureBracket.Misc
         public DbSet<UserMatchup> UserMatchups { get; set; }
         public DbSet<CreatureSubmission> CreatureSubmissions { get; set; }
         public DbSet<Creature> Creatures { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<UserVerifyRequest> UserVerifyRequests { get; set; }
         public DbSet<ChatMessage> ChatMessages { get; set; }
         public DbSet<RegistryItem> Registry { get; set; }
         public DbSet<Vote> Votes { get; set; }
@@ -32,12 +30,8 @@ namespace CreatureBracket.Misc
                             .HasIndex(x => x.Key)
                             .IsUnique();
 
-            modelBuilder.Entity<User>()
-                            .HasIndex(x => x.EmailAddress)
-                            .IsUnique();
-
             modelBuilder.Entity<Vote>()
-                            .HasIndex(x => new { x.MatchupId, x.UserId })
+                            .HasIndex(x => new { x.MatchupId, x.AccountId })
                             .IsUnique();
         }
     }

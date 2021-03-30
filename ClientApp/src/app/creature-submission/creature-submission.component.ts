@@ -25,6 +25,8 @@ export class CreatureSubmissionComponent {
     this.creatureSubmissionService.create({ name: this.input.name, bio: this.input.bio, image: this.croppedImage })
       .subscribe(
         () => {
+          this.toastrService.success(`${this.input.name} has been submitted!`, 'Success');
+
           this.input.name = "";
           this.input.bio = "";
           this.croppedImage = "";
@@ -37,7 +39,17 @@ export class CreatureSubmissionComponent {
     this.imageChangedEvent = event;
   }
   imageCropped(event: ImageCroppedEvent) {
-    this.croppedImage = event.base64;
+    const img = new Image();
+    img.src = event.base64;
+    img.onload = () => {
+      const elem = document.createElement('canvas');
+      elem.width = 200;
+      elem.height = 200;
+      const ctx = elem.getContext('2d');
+      ctx.drawImage(img, 0, 0, 200, 200);
+      const data = ctx.canvas.toDataURL();
+      this.croppedImage = data;
+    }
   }
   imageLoaded() {
     this.showCropper = true;

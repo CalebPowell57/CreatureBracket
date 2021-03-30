@@ -49,7 +49,7 @@ export class BracketManagerComponent {
 
       this.filteredBrackets = this.brackets;
 
-      this.selectedBracket = this.filteredBrackets[0];
+      this.selectedBracket = this.filteredBrackets.length ? this.filteredBrackets[0] : null;
 
       this.isAddingBracket = this.filteredBrackets.length == 0;
     }, error => console.error(error));
@@ -59,7 +59,10 @@ export class BracketManagerComponent {
     this.showForm = selected !== null;
 
     this._selectedBracket = selected;
-    this.input = { title: this._selectedBracket.title, creatureEntryDeadline: this._selectedBracket.creatureEntryDeadline };
+
+    if (this._selectedBracket) {
+      this.input = { title: this._selectedBracket.title, creatureEntryDeadline: this._selectedBracket.creatureEntryDeadline };
+    }
 
     this.selectedBracketText = this.selectedBracket ? this.selectedBracket.title : 'No bracket selected';
   }

@@ -78,9 +78,9 @@ namespace CreatureBracket.Controllers
         }
 
         [HttpGet("Global")]
-        public async Task<IActionResult> Global([FromQuery] Guid userId)
+        public async Task<IActionResult> Global([FromQuery] Guid accountId)
         {
-            var response = await _unitOfWork.BracketRepository.GlobalAsync(userId);
+            var response = await _unitOfWork.BracketRepository.GlobalAsync(accountId);
 
             return Ok(response);
         }
