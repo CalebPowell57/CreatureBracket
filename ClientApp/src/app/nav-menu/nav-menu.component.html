@@ -20,10 +20,10 @@
               <li class="nav-item"
                   [routerLinkActive]="['link-active']"
                   [routerLinkActiveOptions]="{ exact: true }">
-                <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
+                <a class="nav-link" [routerLink]="['/']">Home</a>
               </li>
-              <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="showBracketManager">
-                <a class="nav-link text-dark" [routerLink]="['/bracket-manager']">Bracket Manager</a>
+              <li class="nav-item" [routerLinkActive]="['link-active']">
+                <a class="nav-link" [routerLink]="['/bracket-manager']">Bracket Manager</a>
               </li>
               <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="showCreatureApproval">
                 <a class="nav-link" [routerLink]="['/creature-approval']">Creature Approval</a>
