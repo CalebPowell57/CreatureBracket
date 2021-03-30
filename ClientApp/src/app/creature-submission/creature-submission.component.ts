@@ -8,7 +8,8 @@ import { eCreatureSubmissionStatus, ICreatureSubmission } from '../interfaces/cr
 
 @Component({
   selector: 'app-creature-submission',
-  templateUrl: './creature-submission.component.html'
+  templateUrl: './creature-submission.component.html',
+  styleUrls: ['./creature-submission.component.scss'],
 })
 export class CreatureSubmissionComponent {
   showCropper = false;
