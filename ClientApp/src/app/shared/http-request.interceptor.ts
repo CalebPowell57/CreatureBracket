@@ -13,17 +13,8 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler):
     Observable<HttpEvent<any>> {
 
-    //let token = this.authenticationService.getAccessToken();
-
-    //const headers = new HttpHeaders({
-    //  'Content-Type': 'application/json',
-    //  'Authorization': `Bearer ${token}`
-    //});
-
     req = req.clone({
-      url: `${window.origin}/api/${req.url}`/*,
-      withCredentials: true,
-      headers: headers*/
+      url: `${window.origin}/api/${req.url}`
     });
 
     return next.handle(req);

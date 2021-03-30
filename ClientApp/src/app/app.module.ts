@@ -27,6 +27,7 @@ import { NoPermissionsComponent } from './no-permissions/no-permissions.componen
 import { CreatureApprovalComponent } from './creature-approval/creature-approval.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { SeedingViewComponent } from './seeding-view/seeding-view.component';
+import { HttpErrorInterceptor } from './shared/http-error.interceptor';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -96,7 +97,12 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     provide: HTTP_INTERCEPTORS,
     useClass: HttpRequestInterceptor,
     multi: true
-  }],
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

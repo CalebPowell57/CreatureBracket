@@ -1,4 +1,5 @@
 using CreatureBracket.Hubs;
+using CreatureBracket.Middleware;
 using CreatureBracket.Misc;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -81,6 +82,9 @@ namespace CreatureBracket
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
+
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();

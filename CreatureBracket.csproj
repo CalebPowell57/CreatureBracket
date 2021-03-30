@@ -64,6 +64,7 @@
     <None Remove="ClientApp\src\app\interfaces\UserRoundDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\verifyAccountDTO.interface.ts" />
     <None Remove="ClientApp\src\app\shared\global-bracket.service.ts" />
+    <None Remove="ClientApp\src\app\shared\http-error.interceptor.ts" />
     <None Remove="ClientApp\src\app\shared\http-request.interceptor.ts" />
     <None Remove="ClientApp\src\app\shared\requre-authentication.guard.ts" />
     <None Remove="ClientApp\src\app\shared\requre-super-permissions.guard.ts" />
@@ -123,6 +124,9 @@
     <TypeScriptCompile Include="ClientApp\src\app\shared\global-bracket.service.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\shared\http-error.interceptor.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\shared\http-request.interceptor.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -143,6 +147,12 @@
 
   <ItemGroup>
     <None Update="ClientApp\src\assets\chat-bubble.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ClientApp\src\assets\favicon-white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ClientApp\src\assets\favicon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ClientApp\src\assets\lock.png">
