@@ -17,8 +17,10 @@ export class RequireAuthenticationGuard implements CanActivate {
         return true;
       })
       .catch(error => {
-        if (error.errorCode === 'user_login_error') {
-          this.router.navigate(['/unauthorized']);
+        if (error.errorCode === 'user_login_error' || error.errorCode === 'token_renewal_error' || error.errorCode === 'login_required') {
+          this.authService.loginRedirect({
+            extraScopesToConsent: ["user.read", "openid", "profile"]
+          });
         } else {
           console.error(error);
         }
