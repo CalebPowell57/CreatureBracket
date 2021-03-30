@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CreatureSubmissionService } from './creature-submission.service';
 import { ToastrService } from 'ngx-toastr';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { eCreatureSubmissionStatus, ICreatureSubmission } from '../interfaces/creature-submission.interface';
 
 @Component({
   selector: 'app-creature-submission',
@@ -14,13 +15,18 @@ export class CreatureSubmissionComponent {
   input: IInput = {name: "", bio: ""};
   imageChangedEvent: any = '';
   croppedImage: string = '';
-
+  Pending_ApprovedSubmissions: ICreatureSubmission[];
   constructor(
     private router: Router,
     private creatureSubmissionService: CreatureSubmissionService,
     private toastrService: ToastrService
   ) { }
 
+  ngOnInit() {
+    this.creatureSubmissionService.getSubmissionsById().subscribe(x => {
+      this.Pending_ApprovedSubmissions = x;
+    });
+  }
   onSubmit(form: NgForm) {
     this.creatureSubmissionService.create({ name: this.input.name, bio: this.input.bio, image: this.croppedImage })
       .subscribe(

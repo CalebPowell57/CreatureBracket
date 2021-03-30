@@ -59,11 +59,9 @@ namespace CreatureBracket.Repositories
             return creatures.Count == 15;//this is the last creature. write code that's more readable
         }
 
-        public async Task<List<CreatureSubmission>> ByStatusAsync(ECreatureSubmissionStatus status)
+        public async Task<List<CreatureSubmission>> ByStatusAsync()
         {
-            var submissions = await _context.CreatureSubmissions.AsNoTracking()
-                                                                .Where(x => x.Status == status)
-                                                                .ToListAsync();
+            var submissions = await _context.CreatureSubmissions.AsNoTracking().ToListAsync();
 
             return submissions;
         }

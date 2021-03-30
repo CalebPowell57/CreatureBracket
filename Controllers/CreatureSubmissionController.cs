@@ -61,9 +61,9 @@ namespace CreatureBracket.Controllers
         }
 
         [HttpGet("ByStatus")]
-        public async Task<IActionResult> ByStatus([FromQuery] ECreatureSubmissionStatus status)
+        public async Task<IActionResult> ByStatus()
         {
-            var submissions = await _unitOfWork.CreatureSubmissionRepository.ByStatusAsync(status);
+            var submissions = await _unitOfWork.CreatureSubmissionRepository.ByStatusAsync();
 
             return Ok(submissions);
         }
