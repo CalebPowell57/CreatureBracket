@@ -19,9 +19,9 @@ export class CreatureSubmissionService {
     return response;
   }
 
-  getSubmissionsById(status: eCreatureSubmissionStatus): Observable<ICreatureSubmission[]> {
+  getSubmissionsById(): Observable<ICreatureSubmission[]> {
     let params = new HttpParams().set('status', status.toString());
 
-    return this.http.get<ICreatureSubmission[]>('CreatureSubmission/ByStatus', { params: params });
+    return this.http.get<ICreatureSubmission[]>('CreatureSubmission/ByStatus');
   }
 }

@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { MsalService } from '@azure/msal-angular';
 import { Guid } from 'guid-typescript';
 import { NgttTournament } from 'ng-tournament-tree';
 import { IVote } from '../../../interfaces/vote.interface';
@@ -16,7 +17,8 @@ export class MatchComponent {
 
   public constructor(
     private matchService: MatchService,
-    private cdr: ChangeDetectorRef) { }
+    private cdr: ChangeDetectorRef,
+    private authService: MsalService) { }
 
   ngOnInit() {
     if (this.matchup.vote) {
@@ -25,13 +27,15 @@ export class MatchComponent {
   }
 
   vote(creature: any) {
+    const account = this.authService.getAccount();
+
     let voteId = this.matchup.vote === null ? Guid.create().toString() : this.matchup.vote.voteId;
 
     let vote: IVote = {
       CreatureId: creature.creatureId,
       Id: voteId,
       MatchupId: this.matchup.matchupId,
-      UserId: Guid.parse('54E715D0-2B42-4B19-A36B-E4ADA9DC2594').toString()
+      AccountId: account.accountIdentifier
     };
 
     this.matchup.vote = { voteId: vote.Id, creatureId: creature.creatureId };

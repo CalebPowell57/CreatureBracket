@@ -29,11 +29,8 @@ export class CreatureSubmissionComponent {
   ) { }
 
   ngOnInit() {
-    this.creatureSubmissionService.getSubmissionsById(eCreatureSubmissionStatus.Pending).subscribe(x => {
+    this.creatureSubmissionService.getSubmissionsById().subscribe(x => {
       this.Pending_ApprovedSubmissions = x;
-    });
-    this.creatureSubmissionService.getSubmissionsById(eCreatureSubmissionStatus.Approved).subscribe(x => {
-      this.Pending_ApprovedSubmissions = this.Pending_ApprovedSubmissions.concat(x);
     });
   }
   onSubmit(form: NgForm) {

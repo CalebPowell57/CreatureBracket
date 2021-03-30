@@ -33,7 +33,8 @@ namespace CreatureBracket
 
             services.AddDbContext<DatabaseContext>(options =>
             {
-                options.UseSqlite("Data Source=main.db");
+                //options.UseSqlite("Data Source=main.db");
+                options.UseSqlServer("Server=sql2014.kalosinc.local;Database=CreatureBracket;Trusted_Connection=true");
             });
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

@@ -13,6 +13,9 @@
   animation-duration: 1s;
   animation-fill-mode: forwards;
   animation-play-state: running;
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  animation-delay:0s;
 }
 
 @keyframes fadeIn {
@@ -46,12 +49,15 @@
   cursor: pointer;
 }
 
-.ApprovedIcon:hover .tooltiptext, .PendingIcon:hover .tooltiptext {
+.ApprovedIcon:hover .RemoveApprovaltooltiptext, .PendingIcon:hover .Approvetooltiptext {
   visibility: visible;
   animation-name: fadeIn;
   animation-duration: 1s;
   animation-fill-mode: forwards;
   animation-play-state: running;
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  animation-delay:0s;
 }
 
 .tooltip {
@@ -60,7 +66,21 @@
   border-bottom: 1px dotted black;
 }
 
-.tooltiptext {
+.RemoveApprovaltooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: -25px;
+  left: 105%;
+}
+.Approvetooltiptext {
   visibility: hidden;
   width: 120px;
   background-color: black;
@@ -87,6 +107,7 @@
   position: absolute;
   bottom: 3%;
   right: 31%;
+  -webkit-backface-visibility: hidden;
 }
 
 .PendingIcon:hover {

@@ -1,86 +1,47 @@
-<div class="container-fluid" style="padding-left:40px; padding-right:40px ">
-  <div class="row">
-    <div class="col-12">
-      <h1>Creature Submission</h1>
+<h1>Creature Submission</h1>
 
-      <form #form="ngForm"
-            (ngSubmit)="onSubmit(form)"
-            style="width:20em">
-        <div class="form-group">
-          <button (click)="choosePhoto()" class="btn btn-primary" type="button" style="margin-bottom: 10px;">Upload Photo</button>
+<form #form="ngForm"
+      (ngSubmit)="onSubmit(form)"
+      style="width:20em">
+  <div class="form-group">
+    <button (click)="choosePhoto()" class="btn btn-primary" type="button" style="margin-bottom: 10px;">Upload Photo</button>
 
-          <input id="select-file" hidden type="file" (change)="fileChangeEvent($event)">
+    <input id="select-file" hidden type="file" (change)="fileChangeEvent($event)">
 
-          <image-cropper [imageChangedEvent]="imageChangedEvent"
-                         [maintainAspectRatio]="true"
-                         [aspectRatio]="1"
-                         format="png"
-                         (imageCropped)="imageCropped($event)"
-                         (imageLoaded)="imageLoaded()"
-                         (cropperReady)="cropperReady()"
-                         (loadImageFailed)="loadImageFailed()"
-                         [hidden]="!showCropper"></image-cropper>
+    <image-cropper [imageChangedEvent]="imageChangedEvent"
+                   [maintainAspectRatio]="true"
+                   [aspectRatio]="1"
+                   format="png"
+                   (imageCropped)="imageCropped($event)"
+                   (imageLoaded)="imageLoaded()"
+                   (cropperReady)="cropperReady()"
+                   (loadImageFailed)="loadImageFailed()"
+                   [hidden]="!showCropper"></image-cropper>
 
-          <img [src]="croppedImage" style="border-radius:50%;width:20em;" />
-        </div>
-
-        <div class="form-group">
-          <label for="name">Name</label>
-
-          <input type="text"
-                 [(ngModel)]="input.name"
-                 name="name"
-                 class="form-control"
-                 required
-                 autocomplete="off"
-                 minLength="3"
-                 #nameField="ngModel"
-                 [class.field-error]="form.submitted && nameField.invalid" />
-        </div>
-
-        <div class="form-group">
-          <label for="bio">BIO</label>
-
-          <textarea [(ngModel)]="input.bio"
-                    name="bio"
-                    class="form-control"></textarea>
-        </div>
-
-        <button class="btn btn-primary" type="submit" style="width:100%">Submit</button>
-      </form>
-    </div>
+    <img [src]="croppedImage" style="border-radius:50%;width:20em;" />
   </div>
-  <div class="row" style="padding-top:15px">
-    <div class="col-12">
-      <h1 class="text-center">Submitted Creatures</h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-2 text-center SubmittedCreatures" *ngFor="let creature of Pending_ApprovedSubmissions; let i=index;">
-        <ul>
-          <li>
-            <div style="position:relative">
-              <div *ngIf="creature.status === 1; else PendingCreature">
-                <div class="ApprovedIcon" style="text-align:center" >
-                  <span class="tooltiptext">Creature Submission Approved</span>
-                  <div class="checkmark"></div>
-                </div>
-                <img class="img-fluid creatureImage" [src]="creature?.image" />
-              </div>
-              <ng-template #PendingCreature>
-                <div class="PendingIcon">
-                  <span class="tooltiptext">Creature Submission Pending Approval</span>
-                  <img class="img-fluid pendingImage" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABmJLR0QA/wD/AP+gvaeTAAAJ60lEQVR4nO2df7BVVRXH1wYUNbFCCwntBxZYmFaQaZlaOf0WNbRydBRN+2X+QMsxwnIypMwmorTSciy1cTLJKZ0sBh3NSjNLTTKxzMIMDTB+Q4/3Pv1x7mse75217l3nnnPve/euz4wzDm+f71lr77PP3WvvtfcRCYIgCIIgCIIgCIIgCIIgCIIgCIIgCIIgCIIgCIIgCIIgGFEAewMXAw8AzwJrgN8B84AJ7bYvqBDgBGADOuuA49ptZ1ABwGyj4QfSBxzfbnuDEgGmAhsbfACovSWmttvuoCSAnzkav58l7bY7KAHgPQUav593t9v+oAmAHYBHlMZdD7wBmFH7/zz+DOzQbj+CggDnGL177oBynzHKndNOH4KCAOOBVUqj/gPYZUDZnYC/KWWfBfZopy9BAYDLjV49JNYH3m+Uv6IdPgQFAV4F9CiN+SsgKdfdqVyzDdi/1X4EBQFuUxqyF5hhXPfaWpk8lrbSh6AgwJHGq/y7DVx/tXH9Ua3wISgIsCPwqNJ464CJDWhMANYqGn8FxrbCl6AAwHlG773AofNpQ+dTVfoQFAR4AVnIlsfjwE4OrR2Bx5p5kwQtBviW0WvfV0BvlqF3VRU+BAXBDvvuaEJ3iaJpRhNBiwF+bjTU9CZ0X0M2B5DH3SjzCUELAY42XtVXlqB/laF/bBk+BAUhG6wtVxpnHbBnCfd4IfAf5R7brSkELQb4pNE7zx9QbjxwLrAAOLLAfc437jO3vkJQOnV65l+oTdgAe+S8Jb7mvNfYmmYe64EXVeNloAJcafTKYwaUu1Apc7jzfscY97umfA8DFeAA9NH50kFlv6+UexAY7bzvUkWrF3h9uV4GKsAdSkMMWbYFzjJ67hnO++5vPHjqMnNQItgzdN/MKT8OeEopvwZntg/2jGPsJ6gS7Dn6tShhH3Ca0WiXO22w1hxWAM8px9tgCMAFRkOea1w3imz/Xx7bgAOcdlirjp9r3tNgCNjr9P8P+4zrDzca7Zc4fr+x8w42AS9p3uNgO4DvGA04s0GNxYbGJ5z2zDS0ri/mZZALJeXqAZOBLYrORuDFTru03MM+4BC/p0Eu6Nm6PcB+Ti0thAT4nlNrP/Rl6HuBUT5PgyFg5+t/w6n1xlrv1OgDDnRqWvsPTvJ5G2wH9o4dVwxPFgncZzRWP7/BNyC0diCtBHYr5n1Qb8/e2U6t0xto/H5cEzrYexC/4PM6EJG6YZ9r1y7ZbOC/HA+Aa0IHGAM8rGhtBl5arBa6GOAao4Fc+/aByxyN349rQgf7HIIf+rzvcsj27Gth321OrSnAVkXrMfSp5Q3AXs57aWEhwKG+WuhigLuUSiwS9t1iNMpM4Cjj79c67/VK4L+K1h9wLj93JcAHjQZZ5NQ6wtBaOqBcaRM6wNeNe37Io9V1ADsDTyiVtwbY3aFlDcy2Aa8eUNbquffgCwufjx4WPg0811svXQPwWaP3nOnUmmNoDVkCBhYZ5U903ttKQvmSR6trACahn+L5J3xh33hgtaKVO4FE1nP/rVzzJP6w8I+K1lbgFY1qdQ3AtUaveadTy8raUSeQgDOM6y5y2mCNP37s0ep4gOnoYd8tTi0rYfQRjDcJMJosWTQP9zo/cKvxELzdo9WxAIksISOPHmCaU89a7XtXA9e/1bj+B05b9kUfXC4Dxnj0OhKyE7w1vurUOs7QavjoV/TEkSJh4ULDpo95tDoOsrDv70rlrMYX9lkrh643CVniyGZF634c6/zYg0uXjx0HcJHROz7u1NJ2AAEsLGDbJYaea50fe3Dpest1DMBe6GGf6/cRO4Qs1MuAXYF/KppPArs6tEYDDyla7nFORwBcb/SKdzi1rjO0Cv/OAicbup93almDy1uL2jgiAQ5CT836iVPrYEOrqZE2WYRyj6K9Cec6P/BT4yGoG6F0BLVKvVephK3AFIfWKEMLSoi1sR/WG5xa+6BnJZtzFB0DcJLRYJc5tU4xtG4u0WZthzHAm51aXzG0zirL5mEJsAt62PcM8DyHlrXp0/UmaeBee6Knp/0eX1i4G1myaB7uzaojCrLv9Wl8xKn1RUPr0gpstxJUZzu1PmpouVLdRwxkYZ/25S5v2Gft8KlkzZ3smBgtfcyV/o295rBdrkLHANxgPPWuwRpws6F1WoU+WGcTzHdqWWFhZx1Njx2quZZG61Rc5Xl3wC+Ue7vTv7EfZPdpZsMSslDtt4qTruQI7Bk1gMOq9KVmwzT0/YCu9G/sn7K6W95HBNifbHUN1oAzDa0bq/Ihx44rDDtc6d/Alw2t86ryoSVgz6e7BmvYe/C2AC+v0heHLd6w0Nq1VMppp20DmG883ac7taxduK4BWBkAZxv2nOrU+rCh9e2qfKgUYG/0sO8BHIM17OPg27IDFzvx82mPTdhnGDV14nnbAG40nuojnFracfAAJ1flQwN2vc2wa4FTyzrDqPA3D+pRycGGZPPjdyl/XpxSmuXQOlpEtFBxo4jMF5E+n4WlMkdEJuT8+xYRuVhEeo1rN4vI7Smlh0VEgJtERPu6yayU0uJmDG0JZK+z+5UneQsw2aFlHdLcKfRQ2zKGHRZW8sWyKs6wmS0ir1P+tjCl9LhDa46I7NO8ScOaMSKyEBhbqxstfW2yZPVRKqX+BADjRGS5iOSFLitFZEpKaX2DWhNF5FERGVeehcOaqSml5XXqcL1kdbiyrJuW/QaYK/mGi4jMa7TxayyQ7mn8DSLyhIhIrY7mKeXGicglrTLKRZ3fL+/kyIHYp3l1Ej3AKYP8H0VWZ3mUGhaW9hOAPYI9LKWkRQWDdZKI/FpEDsr58xYRWSQiFDJy+LFSRJaklJYN/gPZlPKdynV3i8ihKaXhUQ/YMax3gcRKGRuer7+KwJ5L+UC77RORurNYriVS7LWDrjtzD3s2dQXD4Ytl2PPYrjPysNcOXPPrnUKdOrmw3cZZCY5P4ds9MxF9P55rENlJkL0VteTXDcCkdhp3qfF0ehMlrZM8K0/0GM5g51S4TjIr06hJ6GHffd4eC5yqaP2oKh9GCtjnHPcx6ENZrTJKS/EudFY+sDtDc+/XAi+rwv6RBnAI+txI099ILmKQNvJ3bZcapDmjpru59sQfXKbNIx30zOoV7TBGO4Wr+7Y6twiyI2fy6KXgSmEzI+tNyr9Pp0tH7FVSq1PtYxY9tf/cFJ4KBm4XkbcUvT4olWUpJdcZyv0001Ova+LaoFwKt0Uzb4CdReQhEWlZOnaQyzMiMi2ltKrIxYXfACmlzSJyrOhjgaB6ekXkxKKNL9JkQkhK6UEReZOIeNK8gnJYLSLvTSk1fP5hHqXkA5AdpHyCiBwvIvuKnhUUNMcqyTrbTSJydTM9PwiCIAiCIAiCIAiCIAiCIAiCIAiCIAiCIOhQ/gcydFqmJ7WTwgAAAABJRU5ErkJggg==" />
-                </div>
-                <img class="img-fluid creatureImage" [src]="creature?.image" />
-              </ng-template>
-            </div>
-          </li>
-          <li>
-            <h3> {{creature?.name}}</h3>
-          </li>
-        </ul>
-    </div>
-  </div>
-</div>
 
+  <div class="form-group">
+    <label for="name">Name</label>
+
+    <input type="text"
+           [(ngModel)]="input.name"
+           name="name"
+           class="form-control"
+           required
+           autocomplete="off"
+           minLength="3"
+           #nameField="ngModel"
+           [class.field-error]="form.submitted && nameField.invalid" />
+  </div>
+
+  <div class="form-group">
+    <label for="bio">BIO</label>
+
+    <textarea [(ngModel)]="input.bio"
+              name="bio"
+              class="form-control"></textarea>
+  </div>
+
+  <button class="btn btn-primary" type="submit" style="width:100%">Submit</button>
+</form>

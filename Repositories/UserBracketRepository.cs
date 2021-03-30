@@ -13,7 +13,7 @@ namespace CreatureBracket.Repositories
     {
         public UserBracketRepository(DatabaseContext context) : base(context) { }
 
-        public async Task<UserBracketResponseDTO> MyBracketAsync(Guid userId, Guid activeBracketId)
+        public async Task<UserBracketResponseDTO> MyBracketAsync(Guid accountId, Guid activeBracketId)
         {
             var userBracket = await _context.UserBrackets.Include(x => x.Rounds)
                                                             .ThenInclude(x => x.Matchups)
@@ -21,12 +21,12 @@ namespace CreatureBracket.Repositories
                                                          .Include(x => x.Rounds)
                                                             .ThenInclude(x => x.Matchups)
                                                                 .ThenInclude(x => x.Creature2)
-                                                         .SingleOrDefaultAsync(x => x.UserId == userId);
+                                                         .SingleOrDefaultAsync(x => x.AccountId == accountId);
 
             var bracket = new UserBracketResponseDTO
             {
                 Rounds = new List<UserRoundResponseDTO>(),
-                UserId = userId
+                AccountId = accountId
             };
 
             if (userBracket is null)
@@ -140,7 +140,7 @@ namespace CreatureBracket.Repositories
             return bracket;
         }
 
-        public async Task<UserBracket> ExistingUserBracket(Guid activeBracketId, Guid userId)
+        public async Task<UserBracket> ExistingUserBracket(Guid activeBracketId, Guid accountId)
         {
             var userBracket = await _context.UserBrackets.Include(x => x.Rounds)
                                                             .ThenInclude(x => x.Matchups)
@@ -148,7 +148,7 @@ namespace CreatureBracket.Repositories
                                                          .Include(x => x.Rounds)
                                                             .ThenInclude(x => x.Matchups)
                                                                 .ThenInclude(x => x.Creature2)
-                                                         .SingleOrDefaultAsync(x => x.UserId == userId && x.BracketId == activeBracketId);
+                                                         .SingleOrDefaultAsync(x => x.AccountId == accountId && x.BracketId == activeBracketId);
 
             if (userBracket != null)
             {
@@ -165,7 +165,7 @@ namespace CreatureBracket.Repositories
             {
                 Id = Guid.NewGuid(),
                 BracketId = activeBracketId,
-                UserId = dto.UserId,
+                AccountId = dto.AccountId,
                 Rounds = new List<UserRound>()
             };
 

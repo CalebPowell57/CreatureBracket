@@ -1,5 +1,6 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { MsalService } from '@azure/msal-angular';
 import { Guid } from 'guid-typescript';
 import { IChatMessage } from '../../../../interfaces/chat-message.interface';
 import { ChatService } from '../../../../shared/chat.service';
@@ -12,9 +13,9 @@ import { ChatService } from '../../../../shared/chat.service';
 export class ChatComponent {
   chatMessages: IChatMessage[];
   chatText = '';
-  userId = Guid.parse('54E715D0-2B42-4B19-A36B-E4ADA9DC2594');
 
-  constructor(private chatService: ChatService) {
+  constructor(private chatService: ChatService,
+              private authService: MsalService) {
     this.subscribeToEvents();
   }
 
@@ -25,8 +26,10 @@ export class ChatComponent {
   }
 
   onSubmit(form: NgForm) {
+    const account = this.authService.getAccount();
+
     if (this.chatText !== '' && form.valid) {
-      this.chatService.sendMessage(this.chatText, this.userId);
+      this.chatService.sendMessage(this.chatText, Guid.parse(account.accountIdentifier));
 
       this.chatText = '';
     }

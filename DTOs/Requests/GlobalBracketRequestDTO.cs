@@ -4,6 +4,6 @@ namespace CreatureBracket.DTOs.Requests
 {
     public class GlobalBracketRequestDTO
     {
-        public Guid UserId { get; set; }
+        public Guid AccountId { get; set; }
     }
 }

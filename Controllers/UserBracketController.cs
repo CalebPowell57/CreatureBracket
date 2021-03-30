@@ -24,10 +24,10 @@ namespace CreatureBracket.Controllers
         }
 
         [HttpGet("MyBracket")]
-        public async Task<IActionResult> MyBracket([FromQuery] Guid userId)
+        public async Task<IActionResult> MyBracket([FromQuery] Guid accountId)
         {
             var activeBracket = await _unitOfWork.BracketRepository.ActiveAsync();
-            var myBracket = await _unitOfWork.UserBracketRepository.MyBracketAsync(userId, activeBracket.Id);
+            var myBracket = await _unitOfWork.UserBracketRepository.MyBracketAsync(accountId, activeBracket.Id);
 
             return Ok(myBracket);
         }
@@ -37,7 +37,7 @@ namespace CreatureBracket.Controllers
         {
             var activeBracket = await _unitOfWork.BracketRepository.ActiveAsync();
 
-            var userBracket = await _unitOfWork.UserBracketRepository.ExistingUserBracket(activeBracket.Id, dto.UserId);
+            var userBracket = await _unitOfWork.UserBracketRepository.ExistingUserBracket(activeBracket.Id, dto.AccountId);
 
             if (userBracket is null)
             {

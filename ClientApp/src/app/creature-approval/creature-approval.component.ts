@@ -10,9 +10,8 @@ import { CreatureApprovalService } from './creature-approval.service';
   styleUrls: ['./creature-approval.component.scss'],
 })
 export class CreatureApprovalComponent {
-  pendingSubmissions: ICreatureSubmission[];
-  approvedSubmissions: ICreatureSubmission[];
-  Pending_ApprovedSubmissions: ICreatureSubmission[];
+  pendingSubmissions: ICreatureSubmission[] = [];
+  approvedSubmissions: ICreatureSubmission[] = [];
 
   constructor(
     private router: Router,
@@ -21,11 +20,15 @@ export class CreatureApprovalComponent {
   ) { }
 
   ngOnInit() {
-    this.creatureApprovalService.getSubmissionsById(eCreatureSubmissionStatus.Pending).subscribe(x => {
-      this.Pending_ApprovedSubmissions = x;
-    });
-    this.creatureApprovalService.getSubmissionsById(eCreatureSubmissionStatus.Approved).subscribe(x => {
-      this.Pending_ApprovedSubmissions = this.Pending_ApprovedSubmissions.concat(x);
+    this.creatureApprovalService.getSubmissionsById().subscribe(x => {
+      for (let creature of x) {
+        if (creature.status === 0) {
+          this.pendingSubmissions.push(creature);
+        }
+        else {
+          this.approvedSubmissions.push(creature);
+        }
+      }
     });
   }
 

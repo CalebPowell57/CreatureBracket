@@ -43,10 +43,6 @@
 }
 .ApprovedIcon:hover .tooltiptext, .PendingIcon:hover .tooltiptext {
   visibility: visible;
-  animation-name: fadeIn;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
-  animation-play-state: running;
 
 }
 
@@ -83,6 +79,7 @@
   position: absolute;
   bottom: 3%;
   right: 31%;
+
 }
 .PendingIcon:hover {
   cursor: pointer;

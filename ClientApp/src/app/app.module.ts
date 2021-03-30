@@ -31,6 +31,7 @@ import { SuccessfulAccountCreationComponent } from './successful-account-creatio
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { UnauthorizedGuard } from './unauthorized/unauthorized.guard';
+import { SeedingViewComponent } from './seeding-view/seeding-view.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -47,7 +48,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     CreatureApprovalComponent,
     VerifyAccountComponent,
     UnauthorizedComponent,
-    SuccessfulAccountCreationComponent
+    SuccessfulAccountCreationComponent,
+    SeedingViewComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -70,6 +72,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       { path: 'standings', component: StandingsComponent, canActivate: [RequireAuthenticationGuard] },
       { path: 'no-permissions', component: NoPermissionsComponent },
       { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [RequireAuthenticationGuard] },
+      { path: 'seeding-view', component: SeedingViewComponent, canActivate: [RequireAuthenticationGuard] },
       { path: '**', component: NotFoundComponent }
     ]),
     MsalModule.forRoot({
