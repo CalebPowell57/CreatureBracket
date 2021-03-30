@@ -6,8 +6,7 @@ import { CreatureApprovalService } from './creature-approval.service';
 
 @Component({
   selector: 'app-creature-approval',
-  templateUrl: './creature-approval.component.html',
-  styleUrls: ['./creature-approval.component.scss'],
+  templateUrl: './creature-approval.component.html'
 })
 export class CreatureApprovalComponent {
   pendingSubmissions: ICreatureSubmission[] = [];

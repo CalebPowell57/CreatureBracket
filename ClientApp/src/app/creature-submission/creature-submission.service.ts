@@ -1,10 +1,9 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { from, Observable } from 'rxjs';
 import { ICreatureSubmissionDTO } from '../interfaces/creature-submission-DTO.interface';
-import { ICreatureDTO } from '../interfaces/CreatureDTO.interface';
-import { ICreatureSubmission, eCreatureSubmissionStatus } from '../interfaces/creature-submission.interface';
-import { IApproveSubmissionDTO } from '../interfaces/approve-submission-DTO.interface';
+import {  ICreatureSubmission } from '../interfaces/creature-submission.interface';
+import {Observable} from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +19,6 @@ export class CreatureSubmissionService {
   }
 
   getSubmissionsById(): Observable<ICreatureSubmission[]> {
-    let params = new HttpParams().set('status', status.toString());
 
     return this.http.get<ICreatureSubmission[]>('CreatureSubmission/ByStatus');
   }
