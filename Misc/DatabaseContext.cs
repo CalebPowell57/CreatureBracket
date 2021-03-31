@@ -27,12 +27,20 @@ namespace CreatureBracket.Misc
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<RegistryItem>()
-                            .HasIndex(x => x.Key)
-                            .IsUnique();
+                        .HasIndex(x => x.Key)
+                        .IsUnique();
 
             modelBuilder.Entity<Vote>()
-                            .HasIndex(x => new { x.MatchupId, x.AccountId })
-                            .IsUnique();
+                        .HasIndex(x => new { x.MatchupId, x.AccountId })
+                        .IsUnique();
+
+            modelBuilder.Entity<CreatureSubmission>()
+                        .HasIndex(x => new { x.Name, x.BracketId })
+                        .IsUnique();
+
+            modelBuilder.Entity<Creature>()
+                        .HasIndex(x => new { x.Name, x.BracketId })
+                        .IsUnique();
         }
     }
 }

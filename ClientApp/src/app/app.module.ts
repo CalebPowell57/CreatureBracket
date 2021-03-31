@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -27,6 +27,7 @@ import { NoPermissionsComponent } from './no-permissions/no-permissions.componen
 import { CreatureApprovalComponent } from './creature-approval/creature-approval.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { SeedingViewComponent } from './seeding-view/seeding-view.component';
+import { CustomErrorHandler } from './shared/error.handler';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -96,7 +97,11 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     provide: HTTP_INTERCEPTORS,
     useClass: HttpRequestInterceptor,
     multi: true
-  }],
+    },
+    {
+      provide: ErrorHandler,
+      useClass: CustomErrorHandler
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -27,6 +27,10 @@ export class RequireSuperPermissionsGuard implements CanActivate {
 
     }
 
+    if (!result) {
+      this.router.navigate(['no-permissions']);
+    }
+
     return result;
   }
 }
