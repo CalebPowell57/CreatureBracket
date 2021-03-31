@@ -1,6 +1,7 @@
 ﻿using CreatureBracket.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Text.RegularExpressions;
 
 namespace CreatureBracket.Middleware
 {
@@ -86,8 +87,8 @@ namespace CreatureBracket.Middleware
 
             var tables = constraint.Split("_");
 
-            var parentTable = tables[_fkParentIndex];
-            var childTable = tables[_fkChildIndex];
+            var parentTable = Regex.Replace(tables[_fkParentIndex], "([a-z])([A-Z])", "$1 $2");
+            var childTable = Regex.Replace(tables[_fkChildIndex], "([a-z])([A-Z])", "$1 $2");
 
             return $"You cannot delete a \"{parentTable}\" record that has an attached \"{childTable}\" record.";
         }
@@ -109,8 +110,8 @@ namespace CreatureBracket.Middleware
 
             var items = constraint.Split("_");
 
-            var column = items[_ixColumnIndex];
-            var childTable = items[_ixChildIndex];
+            var column = Regex.Replace(items[_ixColumnIndex], "([a-z])([A-Z])", "$1 $2");
+            var childTable = Regex.Replace(items[_ixChildIndex], "([a-z])([A-Z])", "$1 $2");
 
             return $"You cannot have more than one {childTable} with the same value for \'{column}\'";
         }
