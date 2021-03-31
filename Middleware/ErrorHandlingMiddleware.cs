@@ -1,10 +1,11 @@
 ﻿using CreatureBracket.Exceptions;
 using CreatureBracket.Misc;
 using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using System.Text.Json;
 using static CreatureBracket.Misc.Constants;
 
 namespace CreatureBracket.Middleware
@@ -34,21 +35,19 @@ namespace CreatureBracket.Middleware
         {
             //await LogErrorAsync(exception, unitOfWork);
 
-            var message = ExceptionBeautifier.Beautify(exception);
+            var beautifyTuple = ExceptionBeautifier.Beautify(exception);
 
-            var severityLevel = EErrorSeverityLevel.High;
-
-            if(exception is ExpectedException expectedException)
+            if (beautifyTuple.Item2)
             {
-                severityLevel = expectedException.SeverityLevel;
+                throw new ExpectedException(beautifyTuple.Item1, EErrorSeverityLevel.Low);
+            }
+            else
+            {
+                throw exception;
             }
 
-            var result = JsonConvert.SerializeObject(exception);
-
-            context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-
-            await context.Response.WriteAsync(result);
+            //var stream = context.Response.Body;
+            //await JsonSerializer.SerializeAsync(stream, problem);
         }
 
         //public static async Task LogErrorAsync(Exception exception, UnitOfWork unitOfWork)

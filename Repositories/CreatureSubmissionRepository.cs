@@ -1,4 +1,5 @@
 ﻿using CreatureBracket.DTOs.Requests;
+using CreatureBracket.Exceptions;
 using CreatureBracket.Misc;
 using CreatureBracket.Models;
 using Microsoft.EntityFrameworkCore;
@@ -39,7 +40,7 @@ namespace CreatureBracket.Repositories
 
             if(creatures.Count >= 16)
             {
-                throw new Exception("There are already 16 creatures approved for battle!");
+                throw new ExpectedException("There are already 16 creatures approved for battle!");
             }
 
             var creature = new Creature

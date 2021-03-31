@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CreatureBracket.Exceptions;
+using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace CreatureBracket.Middleware
@@ -13,38 +14,61 @@ namespace CreatureBracket.Middleware
 
         public static void Initialize() { }
 
-        public static string Beautify(Exception exception)
+        public static Tuple<string, bool> Beautify(Exception exception)
         {
-            if(exception.GetType() == typeof(DbUpdateException) 
+            var didBeautify = false;
+            string exceptionMessage;
+
+            if (exception.GetType() == typeof(DbUpdateException) 
                 && exception.Source == "Microsoft.EntityFrameworkCore.Relational"
                 && exception.InnerException != null)
             {
                 if(exception.InnerException.Message.Contains("The DELETE statement conflicted with the REFERENCE constraint"))
                 {
-                    return BeautifyForeignKeyDeleteException(exception as DbUpdateException);
+                    exceptionMessage = BeautifyForeignKeyDeleteException(exception as DbUpdateException);
+                    didBeautify = true;
                 }
                 else if(exception.InnerException.Message.Contains("String or binary data would be truncated."))
                 {
-                    return BeautifyTruncatedException();
+                    exceptionMessage = BeautifyTruncatedException();
+                    didBeautify = true;
                 }
                 else if(exception.InnerException.Message.Contains("Cannot insert duplicate key row in object") && exception.InnerException.Message.Contains("with unique index"))
                 {
-                    return BeautifyUniqueIndexException(exception as DbUpdateException);
+                    exceptionMessage = BeautifyUniqueIndexException(exception as DbUpdateException);
+                    didBeautify = true;
+                }
+                else
+                {
+                    exceptionMessage = BeautifyGeneralException(exception);
                 }
             }
+            else
+            {
+                exceptionMessage = BeautifyGeneralException(exception);
+            }
 
-            return BeautifyGeneralException(exception);
+            return Tuple.Create(exceptionMessage, didBeautify);
         }
 
         private static string BeautifyGeneralException(Exception exception)
         {
-            var message = exception.Message;
+            string message;
 
-            while (exception.InnerException != null)
+            if (exception is ExpectedException expectedException)
             {
-                exception = exception.InnerException;
+                message = expectedException.Message;
+            }
+            else
+            {
+                message = exception.Message;
 
-                message += " " + exception.Message;
+                while (exception.InnerException != null)
+                {
+                    exception = exception.InnerException;
+
+                    message += " " + exception.Message;
+                }
             }
 
             return message;
