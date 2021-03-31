@@ -55,7 +55,7 @@ namespace CreatureBracket.Repositories
             return standings;
         }
 
-        public async Task SeedCreaturesAsync()
+        public async Task<List<SeedMatchupDTO>> SeedCreaturesAsync()
         {
             var active = await ActiveAsync();
 
@@ -68,10 +68,39 @@ namespace CreatureBracket.Repositories
 
             creatures.Randomize();
 
-            for(int ix = 0; ix < creatures.Count; ix++)
+            for (int ix = 0; ix < creatures.Count; ix++)
             {
                 creatures[ix].Seed = ix;
+
             }
+            List<SeedMatchupDTO> CurrentProjectedMatchups = new List<SeedMatchupDTO>();
+            int creatureCounter = 0;
+            for(int i = 0; i < creatures.Count / 2; i++)
+            {
+                var matchup = new SeedMatchupDTO
+                {
+                    MatchupSeed = i,
+                    Contestants = new List<CreatureSeedDTO>
+                    {
+                        new CreatureSeedDTO
+                        {
+                            Name = creatures[creatureCounter].Name,
+                            BIO = creatures[creatureCounter].BIO,
+                            Image = creatures[creatureCounter].Image,
+
+                        },
+                        new CreatureSeedDTO
+                        {
+                            Name = creatures[creatureCounter + 1].Name,
+                            BIO = creatures[creatureCounter + 1].BIO,
+                            Image = creatures[creatureCounter + 1].Image,
+                        }
+                    }
+                };
+                creatureCounter += 2;
+                CurrentProjectedMatchups.Add(matchup);
+            }
+            return CurrentProjectedMatchups;
         }
 
         public async Task StartAsync()

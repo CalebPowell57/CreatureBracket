@@ -68,13 +68,13 @@ namespace CreatureBracket.Controllers
             return Ok(response);
         }
 
-        [HttpPost("SeedCreatures")]
+        [HttpGet("SeedCreatures")]
         public async Task<IActionResult> SeedCreatures()
         {
-            await _unitOfWork.BracketRepository.SeedCreaturesAsync();
+            var response = await _unitOfWork.BracketRepository.SeedCreaturesAsync();
             await _unitOfWork.SaveAsync();
 
-            return Ok();
+            return Ok(response);
         }
 
         [HttpGet("Global")]
@@ -91,6 +91,14 @@ namespace CreatureBracket.Controllers
             var response = _unitOfWork.BracketRepository.BracketTestData();
 
             return Ok(response);
+        }
+        [HttpGet("StartBracket")]
+        public async Task<IActionResult> Approve()
+        {
+            await _unitOfWork.BracketRepository.StartAsync();
+            await _unitOfWork.SaveAsync();
+
+            return Ok();
         }
     }
 }

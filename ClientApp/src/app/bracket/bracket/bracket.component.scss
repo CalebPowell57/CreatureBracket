@@ -7,24 +7,30 @@
   position: fixed;
   bottom: 25px;
 }
-.ExpandedCol {
-  right:26%;
-}
-.CollapsedCol {
-  right: 15px;
-}
 .ngtt-single-elimination-tree {
   position: absolute;
-  overflow-y: scroll;
-  overflow-x: scroll;
 }
 
 
 /*Zoom Buttons*/
 
-.zoomButtons{
-  position:fixed;
-  top:8%;
+.zoomButtonsExpandedCol {
+  position: fixed;
+  right: 26%;
+  top: 8%;
+  animation-name: fadeInRight;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+.zoomButtonsCollapsedCol {
+  position: fixed;
+  right: 2%;
+  top: 8%;
+  animation-name: fadeIn;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
 }
 .zoomButton{
   height:40px;
@@ -38,23 +44,59 @@
   cursor: pointer;
 }
 
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
 
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
 
+  to {
+    opacity: 1;
+  }
+}
 /*Chat Bubble*/
-
-.chatBubble {
+.chatBubbleExpandedCol {
+  cursor: pointer;
   position: fixed;
   bottom: 25px;
+  right: 26%;
   width: 75px;
+  animation-name: fadeInRight;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
 }
+
+.chatBubbleCollapsedCol {
+  cursor: pointer;
+  position: fixed;
+  bottom: 25px;
+  right: 2%;
+  min-width: 75px;
+  animation-name: fadeIn;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
 .bubble {
   border-radius: 50%;
   width: 50px;
 }
-.chatBubble:hover {
-  cursor: pointer;
-}
+
 .discussionHover:hover {
   cursor: pointer;
 }
@@ -87,25 +129,14 @@
   -webkit-transform-origin: 0 100%;
   transform-origin: 0 100%;
 }
+
 .hvr-skew-backward:hover, .hvr-skew-backward:focus, .hvr-skew-backward:active {
   -webkit-transform: skew(10deg);
   transform: skew(10deg);
 }
 
+/*Discussion/Chat Column*/
 
-
-
-/*CreatureInfo/Discussion Column*/
-
-/*.contentDiscussionCol, .app-creature-discussion-col {
-  position: fixed;
-  width: 30%;
-  right: 0px;
-  top: 55px;
-  height:inherit;
-  overflow: hidden;
-  background-color: #141414;
-}*/
 .contentDiscussionCol, .app-creature-discussion-col {
   position: fixed;
   top: 56px;
@@ -119,28 +150,22 @@
   animation-duration: 1s;
   animation-fill-mode: forwards;
 }
+
+
 .init {
   animation-name: fadeInRight;
   animation-duration: 1s;
   animation-fill-mode: forwards;
 }
+
 .pageLoad {
   display: none;
 }
-.content{
-    display:normal;
-}
-@keyframes zoomIn {
-  from {
-    opacity: 0;
-    -webkit-transform: scale3d(0.3, 0.3, 0.3);
-    transform: scale3d(0.3, 0.3, 0.3);
-  }
 
-  50% {
-    opacity: 1;
-  }
+.content {
+  display: normal;
 }
+
 
 @keyframes fadeInRight {
   from {
@@ -167,69 +192,9 @@
     transform: translate3d(100%, 0, 0);
   }
 }
-@keyframes slideInUp {
-  from {
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
-    visibility: visible;
-  }
 
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-@keyframes rollIn {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);
-    transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);
-  }
 
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-@keyframes backInDown {
-  0% {
-    -webkit-transform: translateY(-1200px) scale(0.7);
-    transform: translateY(-1200px) scale(0.7);
-    opacity: 0.7;
-  }
 
-  80% {
-    -webkit-transform: translateY(0px) scale(0.7);
-    transform: translateY(0px) scale(0.7);
-    opacity: 0.7;
-  }
-
-  100% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-@keyframes backOutDown {
-  0% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    opacity: 1;
-  }
-
-  20% {
-    -webkit-transform: translateY(0px) scale(0.7);
-    transform: translateY(0px) scale(0.7);
-    opacity: 0.7;
-  }
-
-  100% {
-    -webkit-transform: translateY(700px) scale(0.7);
-    transform: translateY(700px) scale(0.7);
-    opacity: 0.7;
-  }
-}
 
 
 

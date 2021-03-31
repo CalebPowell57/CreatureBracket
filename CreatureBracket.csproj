@@ -56,6 +56,7 @@
     <None Remove="ClientApp\src\app\interfaces\creature-submission.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\CreatureDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\register-DTO.interface.ts" />
+    <None Remove="ClientApp\src\app\interfaces\seed-matchupDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\standings-item-DTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\user.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\UserBracketDTO.interface.ts" />
@@ -63,6 +64,7 @@
     <None Remove="ClientApp\src\app\interfaces\UserMatchupDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\UserRoundDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\verifyAccountDTO.interface.ts" />
+    <None Remove="ClientApp\src\app\seeding-view\seeding-view.service.ts" />
     <None Remove="ClientApp\src\app\shared\global-bracket.service.ts" />
     <None Remove="ClientApp\src\app\shared\http-request.interceptor.ts" />
     <None Remove="ClientApp\src\app\shared\requre-authentication.guard.ts" />
@@ -89,6 +91,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\chat-message.interface.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\seed-matchupDTO.interface.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\UserCreatureDTO.interface.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\UserMatchupDTO.interface.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\UserRoundDTO.interface.ts" />
@@ -117,6 +120,7 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\user.interface.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\seeding-view\seeding-view.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\shared\chat.service.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

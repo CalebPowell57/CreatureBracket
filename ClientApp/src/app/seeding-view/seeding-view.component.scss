@@ -1,0 +1,35 @@
+.creatureImage {
+  border-style: ridge;
+  border-color: black;
+  border-width: 5px;
+  border-radius: 50%;
+  width: 45%;
+  z-index: -1;
+}
+
+.PendingMatchups{
+    padding:5px;
+}
+.boxContainer {
+
+  border: solid;
+  border-width: 5px;
+  border-color: slategrey;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  animation-delay: 0s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

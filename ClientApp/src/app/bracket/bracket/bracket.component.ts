@@ -37,6 +37,7 @@ export class BracketComponent {
   hasChatBeenDisplayed: boolean;
   creatureVotedForClassSelection: string;
 
+
   constructor(
     private bracketService: GlobalBracketService,
     private router: Router,
@@ -96,6 +97,7 @@ export class BracketComponent {
   }
 
   zoomIn() {
+
     this.zoomOutEnabled = true;
 
     this.zoom += 20;
@@ -185,7 +187,7 @@ export class BracketComponent {
 
   public discussionCreatureColumnState(contentRequested: string, requestedMatchId: string, CreatureVotedFor: string) {
     if (this.selectedComponent === contentRequested && contentRequested != "CreatureInformation" ||
-      this.matchUpId === requestedMatchId && requestedMatchId != undefined && this.creatureVotedForClassSelection === CreatureVotedFor) {
+      this.matchUpId === requestedMatchId && requestedMatchId != null && this.creatureVotedForClassSelection === CreatureVotedFor) {
       this.contentColumnCommand = "closeColumn";
       this.selectedAnimationClass = "closeColumn";
       this.colActive = false;

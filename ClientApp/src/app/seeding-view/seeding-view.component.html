@@ -1,1 +1,28 @@
-<h1> this is a test</h1>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <h1>Seeding View</h1>
+      <button type="button" (click)="onSeedMatchups()">SeedMatchups</button>
+      <button type="button" (click)="onStartBracket()">StartBracket</button>
+    </div>
+  </div>
+  <div class="row" style="padding:10px">
+    <div class="col-4 text-center boxContainer" *ngFor="let matchup of SeededMatchups; let i=index;">
+      <div class="row" style="padding:10px">
+        <div class="col-6" *ngFor="let creature of matchup.contestants">
+          <ul>
+            <li>
+              <img class="img-fluid creatureImage" [src]="creature.image" />
+            </li>
+            <li>
+              <h3> {{creature.name}} </h3>
+            </li>
+            <li>
+              <p> {{creature.bio}} </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

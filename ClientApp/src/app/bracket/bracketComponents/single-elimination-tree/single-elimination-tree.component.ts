@@ -8,6 +8,12 @@ import { IUserRoundDTO } from '../../../interfaces/UserRoundDTO.interface';
   styleUrls: ['./single-elimination-tree.component.scss']
 })
 export class SingleEliminationTreeComponent implements OnChanges {
+  zoomInEnabled = false;
+  zoomOutEnabled = true;
+  zoom = 100;
+  bracketStyle = {
+    zoom: '100%'
+  };
 
   @Input() matchTemplate: TemplateRef<any>;
   @Input() tournament: IUserBracketDTO;
@@ -28,6 +34,33 @@ export class SingleEliminationTreeComponent implements OnChanges {
           return round
         }
       }).shift();
+    }
+  }
+
+  zoomIn() {
+    this.zoomOutEnabled = true;
+
+    this.zoom += 20;
+
+    this.bracketStyle = {
+      zoom: `${this.zoom}%`
+    };
+
+    if (this.zoom === 100) {
+      this.zoomInEnabled = false;
+    }
+  }
+
+  zoomOut() {
+    this.zoomInEnabled = true;
+    this.zoom -= 20;
+
+    this.bracketStyle = {
+      zoom: `${this.zoom}%`
+    };
+
+    if (this.zoom === 40) {
+      this.zoomOutEnabled = false;
     }
   }
 }
