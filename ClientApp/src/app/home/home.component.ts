@@ -21,7 +21,7 @@ export class HomeComponent {
       if (activeBracket) {
         this.showCreatureSubmission = activeBracket.status === EStatus.Started;
         this.showGlobalBracket = activeBracket.status === EStatus.Open;
-        this.showFinalStandings = activeBracket.status === EStatus.Completed;
+        //this.showFinalStandings = activeBracket.status === EStatus.Completed;
       } else {
         this.showNoActiveBracket = true;
       }

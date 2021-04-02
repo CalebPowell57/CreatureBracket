@@ -16,18 +16,14 @@ import { GlobalBracketService } from '../../shared/global-bracket.service';
   styleUrls: ['./bracket.component.scss'],
 })
 export class BracketComponent {
-  zoomInEnabled = false;
-  zoomOutEnabled = true;
-  zoom = 100;
-  bracketStyle = {
-    zoom: '100%'
-  };
 
   public bracket: IUserBracketDTO;
   @Output() passMatch: Subject<any> = new Subject();
   @Output() selectedComponent: string;
   @Output() userBracketSaveEvent: EventEmitter<any> = new EventEmitter();
   @Output() selectedAnimationClass: string;
+  @Output() zoomButtonClick: string;
+  @Output() zoomEvent: EventEmitter<any> = new EventEmitter();
   @Input() isGlobal: boolean;
 
   colActive = false;
@@ -36,6 +32,7 @@ export class BracketComponent {
   matchUpId: string;
   hasChatBeenDisplayed: boolean;
   creatureVotedForClassSelection: string;
+  zoomInOut = {};
 
 
   constructor(
@@ -49,22 +46,10 @@ export class BracketComponent {
     if (this.isGlobal) {
       this.bracketService.getBracketData().subscribe(data => {
         this.bracket = data;
-        if (this.bracket.rounds[0].matchups.length >= 16) {
-          this.zoomOut(40);
-        }
-        else {
-          this.zoomOut(undefined);
-        }
       });
     } else {
       this.bracketService.getMyBracket().subscribe(data => {
         this.bracket = data;
-        if (this.bracket.rounds[0].matchups.length >= 16) {
-          this.zoomOut(40);
-        }
-        else {
-          this.zoomOut(undefined);
-        }
       });
     }
     this.discussionCreatureColumnState("pageLoad", undefined, undefined);
@@ -83,6 +68,9 @@ export class BracketComponent {
       else if (matchup.creature2.winner) {
         this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, matchup.creature2.creatureId);
       }
+      else {
+        this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, undefined);
+      }
     }
     else {
       this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, undefined);
@@ -96,38 +84,10 @@ export class BracketComponent {
     this.discussionCreatureColumnState("Discussion", undefined, undefined);
   }
 
-  zoomIn() {
-
-    this.zoomOutEnabled = true;
-
-    this.zoom += 20;
-
-    this.bracketStyle = {
-      zoom: `${this.zoom}%`
-    };
-
-    if (this.zoom === 100) {
-      this.zoomInEnabled = false;
-    }
+  zoomClick(zoomButton: string) {
+    this.zoomInOut = { Command: zoomButton };
   }
 
-  zoomOut(zoomInit: number) {
-    this.zoomInEnabled = true;
-    if (zoomInit === undefined) {
-      this.zoom -= 20;
-    }
-    else {
-      this.zoom -= zoomInit;
-    }
-
-    this.bracketStyle = {
-      zoom: `${this.zoom}%`
-    };
-
-    if (this.zoom === 40) {
-      this.zoomOutEnabled = false;
-    }
-  }
 
   userBracketSaveClick() {
     //this.userBracketSaveEvent.emit("Save Clicked");
@@ -192,8 +152,8 @@ export class BracketComponent {
       this.selectedAnimationClass = "closeColumn";
       this.colActive = false;
       this.isColInit = false;
-      this.selectedComponent = "";
-      this.matchUpId = "";
+      this.selectedComponent = undefined;
+      this.matchUpId = undefined;
       this.creatureVotedForClassSelection = CreatureVotedFor;
     }
     else if (contentRequested === "pageLoad") {

@@ -1,5 +1,6 @@
 @import '~ngx-toastr/toastr.css';
 
+
 a {
   color: #0366d6;
 }
@@ -139,4 +140,353 @@ li.listItem {
   background-color: #737272;
   border: 1px solid #000;
   z-index: 0;
+}
+
+
+
+.lds-hourglass {
+  display: inline-block;
+  position: fixed;
+  left:44%;
+  right:56%;
+  top:47%;
+  bottom:53%;
+  width: 150px;
+  height: 150px;
+}
+
+.lds-hourglass:after {
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  margin: 8px;
+  box-sizing: border-box;
+  border: 32px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-hourglass 1.2s infinite;
+}
+
+@keyframes lds-hourglass {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+
+  50% {
+    transform: rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  100% {
+    transform: rotate(1800deg);
+  }
+}
+
+
+
+/*@import url(https://fonts.googleapis.com/css?family=Press+Start+2P)*/
+/*;*/
+
+/*$bg-color: #1f1f1f;
+$glitch-bg-color: $bg-color;
+
+
+.center {
+  position:fixed;
+  top:50%;
+  bottom:50%;
+  right:45%;
+  left:55%;
+  width: 100%;
+}
+
+h1 {
+  display: block;
+  font-size: 3em;
+  margin: 0.6em 0;
+  font-weight: bold;
+}
+
+.glitch {
+  position: relative;
+  margin: 0 auto;
+  background: $glitch-bg-color;
+}
+
+.glitch::before,
+.glitch::after {
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-direction: alternate-reverse;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  clip: rect(0, 900px, 0, 0);
+  content: attr(data-text);
+}
+
+.glitch::after {
+  animation-name: glitch-animation;
+  animation-duration: 4s;
+  left: 4px;
+  text-shadow: -1px 0 #ffa800;
+  background: $glitch-bg-color;
+}
+
+.glitch::before {
+  animation-name: glitch-animation-2;
+  animation-duration: 6s;
+  left: -4px;
+  text-shadow: 1px 0 #00d8ff;
+  background: $glitch-bg-color;
+}
+
+@mixin rect($top, $bottom) {
+  clip: rect($top, 9999px, $bottom, 0);
+}*/
+
+/* Expanded Animations */
+/*@keyframes glitch-animation {
+  0% {
+    @include rect(42px, 44px);
+  }
+
+  5% {
+    @include rect(12px, 59px);
+  }
+
+  10% {
+    @include rect(48px, 29px);
+  }
+
+  15.0% {
+    @include rect(42px, 73px);
+  }
+
+  20% {
+    @include rect(63px, 27px);
+  }
+
+  25% {
+    @include rect(34px, 55px);
+  }
+
+  30.0% {
+    @include rect(86px, 73px);
+  }
+
+  35% {
+    @include rect(20px, 20px);
+  }
+
+  40% {
+    @include rect(26px, 60px);
+  }
+
+  45% {
+    @include rect(25px, 66px);
+  }
+
+  50% {
+    @include rect(57px, 98px);
+  }
+
+  55.0% {
+    @include rect(5px, 46px);
+  }
+
+  60.0% {
+    @include rect(82px, 31px);
+  }
+
+  65% {
+    @include rect(54px, 27px);
+  }
+
+  70% {
+    @include rect(28px, 99px);
+  }
+
+  75% {
+    @include rect(45px, 69px);
+  }
+
+  80% {
+    @include rect(23px, 85px);
+  }
+
+  85.0% {
+    @include rect(54px, 84px);
+  }
+
+  90% {
+    @include rect(45px, 47px);
+  }
+
+  95% {
+    @include rect(37px, 20px);
+  }
+
+  100% {
+    @include rect(4px, 91px);
+  }
+}
+
+@keyframes glitch-animation-2 {
+  0% {
+    @include rect(65px, 100px);
+  }
+
+  5% {
+    @include rect(52px, 74px);
+  }
+
+  10% {
+    @include rect(79px, 85px);
+  }
+
+  15.0% {
+    @include rect(75px, 5px);
+  }
+
+  20% {
+    @include rect(67px, 61px);
+  }
+
+  25% {
+    @include rect(14px, 79px);
+  }
+
+  30.0% {
+    @include rect(1px, 66px);
+  }
+
+  35% {
+    @include rect(86px, 30px);
+  }
+
+  40% {
+    @include rect(23px, 98px);
+  }
+
+  45% {
+    @include rect(85px, 72px);
+  }
+
+  50% {
+    @include rect(71px, 75px);
+  }
+
+  55.0% {
+    @include rect(2px, 48px);
+  }
+
+  60.0% {
+    @include rect(30px, 16px);
+  }
+
+  65% {
+    @include rect(59px, 50px);
+  }
+
+  70% {
+    @include rect(41px, 62px);
+  }
+
+  75% {
+    @include rect(2px, 82px);
+  }
+
+  80% {
+    @include rect(47px, 73px);
+  }
+
+  85.0% {
+    @include rect(3px, 27px);
+  }
+
+  90% {
+    @include rect(26px, 55px);
+  }
+
+  95% {
+    @include rect(42px, 97px);
+  }
+
+  100% {
+    @include rect(38px, 49px);
+  }
+}*/
+@font-face {
+  font-family: MedulaOne;
+  src: url(assets/Fonts/MedulaOne-Regular.ttf) format("opentype");
+}
+$background: #1f1f1f;
+$foreground: white;
+
+@import 'bourbon';
+
+@mixin gitchText($offset, $text) {
+  content: $text;
+  position: absolute;
+  left: $offset;
+  top: $offset;
+  clip: rect(0, 900px, 0, 0);
+  background-color: $background;
+  color: $foreground;
+  animation: glitch 2s infinite alternate-reverse;
+  animation-delay: 3s;
+}
+
+.Glitch {
+  font-family: MedulaOne;
+  font-size: 24pt;
+  font-weight: bold;
+  background-color: $background;
+  color: $foreground;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /*  @include user-select(none);
+*/
+}
+
+
+.Glitch:first-child {
+  margin-right: 5px;
+}
+
+.Glitch .childOne {
+  font-family: 'Medula One', sans-serif !important;
+}
+.Glitch .childTwo {
+  font-family: 'Medula One', sans-serif !important;
+  color: $background;
+  background-color: $background;
+  animation: fadeWhite 2s forwards;
+  position: relative;
+
+  &:after {
+    @include gitchText(2px, 'Creature');
+  }
+
+  &:before {
+    @include gitchText(-2px, 'Bracket');
+  }
+}
+
+@keyframes fadeWhite {
+  100% {
+    color: $foreground;
+  }
+}
+
+@keyframes glitch {
+  $steps: 20; @for $i from 0 through $steps {
+    #{percentage($i * (1 / $steps))} {
+      clip: rect(random(100)+px, 9999px, random(100)+px, 0);
+    }
+  }
 }

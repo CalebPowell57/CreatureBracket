@@ -6,7 +6,7 @@ namespace CreatureBracket.DTOs.Responses
     public class MatchupResponseDTO
     {
         public bool Current { get; set; }
-        public Guid MatchupId { get; set; }
+        public Guid? MatchupId { get; set; }
         public List<CreatureResponseDTO> Contestants { get; set; }
         public VoteResponseDTO Vote { get; set; }
         public int RoundRank { get; set; }

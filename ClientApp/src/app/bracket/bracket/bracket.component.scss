@@ -3,9 +3,25 @@
 @import '../../styles/ngtt-single-elimination-styles.scss';
 
 
-.userBracketSaveButton {
+.userBracketSaveButtonExpandedCol {
+  cursor: pointer;
   position: fixed;
   bottom: 25px;
+  right: 26%;
+  animation-name: fadeInRight;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+.userBracketSaveButtonCollapsedCol {
+  cursor: pointer;
+  position: fixed;
+  bottom: 25px;
+  right: 2%;
+  animation-name: fadeIn;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
 }
 .ngtt-single-elimination-tree {
   position: absolute;

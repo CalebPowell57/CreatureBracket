@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12">
+    <div class="col-12" [ngStyle]="bracketStyle">
       <div class="ngtt-se__container" id="bracketContainer">
         <div class="ngtt-se__bracket-wrapper">
           <ng-container *ngFor="let round of rounds; let i = index">

@@ -76,6 +76,14 @@ namespace CreatureBracket.Controllers
 
             return Ok(response);
         }
+        [HttpGet("CurrentStandings")]
+        public async Task<IActionResult> GetCurrentStandings()
+        {
+            var response = await _unitOfWork.BracketRepository.GetCurrentSeedStandings();
+            await _unitOfWork.SaveAsync();
+
+            return Ok(response);
+        }
 
         [HttpGet("Global")]
         public async Task<IActionResult> Global([FromQuery] Guid accountId)

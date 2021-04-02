@@ -14,12 +14,17 @@ export class SeedingViewComponent {
   SeededMatchups: ImatchupSeed[];
   constructor(private seedingService: SeedingService) { }
 
+
+  ngOnInit() {
+    this.seedingService.GetCurrentStandings().subscribe(CurrentStandings => {
+      this.SeededMatchups = CurrentStandings;
+    })
+  }
   public onSeedMatchups() {
       this.seedingService.SeedCreatures().subscribe(Round => {
         this.SeededMatchups = Round;
       })
   }
-
   public onStartBracket() {
     if (confirm("Are you sure you would like to start the bracket?")) {
       this.seedingService.StartBracket().subscribe(response => {

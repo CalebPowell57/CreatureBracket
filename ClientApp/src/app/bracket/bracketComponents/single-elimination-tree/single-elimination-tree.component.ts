@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, SimpleChanges, TemplateRef } from '@angular/core';
 import { IUserBracketDTO } from '../../../interfaces/UserBracketDTO.interface';
 import { IUserRoundDTO } from '../../../interfaces/UserRoundDTO.interface';
 
@@ -8,6 +8,7 @@ import { IUserRoundDTO } from '../../../interfaces/UserRoundDTO.interface';
   styleUrls: ['./single-elimination-tree.component.scss']
 })
 export class SingleEliminationTreeComponent implements OnChanges {
+
   zoomInEnabled = false;
   zoomOutEnabled = true;
   zoom = 100;
@@ -18,15 +19,23 @@ export class SingleEliminationTreeComponent implements OnChanges {
   @Input() matchTemplate: TemplateRef<any>;
   @Input() tournament: IUserBracketDTO;
   @Input() isGlobal: boolean;
+  @Input('zoomInOut') zoomInOut: any;
 
   public rounds: IUserRoundDTO[] = [];
   public final: IUserRoundDTO = { matchups: [], rank: 0 };
+
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.hasOwnProperty('tournament') && changes.tournament.currentValue) {
       this.rounds = this.tournament.rounds.filter(round => {
         if (round.matchups.length > 1) {
           return round;
+        }
+        if (this.tournament.rounds[0].matchups.length >= 16) {
+          this.zoomOut(40);
+        }
+        else {
+          this.zoomOut(undefined);
         }
       });
       this.final = this.tournament.rounds.filter(round => {
@@ -35,9 +44,20 @@ export class SingleEliminationTreeComponent implements OnChanges {
         }
       }).shift();
     }
+    if (changes.zoomInOut != null) {
+      if (changes.zoomInOut.currentValue && changes.zoomInOut.currentValue.Command != undefined) {
+        if (this.zoomInOut.Command === "ZoomIn") {
+          this.zoomIn();
+        }
+        else if (this.zoomInOut.Command === "ZoomOut") {
+          this.zoomOut(undefined);
+        }
+      }
+    }
   }
 
   zoomIn() {
+
     this.zoomOutEnabled = true;
 
     this.zoom += 20;
@@ -51,9 +71,14 @@ export class SingleEliminationTreeComponent implements OnChanges {
     }
   }
 
-  zoomOut() {
+  zoomOut(zoomInit: number) {
     this.zoomInEnabled = true;
-    this.zoom -= 20;
+    if (zoomInit === undefined) {
+      this.zoom -= 20;
+    }
+    else {
+      this.zoom -= zoomInit;
+    }
 
     this.bracketStyle = {
       zoom: `${this.zoom}%`
@@ -64,3 +89,4 @@ export class SingleEliminationTreeComponent implements OnChanges {
     }
   }
 }
+

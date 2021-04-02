@@ -15,13 +15,13 @@ export class  SeedingService {
   constructor(private http: HttpClient) {
   }
 
-
+  GetCurrentStandings(): Observable<ImatchupSeed[]> {
+    return this.http.get<ImatchupSeed[]>('Bracket/CurrentStandings');
+  }
   SeedCreatures(): Observable<ImatchupSeed[]> {
-
     return this.http.get<ImatchupSeed[]>('Bracket/SeedCreatures');
   }
   StartBracket(){
-
     return this.http.get('Bracket/StartBracket');
   }
   

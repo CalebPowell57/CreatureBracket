@@ -7,14 +7,26 @@ import { StandingsService } from './standings.service';
 
 @Component({
   selector: 'app-standings',
-  templateUrl: './standings.component.html'
+  templateUrl: './standings.component.html',
+  styleUrls:['./standings.component.scss']
 })
 export class StandingsComponent {
-  standings: Observable<IStandingsItemDTO[]>;
-
+  //standings: observable<istandingsitemdto[]>;
+  standings: IStandingsItemDTO[] = [];
   constructor(
     private router: Router,
     private standingsService: StandingsService) {
-    this.standings = standingsService.getStandings();
+    //this.standings = standingsService.getStandings();
+  }
+  ngOnInit() {
+    for (let i = 0; i < 10; i++) {
+      let standing: IStandingsItemDTO = {
+        firstName: "JohnTest",
+        lastName: "Dummy",
+        points: i * 10000,
+        rank: i
+      };
+      this.standings.push(standing);
+    }
   }
 }
