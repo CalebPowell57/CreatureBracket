@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
 import { EStatus } from '../interfaces/bracket.interface';
+import { AccountService } from '../shared/account.service';
 import { GlobalBracketService } from '../shared/global-bracket.service';
 
 @Component({
@@ -12,12 +13,20 @@ export class NavMenuComponent {
   isExpanded = false;
   showCreatureApproval = false;
   showBracketManager = false;
+  signedInUser = '';
+  signedInUserImage = '';
 
   constructor(
     private bracketService: GlobalBracketService,
-    private authService: MsalService) { }
+    private authService: MsalService,
+    private accountService: AccountService) { }
 
   ngOnInit() {
+    this.signedInUser = this.authService.getAccount().name;
+    this.accountService.getInformation().subscribe(x => {
+      this.signedInUserImage = x.image;
+    });
+
     this.bracketService.activeBracket().subscribe(x => {
       if (this.authService.getAccount()) {
         const roles = this.authService.getAccount().idTokenClaims.roles;
@@ -38,5 +47,9 @@ export class NavMenuComponent {
 
   toggle() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  signOut() {
+    this.authService.logout();
   }
 }

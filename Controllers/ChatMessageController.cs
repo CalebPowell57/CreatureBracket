@@ -20,7 +20,6 @@ namespace CreatureBracket.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        [AllowAnonymous]//remove this
         [HttpGet("All")]
         public async Task<IActionResult> All()
         {
