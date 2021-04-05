@@ -442,12 +442,12 @@ $foreground: white;
 
 .Glitch {
   font-family: MedulaOne;
-  font-size: 24pt;
+  font-size: 48pt;
   font-weight: bold;
   background-color: $background;
   color: $foreground;
   position: fixed;
-  top: 50%;
+  top: 46%;
   left: 50%;
   /*  @include user-select(none);
 */
@@ -469,7 +469,7 @@ $foreground: white;
   position: relative;
 
   &:after {
-    @include gitchText(2px, 'Creature');
+    @include gitchText(2px, 'Bracket');
   }
 
   &:before {
