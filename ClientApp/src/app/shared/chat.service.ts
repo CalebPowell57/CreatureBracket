@@ -24,8 +24,8 @@ export class ChatService {
     return this.http.get<IChatMessage[]>('ChatMessage/All');
   }
 
-  sendMessage(message: string, accountId: Guid) {
-    this._hubConnection.invoke('SendMessage', message, accountId.toString());
+  sendMessage(message: string, userName: string) {
+    this._hubConnection.invoke('SendMessage', message, userName);
   }
 
   private onReceiveMessage(): void {

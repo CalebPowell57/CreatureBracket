@@ -5,7 +5,7 @@ namespace CreatureBracket.Models
 {
     public class UserBracket : BaseModel
     {
-        public Guid AccountId { get; set; }
+        public string UserName { get; set; }
         public Guid BracketId { get; set; }
 
         #region navigation properties

@@ -28,6 +28,8 @@
     <PackageReference Include="Microsoft.Identity.Web.UI" Version="1.8.1" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.8.0" />
     <PackageReference Include="SendGrid" Version="9.22.0" />
+    <PackageReference Include="System.DirectoryServices" Version="5.0.0" />
+    <PackageReference Include="System.DirectoryServices.AccountManagement" Version="5.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
   </ItemGroup>
 
@@ -50,13 +52,11 @@
     <None Remove="ClientApp\src\app\creature-approval\creature-approval.service.ts" />
     <None Remove="ClientApp\src\app\creature-submission\creature-submission.service.ts" />
     <None Remove="ClientApp\src\app\interfaces\approve-submission-DTO.interface.ts" />
-    <None Remove="ClientApp\src\app\interfaces\authenticationDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\bracket.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\chat-message.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\creature-submission-DTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\creature-submission.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\CreatureDTO.interface.ts" />
-    <None Remove="ClientApp\src\app\interfaces\register-DTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\seed-matchupDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\standings-item-DTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\user.interface.ts" />
@@ -64,7 +64,6 @@
     <None Remove="ClientApp\src\app\interfaces\UserCreatureDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\UserMatchupDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\UserRoundDTO.interface.ts" />
-    <None Remove="ClientApp\src\app\interfaces\verifyAccountDTO.interface.ts" />
     <None Remove="ClientApp\src\app\seeding-view\seeding-view.service.ts" />
     <None Remove="ClientApp\src\app\shared\error.handler.ts" />
     <None Remove="ClientApp\src\app\shared\global-bracket.service.ts" />
@@ -98,13 +97,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\UserMatchupDTO.interface.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\UserRoundDTO.interface.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\UserBracketDTO.interface.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\interfaces\verifyAccountDTO.interface.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\CreatureDTO.interface.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\interfaces\register-DTO.interface.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\standings-item-DTO.interface.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -114,7 +107,6 @@
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\approve-submission-DTO.interface.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="ClientApp\src\app\interfaces\authenticationDTO.interface.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\bracket.interface.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

@@ -95,7 +95,7 @@ export class BracketComponent {
 
     let bracket: IUserBracketDTO = {
       rounds: [],
-      accountId: account.accountIdentifier
+      userName: account.userName
     };
 
     this.bracket.rounds.forEach(x => {

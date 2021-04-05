@@ -25,7 +25,7 @@ namespace CreatureBracket.Repositories
                     Message = chatMessage.Message,
                     SystemDateTime = chatMessage.SystemDateTime,
                     User = "Test Test",//$"{chatMessage.User.FirstName} {chatMessage.User.LastName}",//we need to store user info somehow
-                    AccountId = chatMessage.AccountId
+                    UserName = chatMessage.UserName
                 };
 
                 chatMessageDTOs.Add(chatMessageDTO);

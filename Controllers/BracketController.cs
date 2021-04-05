@@ -5,6 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
+using System.DirectoryServices;
+using System.DirectoryServices.AccountManagement;
+using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 
@@ -52,9 +58,78 @@ namespace CreatureBracket.Controllers
         //    return Ok();
         //}
 
+        static Image GetUserPicture(string userName)
+        {
+            using (DirectorySearcher dsSearcher = new DirectorySearcher())
+            {
+                dsSearcher.Filter = "(&(objectClass=user) (cn=Caleb Powell))";
+                SearchResult result = dsSearcher.FindOne();
+
+                using (DirectoryEntry user = new DirectoryEntry(result.Path))
+                {
+                    byte[] data = user.Properties["thumbnailPhoto"].Value as byte[];
+
+                    var names = "";
+
+                    foreach(PropertyValueCollection prop in user.Properties)
+                    {
+                        if (prop.PropertyName == "objectGUID")
+                        {
+                            names += new Guid(prop.Value as byte[]).ToString() + "\n";
+                        }
+                        else
+                        {
+                            names += prop.Value + "\n";
+                        }
+                    }
+
+                    var base64 = Convert.ToBase64String(data);
+
+                    if (data != null)
+                    {
+                        using (MemoryStream s = new MemoryStream(data))
+                        {
+                            return Bitmap.FromStream(s);
+                        }
+                    }
+
+                    return null;
+                }
+            }
+        }
+
+        private PrincipalSearchResult<Principal> getusers()
+        {
+            using (var ctx = new PrincipalContext(ContextType.Domain, "fusionmgt"))
+            {
+                var myDomainUsers = new List<string>();
+                var userPrinciple = new UserPrincipal(ctx);
+                using (var search = new PrincipalSearcher(userPrinciple))
+                {
+                    //foreach (var domainUser in search.FindAll())
+                    //{
+                    //    if (domainUser.DisplayName != null)
+                    //    {
+                    //        myDomainUsers.Add(domainUser.DisplayName);
+                    //    }
+                    //}
+
+                    var results = search.FindAll();
+
+                    var me = results.Single(x => x.Name.ToLower().Contains("caleb"));
+
+                    return results;
+                }
+            }
+        }
+
         [HttpGet("Active")]
         public async Task<IActionResult> Active()
         {
+            //var b = getusers();
+
+            //var c = GetUserPicture("");
+
             var response = await _unitOfWork.BracketRepository.ActiveAsync();
 
             return Ok(response);
@@ -86,9 +161,9 @@ namespace CreatureBracket.Controllers
         }
 
         [HttpGet("Global")]
-        public async Task<IActionResult> Global([FromQuery] Guid accountId)
+        public async Task<IActionResult> Global([FromQuery] string userName)
         {
-            var response = await _unitOfWork.BracketRepository.GlobalAsync(accountId);
+            var response = await _unitOfWork.BracketRepository.GlobalAsync(userName);
 
             return Ok(response);
         }

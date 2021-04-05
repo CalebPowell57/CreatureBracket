@@ -3,7 +3,7 @@ import { Guid } from "guid-typescript";
 export interface IChatMessage {
   chatMessageId: Guid;
   user: string;
-  accountId: Guid;
+  userName: string;
   message: string;
   systemDateTime: Date;
 }

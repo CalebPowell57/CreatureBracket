@@ -6,7 +6,7 @@ namespace CreatureBracket.Models
     public class Vote : BaseModel
     {
         public Guid MatchupId { get; set; }
-        public Guid AccountId { get; set; }
+        public string UserName { get; set; }
         public Guid CreatureId { get; set; }
 
         #region navigation properties

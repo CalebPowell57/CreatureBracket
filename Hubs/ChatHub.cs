@@ -16,14 +16,14 @@ namespace CreatureBracket.Hubs
             _unitOfWork = unitOfWork;
         }
 
-        public async Task SendMessage(string message, Guid accountId)
+        public async Task SendMessage(string message, string userName)
         {
             var chatMessage = new ChatMessage
             {
                 Id = Guid.NewGuid(),
                 Message = message,
                 SystemDateTime = DateTime.UtcNow,
-                AccountId = accountId
+                UserName = userName
             };
 
             await _unitOfWork.ChatMessageRepository.PostAsync(chatMessage);
@@ -34,7 +34,7 @@ namespace CreatureBracket.Hubs
                 ChatMessageId = chatMessage.Id,
                 Message = chatMessage.Message,
                 User = "Test Test",//$"{user.FirstName} {user.LastName}",//we need to store user info or something
-                AccountId = accountId,
+                UserName = userName,
                 SystemDateTime = chatMessage.SystemDateTime
             };
 

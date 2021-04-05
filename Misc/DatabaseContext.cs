@@ -31,7 +31,7 @@ namespace CreatureBracket.Misc
                         .IsUnique();
 
             modelBuilder.Entity<Vote>()
-                        .HasIndex(x => new { x.MatchupId, x.AccountId })
+                        .HasIndex(x => new { x.MatchupId, x.UserName })
                         .IsUnique();
 
             modelBuilder.Entity<CreatureSubmission>()

@@ -21,7 +21,7 @@ export class GlobalBracketService {
   getBracketData(): Observable<IUserBracketDTO> {
     const account = this.authService.getAccount();
 
-    let params = new HttpParams().set('accountId', account.accountIdentifier);
+    let params = new HttpParams().set('userName', account.userName);
 
     return this.http.get<IUserBracketDTO>('Bracket/Global', { params: params });
   }
@@ -29,7 +29,7 @@ export class GlobalBracketService {
   getMyBracket(): Observable<IUserBracketDTO> {
     const account = this.authService.getAccount();
 
-    let params = new HttpParams().set('accountId', account.accountIdentifier);
+    let params = new HttpParams().set('userName', account.userName);
 
     return this.http.get<IUserBracketDTO>('UserBracket/MyBracket', { params: params });
   }

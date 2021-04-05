@@ -13,7 +13,7 @@ import { ChatService } from '../../../../shared/chat.service';
 export class ChatComponent {
   chatMessages: IChatMessage[];
   chatText = '';
-  accountId = this.authService.getAccount().accountIdentifier;
+  userName = this.authService.getAccount().userName;
 
   constructor(private chatService: ChatService,
               private authService: MsalService) {
@@ -30,7 +30,7 @@ export class ChatComponent {
     const account = this.authService.getAccount();
 
     if (this.chatText !== '' && form.valid) {
-      this.chatService.sendMessage(this.chatText, Guid.parse(account.accountIdentifier));
+      this.chatService.sendMessage(this.chatText, account.userName);
 
       this.chatText = '';
     }

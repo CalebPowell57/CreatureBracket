@@ -35,7 +35,7 @@ export class MatchComponent {
       CreatureId: creature.creatureId,
       Id: voteId,
       MatchupId: this.matchup.matchupId,
-      AccountId: account.accountIdentifier
+      UserName: account.userName
     };
 
     this.matchup.vote = { voteId: vote.Id, creatureId: creature.creatureId };
