@@ -1,5 +1,4 @@
-﻿using CreatureBracket.DTOs.Requests;
-using CreatureBracket.DTOs.Responses;
+﻿using CreatureBracket.DTOs.Responses;
 using CreatureBracket.Misc;
 using CreatureBracket.Models;
 using Microsoft.EntityFrameworkCore;
@@ -41,12 +40,15 @@ namespace CreatureBracket.Repositories
 
             foreach (var userBracket in userBrackets)
             {
+                var adUserInfo = ADUserInfo.GetByUserName(userBracket.UserName);
+
                 var standingItem = new StandingsItemDTO
                 {
-                    FirstName = "",//we need to store users names or something
-                    LastName = "",//we need to store users names or something
+                    FirstName = adUserInfo.FirstName,
+                    LastName = adUserInfo.LastName,
                     Points = 0,
-                    Rank = 1
+                    Rank = 1,
+                    Image = adUserInfo.Image
                 };
 
                 standings.Add(standingItem);
@@ -54,6 +56,7 @@ namespace CreatureBracket.Repositories
 
             return standings;
         }
+
         public async Task<List<SeedMatchupDTO>> GetCurrentSeedStandings()
         {
             var active = await ActiveAsync();
@@ -62,6 +65,7 @@ namespace CreatureBracket.Repositories
             return CurrentProjectedMatchups;
 
         }
+
         public async Task<List<SeedMatchupDTO>> SeedCreaturesAsync()
         {
             var active = await ActiveAsync();

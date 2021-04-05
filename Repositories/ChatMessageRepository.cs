@@ -3,6 +3,7 @@ using CreatureBracket.Misc;
 using CreatureBracket.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CreatureBracket.Repositories
@@ -15,17 +16,22 @@ namespace CreatureBracket.Repositories
         {
             var chatMessageDTOs = new List<ChatMessageDTO>();
 
-            var chatMessages = await _context.ChatMessages.ToListAsync();
+            var chatMessages = await _context.ChatMessages.OrderBy(x => x.SystemDateTime).ToListAsync();
+
+            var userInfoDictionary = new Dictionary<string, ADUserInfo>();
 
             foreach(var chatMessage in chatMessages)
             {
+                var userInfo = userInfoDictionary.ContainsKey(chatMessage.UserName) ? userInfoDictionary[chatMessage.UserName] : ADUserInfo.GetByUserName(chatMessage.UserName);
+
                 var chatMessageDTO = new ChatMessageDTO
                 {
                     ChatMessageId = chatMessage.Id,
                     Message = chatMessage.Message,
                     SystemDateTime = chatMessage.SystemDateTime,
-                    User = "Test Test",//$"{chatMessage.User.FirstName} {chatMessage.User.LastName}",//we need to store user info somehow
-                    UserName = chatMessage.UserName
+                    User = $"{userInfo.FirstName} {userInfo.LastName}",
+                    UserName = chatMessage.UserName,
+                    Image = userInfo.Image
                 };
 
                 chatMessageDTOs.Add(chatMessageDTO);

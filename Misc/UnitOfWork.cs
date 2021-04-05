@@ -9,6 +9,8 @@ namespace CreatureBracket.Misc
     {
         private DatabaseContext _context;
 
+        public AccountRepository AccountRepository { get; private set; }
+
         public BracketRepository BracketRepository { get; private set; }
         public CreatureSubmissionRepository CreatureSubmissionRepository { get; private set; }
         public UserBracketRepository UserBracketRepository { get; private set; }
@@ -21,6 +23,8 @@ namespace CreatureBracket.Misc
         public UnitOfWork(DatabaseContext context)
         {
             _context = context;
+
+            AccountRepository = new AccountRepository(_context);
 
             BracketRepository = new BracketRepository(_context);
             CreatureSubmissionRepository = new CreatureSubmissionRepository(_context);

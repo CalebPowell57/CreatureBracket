@@ -6,4 +6,5 @@ export interface IChatMessage {
   userName: string;
   message: string;
   systemDateTime: Date;
+  image: string;
 }

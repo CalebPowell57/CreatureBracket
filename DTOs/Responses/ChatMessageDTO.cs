@@ -9,5 +9,6 @@ namespace CreatureBracket.DTOs.Responses
         public string Message { get; set; }
         public string UserName { get; set; }
         public DateTime SystemDateTime { get; set; }
+        public string Image { get; set; }
     }
 }

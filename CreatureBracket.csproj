@@ -65,6 +65,7 @@
     <None Remove="ClientApp\src\app\interfaces\UserMatchupDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\UserRoundDTO.interface.ts" />
     <None Remove="ClientApp\src\app\seeding-view\seeding-view.service.ts" />
+    <None Remove="ClientApp\src\app\shared\account.service.ts" />
     <None Remove="ClientApp\src\app\shared\error.handler.ts" />
     <None Remove="ClientApp\src\app\shared\global-bracket.service.ts" />
     <None Remove="ClientApp\src\app\shared\http-request.interceptor.ts" />
@@ -115,6 +116,9 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\user.interface.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\seeding-view\seeding-view.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\account.service.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\shared\chat.service.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
