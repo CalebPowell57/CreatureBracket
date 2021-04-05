@@ -28,7 +28,7 @@ import { CreatureApprovalComponent } from './creature-approval/creature-approval
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { SeedingViewComponent } from './seeding-view/seeding-view.component';
 import { CustomErrorHandler } from './shared/error.handler';
-import { LoadingAnimationComponent } from './loading-animation/loading-animation.component';
+import { WelcomeInformationComponent } from './welcome-information/welcome-information.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -44,7 +44,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     NoPermissionsComponent,
     CreatureApprovalComponent,
     SeedingViewComponent,
-    LoadingAnimationComponent
+    WelcomeInformationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -58,7 +58,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       positionClass: 'toast-bottom-right'
     }),
     RouterModule.forRoot([
-      { path: 'loading-animation', component: LoadingAnimationComponent},
+      { path: 'How-To', component: WelcomeInformationComponent },
       { path: 'current-standings', component: StandingsComponent, canActivate: [StandingsGuard, RequireAuthenticationGuard] },
       { path: 'creature-approval', component: CreatureApprovalComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard, CreatureApprovalGuard] },
       { path: 'bracket-manager', component: BracketManagerComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard] },
