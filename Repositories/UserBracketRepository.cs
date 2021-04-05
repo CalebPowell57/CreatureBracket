@@ -166,7 +166,8 @@ namespace CreatureBracket.Repositories
                 Id = Guid.NewGuid(),
                 BracketId = activeBracketId,
                 UserName = dto.UserName,
-                Rounds = new List<UserRound>()
+                Rounds = new List<UserRound>(),
+                Points = 0
             };
 
             foreach (var roundDTO in dto.Rounds)
