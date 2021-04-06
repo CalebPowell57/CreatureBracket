@@ -36,18 +36,23 @@ namespace CreatureBracket.Repositories
 
             var standings = new List<StandingsItemDTO>();
 
-            var userBrackets = await _context.UserBrackets.Where(x => x.BracketId == activeBracket.Id).ToListAsync();
+            var userBrackets = await _context.UserBrackets.OrderByDescending(x => x.Points)
+                                                            .ThenBy(x => x.UserName)
+                                                          .Where(x => x.BracketId == activeBracket.Id)
+                                                          .ToListAsync();
 
             foreach (var userBracket in userBrackets)
             {
                 var adUserInfo = ADUserInfo.GetByUserName(userBracket.UserName);
 
+                var tiedItems = standings.Where(x => x.Points == userBracket.Points).ToList();
+
                 var standingItem = new StandingsItemDTO
                 {
                     FirstName = adUserInfo.FirstName,
                     LastName = adUserInfo.LastName,
-                    Points = 0,
-                    Rank = 1,
+                    Points = userBracket.Points,
+                    Rank = tiedItems.Any() ? tiedItems[0].Rank : userBrackets.IndexOf(userBracket) + 1,
                     Image = adUserInfo.Image
                 };
 

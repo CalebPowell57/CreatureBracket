@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SeedingViewComponent } from './seeding-view.component';
+import { SeedTournamentComponent } from './seed-tournament.component';
 
-describe('SeedingViewComponent', () => {
-  let component: SeedingViewComponent;
-  let fixture: ComponentFixture<SeedingViewComponent>;
+describe('SeedTournamentComponent', () => {
+  let component: SeedTournamentComponent;
+  let fixture: ComponentFixture<SeedTournamentComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SeedingViewComponent ]
+      declarations: [SeedTournamentComponent]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SeedingViewComponent);
+    fixture = TestBed.createComponent(SeedTournamentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
