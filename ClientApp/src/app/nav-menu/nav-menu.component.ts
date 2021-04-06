@@ -16,6 +16,7 @@ export class NavMenuComponent {
   showSeedTournament = false;
   showStandings = false;
   showMyBracket = false;
+  showGlobalBracket = false;
   signedInUser = '';
   signedInUserImage = '';
 
@@ -39,6 +40,7 @@ export class NavMenuComponent {
         this.showSeedTournament = isSuper && x.status === EStatus.Open;
         this.showStandings = x.status !== EStatus.Open;
         this.showMyBracket = x.status !== EStatus.Open;
+        this.showGlobalBracket = x.status !== EStatus.Open;
         this.showBracketManager = isSuper;
       }
     });
