@@ -1,13 +1,112 @@
-<div class="container-fluid ContainerNoPadding h-100">
-  <div class="row h-100">
-    <div class="col-12 ColNoPadding h-100">
-      <app-creature-submission *ngIf="showCreatureSubmission"></app-creature-submission>
+<script>
+  window.addEventListener('scroll', () => {
+    document.body.style.setProperty('--scroll', window.pageYOffset / (document.body.offsetHeight - window.innerHeight));
+    alert("ThisHit");
+  }, false);
+</script>
+<div class="container-fluid" style="padding:0px;">
+  <div class="row" >
+    <div class="col-auto">
+      <div class="bgimg-1">
+        <div class="circle-container" *ngFor="let partical of particalArray">
+          <div class="circle">
+          </div>
+        </div>
+        <div class="caption">
+          <span class="border">Welcome to Creature Bracket</span>
+        </div>
+      </div>
+      <div class="TextBox scroller" style="color: #ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify; ">
+        <p>
+          Creature bracket is a play on the typical march madness style bracket prediction/competition with a apples-to-apples
+          element to it. Come up with clever/unique creature entries, make predictions as to which of the available characters
+          will move on throughout the bracket as well as who the overall winner will be, and attempt to convince other players
+          that your selected creatures will win in their matches.
+        </p>
+      </div>
 
-      <app-bracket *ngIf="showGlobalBracket" [isGlobal]="true"></app-bracket>
+      <div class="bgimg-2">
+        <div class="caption">
+          <span class="border">Creature Submission</span>
+        </div>
+      </div>
+      <div class="TextBox scroller" style="position:relative;">
+        <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
+          <p>
+            Prior to the tournament beginning, you will be defaulted to the creature submission page. As the name would suggest, here users will be able to upload an image, name, and small bio
+            description for the creature of their choice. There are no restrictions as far as what or who can be a creature in the creature bracket. The creature can be from a comic series,
+            game, movie, or an inanimate object, the name of the game is simply to convince others to agree/vote alongside you.  Be creative and
+            have fun
+            with it!
+          </p>
+        </div>
+      </div>
 
-      <app-standings *ngIf="showFinalStandings"></app-standings>
+      <div class="bgimg-3">
+        <div class="caption">
+          <span class="border">Tournament Begins</span>
+        </div>
+      </div>
+      <div class="TextBox" style="position:relative;">
+        <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
+          <p>
+            The torunament will be made up of 64 user submitted creatures. Once all of the creature submissions have been approved, the torunament will begin, making the bracket avaliable
+            for all users to access. Each round will last three days, during which all registered users will be able to cast their votes for each avaliable creature matchup. At the end of
+            the 3 day period, the winner of each round will be determined by the system using risk rule logic.
+          </p>
+        </div>
+      </div>
 
-      <h2 *ngIf="showNoActiveBracket">Wait for a tournament organizer to start the bracket!</h2>
+      <div class="bgimg-4">
+        <div class="caption">
+          <span class="border">Tournament Begins</span>
+        </div>
+      </div>
+      <div class="TextBox" style="position:relative;">
+        <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
+          <p>
+            The torunament will be made up of 64 user submitted creatures. Once all of the creature submissions have been approved, the torunament will begin, making the bracket avaliable
+            for all users to access. Each round will last three days, during which all registered users will be able to cast their votes for each avaliable creature matchup. At the end of
+            the 3 day period, the winner of each round will be determined by the system using risk rule logic.
+          </p>
+        </div>
+      </div>
+
+      <div class="bgimg-5">
+        <div class="caption">
+          <span class="border">Matchups</span>
+        </div>
+      </div>
+      <div class="TextBox" style="position:relative;">
+        <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
+          <p>
+            There are no stipulations as to which creature will be facing off against another. They could be cross-universe, cross-platform, potentially having nothing in common. This will result
+            in interesting debates as to which creature will have an edge and move to the next round!
+          </p>
+        </div>
+      </div>
+
+      <div class="bgimg-6">
+        <div class="caption">
+          <span class="border">Voting</span>
+        </div>
+      </div>
+      <div class="TextBox" style="position:relative;">
+        <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
+          <p>
+            In order to cast your vote, simply hover over a matchup within the bracket and two boxes will appear. Click the on the box
+            associated with the desired creature and your vote will be submitted for that matchup. You are able to switch your vote after
+            initially casting if desired.
+          </p>
+        </div>
+      </div>
+
+      <div class="bgimg-1">
+        <div class="caption">
+          <span class="border">COOL!</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+

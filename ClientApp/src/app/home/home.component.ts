@@ -1,32 +1,89 @@
-import { Component } from '@angular/core';
-import { EStatus } from '../interfaces/bracket.interface';
-import { GlobalBracketService } from '../shared/global-bracket.service';
+import { Component, OnInit } from '@angular/core';
+import { Directive, HostListener } from '@angular/core';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
-  showCreatureSubmission = false;
-  showGlobalBracket = false;
-  showFinalStandings = false;
-  showNoActiveBracket = false;
+export class HomeComponent  {
+  particalArray = new Array(50);
 
-  constructor(private bracketService: GlobalBracketService) {}
+  constructor() { }
 
 
-  ngOnInit(): void {
-    this.bracketService.activeBracket().subscribe(activeBracket => {
-      if (activeBracket) {
-        this.showCreatureSubmission = activeBracket.status === EStatus.Started;
-        this.showGlobalBracket = activeBracket.status === EStatus.Open;
-        this.showFinalStandings = activeBracket.status === EStatus.Completed;
-      } else {
-        this.showNoActiveBracket = true;
-      }
-    });
-  }
+
+  //@Output()
+  //appear: EventEmitter<void>;
+
+  //elementPos: number;
+  //elementHeight: number;
+
+  //scrollPos: number;
+  //windowHeight: number;
+
+  //subscriptionScroll: Subscription;
+  //subscriptionResize: Subscription;
+
+  //constructor(private element: ElementRef) {
+  //  this.appear = new EventEmitter<void>();
+  //}
+
+  //saveDimensions() {
+  //  this.elementPos = this.getOffsetTop(this.element.nativeElement);
+  //  this.elementHeight = this.element.nativeElement.offsetHeight;
+  //  this.windowHeight = window.innerHeight;
+  //}
+  //saveScrollPos() {
+  //  this.scrollPos = window.scrollY;
+  //}
+  //getOffsetTop(element: any) {
+  //  let offsetTop = element.offsetTop || 0;
+  //  if (element.offsetParent) {
+  //    offsetTop += this.getOffsetTop(element.offsetParent);
+  //  }
+  //  return offsetTop;
+  //}
+  //checkVisibility() {
+  //  if (this.isVisible()) {
+  //    // double check dimensions (due to async loaded contents, e.g. images)
+  //    this.saveDimensions();
+  //    if (this.isVisible()) {
+  //      this.unsubscribe();
+  //      this.appear.emit();
+  //    }
+  //  }
+  //}
+  //isVisible() {
+  //  return this.scrollPos >= this.elementPos || (this.scrollPos + this.windowHeight) >= (this.elementPos + this.elementHeight);
+  //}
+
+  //subscribe() {
+  //  this.subscriptionScroll = Observable.fromEvent(window, 'scroll').startWith(null)
+  //    .subscribe(() => {
+  //      this.saveScrollPos();
+  //      this.checkVisibility();
+  //    });
+  //  this.subscriptionResize = Observable.fromEvent(window, 'resize').startWith(null)
+  //    .subscribe(() => {
+  //      this.saveDimensions();
+  //      this.checkVisibility();
+  //    });
+  //}
+  //unsubscribe() {
+  //  if (this.subscriptionScroll) {
+  //    this.subscriptionScroll.unsubscribe();
+  //  }
+  //  if (this.subscriptionResize) {
+  //    this.subscriptionResize.unsubscribe();
+  //  }
+  //}
+
+  //ngAfterViewInit() {
+  //  this.subscribe();
+  //}
+  //ngOnDestroy() {
+  //  this.unsubscribe();
+  //}
 }
-
-
