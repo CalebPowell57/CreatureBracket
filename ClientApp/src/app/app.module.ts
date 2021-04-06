@@ -1,33 +1,32 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
-import { ToastrModule } from 'ngx-toastr';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 import { MsalInterceptor, MsalModule } from '@azure/msal-angular';
-
-import { RequireAuthenticationGuard } from './shared/requre-authentication.guard';
-import { StandingsGuard } from './standings/standings.guard';
-import { UserBracketGuard } from './bracket/user-bracket/user-bracket.guard';
-import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.guard';
-import { CreatureApprovalGuard } from './creature-approval/creature-approval.guard';
-
-import { HttpRequestInterceptor } from './shared/http-request.interceptor';
-
-import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { StandingsComponent } from './standings/standings.component';
-import { BracketManagerComponent } from './bracket-manager/bracket-manager.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { CreatureSubmissionComponent } from './creature-submission/creature-submission.component';
-import { BracketModule } from './bracket/bracket.module';
-import { NoPermissionsComponent } from './no-permissions/no-permissions.component';
-import { CreatureApprovalComponent } from './creature-approval/creature-approval.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { ToastrModule } from 'ngx-toastr';
+import { AppComponent } from './app.component';
+import { BracketManagerComponent } from './bracket-manager/bracket-manager.component';
+import { BracketModule } from './bracket/bracket.module';
+import { CreatureApprovalComponent } from './creature-approval/creature-approval.component';
+import { CreatureApprovalGuard } from './creature-approval/creature-approval.guard';
+import { CreatureSubmissionComponent } from './creature-submission/creature-submission.component';
+import { HomeComponent } from './home/home.component';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { NoPermissionsComponent } from './no-permissions/no-permissions.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { SeedTournamentComponent } from './seed-tournament/seed-tournament.component';
 import { CustomErrorHandler } from './shared/error.handler';
+import { HttpRequestInterceptor } from './shared/http-request.interceptor';
+import { RequireAuthenticationGuard } from './shared/requre-authentication.guard';
+import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.guard';
+import { StandingsComponent } from './standings/standings.component';
+import { StandingsGuard } from './standings/standings.guard';
+
+
+
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
