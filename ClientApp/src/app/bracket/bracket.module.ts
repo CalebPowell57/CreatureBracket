@@ -18,6 +18,7 @@ import { GlobalBracketComponent } from './global-bracket/global-bracket.componen
   declarations: [
     BracketComponent,
     UserBracketComponent,
+    GlobalBracketComponent,
     MatchComponent,
     UserMatchComponent,
     SingleEliminationTreeComponent,
