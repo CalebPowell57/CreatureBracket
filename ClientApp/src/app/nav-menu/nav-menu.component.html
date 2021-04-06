@@ -45,8 +45,8 @@
               <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="showMyBracket">
                 <a class="nav-link" [routerLink]="['/user-bracket']">My Bracket</a>
               </li>
-              <li class="nav-item" [routerLinkActive]="['link-active']">
-                <a class="nav-link" [routerLink]="['/global-bracket']">Tournamnet</a>
+              <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="showGlobalBracket">
+                <a class="nav-link" [routerLink]="['/global-bracket']">Tournament</a>
               </li>
             </ul>
           </div>

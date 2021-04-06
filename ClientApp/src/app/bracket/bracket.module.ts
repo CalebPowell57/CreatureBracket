@@ -11,12 +11,14 @@ import { FormsModule } from '@angular/forms';
 import { ChatComponent } from './bracketComponents/creature-discussion-col/chat/chat.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserBracketComponent } from './user-bracket/user-bracket.component';
+import { GlobalBracketComponent } from './global-bracket/global-bracket.component';
 
 
 @NgModule({
   declarations: [
     BracketComponent,
     UserBracketComponent,
+    GlobalBracketComponent,
     MatchComponent,
     UserMatchComponent,
     SingleEliminationTreeComponent,
@@ -29,8 +31,8 @@ import { UserBracketComponent } from './user-bracket/user-bracket.component';
     FormsModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
-      { path: 'global-bracket', component: BracketComponent },
-      { path: 'user-bracket', component: UserBracketComponent }
+      { path: 'user-bracket', component: UserBracketComponent, canActivate: [UserBracketComponent] },
+      { path: 'global-bracket', component: GlobalBracketComponent, canActivate: [GlobalBracketComponent] }
       ])
     ],
   exports: [

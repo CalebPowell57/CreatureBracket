@@ -48,6 +48,7 @@
     <None Remove="ClientApp\src\app\bracket\bracket-generator.module.ts" />
     <None Remove="ClientApp\src\app\bracket\bracket.module.ts" />
     <None Remove="ClientApp\src\app\bracket-manager\bracket-manager.service.ts" />
+    <None Remove="ClientApp\src\app\bracket\global-bracket\global-bracket.guard.ts" />
     <None Remove="ClientApp\src\app\creature-approval\creature-approval.guard.ts" />
     <None Remove="ClientApp\src\app\creature-approval\creature-approval.service.ts" />
     <None Remove="ClientApp\src\app\creature-submission\creature-submission.service.ts" />
@@ -79,6 +80,9 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\bracket\bracket.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\bracket-manager\bracket-manager.service.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\bracket\global-bracket\global-bracket.guard.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\creature-approval\creature-approval.service.ts">
