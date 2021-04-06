@@ -17,7 +17,7 @@
           <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
                [ngClass]="{ show: isExpanded }">
             <div>
-              <img src="{{signedInUserImage}}" style="border-radius:50%; margin-right:10px;" height="32" width="32"/>
+              <img src="{{signedInUserImage}}" style="border-radius:50%; margin-right:10px;" height="32" width="32" *ngIf="signedInUserImage"/>
 
               <span style="margin-right:10px;">{{signedInUser}}</span>
 
@@ -30,8 +30,8 @@
                   [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link" [routerLink]="['/']">Home</a>
               </li>
-              <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="showBracketManager">
-                <a class="nav-link" [routerLink]="['/bracket-manager']">Bracket Manager</a>
+              <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="showCreatureSubmission">
+                <a class="nav-link" [routerLink]="['/creature-submisison']">Creature Submission</a>
               </li>
               <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="showCreatureApproval">
                 <a class="nav-link" [routerLink]="['/creature-approval']">Creature Approval</a>
@@ -39,14 +39,17 @@
               <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="showSeedTournament">
                 <a class="nav-link" [routerLink]="['/seed-tournament']">Seed Tournament</a>
               </li>
-              <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="showStandings">
-                <a class="nav-link" [routerLink]="['/current-standings']">Standings</a>
+              <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="showGlobalBracket">
+                <a class="nav-link" [routerLink]="['/tournament']">Tournament</a>
               </li>
               <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="showMyBracket">
                 <a class="nav-link" [routerLink]="['/user-bracket']">My Bracket</a>
               </li>
-              <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="showGlobalBracket">
-                <a class="nav-link" [routerLink]="['/global-bracket']">Tournament</a>
+              <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="showStandings">
+                <a class="nav-link" [routerLink]="['/current-standings']">Standings</a>
+              </li>
+              <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="showBracketManager">
+                <a class="nav-link" [routerLink]="['/bracket-manager']">Bracket Manager</a>
               </li>
             </ul>
           </div>
