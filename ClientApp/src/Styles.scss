@@ -286,11 +286,11 @@ $foreground: white;
 
 @keyframes voo {
   0%, 100% {
-    transform: translateY(0);
+    transform: translateY(25px);
   }
 
   50% {
-    transform: translateY(-500px);
+    transform: translateY(-25px);
   }
 }
 
@@ -490,5 +490,94 @@ $foreground: white;
     opacity: 1;
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
+  }
+}
+
+
+
+
+
+.circle-container {
+  $particleNum: 50;
+  $particleColor: hsl(180, 100%, 80%);
+
+  position: absolute;
+  transform: translateY(-10vh);
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+
+  $particleBaseSize: 8;
+
+
+  @for $i from 1 through $particleNum {
+    &:nth-child(#{$i}) {
+      $circleSize: $particleBaseSize;
+      width: $circleSize + px;
+      height: $circleSize + px;
+      $startPositionY: 100;
+      $framesName: "move-frames-" + $i;
+      $moveDuration: 500 + random(500) + ms;
+      $startCoordinateXNumber: -30 + random(60);
+      $startCoordinateX: $startCoordinateXNumber + px;
+      $endCoordinateXNumber: -30 + random(60);
+      $endCoordinateX: $endCoordinateXNumber + px;
+      $delay: random(1000);
+      animation-name: #{$framesName};
+      animation-duration: $moveDuration;
+      animation-delay: $delay + ms;
+
+      @keyframes #{$framesName} {
+        from {
+          transform: translate3d( $endCoordinateX, #{0}, 0 );
+        }
+
+        to {
+          transform: translate3d( $endCoordinateX, #{$startPositionY + 20px}, 0 );
+        }
+      }
+
+      $frame1: $delay + 500;
+
+      @if $frame1 > 1000 {$frame1: $frame1 - 1000;}
+
+      $frame2: $frame1 + 500;
+
+      @if $frame2 > 1000 {$frame2: $frame2 - 1000;}
+
+      .circle {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        mix-blend-mode: screen;
+        background-image: radial-gradient( hsl(231, 100%, 97%), hsl(240, 100%, 98%) 10%, hsla(180, 100%, 80%, 0) 56% );
+        animation: fadein-frames 200ms infinite, scale-frame1 $frame1 + ms infinite, scale-frame2 $frame2 + ms infinite;
+
+        @keyframes fade-frames {
+          0% {
+            opacity: 1;
+          }
+
+          50% {
+            opacity: 0.7;
+          }
+
+          100% {
+            opacity: 1;
+          }
+        }
+
+        @keyframes scale-frame1 {
+          to {
+            transform: scale3d(2.2, 2.2, 1);
+          }
+        }
+
+        @keyframes scale-frame2 {
+          to {
+            transform: scale3d(0, 0, 1);
+          }
+        }
+      }
+    }
   }
 }
