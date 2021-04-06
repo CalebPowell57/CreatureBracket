@@ -13,6 +13,9 @@ export class NavMenuComponent {
   isExpanded = false;
   showCreatureApproval = false;
   showBracketManager = false;
+  showSeedTournament = false;
+  showStandings = false;
+  showMyBracket = false;
   signedInUser = '';
   signedInUserImage = '';
 
@@ -30,13 +33,13 @@ export class NavMenuComponent {
     this.bracketService.activeBracket().subscribe(x => {
       if (this.authService.getAccount()) {
         const roles = this.authService.getAccount().idTokenClaims.roles;
+        const isSuper = roles && roles.includes('super');
 
-        if (roles) {
-          this.showCreatureApproval = roles.includes('super') && x.status === EStatus.Open;
-          this.showBracketManager = roles.includes('super');
-        }
-      } else {
-        this.showCreatureApproval = x.status === EStatus.Open;
+        this.showCreatureApproval = isSuper && x.status === EStatus.Open;
+        this.showSeedTournament = isSuper && x.status === EStatus.Open;
+        this.showStandings = x.status !== EStatus.Open;
+        this.showMyBracket = x.status !== EStatus.Open;
+        this.showBracketManager = isSuper;
       }
     });
   }

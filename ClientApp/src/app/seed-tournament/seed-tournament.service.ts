@@ -11,7 +11,7 @@ import { ImatchupSeed } from '../interfaces/seed-matchupDTO.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class  SeedingService {
+export class  SeedTournamentService {
   constructor(private http: HttpClient) {
   }
 

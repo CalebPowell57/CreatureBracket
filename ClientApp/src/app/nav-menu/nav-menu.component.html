@@ -36,14 +36,14 @@
               <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="showCreatureApproval">
                 <a class="nav-link" [routerLink]="['/creature-approval']">Creature Approval</a>
               </li>
-              <li class="nav-item" [routerLinkActive]="['link-active']">
-                <a class="nav-link" [routerLink]="['/seeding-view']">Seeding View</a>
+              <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="showSeedTournament">
+                <a class="nav-link" [routerLink]="['/seed-tournament']">Seed Tournament</a>
               </li>
-              <li class="nav-item" [routerLinkActive]="['link-active']">
+              <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="showStandings">
                 <a class="nav-link" [routerLink]="['/current-standings']">Standings</a>
               </li>
-              <li class="nav-item" [routerLinkActive]="['link-active']">
-                <a class="nav-link" [routerLink]="['/user-bracket']">Your Bracket</a>
+              <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="showMyBracket">
+                <a class="nav-link" [routerLink]="['/user-bracket']">My Bracket</a>
               </li>
               <li class="nav-item" [routerLinkActive]="['link-active']">
                 <a class="nav-link" [routerLink]="['/How-To']">How-To</a>

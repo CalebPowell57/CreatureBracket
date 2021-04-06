@@ -26,7 +26,7 @@ import { BracketModule } from './bracket/bracket.module';
 import { NoPermissionsComponent } from './no-permissions/no-permissions.component';
 import { CreatureApprovalComponent } from './creature-approval/creature-approval.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { SeedingViewComponent } from './seeding-view/seeding-view.component';
+import { SeedTournamentComponent } from './seed-tournament/seed-tournament.component';
 import { CustomErrorHandler } from './shared/error.handler';
 import { WelcomeInformationComponent } from './welcome-information/welcome-information.component';
 
@@ -43,7 +43,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     BracketManagerComponent,
     NoPermissionsComponent,
     CreatureApprovalComponent,
-    SeedingViewComponent,
+    SeedTournamentComponent,
     WelcomeInformationComponent
   ],
   imports: [
@@ -65,7 +65,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       { path: 'standings', component: StandingsComponent, canActivate: [RequireAuthenticationGuard] },
       { path: 'no-permissions', component: NoPermissionsComponent },
       { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [RequireAuthenticationGuard] },
-      { path: 'seeding-view', component: SeedingViewComponent, canActivate: [RequireAuthenticationGuard] },
+      { path: 'seed-tournament', component: SeedTournamentComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard] },
       { path: '**', component: NotFoundComponent }
     ]),
     MsalModule.forRoot({

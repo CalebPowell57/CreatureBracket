@@ -140,6 +140,30 @@ namespace CreatureBracket.Repositories
             return bracket;
         }
 
+        public async Task UpdatePointsAsync(Guid bracketId, Round round)
+        {
+            var userBrackets = await _context.UserBrackets.Include(x => x.Rounds)
+                                                            .ThenInclude(x => x.Matchups)
+                                                          .Where(x => x.BracketId == bracketId)
+                                                          .ToListAsync();
+
+            foreach (var userBracket in userBrackets)
+            {
+                var userRound = userBracket.Rounds.Single(x => x.Rank == round.Rank);
+
+                var userMatchups = userRound.Matchups.OrderBy(x => x.Seed).ToList();
+
+                foreach (var matchup in userMatchups)
+                {
+                    userBracket.Points += matchup.WinnerId == round.Matchups.OrderBy(x => x.SystemDateTime)
+                                                                            .ToList()[userMatchups.IndexOf(matchup)].WinnerId ?
+                                                                                                                                //2 to the round ranks power (1 indexed, not 0 based) minus 1, times 10 gets us the pattern: {10, 20, 40, 80, 160, 320 etc...}
+                                                                                                                                (int)Math.Pow(2, round.Rank - 1) * 10 :
+                                                                                                                                0;
+                }
+            }
+        }
+
         public async Task<UserBracket> ExistingUserBracket(Guid activeBracketId, string userName)
         {
             var userBracket = await _context.UserBrackets.Include(x => x.Rounds)
