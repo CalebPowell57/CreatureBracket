@@ -12,6 +12,8 @@ import { ChatComponent } from './bracketComponents/creature-discussion-col/chat/
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserBracketComponent } from './user-bracket/user-bracket.component';
 import { GlobalBracketComponent } from './global-bracket/global-bracket.component';
+import { UserBracketGuard } from './user-bracket/user-bracket.guard';
+import { GlobalBracketGuard } from './global-bracket/global-bracket.guard';
 
 
 @NgModule({
@@ -31,8 +33,8 @@ import { GlobalBracketComponent } from './global-bracket/global-bracket.componen
     FormsModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
-      { path: 'user-bracket', component: UserBracketComponent, canActivate: [UserBracketComponent] },
-      { path: 'global-bracket', component: GlobalBracketComponent, canActivate: [GlobalBracketComponent] }
+      { path: 'user-bracket', component: UserBracketComponent, canActivate: [UserBracketGuard] },
+      { path: 'global-bracket', component: GlobalBracketComponent, canActivate: [GlobalBracketGuard] }
       ])
     ],
   exports: [
