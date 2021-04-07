@@ -528,36 +528,62 @@ $foreground: white;
     &:nth-child(#{$i}) {
       $circleSize: $particleBaseSize;
       width: $circleSize + px;
-      height: $circleSize + px;
-      $startPositionY: 100;
+      height: $circleSize + px;      
+      $startPositionY: random(100);
       $framesName: "move-frames-" + $i;
       $moveDuration: 500 + random(500) + ms;
-      $startCoordinateXNumber: -30 + random(60);
-      $startCoordinateX: $startCoordinateXNumber + px;
-      $endCoordinateXNumber: -30 + random(60);
-      $endCoordinateX: $endCoordinateXNumber + px;
-      $delay: random(1000);
+      $xCoordNumber: ($i * 4) - 35;
+      $xCoord: $xCoordNumber + px;
+      $particleMoveLength: $startPositionY + 40px;
       animation-name: #{$framesName};
       animation-duration: $moveDuration;
-      animation-delay: $delay + ms;
+      animation-delay: random(1000) + ms;
 
       @keyframes #{$framesName} {
-        from {
-          transform: translate3d( $endCoordinateX, #{0}, 0 );
+        0% {
+          transform: translate3d( $xCoord, $startPositionY, 0 );
         }
 
-        to {
-          transform: translate3d( $endCoordinateX, #{$startPositionY + 20px}, 0 );
+        10% {
+          transform: translate3d( $xCoord, $particleMoveLength * 0.1, 0 ) scale3d(2, 2, 1);
+        }
+
+        20% {
+          transform: translate3d( $xCoord, $particleMoveLength * 0.2, 0 ) scale3d(.5, .5, 1);
+        }
+
+        30% {
+          transform: translate3d( $xCoord, $particleMoveLength * 0.3, 0 ) scale3d(1, 1, 1);
+        }
+
+        40% {
+          transform: translate3d( $xCoord, $particleMoveLength * 0.4, 0 ) scale3d(.5, .5, 1);
+        }
+
+        50% {
+          transform: translate3d( $xCoord, $particleMoveLength * 0.5, 0 ) scale3d(2, 2, 1);
+        }
+
+        60% {
+          transform: translate3d( $xCoord, $particleMoveLength * 0.6, 0 ) scale3d(1, 1, 1);
+        }
+
+        70% {
+          transform: translate3d( $xCoord, $particleMoveLength * 0.7, 0 ) scale3d(.5, .5, 1);
+        }
+
+        80% {
+          transform: translate3d( $xCoord, $particleMoveLength * 0.8, 0 ) scale3d(1, 1, 1);
+        }
+
+        90% {
+          transform: translate3d( $xCoord, $particleMoveLength * 0.9, 0 ) scale3d(.5, .5, 1);
+        }
+
+        100% {
+          transform: translate3d( $xCoord, $particleMoveLength, 0 ) scale3d(0, 0, 1);
         }
       }
-
-      $frame1: $delay + 500;
-
-      @if $frame1 > 1000 {$frame1: $frame1 - 1000;}
-
-      $frame2: $frame1 + 500;
-
-      @if $frame2 > 1000 {$frame2: $frame2 - 1000;}
 
       .circle {
         width: 100%;
@@ -565,33 +591,6 @@ $foreground: white;
         border-radius: 50%;
         mix-blend-mode: screen;
         background-image: radial-gradient( hsl(231, 100%, 97%), hsl(240, 100%, 98%) 10%, hsla(180, 100%, 80%, 0) 56% );
-        animation: fadein-frames 200ms infinite, scale-frame1 $frame1 + ms infinite, scale-frame2 $frame2 + ms infinite;
-
-        @keyframes fade-frames {
-          0% {
-            opacity: 1;
-          }
-
-          50% {
-            opacity: 0.7;
-          }
-
-          100% {
-            opacity: 1;
-          }
-        }
-
-        @keyframes scale-frame1 {
-          to {
-            transform: scale3d(2.2, 2.2, 1);
-          }
-        }
-
-        @keyframes scale-frame2 {
-          to {
-            transform: scale3d(0, 0, 1);
-          }
-        }
       }
     }
   }
