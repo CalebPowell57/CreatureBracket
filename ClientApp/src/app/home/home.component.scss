@@ -164,11 +164,11 @@ h3 {
       animation-delay: random(37000) + ms;
       @keyframes #{$framesName} {
         from {
-          transform: translate3d( #{random(100) + vw}, #{$startPositionY + vh}, 0 );
+          transform: translate3d( #{random(100) + vw}, #{0}, 0 );
         }
 
         to {
-          transform: translate3d( #{random(100) + vw}, #{- $startPositionY - random(30) + vh}, 0 );
+          transform: translate3d( #{random(100) + vw}, #{$startPositionY + vh}, 0 );
         }
       }
 

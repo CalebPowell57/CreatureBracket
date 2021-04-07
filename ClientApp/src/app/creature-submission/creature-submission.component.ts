@@ -7,7 +7,6 @@ import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { eCreatureSubmissionStatus, ICreatureSubmission } from '../interfaces/creature-submission.interface';
 
 @Component({
-  selector: 'app-creature-submission',
   templateUrl: './creature-submission.component.html',
   styleUrls: ['./creature-submission.component.scss'],
 })

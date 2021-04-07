@@ -34,7 +34,7 @@ import { GlobalBracketGuard } from './global-bracket/global-bracket.guard';
     BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: 'user-bracket', component: UserBracketComponent, canActivate: [UserBracketGuard] },
-      { path: 'global-bracket', component: GlobalBracketComponent, canActivate: [GlobalBracketGuard] }
+      { path: 'tournament', component: GlobalBracketComponent, canActivate: [GlobalBracketGuard] }
       ])
     ],
   exports: [
