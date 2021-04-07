@@ -59,21 +59,6 @@
 
       <div class="bgimg-4">
         <div class="caption">
-          <span class="border">Tournament Begins</span>
-        </div>
-      </div>
-      <div class="TextBox" style="position:relative;">
-        <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
-          <p>
-            The torunament will be made up of 64 user submitted creatures. Once all of the creature submissions have been approved, the torunament will begin, making the bracket avaliable
-            for all users to access. Each round will last three days, during which all registered users will be able to cast their votes for each avaliable creature matchup. At the end of
-            the 3 day period, the winner of each round will be determined by the system using risk rule logic.
-          </p>
-        </div>
-      </div>
-
-      <div class="bgimg-5">
-        <div class="caption">
           <span class="border">Matchups</span>
         </div>
       </div>
@@ -86,7 +71,7 @@
         </div>
       </div>
 
-      <div class="bgimg-6">
+      <div class="bgimg-5">
         <div class="caption">
           <span class="border">Voting</span>
         </div>
@@ -101,9 +86,9 @@
         </div>
       </div>
 
-      <div class="bgimg-1">
-        <div class="caption">
-          <span class="border">COOL!</span>
+      <div [class.bgimg-6]="!ExitImageClicked" [class.Clicked]="ExitImageClicked">
+        <div class="ClickCaption">
+          <span class="border" (click)="onStartClick()">Get Started</span>
         </div>
       </div>
     </div>
