@@ -12,6 +12,7 @@ import { GlobalBracketService } from '../shared/global-bracket.service';
 export class NavMenuComponent {
   isExpanded = false;
   showCreatureApproval = false;
+  showCreatureSubmission = false;
   showBracketManager = false;
   showSeedTournament = false;
   showStandings = false;
@@ -38,6 +39,7 @@ export class NavMenuComponent {
 
         this.showCreatureApproval = isSuper && x.status === EStatus.Open;
         this.showSeedTournament = isSuper && x.status === EStatus.Open;
+        this.showCreatureSubmission = x.status === EStatus.Open;
         this.showStandings = x.status !== EStatus.Open;
         this.showMyBracket = x.status !== EStatus.Open;
         this.showGlobalBracket = x.status !== EStatus.Open;

@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12" [ngStyle]="bracketStyle">
       <div class="ngtt-se__container" id="bracketContainer">
-        <div class="ngtt-se__bracket-wrapper">
+        <div class="ngtt-se__bracket-wrapper" style="padding-right:10px;" *ngIf="rounds.length > 0">
           <ng-container *ngFor="let round of rounds; let i = index">
             <div class="ngtt-se__round-wrapper">
               <ng-container *ngFor="let matchup of round.matchups">
