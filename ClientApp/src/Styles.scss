@@ -5,14 +5,14 @@ a {
   color: #0366d6;
 }
 html{
-    height:100%;
+    min-height:100%;
     padding-bottom:5px;
 }
 body {
+  min-height: 100%;
   background-color: #1f1f1f;
   color: white;
-  height: inherit;
-  overflow:auto;
+  overflow: auto;
 }
 
 .Nav-Col {
@@ -150,125 +150,40 @@ li.listItem {
 }
 
 
-
-.lds-hourglass {
-  display: inline-block;
-  position: fixed;
-  left:44%;
-  right:56%;
-  top:47%;
-  bottom:53%;
-  width: 150px;
-  height: 150px;
-}
-
-.lds-hourglass:after {
-  content: " ";
-  display: block;
-  border-radius: 50%;
-  width: 0;
-  height: 0;
-  margin: 8px;
-  box-sizing: border-box;
-  border: 32px solid #fff;
-  border-color: #fff transparent #fff transparent;
-  animation: lds-hourglass 1.2s infinite;
-}
-
-@keyframes lds-hourglass {
-  0% {
-    transform: rotate(0);
-    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-  }
-
-  50% {
-    transform: rotate(900deg);
-    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-  }
-
-  100% {
-    transform: rotate(1800deg);
-  }
-}
-
-
-
-
-@font-face {
-  font-family: MedulaOne;
-  src: url(assets/Fonts/MedulaOne-Regular.ttf) format("opentype");
-}
-$background: #1f1f1f;
-$foreground: white;
-
-@import 'bourbon';
-
-@mixin gitchText($offset, $text) {
-  content: $text;
-  position: absolute;
-  left: $offset;
-  top: $offset;
-  clip: rect(0, 900px, 0, 0);
-  color: $foreground;
-  animation: glitch 2s infinite alternate-reverse;
-  animation-delay: 3s;
-}
-
-.Glitch {
-  font-family: MedulaOne;
+.Fade1 {
   font-size: 48pt;
   font-weight: bold;
-  color: $foreground;
+  position: fixed;
+  top: 46%;
+  left: 35%;
+  animation-name: fadeInDelay;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+
+.Fade2 {
+  font-size: 48pt;
+  font-weight: bold;
   position: fixed;
   top: 46%;
   left: 50%;
-  /*  @include user-select(none);
-*/
+  animation-name: fadeInDelay;
+  animation-duration: 6s;
+  animation-fill-mode: forwards;
 }
-.Glitch.Loaded {
-  animation-name: fadeOut;
-  animation-duration: 3s;
-}
-
-
-.Glitch:first-child {
-  margin-right: 5px;
-}
-
-.Glitch .childOne {
-  font-family: 'Medula One', sans-serif !important;
-}
-.Glitch .childTwo {
-  font-family: 'Medula One', sans-serif !important;
-  animation: fadeWhite 2s forwards;
-  position: relative;
-
-  &:after {
-    @include gitchText(2px, 'Bracket');
+@keyframes fadeInDelay {
+  0% {
+    opacity: 0;
   }
 
-  &:before {
-    @include gitchText(-2px, 'Bracket');
+  66% {
+    opacity: 0;
   }
-}
 
-@keyframes fadeWhite {
   100% {
-    color: $foreground;
+    opacity: 1;
   }
 }
-
-@keyframes glitch {
-  $steps: 20; @for $i from 0 through $steps {
-    #{percentage($i * (1 / $steps))} {
-      clip: rect(random(100)+px, 9999px, random(100)+px, 0);
-    }
-  }
-}
-
-
-
-
 
 
 /*Navi*/
@@ -276,8 +191,8 @@ $foreground: white;
   position: fixed;
   height: 300px;
   width: 500px;
-  left: 25%;
-  top: 40%;
+  left: 15%;
+  top: 30%;
   animation: voo 6s ease-in-out infinite;
   /*animation-fill-mode: forwards;*/
 }
@@ -473,18 +388,18 @@ $foreground: white;
   background-size: cover;
 
 }
-
+/*.LoadingAnimation.Loaded {
+  animation-name: fadeOut;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}*/
 .AnimationGroup {
   animation-name: fadeIn;
   animation-duration: 2s;
   animation-fill-mode: forwards;
   animation-play-state: running;
 }
-/*.LoadingAnimation.Loaded {
-  animation-name: fadeOut;
-  animation-duration: 3s;
-  animation-fill-mode: forwards;
-}*/
+
 
 
 
@@ -509,7 +424,32 @@ $foreground: white;
 }
 
 
+.caption {
+  position: absolute;
+  left: 4%;
+  top: 35%;
+  width: 100%;
+  text-align: center;
+  color: #000;
+  /*margin-left: -15px;*/
+  animation-name: fadeIn;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+.captionContainer.Loaded {
+  animation-name: fadeOut;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
 
+.caption span.border {
+  background-color: #111;
+  color: #fff;
+  padding: 18px;
+  font-size: 25px;
+  letter-spacing: 10px;
+}
 
 
 .circle-container {
@@ -595,3 +535,4 @@ $foreground: white;
     }
   }
 }
+
