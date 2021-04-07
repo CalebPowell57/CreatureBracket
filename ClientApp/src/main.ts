@@ -16,5 +16,22 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic(providers).bootstrapModule(AppModule)
-  .catch(err => console.log(err));
+//platformBrowserDynamic(providers).bootstrapModule(AppModule)
+//  .catch(err => console.log(err));
+const navi = document.querySelector(".navi");
+const glitch = document.querySelector(".Glitch");
+const LoadingAnimation = document.querySelector(".LoadingAnimation");
+
+platformBrowserDynamic()
+  .bootstrapModule(AppModule)
+  // trigger the transition
+  .then(() => navi.classList.add("Loaded"))
+  .then(() => glitch.classList.add("Loaded"))
+
+  // remove the loading element after the transition is complete to prevent swallowed clicks
+  .then(() => setTimeout(() => navi.remove(), 3000))
+  .then(() => setTimeout(() => glitch.remove(), 3000))
+  .then(() => setTimeout(() => LoadingAnimation.remove(), 3000));
+
+  
+
