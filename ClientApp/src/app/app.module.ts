@@ -1,5 +1,5 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,11 +24,10 @@ import { RequireAuthenticationGuard } from './shared/requre-authentication.guard
 import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.guard';
 import { StandingsComponent } from './standings/standings.component';
 import { StandingsGuard } from './standings/standings.guard';
-
-
-
+import { initApp } from './shared/delay-init-app';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
+
 
 @NgModule({
   declarations: [
@@ -55,7 +54,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       positionClass: 'toast-bottom-right'
     }),
     RouterModule.forRoot([
-      { path: 'creature-submission', component: CreatureSubmissionComponent, canActivate: [RequireAuthenticationGuard] },//add a guard
+      { path: 'creature-submission/:userSelected', component: CreatureSubmissionComponent, canActivate: [RequireAuthenticationGuard] },//add a guard
       { path: 'seed-tournament', component: SeedTournamentComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard] },
       { path: 'current-standings', component: StandingsComponent, canActivate: [StandingsGuard, RequireAuthenticationGuard] },
       { path: 'creature-approval', component: CreatureApprovalComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard, CreatureApprovalGuard] },
@@ -88,7 +87,13 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
         extraQueryParameters: {}
       })
   ],
-  providers: [{
+  providers: [
+  {
+    provide: APP_INITIALIZER,
+    useFactory: initApp,
+    multi: true,
+  },
+  {
     provide: HTTP_INTERCEPTORS,
     useClass: MsalInterceptor,
     multi: true
@@ -101,7 +106,10 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     {
       provide: ErrorHandler,
       useClass: CustomErrorHandler
-    }],
+    }
+    
+    
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

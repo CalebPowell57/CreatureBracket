@@ -19,7 +19,6 @@ if (environment.production) {
 //platformBrowserDynamic(providers).bootstrapModule(AppModule)
 //  .catch(err => console.log(err));
 const navi = document.querySelector(".navi");
-//const glitch = document.querySelector(".Glitch");
 const captionContainer = document.querySelector(".captionContainer");
 const LoadingAnimation = document.querySelector(".LoadingAnimation");
 
