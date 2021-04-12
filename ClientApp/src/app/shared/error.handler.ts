@@ -1,13 +1,16 @@
 import { ErrorHandler, Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { NaviService } from './navi.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomErrorHandler implements ErrorHandler {
-  constructor(private toastrService: ToastrService) {}
+  constructor(private toastrService: ToastrService, private naviService: NaviService) { }
 
   handleError(error) {
+    this.naviService.loadingChanged$.next(false);
+
     if (error.error && error.error.startsWith("CreatureBracket.Exceptions.ExpectedException")) {
       let json = `{${error.error.split('{')[1].split('}')[0]}}`;
 

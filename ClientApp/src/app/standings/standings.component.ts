@@ -13,10 +13,10 @@ export class StandingsComponent {
   constructor(private standingsService: StandingsService, private naviService: NaviService) { }
 
   ngOnInit() {
+    this.naviService.loadingChanged$.next(true);
     this.standingsService.getStandings().subscribe(x => {
       this.standings = x;
+      this.naviService.loadingChanged$.next(false);
     })
-
-    this.naviService.loadingChanged$.next(true);
   }
 }

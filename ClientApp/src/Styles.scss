@@ -187,11 +187,18 @@ li.listItem {
 
 
 /*Navi*/
-.navi-mover {
+.navi-move-in {
   position: absolute;
   left: 40%;
   top: 40%;
-  animation: move-in 2s linear, move-out 2s 4s linear;
+  animation: move-in 1s linear;
+}
+
+.navi-move-out {
+  position: absolute;
+  left: 100%;
+  top: 100%;
+  animation: move-out 1s linear;
 }
 
 .navi-container {
@@ -237,8 +244,8 @@ li.listItem {
 
 @keyframes move-in {
   0% {
-    left: 60px;
-    top: 0px;
+    left: 0px;
+    top: 60px;
     transform: scale(1, 1);
     -webkit-transform: scale(1, 1);
     animation-timing-function: ease-out;
@@ -259,12 +266,14 @@ li.listItem {
 
 @keyframes move-out {
   from {
+    left: 40%;
+    top: 40%;
     animation-timing-function: cubic-bezier(.5, .01, .69, .08);
   }
 
   to {
     left: 100%;
-    top: 30%;
+    top: 60px;
     transform: scale(.1, .1);
     -webkit-transform: scale(.1, .1);
   }
