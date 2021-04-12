@@ -118,7 +118,7 @@ export class BracketComponent {
       userName: account.userName
     };
 
-    this.bracket.rounds.forEach(x => {
+    this.userBracket.rounds.forEach(x => {
       let round: IUserRoundDTO = {
         matchups: [],
         rank: x.rank
