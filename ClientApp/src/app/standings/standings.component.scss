@@ -8,29 +8,6 @@
   max-width:75px;
 }
 
-.boxContainer {
-  border: solid;
-  border-width: 1px;
-  border-color: slategrey;
-  animation-name: fadeIn;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
-  animation-play-state: running;
-  -webkit-transform-style: preserve-3d;
-  -webkit-backface-visibility: hidden;
-  animation-delay: 0s;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
 /*Joke*/
 /*.boxContainer {
   border: solid;
@@ -147,4 +124,25 @@
     transform: translate3d(0, 0, 0);
   }
 }*/
+.boxContainer {
+  border: solid;
+  border-width: 1px;
+  border-color: slategrey;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  animation-delay: 0s;
+}
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

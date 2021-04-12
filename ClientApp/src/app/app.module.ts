@@ -1,5 +1,5 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,16 +18,15 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { NoPermissionsComponent } from './no-permissions/no-permissions.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SeedTournamentComponent } from './seed-tournament/seed-tournament.component';
+import { NaviComponent } from './navi/navi.component';
 import { CustomErrorHandler } from './shared/error.handler';
 import { HttpRequestInterceptor } from './shared/http-request.interceptor';
 import { RequireAuthenticationGuard } from './shared/requre-authentication.guard';
 import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.guard';
 import { StandingsComponent } from './standings/standings.component';
 import { StandingsGuard } from './standings/standings.guard';
-import { initApp } from './shared/delay-init-app';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
-
 
 @NgModule({
   declarations: [
@@ -40,7 +39,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     BracketManagerComponent,
     NoPermissionsComponent,
     CreatureApprovalComponent,
-    SeedTournamentComponent
+    SeedTournamentComponent,
+    NaviComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -54,7 +54,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       positionClass: 'toast-bottom-right'
     }),
     RouterModule.forRoot([
-      { path: 'creature-submission/:userSelected', component: CreatureSubmissionComponent, canActivate: [RequireAuthenticationGuard] },//add a guard
+      { path: 'creature-submission', component: CreatureSubmissionComponent, canActivate: [RequireAuthenticationGuard] },//add a guard
       { path: 'seed-tournament', component: SeedTournamentComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard] },
       { path: 'current-standings', component: StandingsComponent, canActivate: [StandingsGuard, RequireAuthenticationGuard] },
       { path: 'creature-approval', component: CreatureApprovalComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard, CreatureApprovalGuard] },
@@ -87,13 +87,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
         extraQueryParameters: {}
       })
   ],
-  providers: [
-  {
-    provide: APP_INITIALIZER,
-    useFactory: initApp,
-    multi: true,
-  },
-  {
+  providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: MsalInterceptor,
     multi: true
@@ -106,10 +100,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     {
       provide: ErrorHandler,
       useClass: CustomErrorHandler
-    }
-    
-    
-  ],
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

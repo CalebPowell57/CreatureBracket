@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
-import { Guid } from 'guid-typescript';
 import { Observable, Subject } from 'rxjs';
 import { IChatMessage } from '../interfaces/chat-message.interface';
 

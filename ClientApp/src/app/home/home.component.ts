@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Directive, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
-import { GlobalBracketService } from '../shared/global-bracket.service';
-import { LoadStateService } from '../shared/load-state.service';
 
 
 @Component({
@@ -13,33 +11,9 @@ import { LoadStateService } from '../shared/load-state.service';
 export class HomeComponent  {
   particalArray = new Array(50);
   ExitImageClicked: boolean;
-  pageInitialized: boolean = false;
-  bracket: string[];
-  constructor(
-    private router: Router,
-    private bracketService: GlobalBracketService,
-    private loadStateService: LoadStateService
-  ) { }
+  bracket: string[] = ['/tournament'];
+  constructor(private router: Router) { }
 
-  ngOnInit() {
-    if (this.loadStateService.HomeHasLoaded) {
-      this.pageInitialized = true;
-    }
-    else {
-      this.loadStateService.HomeHasLoaded = true;
-    }
-    this.bracketService.activeBracket().subscribe(x => {
-      if (x.status === 0) {
-        this.bracket = ['/creature-submission'];
-      }
-      else if (x.status === 1) {
-        this.bracket = ['/tournament'];
-      }
-      else {
-        this.bracket = ['/current-standings'];
-      }
-    })
-  }
   onStartClick() {
     this.ExitImageClicked = true;
     setTimeout(() => {
