@@ -91,33 +91,6 @@ namespace CreatureBracket.Repositories
             }
             List<SeedMatchupDTO> CurrentProjectedMatchups = GetSeededCreatures(creatures);
             return CurrentProjectedMatchups;
-            //int creatureCounter = 0;
-            //for(int i = 0; i < creatures.Count / 2; i++)
-            //{
-            //    var matchup = new SeedMatchupDTO
-            //    {
-            //        MatchupSeed = i,
-            //        Contestants = new List<CreatureSeedDTO>
-            //        {
-            //            new CreatureSeedDTO
-            //            {
-            //                Name = creatures[creatureCounter].Name,
-            //                BIO = creatures[creatureCounter].BIO,
-            //                Image = creatures[creatureCounter].Image,
-
-            //            },
-            //            new CreatureSeedDTO
-            //            {
-            //                Name = creatures[creatureCounter + 1].Name,
-            //                BIO = creatures[creatureCounter + 1].BIO,
-            //                Image = creatures[creatureCounter + 1].Image,
-            //            }
-            //        }
-            //    };
-            //    creatureCounter += 2;
-            //    CurrentProjectedMatchups.Add(matchup);
-            //}
-            //return CurrentProjectedMatchups;
         }
 
         private List<SeedMatchupDTO> GetSeededCreatures(List<Creature> creatures)
@@ -371,7 +344,6 @@ namespace CreatureBracket.Repositories
 
             return rounds;
         }
-
         private RoundResponseDTO GenerateTestRound(int matchupCount)
         {
             var round = new RoundResponseDTO
@@ -409,5 +381,6 @@ namespace CreatureBracket.Repositories
 
             return round;
         }
+
     }
 }

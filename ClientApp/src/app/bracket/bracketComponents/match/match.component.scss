@@ -6,21 +6,9 @@
   height: $ngtt-match-wrapper-height;
   background-color: lighten($ngtt-background-primary, 5%);
   border-radius: 6px;
-  border-left: solid green 5px;
   overflow:hidden;
 }
 
-/*.ngtt__match-wrapper, .ngtt__match-wrapper .voteDiv {
-  animation-play-state: paused;
-}
-.ngtt__match-wrapper:hover {
-  cursor: pointer;
-  box-shadow: 0 0 4px 4px darkslategray;
-  animation-play-state: running;
-}
-.ngtt__match-wrapper:hover .voteDiv {
-  animation-play-state: running;
-}*/
 
 .ngtt__team-wrapper {
   display: flex;
@@ -42,6 +30,27 @@
 .ngtt__team-wrapper.winner.last {
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
+}
+.ngtt__team-wrapper.votedFor {
+  border-left: solid green 5px;
+  animation-name: fadeIn;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+.ngtt__team-wrapper.notVotedFor {
+  border-left: solid black 5px;
+  animation-name: fadeIn;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .ngtt__team-avatar {
@@ -83,7 +92,16 @@
 }
 
 .ngtt__match-wrapper.undecided:hover {
+  cursor:default;
+  box-shadow: none;
+}
+
+.ngtt__match-wrapper.decided {
   border-left: 0;
+}
+.ngtt__match-wrapper.decided:hover {
+  cursor: pointer;
+  box-shadow: 0 0 4px 4px darkslategray;
 }
 .checkBox {
   border-color: darkgrey;

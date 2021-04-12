@@ -6,5 +6,6 @@ export function initApp() {
         resolve();
       }, 1000);
     });
+
   };
 }

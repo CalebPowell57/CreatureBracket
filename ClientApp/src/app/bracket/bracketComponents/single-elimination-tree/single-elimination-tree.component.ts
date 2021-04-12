@@ -1,4 +1,7 @@
-import { Component, EventEmitter, Input, OnChanges, SimpleChanges, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, TemplateRef } from '@angular/core';
+import { ICreatureDTO } from '../../../interfaces/CreatureDTO.interface';
+import { IGlobalBracketDTO } from '../../../interfaces/GlobalBracketDTO.interface';
+import { IGlobalRoundDTO } from '../../../interfaces/GlobalRoundDTO.interface';
 import { IUserBracketDTO } from '../../../interfaces/UserBracketDTO.interface';
 import { IUserRoundDTO } from '../../../interfaces/UserRoundDTO.interface';
 
@@ -17,12 +20,13 @@ export class SingleEliminationTreeComponent implements OnChanges {
   };
 
   @Input() matchTemplate: TemplateRef<any>;
-  @Input() tournament: IUserBracketDTO;
+  @Input() tournament: IGlobalBracketDTO;
   @Input() isGlobal: boolean;
   @Input('zoomInOut') zoomInOut: any;
 
-  public rounds: IUserRoundDTO[] = [];
-  public final: IUserRoundDTO = { matchups: [], rank: 0 };
+  public rounds: IGlobalRoundDTO[] = [];
+  public final: IGlobalRoundDTO = { matchups: [], rank: 0 };
+ 
 
 
   ngOnChanges(changes: SimpleChanges) {

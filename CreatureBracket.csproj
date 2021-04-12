@@ -58,6 +58,10 @@
     <None Remove="ClientApp\src\app\interfaces\creature-submission-DTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\creature-submission.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\CreatureDTO.interface.ts" />
+    <None Remove="ClientApp\src\app\interfaces\GlobalBracketDTO.interface.ts" />
+    <None Remove="ClientApp\src\app\interfaces\GlobalCreatureDTO.interface.ts" />
+    <None Remove="ClientApp\src\app\interfaces\GlobalMatchupDTO.interface.ts" />
+    <None Remove="ClientApp\src\app\interfaces\GlobalRoundDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\seed-matchupDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\standings-item-DTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\user.interface.ts" />
@@ -99,6 +103,10 @@
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\chat-message.interface.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\GlobalBracketDTO.interface.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\GlobalCreatureDTO.interface.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\GlobalMatchupDTO.interface.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\GlobalRoundDTO.interface.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\seed-matchupDTO.interface.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\UserCreatureDTO.interface.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\UserMatchupDTO.interface.ts" />

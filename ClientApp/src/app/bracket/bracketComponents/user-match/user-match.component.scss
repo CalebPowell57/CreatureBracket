@@ -11,10 +11,6 @@
   overflow: hidden;
 }
 
-/*.ngtt__match-wrapper:hover {
-  cursor: pointer;
-  box-shadow: 0 0 4px 4px darkslategray;
-}*/
 
 .ngtt__match-wrapper.needsSelection {
   border-left: solid goldenrod 5px;
@@ -23,19 +19,15 @@
 .ngtt__match-wrapper.unset {
   border-left: 0;
 }
-
-/*.ngtt__match-wrapper.unset:hover {
-  box-shadow: 0 0 0px 0px transparent;
-  cursor: default;
-}*/
+.ngtt__match-wrapper.unset:hover {
+  cursor:default;
+  box-shadow: none;
+}
 
 .ngtt__match-wrapper .hidden {
   visibility: hidden;
 }
 
-/*.ngtt__match-wrapper:hover .hidden {
-  visibility: visible;
-}*/
 
 .ngtt__team-wrapper {
   display: flex;

@@ -1,6 +1,6 @@
-<div class="ngtt__match-wrapper" [class.needsVote]="!creatureVotedForId && matchup.contestants" [class.undecided]="!matchup.contestants || !matchup.current">
+<div class="ngtt__match-wrapper" [class.needsVote]="!creatureVotedForId && matchup.contestants" [class.undecided]="!matchup.contestants || !matchup.current" [class.decided]="!matchup.current && matchup.contestants">
   <ng-container *ngFor="let contestant of matchup.contestants">
-    <div class="ngtt__team-wrapper" [class.winner]="contestant.winner" [class.first]="contestant === matchup.contestants[0]" [class.last]="contestant === matchup.contestants[1]">
+    <div class="ngtt__team-wrapper" [class.winner]="contestant.winner" [class.votedFor]= "matchup.current && matchup.vote != null && matchup.vote.creatureId === contestant.creatureId" [class.notVotedFor]= "matchup.current && matchup.vote != null && matchup.vote.creatureId != contestant.creatureId" [class.first]="contestant === matchup.contestants[0]" [class.last]="contestant === matchup.contestants[1]">
       <img [src]="contestant.image" width="35" height="35" class="ngtt__team-avatar" [class.loser]="!contestant.winner && !matchup.current"/>
       <h6 class="ngtt__team-title" [class.loser]="!contestant.winner && !matchup.current">{{contestant.name}}</h6>
 

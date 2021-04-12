@@ -5,6 +5,8 @@ import { MsalService } from '@azure/msal-angular';
 import { Guid } from 'guid-typescript';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
+import { ICreatureDTO } from '../../interfaces/CreatureDTO.interface';
+import { IGlobalBracketDTO } from '../../interfaces/GlobalBracketDTO.interface';
 import { IUserBracketDTO } from '../../interfaces/UserBracketDTO.interface';
 import { IUserMatchupDTO } from '../../interfaces/UserMatchupDTO.interface';
 import { IUserRoundDTO } from '../../interfaces/UserRoundDTO.interface';
@@ -17,7 +19,8 @@ import { GlobalBracketService } from '../../shared/global-bracket.service';
 })
 export class BracketComponent {
 
-  public bracket: IUserBracketDTO;
+  public bracket: IGlobalBracketDTO;
+  public userBracket: IUserBracketDTO;
   @Output() passMatch: Subject<any> = new Subject();
   @Output() selectedComponent: string;
   @Output() userBracketSaveEvent: EventEmitter<any> = new EventEmitter();
@@ -26,6 +29,8 @@ export class BracketComponent {
   @Output() zoomEvent: EventEmitter<any> = new EventEmitter();
   @Input() isGlobal: boolean;
 
+  Winner: ICreatureDTO;
+  Won = false;
   colActive = false;
   contentColumnCommand: string;
   isColInit: boolean;
@@ -46,22 +51,36 @@ export class BracketComponent {
     if (this.isGlobal) {
       this.bracketService.getBracketData().subscribe(data => {
         this.bracket = data;
+        for (let round of data.rounds) {
+          if (round.matchups.length === 1) {
+            for (let contestant of round.matchups[0].contestants) {
+              if (contestant.winner) {
+                this.Winner = {
+                  Bio: contestant.bio,
+                  Name: contestant.name,
+                  Image: contestant.image,
+                };
+                this.Won = true;
+              }
+            }
+          }
+        }
       });
     } else {
       this.bracketService.getMyBracket().subscribe(data => {
-        this.bracket = data;
+        this.userBracket = data;
       });
     }
     this.discussionCreatureColumnState("pageLoad", undefined, undefined);
   }
 
   public onMatchClick(matchup: any) {
-    if (matchup.vote != null) {
+    if (matchup.vote != null && matchup.contestants != null) {
       this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, matchup.vote.creatureId);
-
       this.passMatch.next(matchup);
+      this.cdr.detectChanges();
     }
-    else if (!this.isGlobal && matchup.creature1 !== null && matchup.creature2 !== null) {
+    else if (!this.isGlobal && matchup.creature1 !== null && matchup.creature2 !== null && matchup.contestants != null) {
       if (matchup.creature1.winner) {
         this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, matchup.creature1.creatureId);
       }
@@ -71,13 +90,14 @@ export class BracketComponent {
       else {
         this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, undefined);
       }
+      this.passMatch.next(matchup);
+      this.cdr.detectChanges();
     }
-    else {
+    else if (matchup.contestants != null) {
       this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, undefined);
+      this.passMatch.next(matchup);
+      this.cdr.detectChanges();
     }
-    this.passMatch.next(matchup);
-
-    this.cdr.detectChanges();
   }
 
   public onchatClick() {

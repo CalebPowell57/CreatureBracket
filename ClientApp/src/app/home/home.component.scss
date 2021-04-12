@@ -155,15 +155,15 @@
 
 }
 
-$color-alpha: darkslategrey;
+$color-alpha: whitesmoke;
 
 
 .box {
   background-color: rgba(#000, 0.5);
-  position:relative;
+  position: relative;
   width: 100%;
-  height:100%;
-  padding:5px;
+  height: 100%;
+  padding: 5px;
   border: 7px solid $color-alpha;
 
   &:before, &:after {

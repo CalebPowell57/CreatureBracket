@@ -4,6 +4,7 @@ import { MsalService } from '@azure/msal-angular';
 import { Guid } from 'guid-typescript';
 import { Observable } from 'rxjs';
 import { IBracket } from '../interfaces/bracket.interface';
+import { IGlobalBracketDTO } from '../interfaces/GlobalBracketDTO.interface';
 import { IUserBracketDTO } from '../interfaces/UserBracketDTO.interface';
 
 @Injectable({
@@ -18,12 +19,12 @@ export class GlobalBracketService {
     return this.http.get<IBracket>('Bracket/Active');
   }
 
-  getBracketData(): Observable<IUserBracketDTO> {
+  getBracketData(): Observable<IGlobalBracketDTO> {
     const account = this.authService.getAccount();
 
     let params = new HttpParams().set('userName', account.userName);
 
-    return this.http.get<IUserBracketDTO>('Bracket/Global', { params: params });
+    return this.http.get<IGlobalBracketDTO>('Bracket/Global', { params: params });
   }
 
   getMyBracket(): Observable<IUserBracketDTO> {

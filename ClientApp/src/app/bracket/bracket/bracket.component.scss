@@ -26,10 +26,35 @@
 .ngtt-single-elimination-tree {
   position: absolute;
 }
+.Won {
+
+  opacity: 0.5;
+  filter: Alpha(Opacity=50);
+}
+.DisplayWinner {
+  position: fixed;
+  right: 20%;
+  top: 27%;
+  left: 55%;
+  bottom: 40%;
+  width: 400px;
+  height: 400px;
+  
+}
+
+.WinnerImage {
+  position: absolute;
+  border-style: ridge;
+  border-color: black;
+  border-width: 5px;
+  border-radius: 50%;
+  left: 24%;
+  top: 25%;
+}
+
 
 
 /*Zoom Buttons*/
-
 .zoomButtonsExpandedCol {
   position: fixed;
   right: 26%;
@@ -208,6 +233,86 @@
     transform: translate3d(100%, 0, 0);
   }
 }
+
+$anime-time: 3s;
+
+$box-size: 400px;
+$clip-distance: .05;
+$clip-size: $box-size * (1 + $clip-distance * 2);
+$path-width: 2px;
+
+$main-color: #3c6a78;
+
+
+%full-fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.bb {
+  @extend %full-fill;
+  width: $box-size;
+  height: $box-size;
+  margin: auto;
+  color: $main-color;
+
+  &::before,
+  &::after {
+    @extend %full-fill;
+    content: '';
+    z-index: -1;
+    margin: -1 * $clip-distance * 100%;
+    box-shadow: inset 0 0 0 $path-width;
+    animation: clipMe $anime-time linear infinite;
+  }
+
+  &::before {
+    animation-delay: $anime-time * -.5;
+  }
+}
+.bb:hover {
+  cursor: move;
+  -webkit-user-drag: element;
+}
+
+@keyframes clipMe {
+  0%, 100% {
+    clip: rect(0px, $clip-size, $path-width, 0px);
+  }
+
+  25% {
+    clip: rect(0px, $path-width, $clip-size, 0px);
+  }
+
+  50% {
+    clip: rect($clip-size - $path-width, $clip-size, $clip-size, 0px);
+  }
+
+  75% {
+    clip: rect(0px, $clip-size, $clip-size, $clip-size - $path-width);
+  }
+}
+
+/////
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  position: relative;
+  background-color: #0f222b;
+}
+
+/**,
+*::before,
+*::after {
+  box-sizing: border-box;
+}*/
 
 
 
