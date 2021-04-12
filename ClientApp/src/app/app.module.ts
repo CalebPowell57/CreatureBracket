@@ -18,15 +18,13 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { NoPermissionsComponent } from './no-permissions/no-permissions.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SeedTournamentComponent } from './seed-tournament/seed-tournament.component';
+import { NaviComponent } from './navi/navi.component';
 import { CustomErrorHandler } from './shared/error.handler';
 import { HttpRequestInterceptor } from './shared/http-request.interceptor';
 import { RequireAuthenticationGuard } from './shared/requre-authentication.guard';
 import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.guard';
 import { StandingsComponent } from './standings/standings.component';
 import { StandingsGuard } from './standings/standings.guard';
-
-
-
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -41,7 +39,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     BracketManagerComponent,
     NoPermissionsComponent,
     CreatureApprovalComponent,
-    SeedTournamentComponent
+    SeedTournamentComponent,
+    NaviComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

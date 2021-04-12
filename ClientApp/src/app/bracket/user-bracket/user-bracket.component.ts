@@ -1,4 +1,5 @@
-import { ChangeDetectorRef, Component, Output } from '@angular/core';
+import { Component, Output } from '@angular/core';
+import { NaviService } from '../../shared/navi.service';
 
 @Component({
   selector: 'app-user-bracket',
@@ -7,8 +8,12 @@ import { ChangeDetectorRef, Component, Output } from '@angular/core';
 })
 export class UserBracketComponent {
   @Output() userBracketFlag: boolean;
+
+  constructor(private naviService: NaviService) {}
+
   ngOnInit() {
     this.userBracketFlag = true;
+    this.naviService.loadingChanged$.next(false);
   }
 
   saveBracketRankings(event) {

@@ -9,82 +9,52 @@
     <link rel="icon" type="image/x-icon" href="assets/favicon.png" />
   </head>
   <body>
-    <!--<app-root></app-root>-->
+    <app-root></app-root>
     <div class="LoadingAnimation">
       <div class="AnimationGroup">
-        <div class="navi">
-          <div class="circle-container">
-            <div class="circle">
+        <div class="navi-mover">
+          <div class="navi-container">
+            <div class="navi" id="navi">
+              <div class="wing-container">
+                <div class="wing-individual-container">
+                  <div class="upper-left-wing"></div>
+                </div>
+                <div class="wing-individual-container" style="right:0;">
+                  <div class="upper-right-wing"></div>
+                </div>
+                <div class="wing-individual-container" style="bottom:0;">
+                  <div class="lower-left-wing"></div>
+                </div>
+                <div class="wing-individual-container" style="right:0; bottom:0;">
+                  <div class="lower-right-wing"></div>
+                </div>
+              </div>
+              <div class="navi-body"></div>
             </div>
           </div>
-          <div class="circle-container">
-            <div class="circle">
-            </div>
-          </div>
-          <div class="circle-container">
-            <div class="circle">
-            </div>
-          </div>
-          <div class="circle-container">
-            <div class="circle">
-            </div>
-          </div>
-          <div class="circle-container">
-            <div class="circle">
-            </div>
-          </div>
-          <div class="circle-container">
-            <div class="circle">
-            </div>
-          </div>
-          <div class="circle-container">
-            <div class="circle">
-            </div>
-          </div>
-          <div class="circle-container">
-            <div class="circle">
-            </div>
-          </div>
-          <div class="circle-container">
-            <div class="circle">
-            </div>
-          </div>
-          <div class="circle-container">
-            <div class="circle">
-            </div>
-          </div>
-          <div class="circle-container">
-            <div class="circle">
-            </div>
-          </div>
-          <div class="circle-container">
-            <div class="circle">
-            </div>
-          </div>
-          <div class="circle-container">
-            <div class="circle">
-            </div>
-          </div>
-          <div class="circle-container">
-            <div class="circle">
-            </div>
-          </div>
-          <div class="circle-container">
-            <div class="circle">
-            </div>
-          </div>
-          <div class="asa-g-e"></div>
-          <div class="asa-g-d"></div>
-          <div class="asa-p-e"></div>
-          <div class="asa-p-d"></div>
-          <div class="corpo"></div>
         </div>
         <div class="captionContainer">
           <h2 class="Fade1">Creature</h2>
           <h2 class="Fade2">Bracket</h2>
         </div>
       </div>
-    </div>      
+    </div>
   </body>
 </html>
 
+<script>
+  for(var i = 0; i < 15; i++)
+  {
+    var navi = document.getElementById('navi');
+
+    var particle = document.createElement("div");
+    var particleCircle = document.createElement("div");
+
+    navi.appendChild(particle);
+
+    particle.classList.add('navi-dust-container');
+    particle.appendChild(particleCircle);
+
+    particleCircle.classList.add('navi-dust');
+  }
+</script>

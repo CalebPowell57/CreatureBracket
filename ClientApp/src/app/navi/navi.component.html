@@ -1,0 +1,26 @@
+<div style="width:100%; height:100%; position:absolute; top: 0px; left: 0px; background-color: rgba(0, 0, 0, .5); /*z-index:10000000000*/" *ngIf="show">
+  <div class="navi-mover">
+    <div class="navi-container">
+      <div class="navi">
+        <div class="navi-dust-container" *ngFor="let particle of particles">
+          <div class="navi-dust"></div>
+        </div>
+        <div class="wing-container">
+          <div class="wing-individual-container">
+            <div class="upper-left-wing"></div>
+          </div>
+          <div class="wing-individual-container" style="right:0;">
+            <div class="upper-right-wing"></div>
+          </div>
+          <div class="wing-individual-container" style="bottom:0;">
+            <div class="lower-left-wing"></div>
+          </div>
+          <div class="wing-individual-container" style="right:0; bottom:0;">
+            <div class="lower-right-wing"></div>
+          </div>
+        </div>
+        <div class="navi-body"></div>
+      </div>
+    </div>
+  </div>
+</div>
