@@ -1,5 +1,5 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,6 +25,7 @@ import { RequireAuthenticationGuard } from './shared/requre-authentication.guard
 import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.guard';
 import { StandingsComponent } from './standings/standings.component';
 import { StandingsGuard } from './standings/standings.guard';
+import { initApp } from './shared/delay-init-app';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -87,7 +88,13 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
         extraQueryParameters: {}
       })
   ],
-  providers: [{
+  providers: [
+  {
+    provide: APP_INITIALIZER,
+    useFactory: initApp,
+    multi: true,
+  },
+  {
     provide: HTTP_INTERCEPTORS,
     useClass: MsalInterceptor,
     multi: true
