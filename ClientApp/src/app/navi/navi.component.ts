@@ -9,16 +9,19 @@ import { NaviService } from '../shared/navi.service';
 export class NaviComponent  {
   particles = new Array(15);
   show = false;
+  moveClass = '';
 
   constructor(private naviService: NaviService) {}
 
   ngOnInit() {
     this.naviService.loadingChanged$.subscribe(x => {
-      //if (!x) {
-      //  setTimeout(null, 1000);
-      //}
+      this.moveClass = x ? 'navi-move-in' : 'navi-move-out';
 
-      this.show = x;
+      if (!x) {
+        setTimeout(() => { this.show = x; }, 1100);
+      } else {
+        this.show = x;
+      }
     });
   }
 }

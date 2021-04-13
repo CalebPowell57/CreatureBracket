@@ -11,6 +11,7 @@ import { IUserBracketDTO } from '../../interfaces/UserBracketDTO.interface';
 import { IUserMatchupDTO } from '../../interfaces/UserMatchupDTO.interface';
 import { IUserRoundDTO } from '../../interfaces/UserRoundDTO.interface';
 import { GlobalBracketService } from '../../shared/global-bracket.service';
+import { NaviService } from '../../shared/navi.service';
 
 @Component({
   selector: 'app-bracket',
@@ -45,11 +46,14 @@ export class BracketComponent {
     private router: Router,
     private cdr: ChangeDetectorRef,
     private toastrService: ToastrService,
-    private authService: MsalService) { }
+    private authService: MsalService,
+    private naviService: NaviService) { }
 
   ngOnInit() {
+    this.naviService.loadingChanged$.next(true);
     if (this.isGlobal) {
       this.bracketService.getBracketData().subscribe(data => {
+        this.naviService.loadingChanged$.next(false);
         this.bracket = data;
         for (let round of data.rounds) {
           if (round.matchups.length === 1) {
@@ -68,6 +72,7 @@ export class BracketComponent {
       });
     } else {
       this.bracketService.getMyBracket().subscribe(data => {
+        this.naviService.loadingChanged$.next(false);
         this.userBracket = data;
       });
     }
