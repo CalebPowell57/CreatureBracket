@@ -14,7 +14,7 @@
       <div class="row h-100" [class.Won]="Won">
         <div class="col-auto h-100" >
           <ng-container>
-            <ngtt-single-elimination-tree [tournament]="bracket"
+            <ngtt-single-elimination-tree [tournament]="isGlobal === true ? bracket : userBracket"
                                           [matchTemplate]="matchTemplate"
                                           [isGlobal]="isGlobal"
                                           [zoomInOut]="zoomInOut">
