@@ -254,8 +254,8 @@ li.listItem {
   }
 
   0.1% {
-    transform: scale(.1, .1);
-    -webkit-transform: scale(.1, .1);
+    transform: scale(0, 0);
+    -webkit-transform: scale(0, 0);
   }
 
   100% {
@@ -276,8 +276,8 @@ li.listItem {
   to {
     /*left: 100%;
     top: 60px;*/
-    transform: scale(.1, .1);
-    -webkit-transform: scale(.1, .1);
+    transform: scale(0, 0);
+    -webkit-transform: scale(0, 0);
   }
 }
 
