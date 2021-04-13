@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Directive, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { NaviService } from '../shared/navi.service';
 
 
 @Component({
@@ -12,7 +12,7 @@ export class HomeComponent  {
   particalArray = new Array(50);
   ExitImageClicked: boolean;
   bracket: string[] = ['/tournament'];
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   onStartClick() {
     this.ExitImageClicked = true;

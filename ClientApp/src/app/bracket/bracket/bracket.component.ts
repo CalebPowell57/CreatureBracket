@@ -53,7 +53,6 @@ export class BracketComponent {
     this.naviService.loadingChanged$.next(true);
     if (this.isGlobal) {
       this.bracketService.getBracketData().subscribe(data => {
-        this.naviService.loadingChanged$.next(false);
         this.bracket = data;
         for (let round of data.rounds) {
           if (round.matchups.length === 1) {
@@ -69,6 +68,8 @@ export class BracketComponent {
             }
           }
         }
+
+        this.naviService.loadingChanged$.next(false);
       });
     } else {
       this.bracketService.getMyBracket().subscribe(data => {
