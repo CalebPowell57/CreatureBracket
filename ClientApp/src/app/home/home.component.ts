@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Directive, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalBracketService } from '../shared/global-bracket.service';
 import { LoadStateService } from '../shared/load-state.service';

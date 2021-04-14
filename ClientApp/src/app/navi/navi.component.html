@@ -1,5 +1,5 @@
-<div style="width:100%; height:100%; position:absolute; top: 0px; left: 0px; background-color: rgba(0, 0, 0, .5); overflow:hidden;/*z-index:10000000000*/" *ngIf="show">
-  <div [ngClass]="moveClass">
+<div style="width:100%; height:100%; position:absolute; top: 0px; left: 0px; background-color: rgba(0, 0, 0, .5); overflow: hidden;" [ngClass]="showingClass" >
+  <div [ngClass]="moveClass" (animationend)="animationEnd()">
     <div class="navi-container">
       <div class="navi">
         <div class="navi-dust-container" *ngFor="let particle of particles">
