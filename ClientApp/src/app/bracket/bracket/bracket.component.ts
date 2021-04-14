@@ -86,7 +86,7 @@ export class BracketComponent {
       this.passMatch.next(matchup);
       this.cdr.detectChanges();
     }
-    else if (!this.isGlobal && matchup.creature1 !== null && matchup.creature2 !== null && matchup.contestants != null) {
+    else if (!this.isGlobal && matchup.creature1 !== null && matchup.creature2 !== null) {
       if (matchup.creature1.winner) {
         this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, matchup.creature1.creatureId);
       }
