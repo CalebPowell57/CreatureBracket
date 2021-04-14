@@ -52,8 +52,6 @@
   top: 25%;
 }
 
-
-
 /*Zoom Buttons*/
 .zoomButtonsExpandedCol {
   position: fixed;
@@ -153,27 +151,13 @@
     transform: translateX(-3px) rotate(-2deg);
   }
 }
-/* Skew Backward */
-.hvr-skew-backward {
-  display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-property: transform;
-  transition-property: transform;
-  -webkit-transform-origin: 0 100%;
-  transform-origin: 0 100%;
+
+.chatBubble {
+  transition: all 200ms ease-in-out;
 }
 
-.hvr-skew-backward:hover, .hvr-skew-backward:focus, .hvr-skew-backward:active {
-  -webkit-transform: skew(10deg);
-  transform: skew(10deg);
+.chatBubble:hover {
+  transform: scale(1.1);
 }
 
 /*Discussion/Chat Column*/

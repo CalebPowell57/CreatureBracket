@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { MsalService } from '@azure/msal-angular';
+import { ToastrService } from 'ngx-toastr';
+import { IChatMessage } from './interfaces/chat-message.interface';
+import { ChatService } from './shared/chat.service';
 
 @Component({
   selector: 'app-root',
@@ -7,12 +10,9 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'app';
-  constructor(private router: Router) {
-
-  }
+  constructor(private chatService: ChatService, private toastrService: ToastrService, private authService: MsalService) {}
  
   ngOnInit() {
-
     var CurrentURL = window.location.href;
     if (CurrentURL !== window.origin) {
       var LoadingAnimation = document.querySelector(".LoadingAnimation");
@@ -22,6 +22,10 @@ export class AppComponent {
       })
     }
 
-
+    this.chatService.onReceiveMessage$.subscribe((chatMessage: IChatMessage) => {
+      if (chatMessage.userName.toLowerCase() !== this.authService.getAccount().userName.toLowerCase()) {
+        this.toastrService.info(chatMessage.message, `${chatMessage.user} Says:`);//add on click at some point
+      }
+    });
   }
 }

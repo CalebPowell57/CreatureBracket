@@ -57,10 +57,9 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     RouterModule.forRoot([
       { path: 'creature-submission', component: CreatureSubmissionComponent, canActivate: [RequireAuthenticationGuard] },//add a guard
       { path: 'seed-tournament', component: SeedTournamentComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard] },
-      { path: 'current-standings', component: StandingsComponent, canActivate: [StandingsGuard, RequireAuthenticationGuard] },
+      { path: 'standings', component: StandingsComponent, canActivate: [StandingsGuard, RequireAuthenticationGuard] },
       { path: 'creature-approval', component: CreatureApprovalComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard, CreatureApprovalGuard] },
       { path: 'bracket-manager', component: BracketManagerComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard] },
-      { path: 'standings', component: StandingsComponent, canActivate: [RequireAuthenticationGuard] },
       { path: 'no-permissions', component: NoPermissionsComponent },
       { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [RequireAuthenticationGuard] },
       { path: '**', component: NotFoundComponent }
