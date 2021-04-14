@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
-import { Guid } from 'guid-typescript';
 import { Observable } from 'rxjs';
 import { IBracket } from '../interfaces/bracket.interface';
+import { ICanEditMyBracketDTO } from '../interfaces/CanEditMyBracketDTO.interface';
 import { IGlobalBracketDTO } from '../interfaces/GlobalBracketDTO.interface';
 import { IUserBracketDTO } from '../interfaces/UserBracketDTO.interface';
 
@@ -25,6 +25,10 @@ export class GlobalBracketService {
     let params = new HttpParams().set('userName', account.userName);
 
     return this.http.get<IGlobalBracketDTO>('Bracket/Global', { params: params });
+  }
+
+  canEditUserBracket(): Observable<ICanEditMyBracketDTO> {
+    return this.http.get<ICanEditMyBracketDTO>('Bracket/CanEditMyBracket');
   }
 
   getMyBracket(): Observable<IUserBracketDTO> {

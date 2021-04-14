@@ -11,8 +11,8 @@
           $('bb').draggable();
         </script>
       </div>
-      <div class="row h-100" [class.Won]="Won">
-        <div class="col-auto h-100" >
+      <div class="row h-100">
+        <div class="col-auto h-100">
           <ng-container>
             <ngtt-single-elimination-tree [tournament]="isGlobal === true ? bracket : userBracket"
                                           [matchTemplate]="matchTemplate"
@@ -23,7 +23,7 @@
 
           <ng-template #matchTemplate let-matchup let-tournament="tournament" let-isGlobal="isGlobal">
             <tt-match *ngIf="isGlobal" [matchup]="matchup" (click)="onMatchClick(matchup)"></tt-match>
-            <tt-user-match *ngIf="!isGlobal" [matchup]="matchup" [tournament]="tournament" (click)="onMatchClick(matchup)"></tt-user-match>
+            <tt-user-match *ngIf="!isGlobal" [matchup]="matchup" [tournament]="tournament" (click)="onMatchClick(matchup)" [canEdit]="canEdit"></tt-user-match>
           </ng-template>
         </div>
       </div>
@@ -47,7 +47,7 @@
       </div>
       <ng-template #userBracketSaveButton>
         <div class="btn-group">
-          <button type="button" [class.userBracketSaveButtonCollapsedCol]="!colActive" [class.userBracketSaveButtonExpandedCol]="colActive" class="btn btn-primary" (click)="userBracketSaveClick($event)">Save</button>
+          <button type="button" [class.userBracketSaveButtonCollapsedCol]="!colActive" [class.userBracketSaveButtonExpandedCol]="colActive" class="btn btn-primary" (click)="userBracketSaveClick($event)" [disabled]="!canEdit">Save</button>
         </div>
       </ng-template>
     </div>

@@ -54,6 +54,7 @@
     <None Remove="ClientApp\src\app\creature-submission\creature-submission.service.ts" />
     <None Remove="ClientApp\src\app\interfaces\approve-submission-DTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\bracket.interface.ts" />
+    <None Remove="ClientApp\src\app\interfaces\CanEditMyBracketDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\chat-message.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\creature-submission-DTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\creature-submission.interface.ts" />
@@ -104,6 +105,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\chat-message.interface.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\CanEditMyBracketDTO.interface.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\GlobalBracketDTO.interface.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\GlobalCreatureDTO.interface.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\GlobalMatchupDTO.interface.ts" />

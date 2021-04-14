@@ -5,6 +5,7 @@ import { MsalService } from '@azure/msal-angular';
 import { Guid } from 'guid-typescript';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
+import { EStatus } from '../../interfaces/bracket.interface';
 import { ICreatureDTO } from '../../interfaces/CreatureDTO.interface';
 import { IGlobalBracketDTO } from '../../interfaces/GlobalBracketDTO.interface';
 import { IUserBracketDTO } from '../../interfaces/UserBracketDTO.interface';
@@ -39,7 +40,7 @@ export class BracketComponent {
   hasChatBeenDisplayed: boolean;
   creatureVotedForClassSelection: string;
   zoomInOut = {};
-
+  canEdit = false;
 
   constructor(
     private bracketService: GlobalBracketService,
@@ -50,7 +51,16 @@ export class BracketComponent {
     private naviService: NaviService) { }
 
   ngOnInit() {
+    if (this.isGlobal) {
+      this.canEdit = true;
+    } else {
+      this.bracketService.canEditUserBracket().subscribe(x => {
+        this.canEdit = x.canEdit;
+      });
+    }
+
     this.naviService.loadingChanged$.next(true);
+
     if (this.isGlobal) {
       this.bracketService.getBracketData().subscribe(data => {
         this.bracket = data;

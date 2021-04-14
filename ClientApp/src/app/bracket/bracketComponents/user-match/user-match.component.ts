@@ -9,6 +9,7 @@ export class UserMatchComponent {
 
   @Input() matchup: any;
   @Input() tournament: IUserBracketDTO;
+  @Input() canEdit: boolean;
 
   private creatureVotedForId: string;
 
