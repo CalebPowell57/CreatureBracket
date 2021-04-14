@@ -4,7 +4,7 @@ export function initApp() {
       setTimeout(() => {
         console.log('In initApp');
         resolve();
-      }, 4000);
+      }, 3000);
     });
   };
 }
