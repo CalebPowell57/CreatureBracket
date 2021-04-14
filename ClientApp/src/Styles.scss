@@ -189,17 +189,23 @@ li.listItem {
 /*Navi*/
 .navi-move-in {
   position: absolute;
-  left: 40%;
-  top: 40%;
+  left: 50%;
+  top: 50%;
+  width: 200px;
+  height: 200px;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   animation: move-in 200ms linear;
 }
 
 .navi-move-out {
   position: absolute;
-  /*left: 100%;
-  top: 100%;*/
-  left: 40%;
-  top: 40%;
+  left: 50%;
+  top: 50%;
+  width: 200px;
+  height: 200px;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   animation: move-out 200ms linear;
 }
 
@@ -207,9 +213,8 @@ li.listItem {
   position: absolute;
   height: 200px;
   width: 200px;
-  left: 40%;
-  top: 40%;
-  transform-origin: 150px center;
+  -ms-transform: translate(-50px, -50px);
+  transform: translate(-50px, -50px);
   animation: rotate 2s linear infinite;
 }
 
@@ -222,13 +227,13 @@ li.listItem {
 
 @keyframes rotate {
   from {
-    transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg) translate(-50px, -50px);
+    -webkit-transform: rotate(0deg) translate(-50px, -50px);
   }
 
   to {
-    transform: rotate(-360deg);
-    -webkit-transform: rotate(-360deg);
+    transform: rotate(-360deg) translate(-50px, -50px);
+    -webkit-transform: rotate(-360deg) translate(-50px, -50px);
   }
 }
 
@@ -246,38 +251,40 @@ li.listItem {
 
 @keyframes move-in {
   0% {
-    /*left: 0px;
-    top: 60px;*/
-    transform: scale(1, 1);
-    -webkit-transform: scale(1, 1);
+    left: 50%;
+    top: 50%;
+    transform: scale(1, 1) translate(-50%, -50%);
+    -webkit-transform: scale(1, 1) translate(-50%, -50%);
     animation-timing-function: ease-out;
   }
 
   0.1% {
-    transform: scale(0, 0);
-    -webkit-transform: scale(0, 0);
+    transform: scale(0, 0) translate(-50%, -50%);
+    -webkit-transform: scale(0, 0) translate(-50%, -50%);
   }
 
   100% {
-    /*left: 40%;
-    top: 40%;*/
-    transform: scale(1, 1);
-    -webkit-transform: scale(1, 1);
+    left: 50%;
+    top: 50%;
+    transform: scale(1, 1) translate(-50%, -50%);
+    -webkit-transform: scale(1, 1) translate(-50%, -50%);
   }
 }
 
 @keyframes move-out {
   from {
-    /*left: 40%;
-    top: 40%;*/
+    left: 50%;
+    top: 50%;
+    transform: scale(1, 1) translate(-50%, -50%);
+    -webkit-transform: scale(1, 1) translate(-50%, -50%);
     animation-timing-function: cubic-bezier(.5, .01, .69, .08);
   }
 
   to {
-    /*left: 100%;
-    top: 60px;*/
-    transform: scale(0, 0);
-    -webkit-transform: scale(0, 0);
+    left: 50%;
+    top: 50%;
+    transform: scale(0, 0) translate(-50%, -50%);
+    -webkit-transform: scale(0, 0) translate(-50%, -50%);
   }
 }
 

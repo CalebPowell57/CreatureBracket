@@ -11,7 +11,7 @@ export enum EState { MovingIn, Idle, MovingOut }
 
 export class NaviComponent  {
   particles = new Array(15);
-  showingClass = 'showing';
+  showingClass = 'not-showing';
   moveClass = '';
   state = EState.MovingIn;
 
