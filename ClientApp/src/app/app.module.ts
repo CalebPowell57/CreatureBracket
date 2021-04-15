@@ -19,6 +19,7 @@ import { NaviComponent } from './navi/navi.component';
 import { NoPermissionsComponent } from './no-permissions/no-permissions.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NotSignedInComponent } from './not-signed-in/not-signed-in.component';
+import { NotSignedInGuard } from './not-signed-in/not-signed-in.guard';
 import { SeedTournamentComponent } from './seed-tournament/seed-tournament.component';
 import { initApp } from './shared/delay-init-app';
 import { CustomErrorHandler } from './shared/error.handler';
@@ -62,8 +63,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       { path: 'standings', component: StandingsComponent, canActivate: [StandingsGuard, RequireAuthenticationGuard] },
       { path: 'creature-approval', component: CreatureApprovalComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard, CreatureApprovalGuard] },
       { path: 'bracket-manager', component: BracketManagerComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard] },
+      { path: 'not-signed-in', component: NotSignedInComponent, canActivate: [NotSignedInGuard] },
       { path: 'no-permissions', component: NoPermissionsComponent },
-      { path: 'not-signed-in', component: NotSignedInComponent },
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: '**', component: NotFoundComponent }
     ]),

@@ -21,23 +21,23 @@ export class HomeComponent  {
   ) { }
 
   ngOnInit() {
-    if (this.loadStateService.HomeHasLoaded) {
-      this.pageInitialized = true;
-    }
-    else {
-      this.loadStateService.HomeHasLoaded = true;
-    }
-    this.bracketService.activeBracket().subscribe(x => {
-      if (x.status === 0) {
-        this.bracket = ['/creature-submission'];
-      }
-      else if (x.status === 1) {
-        this.bracket = ['/tournament'];
-      }
-      else {
-        this.bracket = ['/current-standings'];
-      }
-    })
+    //if (this.loadStateService.HomeHasLoaded) {
+    //  this.pageInitialized = true;
+    //}
+    //else {
+    //  this.loadStateService.HomeHasLoaded = true;
+    //}
+    //this.bracketService.activeBracket().subscribe(x => {
+    //  if (x.status === 0) {
+    //    this.bracket = ['/creature-submission'];
+    //  }
+    //  else if (x.status === 1) {
+    //    this.bracket = ['/tournament'];
+    //  }
+    //  else {
+    //    this.bracket = ['/current-standings'];
+    //  }
+    //})
   }
 
   onStartClick() {

@@ -19,7 +19,7 @@
             <div>
               <img src="{{signedInUserImage}}" style="border-radius:50%; margin-right:10px;" height="32" width="32" *ngIf="signedInUserImage"/>
 
-              <span style="margin-right:10px;">{{signedInUser}}</span>
+              <span style="margin-right:30px;">{{signedInUser}}</span>
 
               <button class="btn btn-outline-light" (click)="signOut()" *ngIf="signedInUser !== ''">Sign out</button>
             </div>

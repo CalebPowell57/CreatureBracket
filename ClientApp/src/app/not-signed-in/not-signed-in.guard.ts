@@ -5,25 +5,24 @@ import { MsalService } from '@azure/msal-angular';
 @Injectable({
   providedIn: 'root'
 })
-export class RequireAuthenticationGuard implements CanActivate {
+export class NotSignedInGuard implements CanActivate {
   constructor(private router: Router,
-    private authService: MsalService) {}
+    private authService: MsalService) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Promise<boolean> {
     return this.authService.acquireTokenSilent({ scopes: ["profile", "openid"] })
       .then(tokenResponse => {
-        return true;
+        this.router.navigate(['']);
+        return false;
       })
       .catch(error => {
         if (error.errorCode === 'user_login_error' || error.errorCode === 'token_renewal_error' || error.errorCode === 'login_required') {//duplicate check in error.handler.ts
-          this.router.navigate(['not-signed-in']);
+          return true;
         } else {
           throw error;
         }
-
-        return false;
       });
   }
 }

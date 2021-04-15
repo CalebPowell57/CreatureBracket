@@ -34,22 +34,23 @@ export class NavMenuComponent {
       this.accountService.getInformation().subscribe(x => {
         this.signedInUserImage = x.image;
       });
-
-      this.bracketService.activeBracket().subscribe(x => {
-        if (this.authService.getAccount()) {
-          const roles = this.authService.getAccount().idTokenClaims.roles;
-          const isSuper = roles && roles.includes('super');
-
-          this.showCreatureApproval = isSuper && x.status === EStatus.Open;
-          this.showSeedTournament = isSuper && x.status === EStatus.Open;
-          this.showBracketManager = isSuper;
-          this.showCreatureSubmission = x.status === EStatus.Open;
-          this.showStandings = x.status !== EStatus.Open;
-          this.showMyBracket = x.status !== EStatus.Open;
-          this.showGlobalBracket = x.status !== EStatus.Open;
-        }
-      });
     }
+
+    this.bracketService.activeBracketStatus().subscribe(x => {
+      if (account) {
+        const roles = account.idTokenClaims.roles;
+        const isSuper = roles && roles.includes('super');
+
+        this.showCreatureApproval = isSuper && x.status === EStatus.Open;
+        this.showSeedTournament = isSuper && x.status === EStatus.Open;
+        this.showBracketManager = isSuper;
+      }
+
+      this.showCreatureSubmission = x.status === EStatus.Open;
+      this.showStandings = x.status !== EStatus.Open;
+      this.showMyBracket = x.status !== EStatus.Open;
+      this.showGlobalBracket = x.status !== EStatus.Open;
+    });
   }
 
   collapse() {

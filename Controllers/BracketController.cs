@@ -66,6 +66,15 @@ namespace CreatureBracket.Controllers
             return Ok(response);
         }
 
+        [AllowAnonymous]//this is anonymous as we need it to check the status for the nav menu item visibility
+        [HttpGet("ActiveStatus")]
+        public async Task<IActionResult> ActiveStatus()
+        {
+            var response = await _unitOfWork.BracketRepository.ActiveStatusAsync();
+
+            return Ok(response);
+        }
+
         [HttpGet("CanEditMyBracket")]
         public async Task<IActionResult> GetCanEditMyBracket()
         {

@@ -15,6 +15,7 @@ import { GlobalBracketComponent } from './global-bracket/global-bracket.componen
 import { UserBracketGuard } from './user-bracket/user-bracket.guard';
 import { GlobalBracketGuard } from './global-bracket/global-bracket.guard';
 import { UTCDatePipe } from '../pipes/UTCDate.pipe';
+import { RequireAuthenticationGuard } from '../shared/requre-authentication.guard';
 
 
 @NgModule({
@@ -35,8 +36,8 @@ import { UTCDatePipe } from '../pipes/UTCDate.pipe';
     FormsModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
-      { path: 'user-bracket', component: UserBracketComponent, canActivate: [UserBracketGuard] },
-      { path: 'tournament', component: GlobalBracketComponent, canActivate: [GlobalBracketGuard] }
+      { path: 'user-bracket', component: UserBracketComponent, canActivate: [RequireAuthenticationGuard, UserBracketGuard] },
+      { path: 'tournament', component: GlobalBracketComponent, canActivate: [RequireAuthenticationGuard, GlobalBracketGuard] }
       ])
     ],
   exports: [

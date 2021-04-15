@@ -25,6 +25,23 @@ namespace CreatureBracket.Repositories
             return activeBracket;
         }
 
+        public async Task<ActiveBracketStatusResponseDTO> ActiveStatusAsync()
+        {
+            var activeBracket = await ActiveAsync();
+
+            if (activeBracket is null)
+            {
+                return null;
+            }
+
+            var activeBracketDTO = new ActiveBracketStatusResponseDTO
+            {
+                Status = activeBracket.Status
+            };
+
+            return activeBracketDTO;
+        }
+
         public async Task<CanEditMyBracketDTO> CanEditMyBracketAsync()
         {
             var activeBracket = await ActiveAsync();

@@ -70,6 +70,7 @@
     <None Remove="ClientApp\src\app\interfaces\UserCreatureDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\UserMatchupDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\UserRoundDTO.interface.ts" />
+    <None Remove="ClientApp\src\app\not-signed-in\not-signed-in.guard.ts" />
     <None Remove="ClientApp\src\app\seed-tournament\seed-tournament.service.ts" />
     <None Remove="ClientApp\src\app\shared\account.service.ts" />
     <None Remove="ClientApp\src\app\shared\currentURL.service.ts" />
@@ -132,6 +133,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\user.interface.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\not-signed-in\not-signed-in.guard.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\seed-tournament\seed-tournament.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\shared\currentURL.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\shared\load-state.service.ts" />

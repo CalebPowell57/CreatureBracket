@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
 import {
-  HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders
+    HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 } from '@angular/common/http';
-
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+
 
 /** Inject With Credentials into the request */
 @Injectable()
