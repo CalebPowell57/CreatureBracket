@@ -18,9 +18,7 @@ export class RequireAuthenticationGuard implements CanActivate {
       })
       .catch(error => {
         if (error.errorCode === 'user_login_error' || error.errorCode === 'token_renewal_error' || error.errorCode === 'login_required') {
-          this.authService.loginRedirect({
-            extraScopesToConsent: ["user.read", "openid", "profile", "user.readbasic.all"]
-          });
+          this.router.navigate(['not-signed-in']);
         } else {
           console.error(error);
         }
