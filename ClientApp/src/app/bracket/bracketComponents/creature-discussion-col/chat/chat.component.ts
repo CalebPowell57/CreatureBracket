@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MsalService } from '@azure/msal-angular';
-import { Guid } from 'guid-typescript';
 import { IChatMessage } from '../../../../interfaces/chat-message.interface';
 import { ChatService } from '../../../../shared/chat.service';
 
@@ -14,6 +13,7 @@ export class ChatComponent {
   chatMessages: IChatMessage[];
   chatText = '';
   userName = this.authService.getAccount().userName;
+  loadingMessages: boolean = null;
 
   constructor(private chatService: ChatService,
               private authService: MsalService) {
@@ -21,8 +21,10 @@ export class ChatComponent {
   }
 
   ngOnInit() {
+    this.loadingMessages = true;
     this.chatService.getMessages().subscribe(chatMessages => {
       this.chatMessages = chatMessages;
+      this.loadingMessages = false;
     });
   }
 

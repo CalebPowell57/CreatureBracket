@@ -66,8 +66,8 @@ namespace CreatureBracket.Misc
                     return;
                 }
 
-                //use activeRound.VotingDeadline
-                if (activeRound.VoteDeadline < DateTime.UtcNow)
+                //if votedeadline is in the past && a cretaure winner has not been determined
+                if (activeRound.VoteDeadline < DateTime.UtcNow && (activeRound.Matchups.Count > 1 || !activeRound.Matchups.Any(x => x.WinnerId.HasValue)))
                 {
                     foreach (var matchup in activeRound.Matchups)
                     {

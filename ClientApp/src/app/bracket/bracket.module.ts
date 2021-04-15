@@ -14,6 +14,7 @@ import { UserBracketComponent } from './user-bracket/user-bracket.component';
 import { GlobalBracketComponent } from './global-bracket/global-bracket.component';
 import { UserBracketGuard } from './user-bracket/user-bracket.guard';
 import { GlobalBracketGuard } from './global-bracket/global-bracket.guard';
+import { UTCDatePipe } from '../pipes/UTCDate.pipe';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { GlobalBracketGuard } from './global-bracket/global-bracket.guard';
     SingleEliminationTreeComponent,
     CreatureDiscussionColComponent,
     SelectedMatchDiscussionInfoComponent,
-    ChatComponent
+    ChatComponent,
+    UTCDatePipe
   ],
   imports: [
     CommonModule,

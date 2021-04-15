@@ -1,4 +1,12 @@
 <div class="container-fluid h-100" style="padding-top:15px">
+  <div class="profile-main-loader" [class.fade-out]="loadingMessages !== null && !loadingMessages">
+    <div class="loader">
+      <svg class="circular-loader" viewBox="25 25 50 50">
+        <circle class="loader-path" cx="50" cy="50" r="20" fill="none" stroke="darkslategray" stroke-width="2" />
+      </svg>
+    </div>
+  </div>
+
   <div class="row chat scroll d-flex flex-column-reverse">
     <div id="chatScroll" class="col-12 scroll d-flex flex-column-reverse">
       <ul>
@@ -7,9 +15,9 @@
             [class.current]="chatMessage.userName.toUpperCase() === userName.toUpperCase()">
           <div class="verticalContainer">
             <div>
-              <img [src]="chatMessage.image" *ngIf="chatMessage.userName.toUpperCase() !== userName.toUpperCase()" style="border-radius: 50%; margin-right:10px;" height="20" width="20"/>
+              <img [src]="chatMessage.image" *ngIf="chatMessage.userName.toUpperCase() !== userName.toUpperCase()" style="border-radius: 50%; margin-right:10px;" height="20" width="20" />
               <span class="chat-user" *ngIf="chatMessage.userName.toUpperCase() !== userName.toUpperCase()">{{chatMessage.user}}</span>
-              <span class="chat-date-time">{{chatMessage.systemDateTime | date:"longDate" }} at {{chatMessage.systemDateTime | date:"shortTime" }}</span>
+              <span class="chat-date-time">{{chatMessage.systemDateTime | utcDate | date:"longDate" }} at {{chatMessage.systemDateTime | utcDate | date : 'shortTime'}}</span>
             </div>
             {{chatMessage.message}}
           </div>
@@ -27,7 +35,8 @@
                class="form-control"
                autocomplete="off"
                minLength="3"
-               placeholder="Type your message here" />
+               placeholder="Type your message here"
+               [disabled]="loadingMessages"/>
       </form>
     </div>
   </div>

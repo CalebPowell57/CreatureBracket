@@ -123,6 +123,13 @@ li.listItem {
   border-color: #141414;
 }
 
+.form-control:disabled {
+  background-color: #292929;
+  color: white;
+  border-color: #141414;
+  opacity: 0.5;
+}
+
 .form-control:focus {
   background-color: #292929;
   color:white;
@@ -641,4 +648,9 @@ li.listItem {
   padding: 18px;
   font-size: 25px;
   letter-spacing: 10px;
+}
+
+.toast-info {
+  background-color: darkslategray !important;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMzIiIGhlaWdodD0iMzIiCnZpZXdCb3g9IjAgMCAxNzIgMTcyIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE3MnYtMTcyaDE3MnYxNzJ6IiBmaWxsPSJub25lIj48L3BhdGg+PGcgZmlsbD0iI2ZmZmZmZiI+PHBhdGggZD0iTTE2LjEyNSwyNi44NzV2OTYuNzVoMjYuODc1djI3LjMwNTQybDM0LjEzOTY1LC0yNy4zMDU0Mmg3OC43MzUzNXYtNS4zNzV2LTkxLjM3NXpNMjYuODc1LDM3LjYyNWgxMTguMjV2NzUuMjVoLTcxLjc2NDY1bC0xOS42MTAzNSwxNS42ODQwOHYtMTUuNjg0MDhoLTI2Ljg3NXpNNDMsNTkuMTI1djEwLjc1aDg2di0xMC43NXpNNDMsODAuNjI1djEwLjc1aDUzLjc1di0xMC43NXoiPjwvcGF0aD48L2c+PC9nPjwvc3ZnPg==");
 }

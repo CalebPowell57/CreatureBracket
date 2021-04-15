@@ -15,17 +15,18 @@ import { CreatureApprovalGuard } from './creature-approval/creature-approval.gua
 import { CreatureSubmissionComponent } from './creature-submission/creature-submission.component';
 import { HomeComponent } from './home/home.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { NaviComponent } from './navi/navi.component';
 import { NoPermissionsComponent } from './no-permissions/no-permissions.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { NotSignedInComponent } from './not-signed-in/not-signed-in.component';
 import { SeedTournamentComponent } from './seed-tournament/seed-tournament.component';
-import { NaviComponent } from './navi/navi.component';
+import { initApp } from './shared/delay-init-app';
 import { CustomErrorHandler } from './shared/error.handler';
 import { HttpRequestInterceptor } from './shared/http-request.interceptor';
 import { RequireAuthenticationGuard } from './shared/requre-authentication.guard';
 import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.guard';
 import { StandingsComponent } from './standings/standings.component';
 import { StandingsGuard } from './standings/standings.guard';
-import { initApp } from './shared/delay-init-app';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -39,6 +40,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     CreatureSubmissionComponent,
     BracketManagerComponent,
     NoPermissionsComponent,
+    NotSignedInComponent,
     CreatureApprovalComponent,
     SeedTournamentComponent,
     NaviComponent
@@ -55,14 +57,14 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       positionClass: 'toast-bottom-right'
     }),
     RouterModule.forRoot([
-      { path: 'creature-submission', component: CreatureSubmissionComponent, canActivate: [RequireAuthenticationGuard] },//add a guard
+      { path: 'creature-submission', component: CreatureSubmissionComponent, canActivate: [RequireAuthenticationGuard] },
       { path: 'seed-tournament', component: SeedTournamentComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard] },
-      { path: 'current-standings', component: StandingsComponent, canActivate: [StandingsGuard, RequireAuthenticationGuard] },
+      { path: 'standings', component: StandingsComponent, canActivate: [StandingsGuard, RequireAuthenticationGuard] },
       { path: 'creature-approval', component: CreatureApprovalComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard, CreatureApprovalGuard] },
       { path: 'bracket-manager', component: BracketManagerComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard] },
-      { path: 'standings', component: StandingsComponent, canActivate: [RequireAuthenticationGuard] },
       { path: 'no-permissions', component: NoPermissionsComponent },
-      { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [RequireAuthenticationGuard] },
+      { path: 'not-signed-in', component: NotSignedInComponent },
+      { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: '**', component: NotFoundComponent }
     ]),
     MsalModule.forRoot({

@@ -66,6 +66,14 @@ namespace CreatureBracket.Controllers
             return Ok(response);
         }
 
+        [HttpGet("CanEditMyBracket")]
+        public async Task<IActionResult> GetCanEditMyBracket()
+        {
+            var response = await _unitOfWork.BracketRepository.CanEditMyBracketAsync();
+
+            return Ok(response);
+        }
+
         [HttpGet("Standings")]
         public async Task<IActionResult> Standings()
         {

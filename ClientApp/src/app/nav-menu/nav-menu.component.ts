@@ -27,25 +27,29 @@ export class NavMenuComponent {
     private accountService: AccountService) { }
 
   ngOnInit() {
-    this.signedInUser = this.authService.getAccount().name;
-    this.accountService.getInformation().subscribe(x => {
-      this.signedInUserImage = x.image;
-    });
+    const account = this.authService.getAccount();
 
-    this.bracketService.activeBracket().subscribe(x => {
-      if (this.authService.getAccount()) {
-        const roles = this.authService.getAccount().idTokenClaims.roles;
-        const isSuper = roles && roles.includes('super');
+    if (account) {
+      this.signedInUser = account.name;
+      this.accountService.getInformation().subscribe(x => {
+        this.signedInUserImage = x.image;
+      });
 
-        this.showCreatureApproval = isSuper && x.status === EStatus.Open;
-        this.showSeedTournament = isSuper && x.status === EStatus.Open;
-        this.showCreatureSubmission = x.status === EStatus.Open;
-        this.showStandings = x.status !== EStatus.Open;
-        this.showMyBracket = x.status !== EStatus.Open;
-        this.showGlobalBracket = x.status !== EStatus.Open;
-        this.showBracketManager = isSuper;
-      }
-    });
+      this.bracketService.activeBracket().subscribe(x => {
+        if (this.authService.getAccount()) {
+          const roles = this.authService.getAccount().idTokenClaims.roles;
+          const isSuper = roles && roles.includes('super');
+
+          this.showCreatureApproval = isSuper && x.status === EStatus.Open;
+          this.showSeedTournament = isSuper && x.status === EStatus.Open;
+          this.showBracketManager = isSuper;
+          this.showCreatureSubmission = x.status === EStatus.Open;
+          this.showStandings = x.status !== EStatus.Open;
+          this.showMyBracket = x.status !== EStatus.Open;
+          this.showGlobalBracket = x.status !== EStatus.Open;
+        }
+      });
+    }
   }
 
   collapse() {
@@ -58,5 +62,11 @@ export class NavMenuComponent {
 
   signOut() {
     this.authService.logout();
+  }
+
+  signIn() {
+    this.authService.loginRedirect({
+      extraScopesToConsent: ["user.read", "openid", "profile", "user.readbasic.all"]
+    });
   }
 }

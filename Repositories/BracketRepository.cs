@@ -25,6 +25,28 @@ namespace CreatureBracket.Repositories
             return activeBracket;
         }
 
+        public async Task<CanEditMyBracketDTO> CanEditMyBracketAsync()
+        {
+            var activeBracket = await ActiveAsync();
+
+            var response = new CanEditMyBracketDTO
+            {
+                CanEdit = false
+            };
+
+            if (activeBracket.Status == Bracket.EStatus.Started)
+            {
+                var firstRound = await _context.Rounds.OrderBy(x => x.Rank).Take(1).SingleOrDefaultAsync(x => x.BracketId == activeBracket.Id);
+
+                if(firstRound != null)
+                {
+                    response.CanEdit = firstRound.VoteDeadline > DateTime.UtcNow;
+                }
+            }
+
+            return response;
+        }
+
         public async Task<List<StandingsItemDTO>> StandingsAsync()
         {
             if (!await _context.Brackets.AnyAsync())
