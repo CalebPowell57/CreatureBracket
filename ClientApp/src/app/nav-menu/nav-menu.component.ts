@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
 import { EStatus } from '../interfaces/bracket.interface';
 import { AccountService } from '../shared/account.service';
@@ -24,7 +25,8 @@ export class NavMenuComponent {
   constructor(
     private bracketService: GlobalBracketService,
     private authService: MsalService,
-    private accountService: AccountService) { }
+    private accountService: AccountService,
+    private router: Router) { }
 
   ngOnInit() {
     const account = this.authService.getAccount();
@@ -59,6 +61,18 @@ export class NavMenuComponent {
 
   toggle() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  expandUserOptions() {
+    var popup = document.getElementById("userOptionsPopup");
+    popup.classList.toggle("show");
+
+    var popup = document.getElementById("userOptionsButton");
+    popup.classList.toggle("active");
+  }
+
+  openSettings() {
+    this.router.navigate(['account-settings']);
   }
 
   signOut() {

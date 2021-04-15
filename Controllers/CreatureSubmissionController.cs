@@ -2,10 +2,8 @@
 using CreatureBracket.Misc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
-using static CreatureBracket.Misc.Constants;
 
 namespace CreatureBracket.Controllers
 {
@@ -35,14 +33,6 @@ namespace CreatureBracket.Controllers
             return Ok();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get()
-        {
-            var submissions = await _unitOfWork.CreatureSubmissionRepository.Get().ToListAsync();
-
-            return Ok(submissions);
-        }
-
         [HttpPost("Approve")]
         public async Task<IActionResult> Approve([FromBody] ApproveSubmissionRequestDTO dto)
         {
@@ -53,10 +43,10 @@ namespace CreatureBracket.Controllers
             return Ok();
         }
 
-        [HttpGet("ByStatus")]
-        public async Task<IActionResult> ByStatus()
+        [HttpGet]
+        public async Task<IActionResult> Get()
         {
-            var submissions = await _unitOfWork.CreatureSubmissionRepository.ByStatusAsync();
+            var submissions = await _unitOfWork.CreatureSubmissionRepository.GetAllAsync();
 
             return Ok(submissions);
         }

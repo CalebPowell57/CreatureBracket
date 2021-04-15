@@ -18,8 +18,8 @@ export class CreatureSubmissionService {
     return response;
   }
 
-  getSubmissionsById(): Observable<ICreatureSubmission[]> {
+  getSubmissions(): Observable<ICreatureSubmission[]> {
 
-    return this.http.get<ICreatureSubmission[]>('CreatureSubmission/ByStatus');
+    return this.http.get<ICreatureSubmission[]>('CreatureSubmission');
   }
 }

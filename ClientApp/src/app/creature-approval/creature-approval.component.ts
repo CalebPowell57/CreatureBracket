@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { eCreatureSubmissionStatus, ICreatureSubmission } from '../interfaces/creature-submission.interface';
+import { ICreatureSubmission } from '../interfaces/creature-submission.interface';
 import { CreatureApprovalService } from './creature-approval.service';
 
 @Component({
@@ -14,13 +13,12 @@ export class CreatureApprovalComponent {
   approvedSubmissions: ICreatureSubmission[] = [];
 
   constructor(
-    private router: Router,
     private creatureApprovalService: CreatureApprovalService,
     private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
-    this.creatureApprovalService.getSubmissionsById().subscribe(x => {
+    this.creatureApprovalService.getSubmissions().subscribe(x => {
       for (let creature of x) {
         if (creature.status === 0) {
           this.pendingSubmissions.push(creature);

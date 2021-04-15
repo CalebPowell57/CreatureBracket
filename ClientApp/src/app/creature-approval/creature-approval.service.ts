@@ -18,8 +18,8 @@ export class CreatureApprovalService {
     return this.http.post('CreatureSubmission/Approve', dto);
   }
 
-  getSubmissionsById(): Observable<ICreatureSubmission[]> {
+  getSubmissions(): Observable<ICreatureSubmission[]> {
 
-    return this.http.get<ICreatureSubmission[]>('CreatureSubmission/ByStatus');
+    return this.http.get<ICreatureSubmission[]>('CreatureSubmission');
   }
 }

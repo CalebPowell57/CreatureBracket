@@ -579,17 +579,10 @@ li.listItem {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  /*min-height: 1050px;
-  position: relative;
-  opacity: 0.75;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;*/
 }
 .LoadingAnimation.Loaded {
   animation-name: fadeOut;
-  animation-duration: 3s;
+  animation-duration: 1s;
   animation-fill-mode: forwards;
 }
 .AnimationGroup {

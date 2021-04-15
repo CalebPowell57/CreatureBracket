@@ -58,9 +58,9 @@ namespace CreatureBracket.Repositories
             _context.Add(creature);
         }
 
-        public async Task<List<CreatureSubmission>> ByStatusAsync()
+        public async Task<List<CreatureSubmission>> GetAllAsync()
         {
-            var submissions = await _context.CreatureSubmissions.AsNoTracking().ToListAsync();
+            var submissions = await _context.CreatureSubmissions.AsNoTracking().OrderByDescending(x => x.Status).ToListAsync();
 
             return submissions;
         }
