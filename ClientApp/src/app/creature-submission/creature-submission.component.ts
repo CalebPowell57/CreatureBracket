@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { ToastrService } from 'ngx-toastr';
 import { ICreatureSubmission } from '../interfaces/creature-submission.interface';
+import { NaviService } from '../shared/navi.service';
 import { CreatureSubmissionService } from './creature-submission.service';
 
 @Component({
@@ -18,16 +19,20 @@ export class CreatureSubmissionComponent {
 
   constructor(
     private creatureSubmissionService: CreatureSubmissionService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private naviService: NaviService
   ) { }
 
   ngOnInit() {
+    this.naviService.loadingChanged$.next(true);
     this.creatureSubmissionService.getSubmissions().subscribe(x => {
       this.submissions = x;
+      this.naviService.loadingChanged$.next(false);
     });
   }
 
   onSubmit(form: NgForm) {
+    this.naviService.loadingChanged$.next(true);
     this.creatureSubmissionService.create({ name: this.input.name, bio: this.input.bio, image: this.croppedImage })
       .subscribe(
         () => {
@@ -37,6 +42,7 @@ export class CreatureSubmissionComponent {
           this.input.bio = "";
           this.croppedImage = "";
           this.showCropper = false;
+          this.naviService.loadingChanged$.next(false);
         }
       );
   }

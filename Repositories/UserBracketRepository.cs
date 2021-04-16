@@ -140,6 +140,13 @@ namespace CreatureBracket.Repositories
             return bracket;
         }
 
+        public async Task<List<UserBracket>> AllActiveAsync(Guid activeBracketId)
+        {
+            var userBrackets = await _context.UserBrackets.Where(x => x.BracketId == activeBracketId).ToListAsync();
+
+            return userBrackets;
+        }
+
         public async Task UpdatePointsAsync(Guid bracketId, Round round)
         {
             var userBrackets = await _context.UserBrackets.Include(x => x.Rounds)

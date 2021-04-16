@@ -14,19 +14,19 @@ namespace CreatureBracket.Controllers
     {
         private readonly ILogger<EmailSenderController> _logger;
         private readonly UnitOfWork _unitOfWork;
-        private readonly EmailService _emailService;
 
-        public EmailSenderController(ILogger<EmailSenderController> logger, UnitOfWork unitOfWork, EmailService emailService)
+        public EmailSenderController(ILogger<EmailSenderController> logger, UnitOfWork unitOfWork)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
-            _emailService = emailService;
         }
 
         [HttpPost("Test")]
         public async Task<IActionResult> Test([FromBody] EmailTestRequestDTO dto)
         {
-            var response = await _emailService.SendTestAsync(dto.SendGridApiKey, dto.EmailAddress, dto.ToName);
+            var emailSender = new EmailSender(dto.SendGridApiKey);
+
+            var response = await emailSender.SendTestAsync(dto.EmailAddress, dto.ToName);
 
             return Ok(response);
         }

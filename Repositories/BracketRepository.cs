@@ -189,7 +189,8 @@ namespace CreatureBracket.Repositories
                 BracketId = active.Id,
                 Rank = rank,
                 CreatureCount = creatureCount,
-                VoteDeadline = DateTime.UtcNow.Date.AddDays(3)
+                VoteDeadline = DateTime.UtcNow.Date.AddHours(12).AddDays(3),//I want the battles to execute at 12 pm server time
+                EmailReminderSent = false
             };
 
             var matchups = new List<Matchup>();

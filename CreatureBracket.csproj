@@ -52,6 +52,8 @@
     <None Remove="ClientApp\src\app\creature-approval\creature-approval.guard.ts" />
     <None Remove="ClientApp\src\app\creature-approval\creature-approval.service.ts" />
     <None Remove="ClientApp\src\app\creature-submission\creature-submission.service.ts" />
+    <None Remove="ClientApp\src\app\interfaces\AccountSettingDTO.interface.ts" />
+    <None Remove="ClientApp\src\app\interfaces\AccountSettingGroupDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\approve-submission-DTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\bracket.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\CanEditMyBracketDTO.interface.ts" />
@@ -63,6 +65,7 @@
     <None Remove="ClientApp\src\app\interfaces\GlobalCreatureDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\GlobalMatchupDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\GlobalRoundDTO.interface.ts" />
+    <None Remove="ClientApp\src\app\interfaces\SaveAccountSettingDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\seed-matchupDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\standings-item-DTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\user.interface.ts" />
@@ -103,6 +106,9 @@
     <TypeScriptCompile Include="ClientApp\src\app\creature-submission\creature-submission.service.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\SaveAccountSettingDTO.interface.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\AccountSettingDTO.interface.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\AccountSettingGroupDTO.interface.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\chat-message.interface.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -173,6 +179,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="ClientApp\src\app\interfaces\AccountSettingDTO - Copy.interface.js">
+      <DependentUpon>AccountSettingDTO.interface.js</DependentUpon>
+    </None>
+    <None Update="ClientApp\src\app\interfaces\AccountSettingDTO - Copy.interface.js.map">
+      <DependentUpon>AccountSettingDTO.interface.js.map</DependentUpon>
+    </None>
+    <None Update="ClientApp\src\app\interfaces\CanEditMyBracketDTO - Copy.interface.js">
+      <DependentUpon>CanEditMyBracketDTO.interface.js</DependentUpon>
+    </None>
+    <None Update="ClientApp\src\app\interfaces\CanEditMyBracketDTO - Copy.interface.js.map">
+      <DependentUpon>CanEditMyBracketDTO.interface.js.map</DependentUpon>
+    </None>
     <None Update="ClientApp\src\assets\chat-bubble.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -203,7 +221,7 @@
     <None Update="ClientApp\src\assets\circle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="ConfirmationRequestBody.html">
+    <None Update="EmailTemplates\VoteDeadlineReminderBody.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

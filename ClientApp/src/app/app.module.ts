@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { MsalInterceptor, MsalModule } from '@azure/msal-angular';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { ToastrModule } from 'ngx-toastr';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { AppComponent } from './app.component';
 import { BracketManagerComponent } from './bracket-manager/bracket-manager.component';
 import { BracketModule } from './bracket/bracket.module';
@@ -40,6 +41,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     NotFoundComponent,
     CreatureSubmissionComponent,
     BracketManagerComponent,
+    AccountSettingsComponent,
     NoPermissionsComponent,
     NotSignedInComponent,
     CreatureApprovalComponent,
@@ -58,6 +60,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       positionClass: 'toast-bottom-right'
     }),
     RouterModule.forRoot([
+      { path: 'account-settings', component: AccountSettingsComponent, canActivate: [RequireAuthenticationGuard] },
       { path: 'creature-submission', component: CreatureSubmissionComponent, canActivate: [RequireAuthenticationGuard] },
       { path: 'seed-tournament', component: SeedTournamentComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard] },
       { path: 'standings', component: StandingsComponent, canActivate: [StandingsGuard, RequireAuthenticationGuard] },

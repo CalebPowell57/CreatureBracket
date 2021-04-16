@@ -1,47 +1,128 @@
-﻿using SendGrid;
+﻿using CreatureBracket.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using SendGrid.Helpers.Mail;
-using System.IO;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+
 
 namespace CreatureBracket.Misc
 {
-    public class EmailService
+    public class EmailService : IHostedService, IDisposable
     {
-        private readonly EmailAddress _sender = new EmailAddress("cpowell@kalos-inc.com", "Creature Bracket");
+        private readonly ILogger<EmailService> _logger;
+        private Timer _timer;
+        private Random _rng = new Random();
+        private IServiceScopeFactory _serviceScopeFactory;
 
-        public async Task<Response> SendTestAsync(string sendGridApiKey, string emailAddress, string toName)
+        public EmailService(IServiceScopeFactory serviceScopeFactory)
         {
-            var client = new SendGridClient(sendGridApiKey);
-            var subject = "This is a test";
-            var to = new EmailAddress(emailAddress, toName);
-            var msg = MailHelper.CreateSingleEmail(_sender, to, subject, "Test message.", "");
-            var response = await client.SendEmailAsync(msg);
-
-            return response;
+            _serviceScopeFactory = serviceScopeFactory;
         }
 
-        public async Task<Response> SendConfirmationRequestAsync(string sendGridApiKey, string emailAddress, string toName, string key, string baseUrl)
+        public Task StartAsync(CancellationToken cancellationToken)
         {
-            var client = new SendGridClient(sendGridApiKey);
-            var subject = "Please verify your Creature Bracket account";
+            //_logger.LogInformation("Email Service started.");
 
-            var to = new EmailAddress(emailAddress, toName);
-            var htmlContent = GetConfirmationRequestContent(baseUrl, key);
-            var msg = MailHelper.CreateSingleEmail(_sender, to, subject, "", htmlContent);
-            var response = await client.SendEmailAsync(msg);
+            _timer = new Timer(Execute, null, TimeSpan.Zero, TimeSpan.FromSeconds(15));
 
-            return response;
+            return Task.CompletedTask;
         }
 
-        private string GetConfirmationRequestContent(string baseUrl, string key)
+        public Task StopAsync(CancellationToken cancellationToken)
         {
-            var body = File.ReadAllText("ConfirmationRequestBody.html");
+            //_logger.LogInformation("Email Service stopped.");
 
-            var verifyRoute = $"https://localhost:44316/verify-account?key={key}";
+            StopTimer();
 
-            body = body.Replace("{{verify-route}}", verifyRoute);
+            return Task.CompletedTask;
+        }
 
-            return body;
+        public async void Execute(object state)
+        {
+            StopTimer();
+
+            using (var scope = _serviceScopeFactory.CreateScope())
+            {
+                var unitOfWork = scope.ServiceProvider.GetService<UnitOfWork>();
+
+                var activeBracket = await unitOfWork.BracketRepository.ActiveAsync();
+
+                if (activeBracket is null)
+                {
+                    StartTimer();
+
+                    return;
+                }
+
+                var activeRound = await unitOfWork.RoundRepository.ActiveAsync(activeBracket.Id);
+
+                if (activeRound is null)
+                {
+                    StartTimer();
+
+                    return;
+                }
+
+                if (activeRound.VoteDeadline < DateTime.UtcNow.AddHours(2) && !activeRound.EmailReminderSent)
+                {
+                    activeRound.EmailReminderSent = true;
+
+                    await unitOfWork.SaveAsync();
+
+                    var userBrackets = await unitOfWork.UserBracketRepository.AllActiveAsync(activeBracket.Id);
+
+                    var toEmailAddresses = new List<EmailAddress>();
+
+                    foreach (var userBracket in userBrackets.Where(x => x.UserName.ToLower() == "caleb.powell@fusionmgt.com"))
+                    {
+                        var settings = await unitOfWork.AccountRepository.GetSettingsAsync(userBracket.UserName);
+
+                        if (settings.VoteDeadline)
+                        {
+                            toEmailAddresses.Add(new EmailAddress(userBracket.UserName));
+                        }
+                    }
+
+                    if (toEmailAddresses.Any())
+                    {
+                        var emailSender = await EmailSenderAsync(unitOfWork);
+
+                        await emailSender.SendVoteDeadlineReminderAsync(toEmailAddresses, activeRound.Rank, Globals.ApplicationUrl, activeRound.VoteDeadline);
+                    }
+                }
+            }
+
+            StartTimer();
+        }
+
+        private async Task<EmailSender> EmailSenderAsync(UnitOfWork unitOfWork)
+        {
+            var registryItem = await unitOfWork.RegistryRepository.GetByKeyAsync("SendGridAPIKey");
+
+            var emailSender = new EmailSender(registryItem.Value);
+
+            return emailSender;
+        }
+
+        private void StartTimer()
+        {
+            _timer.Change(TimeSpan.FromSeconds(15), TimeSpan.FromSeconds(15));
+        }
+
+        private void StopTimer()
+        {
+            _timer?.Change(Timeout.Infinite, 0);
+        }
+
+        public void Dispose()
+        {
+            _timer?.Dispose();
         }
     }
 }

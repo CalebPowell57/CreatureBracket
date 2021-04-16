@@ -1,7 +1,9 @@
-﻿using CreatureBracket.Misc;
+﻿using CreatureBracket.DTOs.Requests;
+using CreatureBracket.Misc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace CreatureBracket.Controllers
 {
@@ -26,6 +28,23 @@ namespace CreatureBracket.Controllers
             var information = _unitOfWork.AccountRepository.GetInformation(userName);
 
             return Ok(information);
+        }
+
+        [HttpGet("Settings")]
+        public async Task<IActionResult> Settings([FromQuery] string userName)
+        {
+            var settings = await _unitOfWork.AccountRepository.GetSettingDTOsAsync(userName);
+
+            return Ok(settings);
+        }
+
+        [HttpPost("Setting")]
+        public async Task<IActionResult> Setting([FromBody] SaveAccountSettingRequestDTO dto)
+        {
+            await _unitOfWork.AccountRepository.SaveSettingAsync(dto);
+            await _unitOfWork.SaveAsync();
+
+            return Ok();
         }
     }
 }

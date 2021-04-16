@@ -66,7 +66,7 @@ namespace CreatureBracket.Misc
                     return;
                 }
 
-                //if votedeadline is in the past && a cretaure winner has not been determined
+                //if votedeadline is in the past && a creature winner has not been determined
                 if (activeRound.VoteDeadline < DateTime.UtcNow && (activeRound.Matchups.Count > 1 || !activeRound.Matchups.Any(x => x.WinnerId.HasValue)))
                 {
                     foreach (var matchup in activeRound.Matchups)
@@ -177,7 +177,7 @@ namespace CreatureBracket.Misc
 
         private void StartTimer()
         {
-            _timer.Change(TimeSpan.Zero, TimeSpan.FromSeconds(5));
+            _timer.Change(TimeSpan.FromSeconds(15), TimeSpan.FromSeconds(15));
         }
 
         private void StopTimer()
