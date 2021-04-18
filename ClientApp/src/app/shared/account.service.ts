@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { MsalService } from '@azure/msal-angular';
 import { IAccountSettingGroupDTO } from '../interfaces/AccountSettingGroupDTO.interface';
 import { IAccountSettingDTO } from '../interfaces/AccountSettingDTO.interface';
@@ -10,9 +10,19 @@ import { ISaveAccountSettingDTO } from '../interfaces/SaveAccountSettingDTO.inte
   providedIn: 'root'
 })
 export class AccountService {
+  settings: any;
+
   constructor(
     private http: HttpClient,
     private authService: MsalService) { }
+
+  getAccountSettings(): Observable<any> {
+    if (!this.settings) {
+      return this.http.get<any>('Account/AccountSettings');
+    } else {
+      return of(this.settings);
+    }
+  }
 
   getInformation(): Observable<any> {
     const account = this.authService.getAccount();

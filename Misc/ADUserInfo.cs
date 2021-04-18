@@ -11,30 +11,32 @@ namespace CreatureBracket.Misc
 
         public static ADUserInfo GetByUserName(string userName)
         {
-            using (DirectorySearcher dsSearcher = new DirectorySearcher())
-            {
-                dsSearcher.Filter = $"(&(objectClass=user) (userPrincipalName={userName}))";
-                SearchResult result = dsSearcher.FindOne();
+            //using (DirectorySearcher dsSearcher = new DirectorySearcher())
+            //{
+            //    dsSearcher.Filter = $"(&(objectClass=user) (userPrincipalName={userName}))";
+            //    SearchResult result = dsSearcher.FindOne();
 
-                using (DirectoryEntry user = new DirectoryEntry(result.Path))
-                {
-                    byte[] image = user.Properties["thumbnailPhoto"].Value as byte[];
+            //    using (DirectoryEntry user = new DirectoryEntry(result.Path))
+            //    {
+            //        byte[] image = user.Properties["thumbnailPhoto"].Value as byte[];
 
-                    if (image is null)
-                    {
-                        throw new Exception("ADUserInfo.GetByUserName() - User image is null.");
-                    }
+            //        if (image is null)
+            //        {
+            //            throw new Exception("ADUserInfo.GetByUserName() - User image is null.");
+            //        }
 
-                    var userInfo = new ADUserInfo
-                    {
-                        FirstName = user.Properties["givenName"].Value as string,
-                        LastName = user.Properties["sn"].Value as string,
-                        Image = $"data:image/jpeg;base64,{Convert.ToBase64String(image)}"
-                    };
+            //        var userInfo = new ADUserInfo
+            //        {
+            //            FirstName = user.Properties["givenName"].Value as string,
+            //            LastName = user.Properties["sn"].Value as string,
+            //            Image = $"data:image/jpeg;base64,{Convert.ToBase64String(image)}"
+            //        };
 
-                    return userInfo;
-                }
-            }
+            //        return userInfo;
+            //    }
+            //}
+
+            return new ADUserInfo { FirstName = "Caleb", LastName = "Powell", Image = null };
         }
     }
 }

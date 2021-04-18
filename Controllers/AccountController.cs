@@ -46,5 +46,13 @@ namespace CreatureBracket.Controllers
 
             return Ok();
         }
+
+        [HttpGet("AccountSettings")]
+        public async Task<IActionResult> AccountSettings([FromQuery] string userName)
+        {
+            var settings = _unitOfWork.AccountRepository.GetSettingsAsync(userName);
+
+            return Ok(settings);
+        }
     }
 }
