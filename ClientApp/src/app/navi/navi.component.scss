@@ -5,3 +5,13 @@
 .not-showing {
     display: none;
 }
+.navi-move-in {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 200px;
+  height: 200px;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  animation: move-in 200ms linear;
+}

@@ -17,6 +17,7 @@ body {
 .sticky-top {
   z-index: 5;
 }
+
 .Nav-Col {
   animation-name: fadeInDelay;
   animation-duration: 4s;
@@ -28,7 +29,7 @@ code {
   color: #e01a76;
 }
 .container-fluid, .row, .col-12 {
-    height:auto;
+  height: auto;
 }
 .tallRow{
     height:100%;
@@ -135,7 +136,13 @@ li.listItem {
   color:white;
 }
 
-*::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track:horizontal {
+  border: 2px solid #000;
+  padding: 2px 2px;
+  background-color: #404040;
+  z-index: 0;
+}
+*::-webkit-scrollbar-track:vertical {
   border: 2px solid #000;
   padding: 2px 2px;
   background-color: #404040;
@@ -159,47 +166,11 @@ li.listItem {
 }
 
 
-.Fade1 {
-  font-size: 48pt;
-  font-weight: bold;
-  position: fixed;
-  top: 46%;
-  left: 35%;
-  animation-name: fadeInDelay;
-  animation-duration: 3s;
-  animation-fill-mode: forwards;
-}
-
-.Fade2 {
-  font-size: 48pt;
-  font-weight: bold;
-  position: fixed;
-  top: 46%;
-  left: 50%;
-  animation-name: fadeInDelay;
-  animation-duration: 6s;
-  animation-fill-mode: forwards;
-}
-@keyframes fadeInDelay {
-  0% {
-    opacity: 0;
-  }
-
-  66% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-
 /*Navi*/
 .navi-move-in {
   position: absolute;
-  left: 50%;
-  top: 50%;
+  left: 30%;
+  top: 45%;
   width: 200px;
   height: 200px;
   -ms-transform: translate(-50%, -50%);
@@ -586,6 +557,11 @@ li.listItem {
   animation-fill-mode: forwards;
 }
 .AnimationGroup {
+  display:inline-flex;
+  top:45%;
+  left:50%;
+  height:auto;
+  width:auto;
   animation-name: fadeIn;
   animation-duration: 2s;
   animation-fill-mode: forwards;
@@ -616,6 +592,69 @@ li.listItem {
 }
 
 
+.captionContainer{
+    position:fixed;
+    top:45%;
+    left:45%;
+    text-align:center;
+
+}
+.captionContainer.Loaded {
+  animation-name: fadeOut;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+
+.Fade1 {
+  /*font-size: 48pt;
+  font-weight: bold;
+  position: fixed;
+  padding-right:10px;
+  top: 46%;
+  left: 35%;
+  animation-name: fadeInDelay;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;*/
+  font-size: 48pt;
+  font-weight: bold;
+  display:inline-flex;
+  padding-right: 10px;
+  animation-name: fadeInDelay;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+
+.Fade2 {
+  /*font-size: 48pt;
+  font-weight: bold;
+  position: fixed;
+  top: 46%;
+  left: 50%;
+  animation-name: fadeInDelay;
+  animation-duration: 6s;
+  animation-fill-mode: forwards;*/
+  font-size: 48pt;
+  font-weight: bold;
+  display: inline-flex;
+  animation-name: fadeInDelay;
+  animation-duration: 6s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInDelay {
+  0% {
+    opacity: 0;
+  }
+
+  66% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 .caption {
   position: absolute;
   left: 4%;
@@ -628,11 +667,6 @@ li.listItem {
   animation-duration: 2s;
   animation-fill-mode: forwards;
   animation-play-state: running;
-}
-.captionContainer.Loaded {
-  animation-name: fadeOut;
-  animation-duration: 3s;
-  animation-fill-mode: forwards;
 }
 
 .caption span.border {

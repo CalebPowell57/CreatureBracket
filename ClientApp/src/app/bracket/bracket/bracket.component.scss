@@ -2,7 +2,9 @@
 @import '../../styles/ngtt-variables.scss';
 @import '../../styles/ngtt-single-elimination-styles.scss';
 
-
+.container-fluid{
+    overflow-x:auto;
+}
 .userBracketSaveButtonExpandedCol {
   cursor: pointer;
   position: fixed;

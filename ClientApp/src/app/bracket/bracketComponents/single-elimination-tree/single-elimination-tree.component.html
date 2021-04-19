@@ -21,12 +21,6 @@
                   <div class="ngtt-se__finale-component-container animate__animated animate__backInRight" *ngIf="final.matchups.length > 0">
                     <ng-container *ngTemplateOutlet="matchTemplate; context:{$implicit: final.matchups[0], tournament: tournament, isGlobal: isGlobal}"></ng-container>
                   </div>
-                  <!--<div class="Winner">
-                    <h1>Winner</h1>
-                    <img [src]="Winner?.Image" />
-                    <h2>{{ Winner?.Name }}</h2>
-                    <p>{{ Winner?.Bio }}</p>
-                  </div>-->
                   <div class="ngtt-se__match-component-container" *ngIf="final.matchups.length > 1">
                     <ng-container *ngTemplateOutlet="matchTemplate; context:{$implicit: final.matchups[1], tournament: tournament, isGlobal: isGlobal}"></ng-container>
                   </div>
