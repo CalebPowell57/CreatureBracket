@@ -6,6 +6,7 @@ export interface IBracket {
   id: Guid;
   title: string;
   status: EStatus;
-  creatureEntryDeadline: Date;
+  BracketSubmissionDeadline: Date;
+  CompletedDateTime: Date;
   winnerId: Guid;
 }

@@ -137,7 +137,7 @@ namespace CreatureBracket.Misc
                     }
                     else
                     {
-                        //do finale logic
+                        await unitOfWork.BracketRepository.CompleteActive();
                     }
 
                     await unitOfWork.UserBracketRepository.UpdatePointsAsync(activeBracket.Id, activeRound);

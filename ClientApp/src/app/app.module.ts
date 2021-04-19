@@ -12,7 +12,6 @@ import { AppComponent } from './app.component';
 import { BracketManagerComponent } from './bracket-manager/bracket-manager.component';
 import { BracketModule } from './bracket/bracket.module';
 import { CreatureApprovalComponent } from './creature-approval/creature-approval.component';
-import { CreatureApprovalGuard } from './creature-approval/creature-approval.guard';
 import { CreatureSubmissionComponent } from './creature-submission/creature-submission.component';
 import { HomeComponent } from './home/home.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -27,6 +26,8 @@ import { CustomErrorHandler } from './shared/error.handler';
 import { HttpRequestInterceptor } from './shared/http-request.interceptor';
 import { RequireAuthenticationGuard } from './shared/requre-authentication.guard';
 import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.guard';
+import { TournamentOpenGuard } from './shared/tournament-open.guard';
+import { TournamentStartedGuard } from './shared/tournament-started.guard';
 import { StandingsComponent } from './standings/standings.component';
 import { StandingsGuard } from './standings/standings.guard';
 
@@ -61,10 +62,10 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     }),
     RouterModule.forRoot([
       { path: 'account-settings', component: AccountSettingsComponent, canActivate: [RequireAuthenticationGuard] },
-      { path: 'creature-submission', component: CreatureSubmissionComponent, canActivate: [RequireAuthenticationGuard] },
-      { path: 'seed-tournament', component: SeedTournamentComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard] },
-      { path: 'standings', component: StandingsComponent, canActivate: [StandingsGuard, RequireAuthenticationGuard] },
-      { path: 'creature-approval', component: CreatureApprovalComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard, CreatureApprovalGuard] },
+      { path: 'creature-submission', component: CreatureSubmissionComponent, canActivate: [RequireAuthenticationGuard, TournamentOpenGuard] },
+      { path: 'seed-tournament', component: SeedTournamentComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard, TournamentOpenGuard] },
+      { path: 'standings', component: StandingsComponent, canActivate: [StandingsGuard, RequireAuthenticationGuard, TournamentStartedGuard] },
+      { path: 'creature-approval', component: CreatureApprovalComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard, TournamentOpenGuard] },
       { path: 'bracket-manager', component: BracketManagerComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard] },
       { path: 'not-signed-in', component: NotSignedInComponent, canActivate: [NotSignedInGuard] },
       { path: 'no-permissions', component: NoPermissionsComponent },
