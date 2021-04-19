@@ -1,11 +1,7 @@
 .userImage {
-  border-style: ridge;
-  border-color: black;
-  border-width: 5px;
   border-radius: 50%;
-  width: 45%;
   z-index: -1;
-  max-width:75px;
+  width: 50px;
 }
 
 /*Joke*/
@@ -125,9 +121,6 @@
   }
 }*/
 .boxContainer {
-  border: solid;
-  border-width: 1px;
-  border-color: slategrey;
   animation-name: fadeIn;
   animation-duration: 1s;
   animation-fill-mode: forwards;
