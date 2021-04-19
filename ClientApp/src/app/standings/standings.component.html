@@ -1,37 +1,35 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-auto">
-      <h1>Standings</h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-2 mx-auto">
-      <h3>Rank</h3>
-    </div>
-    <div class="col-7 mx-auto">
-      <h3>User</h3>
-    </div>
-    <div class="col-3 mx-auto">
-      <h3>Points</h3>
-    </div>
-  </div>
-  <div class="row boxContainer" *ngFor="let row of standings">
-    <div class="col-2 my-auto mx-auto fadeInTopRight">
-      <h3>{{row.rank}}</h3>
-    </div>
-    <div class="col-7">
-      <div class="row">
-        <div class="col-2" style="padding:5px">
-          <img [src]="row.image" class="img-fluid userImage" />
-        </div>
-        <div class="col-auto my-auto fadeInUpBig" style="left:0;">
-          <h3>{{row.firstName}} {{row.lastName}}</h3>
-        </div>
+<div style="padding:20px;">
+  <h1>Standings</h1>
+
+  <div class="container-fluid" style="padding:40px;">
+    <div class="row">
+      <div class="col-2 mx-auto">
+        <h3>Rank</h3>
+      </div>
+      <div class="col-7 mx-auto">
+        <h3>Contestant</h3>
+      </div>
+      <div class="col-3 mx-auto">
+        <h3>Points</h3>
       </div>
     </div>
-    <div class="col-3 my-auto fadeInTopLeft">
-      <h3>{{row.points}}</h3>
+    <div class="row boxContainer" *ngFor="let row of standings">
+      <div class="col-2 my-auto mx-auto fadeInTopRight">
+        <h5>{{row.rank}}</h5>
+      </div>
+      <div class="col-7">
+        <div class="row">
+          <div class="col-2" style="padding:5px">
+            <img [src]="row.image" class="img-fluid userImage" />
+          </div>
+          <div class="col-auto my-auto fadeInUpBig" style="left:0;">
+            <h5>{{row.firstName}} {{row.lastName}}</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-3 my-auto fadeInTopLeft">
+        <h5>{{row.points}}</h5>
+      </div>
     </div>
   </div>
 </div>
-

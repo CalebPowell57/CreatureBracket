@@ -13,8 +13,7 @@ export class BracketManagerComponent {
   brackets: IBracket[];
   filteredBrackets: IBracket[];
   input: IInput = {
-    title: null,
-    creatureEntryDeadline: null,
+    title: null
   };
   _selectedBracket: IBracket;
   get selectedBracket(): IBracket {
@@ -61,7 +60,7 @@ export class BracketManagerComponent {
     this._selectedBracket = selected;
 
     if (this._selectedBracket) {
-      this.input = { title: this._selectedBracket.title, creatureEntryDeadline: this._selectedBracket.creatureEntryDeadline };
+      this.input = { title: this._selectedBracket.title };
     }
 
     this.selectedBracketText = this.selectedBracket ? this.selectedBracket.title : 'No bracket selected';
@@ -76,8 +75,7 @@ export class BracketManagerComponent {
     this.filterText = '';
 
     this.input = {
-      title: "",
-      creatureEntryDeadline: new Date(),
+      title: ""
     };
 
     this.isAddingBracket = true;
@@ -86,7 +84,7 @@ export class BracketManagerComponent {
   }
 
   onCancelButtonClick() {
-    this.input = { title: this._selectedBracket.title, creatureEntryDeadline: this._selectedBracket.creatureEntryDeadline };
+    this.input = { title: this._selectedBracket.title };
 
     this.isAddingBracket = false;
   }
@@ -95,11 +93,12 @@ export class BracketManagerComponent {
     var adding = this.isAddingBracket;
 
     let newBracket: IBracket = {
-      creatureEntryDeadline: this.input.creatureEntryDeadline,
       title: this.input.title,
       id: Guid.create(),
       status: EStatus.Open,
-      winnerId: null
+      winnerId: null,
+      BracketSubmissionDeadline: null,
+      CompletedDateTime: null
     };
 
     if (form.valid) {
@@ -145,5 +144,4 @@ export class BracketManagerComponent {
 
 interface IInput {
   title: string;
-  creatureEntryDeadline: Date;
 }

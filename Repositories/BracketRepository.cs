@@ -14,6 +14,16 @@ namespace CreatureBracket.Repositories
     {
         public BracketRepository(DatabaseContext context) : base(context) { }
 
+        public override async Task PostAsync(Bracket entity)
+        {
+            if (await _context.Brackets.AnyAsync(x => x.Status != Bracket.EStatus.Completed))
+            {
+                throw new ExpectedException("You can only have one active bracket at a time!");
+            }
+
+            await base.PostAsync(entity);
+        }
+
         public async Task<Bracket> ActiveAsync()
         {
             if (!await _context.Brackets.AnyAsync())
@@ -21,7 +31,12 @@ namespace CreatureBracket.Repositories
                 return null;
             }
 
-            var activeBracket = await _context.Brackets.OrderBy(x => x.CreatureEntryDeadline).Take(1).SingleAsync();
+            var activeBracket = await _context.Brackets.SingleOrDefaultAsync(x => x.Status != Bracket.EStatus.Completed);
+
+            if (activeBracket is null)
+            {
+                activeBracket = await _context.Brackets.OrderByDescending(x => x.CompletedDateTime).Take(1).SingleOrDefaultAsync();
+            }
 
             return activeBracket;
         }
@@ -43,24 +58,27 @@ namespace CreatureBracket.Repositories
             return activeBracketDTO;
         }
 
+        public async Task CompleteActive()
+        {
+            var activeBracket = await ActiveAsync();
+
+            if (activeBracket is null || activeBracket.Status == Bracket.EStatus.Completed)
+            {
+                return;
+            }
+
+            activeBracket.Status = Bracket.EStatus.Completed;
+            activeBracket.CompletedDateTime = DateTime.UtcNow;
+        }
+
         public async Task<CanEditMyBracketDTO> CanEditMyBracketAsync()
         {
             var activeBracket = await ActiveAsync();
 
             var response = new CanEditMyBracketDTO
             {
-                CanEdit = false
+                CanEdit = activeBracket.BracketSubmissionDeadline > DateTime.UtcNow
             };
-
-            if (activeBracket.Status == Bracket.EStatus.Started)
-            {
-                var firstRound = await _context.Rounds.OrderBy(x => x.Rank).Take(1).SingleOrDefaultAsync(x => x.BracketId == activeBracket.Id);
-
-                if(firstRound != null)
-                {
-                    response.CanEdit = firstRound.VoteDeadline > DateTime.UtcNow;
-                }
-            }
 
             return response;
         }
@@ -120,7 +138,7 @@ namespace CreatureBracket.Repositories
 
             var creatures = await _context.Creatures.Where(x => x.BracketId == active.Id).ToListAsync();
 
-            if(creatures.Count != 16)
+            if (creatures.Count != 16)
             {
                 throw new ExpectedException("There are not 16 creatures approved for the tournament!");
             }
@@ -175,6 +193,7 @@ namespace CreatureBracket.Repositories
         {
             var active = await ActiveAsync();
             active.Status = Bracket.EStatus.Started;
+            active.BracketSubmissionDeadline = DateTime.UtcNow.Date.AddHours(12).AddDays(7);
 
             await CreateNewRoundAsync();
         }
@@ -187,7 +206,7 @@ namespace CreatureBracket.Repositories
 
             var rank = lastRound is null ? 1 : lastRound.Rank + 1;
             var creatureCount = lastRound is null ? 16 : lastRound.CreatureCount / 2;
-                                                  //64
+            //64
             var matchupCount = creatureCount / 2;
 
             var round = new Round
@@ -196,7 +215,7 @@ namespace CreatureBracket.Repositories
                 BracketId = active.Id,
                 Rank = rank,
                 CreatureCount = creatureCount,
-                VoteDeadline = DateTime.UtcNow.Date.AddHours(12).AddDays(3),//I want the battles to execute at 12 pm server time
+                VoteDeadline = lastRound is null ? DateTime.UtcNow.Date.AddHours(12).AddDays(7) : DateTime.UtcNow.Date.AddHours(12).AddDays(3),//I want the battles to execute at 12 pm server time
                 EmailReminderSent = false
             };
 
@@ -204,11 +223,11 @@ namespace CreatureBracket.Repositories
 
             for (int ix = 0; ix < matchupCount; ix++)
             {
-                var creature1 = lastRound is null ? 
-                                    creatures.Single(x => x.Seed == ix * 2) : 
+                var creature1 = lastRound is null ?
+                                    creatures.Single(x => x.Seed == ix * 2) :
                                     lastRound.Matchups[ix * 2].Winner;
-                var creature2 = lastRound is null ? 
-                                    creatures.Single(x => x.Seed == (ix * 2) + 1) : 
+                var creature2 = lastRound is null ?
+                                    creatures.Single(x => x.Seed == (ix * 2) + 1) :
                                     lastRound.Matchups[(ix * 2) + 1].Winner;
 
                 var matchup = new Matchup
@@ -334,7 +353,7 @@ namespace CreatureBracket.Repositories
                     roundDTO.Matchups.Add(matchupDTO);
                 }
             }
-            else if(lastRoundCreatureCount.HasValue)
+            else if (lastRoundCreatureCount.HasValue)
             {
                 for (var ix = 0; ix < lastRoundCreatureCount / 4; ix++)
                 {

@@ -10,8 +10,9 @@ namespace CreatureBracket.Models
 
         public string Title { get; set; }
         public EStatus Status { get; set; }
-        public DateTime? CreatureEntryDeadline { get; set; }
+        public DateTime? BracketSubmissionDeadline { get; set; }
         public Guid? WinnerId { get; set; }
+        public DateTime? CompletedDateTime { get; set; }
 
         #region navigation properties
         [NotMapped]

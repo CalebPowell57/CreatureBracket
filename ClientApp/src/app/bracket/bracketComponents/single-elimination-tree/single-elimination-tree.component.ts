@@ -26,8 +26,6 @@ export class SingleEliminationTreeComponent implements OnChanges {
 
   public rounds: IGlobalRoundDTO[] = [];
   public final: IGlobalRoundDTO = { matchups: [], rank: 0 };
- 
-
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.hasOwnProperty('tournament') && changes.tournament.currentValue) {
@@ -61,6 +59,9 @@ export class SingleEliminationTreeComponent implements OnChanges {
   }
 
   zoomIn() {
+    if (!this.zoomInEnabled) {
+      return;
+    }
 
     this.zoomOutEnabled = true;
 
@@ -70,13 +71,18 @@ export class SingleEliminationTreeComponent implements OnChanges {
       zoom: `${this.zoom}%`
     };
 
-    if (this.zoom === 100) {
+    if (this.zoom === 200) {
       this.zoomInEnabled = false;
     }
   }
 
   zoomOut(zoomInit: number) {
+    if (!this.zoomOutEnabled) {
+      return;
+    }
+
     this.zoomInEnabled = true;
+
     if (zoomInit === undefined) {
       this.zoom -= 20;
     }
@@ -88,7 +94,7 @@ export class SingleEliminationTreeComponent implements OnChanges {
       zoom: `${this.zoom}%`
     };
 
-    if (this.zoom === 40) {
+    if (this.zoom === 20) {
       this.zoomOutEnabled = false;
     }
   }
