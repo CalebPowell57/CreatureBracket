@@ -1,7 +1,9 @@
-﻿using CreatureBracket.Misc;
+﻿using CreatureBracket.DTOs.Requests;
+using CreatureBracket.Misc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace CreatureBracket.Controllers
 {
@@ -18,6 +20,13 @@ namespace CreatureBracket.Controllers
             _logger = logger;
 
             _unitOfWork = unitOfWork;
+        }
+
+        public async Task<IActionResult> Images([FromQuery] CreatureImagesRequestDTO dto)
+        {
+            var images = await _unitOfWork.CreatureRepository.ImagesAsync(dto);
+
+            return Ok(images);
         }
     }
 }

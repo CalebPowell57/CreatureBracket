@@ -65,6 +65,7 @@
     <None Remove="ClientApp\src\app\interfaces\GlobalCreatureDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\GlobalMatchupDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\GlobalRoundDTO.interface.ts" />
+    <None Remove="ClientApp\src\app\interfaces\image.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\SaveAccountSettingDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\seed-matchupDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\standings-item-DTO.interface.ts" />
@@ -80,6 +81,7 @@
     <None Remove="ClientApp\src\app\shared\error.handler.ts" />
     <None Remove="ClientApp\src\app\shared\global-bracket.service.ts" />
     <None Remove="ClientApp\src\app\shared\http-request.interceptor.ts" />
+    <None Remove="ClientApp\src\app\shared\image.service.ts" />
     <None Remove="ClientApp\src\app\shared\load-state.service.ts" />
     <None Remove="ClientApp\src\app\shared\navi.service.ts" />
     <None Remove="ClientApp\src\app\shared\requre-authentication.guard.ts" />
@@ -106,6 +108,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\creature-submission\creature-submission.service.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\image.interface.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\SaveAccountSettingDTO.interface.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\AccountSettingDTO.interface.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\AccountSettingGroupDTO.interface.ts" />
@@ -143,6 +146,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\seed-tournament\seed-tournament.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\image.service.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\shared\currentURL.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\shared\load-state.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\shared\navi.service.ts">
@@ -179,6 +185,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="ClientApp\src\app\interfaces\AccountSettingDTO - Copy - Copy.interface.js">
+      <DependentUpon>AccountSettingDTO.interface.js</DependentUpon>
+    </None>
+    <None Update="ClientApp\src\app\interfaces\AccountSettingDTO - Copy - Copy.interface.js.map">
+      <DependentUpon>AccountSettingDTO.interface.js.map</DependentUpon>
+    </None>
     <None Update="ClientApp\src\app\interfaces\AccountSettingDTO - Copy.interface.js">
       <DependentUpon>AccountSettingDTO.interface.js</DependentUpon>
     </None>

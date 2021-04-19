@@ -50,9 +50,17 @@ namespace CreatureBracket.Controllers
         [HttpGet("AccountSettings")]
         public async Task<IActionResult> AccountSettings([FromQuery] string userName)
         {
-            var settings = _unitOfWork.AccountRepository.GetSettingsAsync(userName);
+            var settings = await _unitOfWork.AccountRepository.GetSettingsAsync(userName);
 
             return Ok(settings);
+        }
+
+        [HttpGet("Images")]
+        public IActionResult Images([FromQuery] AccountImagesRequestDTO dto)
+        {
+            var images = _unitOfWork.AccountRepository.Images(dto);
+
+            return Ok(images);
         }
     }
 }

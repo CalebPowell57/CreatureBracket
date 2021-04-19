@@ -10,7 +10,6 @@ namespace CreatureBracket.Misc
         private DatabaseContext _context;
 
         public AccountRepository AccountRepository { get; private set; }
-
         public BracketRepository BracketRepository { get; private set; }
         public CreatureSubmissionRepository CreatureSubmissionRepository { get; private set; }
         public UserBracketRepository UserBracketRepository { get; private set; }
@@ -19,6 +18,7 @@ namespace CreatureBracket.Misc
         public RoundRepository RoundRepository { get; private set; }
         public MatchupRepository MatchupRepository { get; private set; }
         public VoteRepository VoteRepository { get; private set; }
+        public CreatureRepository CreatureRepository { get; internal set; }
 
         public UnitOfWork(DatabaseContext context)
         {
@@ -34,6 +34,7 @@ namespace CreatureBracket.Misc
             RoundRepository = new RoundRepository(_context);
             MatchupRepository = new MatchupRepository(_context);
             VoteRepository = new VoteRepository(_context);
+            CreatureRepository = new CreatureRepository(_context);
         }
 
         public async Task SaveAsync(/*LogProcess logProcess = LogProcess.Internal*/)
