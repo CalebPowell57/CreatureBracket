@@ -18,13 +18,15 @@ namespace CreatureBracket.Misc
         public RoundRepository RoundRepository { get; private set; }
         public MatchupRepository MatchupRepository { get; private set; }
         public VoteRepository VoteRepository { get; private set; }
-        public CreatureRepository CreatureRepository { get; internal set; }
+        public CreatureRepository CreatureRepository { get; private set; }
+        public ImageRepository ImageRepository { get; private set; }
 
         public UnitOfWork(DatabaseContext context)
         {
             _context = context;
 
             AccountRepository = new AccountRepository(_context);
+            ImageRepository = new ImageRepository(_context);
 
             BracketRepository = new BracketRepository(_context);
             CreatureSubmissionRepository = new CreatureSubmissionRepository(_context);

@@ -10,16 +10,24 @@ namespace CreatureBracket.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class CreatureController : ControllerBase
+    public class ImageController : ControllerBase
     {
-        private readonly ILogger<CreatureController> _logger;
+        private readonly ILogger<ImageController> _logger;
         private readonly UnitOfWork _unitOfWork;
 
-        public CreatureController(ILogger<CreatureController> logger, UnitOfWork unitOfWork)
+        public ImageController(ILogger<ImageController> logger, UnitOfWork unitOfWork)
         {
             _logger = logger;
 
             _unitOfWork = unitOfWork;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Images([FromBody] ImageRequestDTO dto)
+        {
+            var images = await _unitOfWork.ImageRepository.ImagesAsync(dto);
+
+            return Ok(images);
         }
     }
 }

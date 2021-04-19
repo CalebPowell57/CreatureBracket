@@ -6,5 +6,6 @@
         public enum EUserType { Super, Normal }
         public enum ECreatureSubmissionStatus { Pending, Approved }
         public enum EErrorSeverityLevel { Low, High }
+        public enum EImageType { Creatures, CreatureSubmissions, Account }
     }
 }

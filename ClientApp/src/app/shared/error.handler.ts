@@ -17,7 +17,7 @@ export class CustomErrorHandler implements ErrorHandler {
 
       router.navigate(['not-signed-in']);
     }
-    else if (error.error && error.error.startsWith("CreatureBracket.Exceptions.ExpectedException")) {
+    else if (error.error && (error.error instanceof String || typeof error.error == 'string') && error.error.startsWith("CreatureBracket.Exceptions.ExpectedException")) {
       let json = `{${error.error.split('{')[1].split('}')[0]}}`;
 
       let errorInformation = JSON.parse(json);

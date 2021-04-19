@@ -1,4 +1,5 @@
 ﻿using CreatureBracket.DTOs.Responses;
+using CreatureBracket.Exceptions;
 using CreatureBracket.Misc;
 using CreatureBracket.Models;
 using Microsoft.EntityFrameworkCore;
@@ -92,7 +93,8 @@ namespace CreatureBracket.Repositories
                     LastName = adUserInfo.LastName,
                     Points = userBracket.Points,
                     Rank = tiedItems.Any() ? tiedItems[0].Rank : userBrackets.IndexOf(userBracket) + 1,
-                    Image = adUserInfo.Image
+                    Image = null,
+                    UserName = userBracket.UserName
                 };
 
                 standings.Add(standingItem);
@@ -104,10 +106,12 @@ namespace CreatureBracket.Repositories
         public async Task<List<SeedMatchupDTO>> GetCurrentSeedStandings()
         {
             var active = await ActiveAsync();
-            var creatures = await _context.Creatures.Where(x => x.BracketId == active.Id).ToListAsync();
-            List<SeedMatchupDTO> CurrentProjectedMatchups = GetSeededCreatures(creatures);
-            return CurrentProjectedMatchups;
 
+            var creatures = await _context.Creatures.Where(x => x.BracketId == active.Id).ToListAsync();
+
+            var currentProjectedMatchups = GetSeededCreatures(creatures);
+
+            return currentProjectedMatchups;
         }
 
         public async Task<List<SeedMatchupDTO>> SeedCreaturesAsync()
@@ -118,7 +122,7 @@ namespace CreatureBracket.Repositories
 
             if(creatures.Count != 16)
             {
-                throw new System.Exception("There are not 16 creatures approved for the tournament!");
+                throw new ExpectedException("There are not 16 creatures approved for the tournament!");
             }
 
             creatures.Randomize();
@@ -126,16 +130,18 @@ namespace CreatureBracket.Repositories
             for (int ix = 0; ix < creatures.Count; ix++)
             {
                 creatures[ix].Seed = ix;
-
             }
-            List<SeedMatchupDTO> CurrentProjectedMatchups = GetSeededCreatures(creatures);
-            return CurrentProjectedMatchups;
+
+            var currentProjectedMatchups = GetSeededCreatures(creatures);
+
+            return currentProjectedMatchups;
         }
 
         private List<SeedMatchupDTO> GetSeededCreatures(List<Creature> creatures)
         {
-            List<SeedMatchupDTO> CurrentProjectedMatchups = new List<SeedMatchupDTO>();
+            var currentProjectedMatchups = new List<SeedMatchupDTO>();
             int creatureCounter = 0;
+
             for (int i = 0; i < creatures.Count / 2; i++)
             {
                 var matchup = new SeedMatchupDTO
@@ -159,9 +165,10 @@ namespace CreatureBracket.Repositories
                     }
                 };
                 creatureCounter += 2;
-                CurrentProjectedMatchups.Add(matchup);
+                currentProjectedMatchups.Add(matchup);
             }
-            return CurrentProjectedMatchups;
+
+            return currentProjectedMatchups;
         }
 
         public async Task StartAsync()
@@ -302,7 +309,7 @@ namespace CreatureBracket.Repositories
                             {
                                 CreatureId = matchup.Creature1Id,
                                 BIO = matchup.Creature1.BIO,
-                                Image = matchup.Creature1.Image,
+                                Image = null,
                                 Name = matchup.Creature1.Name,
                                 Winner = matchup.WinnerId == matchup.Creature1Id
                             },
@@ -310,7 +317,7 @@ namespace CreatureBracket.Repositories
                             {
                                 CreatureId = matchup.Creature2Id,
                                 BIO = matchup.Creature2.BIO,
-                                Image = matchup.Creature2.Image,
+                                Image = null,
                                 Name = matchup.Creature2.Name,
                                 Winner = matchup.WinnerId == matchup.Creature2Id
                             }

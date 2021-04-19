@@ -85,7 +85,9 @@ namespace CreatureBracket.Misc
 
                         if (settings.VoteDeadline)
                         {
-                            toEmailAddresses.Add(new EmailAddress(userBracket.UserName));
+                            var userInfo = ADUserInfo.GetByUserName(userBracket.UserName);
+
+                            toEmailAddresses.Add(new EmailAddress(userBracket.UserName, $"{userInfo.FirstName} {userInfo.LastName}"));
                         }
                     }
 

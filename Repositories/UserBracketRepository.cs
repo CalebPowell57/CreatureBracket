@@ -65,7 +65,7 @@ namespace CreatureBracket.Repositories
                             {
                                 BIO = creature1.BIO,
                                 CreatureId = creature1.Id,
-                                Image = creature1.Image,
+                                Image = null,
                                 Name = creature1.Name,
                                 Winner = false
                             };
@@ -74,7 +74,7 @@ namespace CreatureBracket.Repositories
                             {
                                 BIO = creature2.BIO,
                                 CreatureId = creature2.Id,
-                                Image = creature2.Image,
+                                Image = null,
                                 Name = creature2.Name,
                                 Winner = false
                             };
@@ -112,7 +112,7 @@ namespace CreatureBracket.Repositories
                             {
                                 BIO = matchup.Creature1.BIO,
                                 CreatureId = matchup.Creature1.Id,
-                                Image = matchup.Creature1.Image,
+                                Image = null,
                                 Name = matchup.Creature1.Name,
                                 Winner = matchup.Creature1Id == matchup.WinnerId
                             },
@@ -120,7 +120,7 @@ namespace CreatureBracket.Repositories
                             {
                                 BIO = matchup.Creature2.BIO,
                                 CreatureId = matchup.Creature2.Id,
-                                Image = matchup.Creature2.Image,
+                                Image = null,
                                 Name = matchup.Creature2.Name,
                                 Winner = matchup.Creature2Id == matchup.WinnerId
                             },

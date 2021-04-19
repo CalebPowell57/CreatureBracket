@@ -60,7 +60,7 @@ namespace CreatureBracket.Repositories
 
         public async Task<List<CreatureSubmission>> GetAllAsync()
         {
-            var submissions = await _context.CreatureSubmissions.AsNoTracking().OrderByDescending(x => x.Status).ToListAsync();
+            var submissions = await _context.CreatureSubmissions.AsNoTracking().Select(x => new CreatureSubmission { BIO = x.BIO, BracketId = x.BracketId, EntryDate = x.EntryDate, Id = x.Id, Name = x.Name, Status = x.Status }).OrderByDescending(x => x.Status).ToListAsync();
 
             return submissions;
         }

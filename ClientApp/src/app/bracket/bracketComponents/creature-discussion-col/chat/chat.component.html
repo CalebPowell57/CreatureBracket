@@ -15,7 +15,7 @@
             [class.current]="chatMessage.userName.toUpperCase() === userName.toUpperCase()">
           <div class="verticalContainer">
             <div>
-              <img [src]="chatMessage.image" *ngIf="chatMessage.userName.toUpperCase() !== userName.toUpperCase()" style="border-radius: 50%; margin-right:10px;" height="20" width="20" />
+              <img [src]="chatMessage.image" *ngIf="chatMessage.image && chatMessage.userName.toUpperCase() !== userName.toUpperCase()" style="border-radius: 50%; margin-right:10px;" height="20" width="20" />
               <span class="chat-user" *ngIf="chatMessage.userName.toUpperCase() !== userName.toUpperCase()">{{chatMessage.user}}</span>
               <span class="chat-date-time">{{chatMessage.systemDateTime | utcDate | date:"longDate" }} at {{chatMessage.systemDateTime | utcDate | date : 'shortTime'}}</span>
             </div>

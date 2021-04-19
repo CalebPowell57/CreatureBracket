@@ -18,11 +18,9 @@ namespace CreatureBracket.Repositories
 
             var chatMessages = await _context.ChatMessages.OrderBy(x => x.SystemDateTime).ToListAsync();
 
-            var userInfoDictionary = new Dictionary<string, ADUserInfo>();
-
             foreach(var chatMessage in chatMessages)
             {
-                var userInfo = userInfoDictionary.ContainsKey(chatMessage.UserName) ? userInfoDictionary[chatMessage.UserName] : ADUserInfo.GetByUserName(chatMessage.UserName);
+                var userInfo = ADUserInfo.GetByUserName(chatMessage.UserName);
 
                 var chatMessageDTO = new ChatMessageDTO
                 {
@@ -31,7 +29,7 @@ namespace CreatureBracket.Repositories
                     SystemDateTime = chatMessage.SystemDateTime,
                     User = $"{userInfo.FirstName} {userInfo.LastName}",
                     UserName = chatMessage.UserName,
-                    Image = userInfo.Image
+                    Image = null
                 };
 
                 chatMessageDTOs.Add(chatMessageDTO);

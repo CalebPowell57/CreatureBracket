@@ -35,9 +35,11 @@ namespace CreatureBracket
 
             services.AddDbContext<DatabaseContext>(options =>
             {
+                var connectionString = Configuration["ConnectionString"];
+
                 //options.UseSqlite("Data Source=main.db");
-                //options.UseSqlServer("Server=sql2014.kalosinc.local;Database=CreatureBracket;Trusted_Connection=true");
-                options.UseSqlServer("Server=CALEB-LAPTOP;Database=CreatureBracketFusion;Trusted_Connection=true");
+                options.UseSqlServer(connectionString);
+                //options.UseSqlServer("Server=CALEB-LAPTOP;Database=CreatureBracketFusion;Trusted_Connection=true");
             });
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

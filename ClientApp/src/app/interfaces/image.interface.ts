@@ -1,4 +1,6 @@
+export enum EImageType { Creatures, CreatureSubmissions, Account }
+
 export interface IImage {
-  image: string;
+  base64: string;
   key: string;
 }

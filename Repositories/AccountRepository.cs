@@ -68,25 +68,5 @@ namespace CreatureBracket.Repositories
                 _context.Registry.Add(newRegistryItem);
             }
         }
-
-        public List<Image> Images(AccountImagesRequestDTO dto)
-        {
-            var images = new List<Image>();
-
-            foreach (var userName in dto.AccountUserNames)
-            {
-                var userInfo = ADUserInfo.GetByUserName(userName);
-
-                var image = new Image
-                {
-                    Base64 = userInfo.Image,
-                    Key = userName
-                };
-
-                images.Add(image);
-            }
-
-            return images;
-        }
     }
 }

@@ -4,4 +4,5 @@ export interface IStandingsItemDTO {
   rank: number;
   points: number;
   image: string;
+  userName: string;
 }
