@@ -30,6 +30,9 @@ import { TournamentOpenGuard } from './shared/tournament-open.guard';
 import { TournamentStartedGuard } from './shared/tournament-started.guard';
 import { StandingsComponent } from './standings/standings.component';
 import { StandingsGuard } from './standings/standings.guard';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { ChatComponent2 } from './sidebar/chat/chat.component';
+import { CreatureInfoComponent } from './sidebar/creature-info/creature-info.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -47,7 +50,10 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     NotSignedInComponent,
     CreatureApprovalComponent,
     SeedTournamentComponent,
-    NaviComponent
+    NaviComponent,
+    SidebarComponent,
+    ChatComponent2,
+    CreatureInfoComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

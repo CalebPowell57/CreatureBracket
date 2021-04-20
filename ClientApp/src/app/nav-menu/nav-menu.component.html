@@ -31,7 +31,7 @@
 
             <button class="btn btn-outline-light" (click)="signIn()" *ngIf="signedInUser === ''">Sign in</button>
 
-            <ul class="navbar-nav" style="margin-right:auto;">
+            <ul class="navbar-nav" style="margin-right:auto;" (click)="onChangeView()">
               <li class="nav-item"
                   [routerLinkActive]="['link-active']"
                   [routerLinkActiveOptions]="{ exact: true }">

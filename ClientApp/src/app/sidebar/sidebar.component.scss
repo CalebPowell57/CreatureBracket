@@ -1,12 +1,12 @@
 
 
-app-selected-match-discussion-info, app-chat {
+app-selected-match-discussion-info, app-chat2 {
   background-color: #141414;
   /*position: fixed;*/
   height: 100%;
   /*overflow-y: scroll;*/
-  padding-left:0px;
-  padding-right:0px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .h1 {
@@ -20,6 +20,7 @@ app-selected-match-discussion-info, app-chat {
   animation-fill-mode: forwards;
   animation-play-state: running;
 }
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -37,6 +38,7 @@ app-selected-match-discussion-info, app-chat {
   animation-fill-mode: forwards;
   animation-play-state: running;
 }
+
 @keyframes fadeIn2 {
   from {
     opacity: 0;
@@ -53,6 +55,7 @@ app-selected-match-discussion-info, app-chat {
   animation-duration: 1s;
   animation-fill-mode: forwards;
 }
+
 @keyframes fadeInRight {
   from {
     opacity: 0;
@@ -72,6 +75,7 @@ app-selected-match-discussion-info, app-chat {
   animation-duration: 1s;
   animation-fill-mode: forwards;
 }
+
 @keyframes fadeOutRight {
   from {
     opacity: 1;
@@ -83,10 +87,3 @@ app-selected-match-discussion-info, app-chat {
     transform: translate3d(100%, 0, 0);
   }
 }
-
-
-
-
-
-
-

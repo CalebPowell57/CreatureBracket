@@ -4,6 +4,7 @@ import { MsalService } from '@azure/msal-angular';
 import { EStatus } from '../interfaces/bracket.interface';
 import { AccountService } from '../shared/account.service';
 import { GlobalBracketService } from '../shared/global-bracket.service';
+import { SidebarService } from '../shared/sidebar.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -26,7 +27,9 @@ export class NavMenuComponent {
     private bracketService: GlobalBracketService,
     private authService: MsalService,
     private accountService: AccountService,
-    private router: Router) { }
+    private router: Router,
+    private sidebarService: SidebarService
+  ) { }
 
   ngOnInit() {
     const account = this.authService.getAccount();
@@ -83,5 +86,8 @@ export class NavMenuComponent {
     this.authService.loginRedirect({
       extraScopesToConsent: ["user.read", "openid", "profile", "user.readbasic.all"]
     });
+  }
+  onChangeView() {
+    this.sidebarService.onChangeView();
   }
 }

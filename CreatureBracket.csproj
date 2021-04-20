@@ -67,6 +67,7 @@
     <None Remove="ClientApp\src\app\interfaces\image.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\SaveAccountSettingDTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\seed-matchupDTO.interface.ts" />
+    <None Remove="ClientApp\src\app\interfaces\sidebar.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\standings-item-DTO.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\user.interface.ts" />
     <None Remove="ClientApp\src\app\interfaces\UserBracketDTO.interface.ts" />
@@ -85,6 +86,7 @@
     <None Remove="ClientApp\src\app\shared\navi.service.ts" />
     <None Remove="ClientApp\src\app\shared\requre-authentication.guard.ts" />
     <None Remove="ClientApp\src\app\shared\requre-super-permissions.guard.ts" />
+    <None Remove="ClientApp\src\app\shared\sidebar.service.ts" />
     <None Remove="ClientApp\src\app\shared\tournament-open.guard.ts" />
     <None Remove="ClientApp\src\app\shared\tournament-started.guard.ts" />
     <None Remove="ClientApp\src\app\standings\standings.guard.ts" />
@@ -102,6 +104,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\creature-submission\creature-submission.service.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\sidebar.interface.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\image.interface.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\SaveAccountSettingDTO.interface.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\AccountSettingDTO.interface.ts" />
@@ -140,6 +143,7 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\seed-tournament\seed-tournament.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\sidebar.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\shared\image.service.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

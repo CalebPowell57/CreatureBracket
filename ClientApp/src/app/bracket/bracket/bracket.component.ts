@@ -1,11 +1,7 @@
-import { Component, Input, Output, SimpleChange, EventEmitter, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
-import { Guid } from 'guid-typescript';
 import { ToastrService } from 'ngx-toastr';
-import { Subject } from 'rxjs';
-import { EStatus } from '../../interfaces/bracket.interface';
 import { ICreatureDTO } from '../../interfaces/CreatureDTO.interface';
 import { IGlobalBracketDTO } from '../../interfaces/GlobalBracketDTO.interface';
 import { IUserBracketDTO } from '../../interfaces/UserBracketDTO.interface';
@@ -13,6 +9,7 @@ import { IUserMatchupDTO } from '../../interfaces/UserMatchupDTO.interface';
 import { IUserRoundDTO } from '../../interfaces/UserRoundDTO.interface';
 import { GlobalBracketService } from '../../shared/global-bracket.service';
 import { NaviService } from '../../shared/navi.service';
+import { SidebarService } from '../../shared/sidebar.service';
 
 @Component({
   selector: 'app-bracket',
@@ -23,22 +20,13 @@ export class BracketComponent {
 
   public bracket: IGlobalBracketDTO;
   public userBracket: IUserBracketDTO;
-  @Output() passMatch: Subject<any> = new Subject();
-  @Output() selectedComponent: string;
   @Output() userBracketSaveEvent: EventEmitter<any> = new EventEmitter();
-  @Output() selectedAnimationClass: string;
   @Output() zoomButtonClick: string;
   @Output() zoomEvent: EventEmitter<any> = new EventEmitter();
   @Input() isGlobal: boolean;
-
+  
   Winner: ICreatureDTO;
   Won = false;
-  colActive = false;
-  contentColumnCommand: string;
-  isColInit: boolean;
-  matchUpId: string;
-  hasChatBeenDisplayed: boolean;
-  creatureVotedForClassSelection: string;
   zoomInOut = {};
   canEdit = false;
 
@@ -48,7 +36,9 @@ export class BracketComponent {
     private cdr: ChangeDetectorRef,
     private toastrService: ToastrService,
     private authService: MsalService,
-    private naviService: NaviService) { }
+    private naviService: NaviService,
+    private sidebarService: SidebarService
+  ) { }
 
   ngOnInit() {
     if (this.isGlobal) {
@@ -87,37 +77,35 @@ export class BracketComponent {
         this.userBracket = data;
       });
     }
-    this.discussionCreatureColumnState("pageLoad", undefined, undefined);
   }
 
   public onMatchClick(matchup: any) {
+
+    if (this.isGlobal) {
+      this.sidebarService.onGlobalMatchClicked(matchup);
+    }
+    else {
+      this.sidebarService.onUserMatchClicked(matchup);
+    }
+    
+
     if (matchup.vote != null && matchup.contestants != null) {
-      this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, matchup.vote.creatureId);
-      this.passMatch.next(matchup);
-      this.cdr.detectChanges();
+      this.sidebarService.sidebarColumnState("CreatureInformation", matchup.matchupId, matchup.vote.creatureId);
     }
     else if (!this.isGlobal && matchup.creature1 !== null && matchup.creature2 !== null) {
       if (matchup.creature1.winner) {
-        this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, matchup.creature1.creatureId);
+        this.sidebarService.sidebarColumnState("CreatureInformation", matchup.matchupId, matchup.creature1.creatureId);
       }
       else if (matchup.creature2.winner) {
-        this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, matchup.creature2.creatureId);
+        this.sidebarService.sidebarColumnState("CreatureInformation", matchup.matchupId, matchup.creature2.creatureId);
       }
       else {
-        this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, undefined);
+        this.sidebarService.sidebarColumnState("CreatureInformation", matchup.matchupId, undefined);
       }
-      this.passMatch.next(matchup);
-      this.cdr.detectChanges();
     }
     else if (matchup.contestants != null) {
-      this.discussionCreatureColumnState("CreatureInformation", matchup.matchupId, undefined);
-      this.passMatch.next(matchup);
-      this.cdr.detectChanges();
+      this.sidebarService.sidebarColumnState("CreatureInformation", matchup.matchupId, undefined);
     }
-  }
-
-  public onchatClick() {
-    this.discussionCreatureColumnState("Discussion", undefined, undefined);
   }
 
   zoomClick(zoomButton: string) {
@@ -181,41 +169,4 @@ export class BracketComponent {
     });
   }
 
-  public discussionCreatureColumnState(contentRequested: string, requestedMatchId: string, CreatureVotedFor: string) {
-    if (this.selectedComponent === contentRequested && contentRequested != "CreatureInformation" ||
-      this.matchUpId === requestedMatchId && requestedMatchId != null && this.creatureVotedForClassSelection === CreatureVotedFor) {
-      this.contentColumnCommand = "closeColumn";
-      this.selectedAnimationClass = "closeColumn";
-      this.colActive = false;
-      this.isColInit = false;
-      this.selectedComponent = undefined;
-      this.matchUpId = undefined;
-      this.creatureVotedForClassSelection = CreatureVotedFor;
-    }
-    else if (contentRequested === "pageLoad") {
-      this.colActive = false;
-      this.contentColumnCommand = contentRequested;
-      this.selectedAnimationClass = undefined;
-      this.isColInit = false;
-      this.matchUpId = requestedMatchId;
-    }
-    else if (this.isColInit === false ||
-      this.selectedAnimationClass === "init" && this.matchUpId != undefined && requestedMatchId != undefined) {
-      this.colActive = true;
-      this.contentColumnCommand = "init";
-      this.selectedComponent = contentRequested;
-      this.selectedAnimationClass = "init";
-      this.isColInit = true;
-      this.matchUpId = requestedMatchId;
-      this.creatureVotedForClassSelection = CreatureVotedFor;
-    }
-    else {
-      this.colActive = true;
-      this.contentColumnCommand = "content";
-      this.selectedComponent = contentRequested;
-      this.selectedAnimationClass = contentRequested;
-      this.matchUpId = requestedMatchId;
-      this.creatureVotedForClassSelection = CreatureVotedFor;
-    }
-  }
 }
