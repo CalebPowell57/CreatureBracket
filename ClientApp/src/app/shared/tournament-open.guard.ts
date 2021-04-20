@@ -15,7 +15,13 @@ export class TournamentOpenGuard implements CanActivate {
     state: RouterStateSnapshot): Promise<boolean> {
     return this.bracketService.activeBracketStatus().toPromise()
       .then(statusDTO => {
-        return statusDTO.status === EStatus.Open;
+        if (statusDTO.status === EStatus.Open) {
+          return true;
+        } else {
+          this.router.navigate(['not-found']);
+
+          return false;
+        }
       });
   }
 }

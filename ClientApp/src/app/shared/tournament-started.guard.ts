@@ -15,7 +15,13 @@ export class TournamentStartedGuard implements CanActivate {
     state: RouterStateSnapshot): Promise<boolean> {
     return this.bracketService.activeBracketStatus().toPromise()
       .then(statusDTO => {
-        return statusDTO.status === EStatus.Started;
+        if (statusDTO.status === EStatus.Started) {
+          return true;
+        } else {
+          this.router.navigate(['not-found']);
+
+          return false;
+        }
       });
   }
 }

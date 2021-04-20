@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { EStatus } from '../interfaces/bracket.interface';
 import { GlobalBracketService } from '../shared/global-bracket.service';
 import { LoadStateService } from '../shared/load-state.service';
 
@@ -12,35 +14,51 @@ import { LoadStateService } from '../shared/load-state.service';
 export class HomeComponent  {
   particalArray = new Array(30);
   ExitImageClicked: boolean;
-  bracket: string[] = ['/tournament'];
+  bracket: string[] = [''];
   pageInitialized: boolean = false;
+  hasActiveBracket = false;
   constructor(
     private router: Router,
     private bracketService: GlobalBracketService,
-    private loadStateService: LoadStateService
+    private loadStateService: LoadStateService,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
-    //if (this.loadStateService.HomeHasLoaded) {
-    //  this.pageInitialized = true;
-    //}
-    //else {
-    //  this.loadStateService.HomeHasLoaded = true;
-    //}
-    //this.bracketService.activeBracket().subscribe(x => {
-    //  if (x.status === 0) {
-    //    this.bracket = ['/creature-submission'];
-    //  }
-    //  else if (x.status === 1) {
-    //    this.bracket = ['/tournament'];
-    //  }
-    //  else {
-    //    this.bracket = ['/current-standings'];
-    //  }
-    //})
+    if (this.loadStateService.HomeHasLoaded) {
+      this.pageInitialized = true;
+    }
+    else {
+      this.loadStateService.HomeHasLoaded = true;
+    }
+    this.bracketService.activeBracketStatus().subscribe(x => {
+      if (!x) {
+        this.hasActiveBracket = false;
+
+        return;
+      } else {
+        this.hasActiveBracket = true;
+      }
+
+      if (x.status === EStatus.Open) {
+        this.bracket = ['/creature-submission'];
+      }
+      else if (x.status === EStatus.Started) {
+        this.bracket = ['/tournament'];
+      }
+      else {
+        this.bracket = ['/current-standings'];
+      }
+    })
   }
 
   onStartClick() {
+    if (!this.hasActiveBracket) {
+      this.toastrService.warning('Wait for a tournament organizer to start a bracket.', 'Attention');
+
+      return;
+    }
+
     this.ExitImageClicked = true;
     setTimeout(() => {
       

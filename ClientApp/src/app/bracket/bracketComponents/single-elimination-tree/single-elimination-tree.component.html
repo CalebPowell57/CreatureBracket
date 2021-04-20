@@ -1,13 +1,13 @@
-<div class="container-fluid" [class.DisplayWinner]="Winner?.Name != null">
+<div class="container-fluid">
   <div class="row">
     <div class="col-12" [ngStyle]="bracketStyle">
       <div class="ngtt-se__container" id="bracketContainer">
-        <div class="ngtt-se__bracket-wrapper" style="padding-right:10px;" *ngIf="rounds.length > 0">
+        <div id="wrapper" class="ngtt-se__bracket-wrapper animate__animated animate__backInRight" style="padding-right:10px;" *ngIf="rounds.length > 0" (animationend)="startConfetti()">
           <ng-container *ngFor="let round of rounds; let i = index">
             <div class="ngtt-se__round-wrapper">
               <ng-container *ngFor="let matchup of round.matchups">
                 <div class="ngtt-se__match-wrapper">
-                  <div class="ngtt-se__match-component-container animate__animated animate__backInRight">
+                  <div class="ngtt-se__match-component-container">
                     <ng-container *ngTemplateOutlet="matchTemplate; context:{$implicit: matchup, tournament: tournament, isGlobal: isGlobal}"></ng-container>
                   </div>
                 </div>
@@ -18,7 +18,7 @@
             <div class="ngtt-se__round-wrapper">
               <div class="ngtt-se__match-wrapper grow">
                 <div class="ngtt-se__finale-match-wrapper">
-                  <div class="ngtt-se__finale-component-container animate__animated animate__backInRight" *ngIf="final.matchups.length > 0">
+                  <div class="ngtt-se__finale-component-container" *ngIf="final.matchups.length > 0">
                     <ng-container *ngTemplateOutlet="matchTemplate; context:{$implicit: final.matchups[0], tournament: tournament, isGlobal: isGlobal}"></ng-container>
                   </div>
                   <div class="ngtt-se__match-component-container" *ngIf="final.matchups.length > 1">
@@ -28,11 +28,23 @@
               </div>
             </div>
           </ng-container>
+          <ng-container *ngIf="winner">
+            <div class="winner-box">
+              <canvas id="my-canvas" height="300" width="600" style="margin-left: -80px; margin-top: -20px; border-radius: 10px;"></canvas>
+
+              <div class="verticalContainer" style="margin-top:-275px;">
+                <span style="font-size:32pt; margin-bottom:20px;">{{isGlobal ? '' : 'YOUR'}} CHAMPION</span>
+
+                <div class="verticalContainer" style="margin-left:auto; margin-right:auto; width:unset;">
+                  <img class="winner-image" [src]="winner.image" width="100" height="100" />
+
+                  <span style="font-size:24pt; margin-top:auto; margin-bottom:auto;">{{winner.name}}</span>
+                </div>
+              </div>
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-  
-

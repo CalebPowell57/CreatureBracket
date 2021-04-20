@@ -42,6 +42,10 @@ export class NavMenuComponent {
     }
 
     this.bracketService.activeBracketStatus().subscribe(x => {
+      if (!x) {
+        return;
+      }
+
       if (account) {
         const roles = account.idTokenClaims.roles;
         const isSuper = roles && roles.includes('super');

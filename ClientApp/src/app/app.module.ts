@@ -29,7 +29,6 @@ import { RequireSuperPermissionsGuard } from './shared/requre-super-permissions.
 import { TournamentOpenGuard } from './shared/tournament-open.guard';
 import { TournamentStartedGuard } from './shared/tournament-started.guard';
 import { StandingsComponent } from './standings/standings.component';
-import { StandingsGuard } from './standings/standings.guard';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ChatComponent2 } from './sidebar/chat/chat.component';
 import { CreatureInfoComponent } from './sidebar/creature-info/creature-info.component';
@@ -69,10 +68,10 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     RouterModule.forRoot([
       { path: 'account-settings', component: AccountSettingsComponent, canActivate: [RequireAuthenticationGuard] },
       { path: 'creature-submission', component: CreatureSubmissionComponent, canActivate: [RequireAuthenticationGuard, TournamentOpenGuard] },
-      { path: 'seed-tournament', component: SeedTournamentComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard, TournamentOpenGuard] },
-      { path: 'standings', component: StandingsComponent, canActivate: [StandingsGuard, RequireAuthenticationGuard, TournamentStartedGuard] },
-      { path: 'creature-approval', component: CreatureApprovalComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard, TournamentOpenGuard] },
-      { path: 'bracket-manager', component: BracketManagerComponent, canActivate: [RequireSuperPermissionsGuard, RequireAuthenticationGuard] },
+      { path: 'seed-tournament', component: SeedTournamentComponent, canActivate: [RequireAuthenticationGuard, RequireSuperPermissionsGuard,  TournamentOpenGuard] },
+      { path: 'standings', component: StandingsComponent, canActivate: [RequireAuthenticationGuard, TournamentStartedGuard] },
+      { path: 'creature-approval', component: CreatureApprovalComponent, canActivate: [RequireAuthenticationGuard, TournamentOpenGuard, RequireSuperPermissionsGuard] },
+      { path: 'bracket-manager', component: BracketManagerComponent, canActivate: [RequireAuthenticationGuard, RequireSuperPermissionsGuard] },
       { path: 'not-signed-in', component: NotSignedInComponent, canActivate: [NotSignedInGuard] },
       { path: 'no-permissions', component: NoPermissionsComponent },
       { path: '', component: HomeComponent, pathMatch: 'full' },
