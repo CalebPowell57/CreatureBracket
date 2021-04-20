@@ -41,7 +41,7 @@ export class SingleEliminationTreeComponent implements OnChanges {
     if (canvas) {
       var launchConfetti = confetti.create(canvas, { resize: true });
 
-      var colors = ['#000000', '#ffffff', '#499bd1', '#7eb812'];
+      var colors = ['#f54242', '#f5d742', '#499bd1', '#7eb812', '#ffffff'];
 
       let start;
 
@@ -52,7 +52,7 @@ export class SingleEliminationTreeComponent implements OnChanges {
 
         if (elapsed > 100) {
           launchConfetti({
-            particleCount: 4,
+            particleCount: 5,
             angle: 75,
             spread: 35,
             origin: { x: 0, y: .8 },
@@ -60,7 +60,7 @@ export class SingleEliminationTreeComponent implements OnChanges {
             startVelocity: 30
           });
           launchConfetti({
-            particleCount: 4,
+            particleCount: 5,
             angle: 105,
             spread: 35,
             origin: { x: 1, y: .8 },
@@ -74,7 +74,7 @@ export class SingleEliminationTreeComponent implements OnChanges {
         requestAnimationFrame(frame);
       }());
     } else {
-      setTimeout(this.startConfetti, 100);
+      setTimeout(this.startConfetti, 150);
     }
   }
 
