@@ -8,14 +8,24 @@
   bottom: 0px;
   background-color: #141414;
   z-index:20;
+  min-width: 500px;
+  max-width: 500px;
 }
 /*Chat Bubble*/
+.chatBubble {
+  transition: all 200ms ease-in-out;
+}
+
+.chatBubble:hover {
+  transform: scale(1.1);
+}
+
 .chatBubbleExpandedCol {
   z-index:20;
   cursor: pointer;
   position: fixed;
   bottom: 25px;
-  right: 26%;
+  right: 525px;
   width: 75px;
   animation-name: fadeInRight;
   animation-duration: 1s;
