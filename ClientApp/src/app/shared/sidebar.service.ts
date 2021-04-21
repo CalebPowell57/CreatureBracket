@@ -1,3 +1,4 @@
+import { Content } from '@angular/compiler/src/render3/r3_ast';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { IGlobalMatchupDTO } from '../interfaces/GlobalMatchupDTO.interface';
@@ -28,7 +29,7 @@ export class SidebarService {
         creatureVotedForClassSelection: undefined
       }
     }
-    else if (this.sidebarParams.selectedComponent === contentRequested && contentRequested != "CreatureInformation" ||
+    else if (contentRequested === "closeColumn" || this.sidebarParams.selectedComponent === contentRequested && contentRequested != "CreatureInformation" ||
       this.sidebarParams.matchupId === requestedMatchId && requestedMatchId != null && this.sidebarParams.creatureVotedForClassSelection === CreatureVotedFor) {
       this.sidebarParams = {
         contentColumnCommand: "closeColumn",

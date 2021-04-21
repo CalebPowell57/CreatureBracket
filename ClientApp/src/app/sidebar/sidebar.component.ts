@@ -23,6 +23,9 @@ export class SidebarComponent  {
   @Output() globalMatchupClicked: IGlobalMatchupDTO;
   @Output() userMatchupClicked: IUserMatchupDTO;
 
+  public closeSideBar() {
+    this.sidebarService.sidebarColumnState("closeColumn", undefined, undefined);
+  }
 
   private subscribeToEvents(): void {
     this.sidebarService.onGlobalMatchupClicked$.subscribe((globalMatchupClicked: IGlobalMatchupDTO) => {
