@@ -4,6 +4,7 @@ import { MsalService } from '@azure/msal-angular';
 import { ToastrService } from 'ngx-toastr';
 import { ICreatureDTO } from '../../interfaces/CreatureDTO.interface';
 import { IGlobalBracketDTO } from '../../interfaces/GlobalBracketDTO.interface';
+import { ISidebarParams } from '../../interfaces/sidebar.interface';
 import { IUserBracketDTO } from '../../interfaces/UserBracketDTO.interface';
 import { IUserMatchupDTO } from '../../interfaces/UserMatchupDTO.interface';
 import { IUserRoundDTO } from '../../interfaces/UserRoundDTO.interface';
@@ -24,11 +25,13 @@ export class BracketComponent {
   @Output() zoomButtonClick: string;
   @Output() zoomEvent: EventEmitter<any> = new EventEmitter();
   @Input() isGlobal: boolean;
-  
+
+  sidebarParams: ISidebarParams;
   Winner: ICreatureDTO;
   Won = false;
   zoomInOut = {};
   canEdit = false;
+  colActive = false;
 
   constructor(
     private bracketService: GlobalBracketService,
@@ -38,7 +41,9 @@ export class BracketComponent {
     private authService: MsalService,
     private naviService: NaviService,
     private sidebarService: SidebarService
-  ) { }
+  ) {
+    this.checkSideBarStatus();
+  }
 
   ngOnInit() {
     if (this.isGlobal) {
@@ -68,7 +73,6 @@ export class BracketComponent {
             }
           }
         }
-
         this.naviService.loadingChanged$.next(false);
       });
     } else {
@@ -87,7 +91,6 @@ export class BracketComponent {
     else {
       this.sidebarService.onUserMatchClicked(matchup);
     }
-    
 
     if (matchup.vote != null && matchup.contestants != null) {
       this.sidebarService.sidebarColumnState("CreatureInformation", matchup.matchupId, matchup.vote.creatureId);
@@ -111,7 +114,6 @@ export class BracketComponent {
   zoomClick(zoomButton: string) {
     this.zoomInOut = { Command: zoomButton };
   }
-
 
   userBracketSaveClick() {
     //this.userBracketSaveEvent.emit("Save Clicked");
@@ -169,4 +171,17 @@ export class BracketComponent {
     });
   }
 
+  private checkSideBarStatus(): void {
+    this.sidebarService.onSidebarParamsChanged$.subscribe((newSidebarParams: ISidebarParams) => {
+      this.sidebarParams = newSidebarParams;
+      if (this.sidebarParams != undefined) {
+        if (this.sidebarParams.colActive) {
+          this.colActive = true;
+        }
+        else {
+          this.colActive = false;
+        }
+      }
+    });
+  }
 }

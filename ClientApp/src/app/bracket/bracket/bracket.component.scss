@@ -4,12 +4,13 @@
 
 .container-fluid{
     overflow-x:auto;
+    overflow-y:hidden;
 }
 .userBracketSaveButtonExpandedCol {
   cursor: pointer;
   position: fixed;
   bottom: 25px;
-  right: 26%;
+  right: 32%;
   animation-name: fadeInRight;
   animation-duration: 1s;
   animation-fill-mode: forwards;
@@ -19,7 +20,7 @@
   cursor: pointer;
   position: fixed;
   bottom: 25px;
-  right: 2%;
+  right: 9%;
   animation-name: fadeIn;
   animation-duration: 2s;
   animation-fill-mode: forwards;
