@@ -1,9 +1,7 @@
-<div class="container-fluid h-100">
-  <div class="row h-100">
-    <div class="col-12 h-100" [ngSwitch]="sidebarParams.selectedComponent" [ngClass]="sidebarParams.selectedAnimationClass">
-      <app-creature-info *ngSwitchCase="'CreatureInformation'" [globalMatchupClicked]="globalMatchupClicked" [userMatchupClicked]="userMatchupClicked"></app-creature-info>
-      <app-chat2 *ngSwitchCase="'Discussion'"></app-chat2>
-      <div *ngSwitchDefault></div>
-    </div>
+<div style="height:100%;">
+  <div style="height:100%;" [ngSwitch]="sidebarParams.selectedComponent" [ngClass]="sidebarParams.selectedAnimationClass">
+    <app-creature-info *ngSwitchCase="'CreatureInformation'" [globalMatchupClicked]="globalMatchupClicked" [userMatchupClicked]="userMatchupClicked"></app-creature-info>
+    <app-chat2 *ngSwitchCase="'Discussion'"></app-chat2>
+    <div *ngSwitchDefault></div>
   </div>
 </div>
