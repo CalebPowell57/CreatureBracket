@@ -9,8 +9,8 @@
   <div class="row h-100">
     <div class="col-12" style="padding:0px;">
       <router-outlet></router-outlet>
-      <div [class.chatBubbleCollapsedCol]="!sidebarParams.colActive" [class.chatBubbleExpandedCol]="sidebarParams.colActive" class="chatBubble" (click)="onchatClick()">
-        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+      <div [class.chatBubbleCollapsedCol]="!sidebarParams.colActive" [class.chatBubbleExpandedCol]="sidebarParams.colActive" (click)="onchatClick()">
+        <svg class="chatBubble" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
              width="75" height="75"
              viewBox="0 0 172 172"
              style=" fill:#000000;">
@@ -18,9 +18,9 @@
           <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g><path d="M86,14.33333c39.5815,0 71.66667,32.08517 71.66667,71.66667c0,13.03258 -3.53317,25.21592 -9.6105,35.74375l16.35433,37.20933c1.81317,4.12442 -2.54775,8.24167 -6.56108,6.19917l-34.95183,-17.79842c-10.78942,6.50375 -23.38483,10.31283 -36.89758,10.31283c-39.5815,0 -71.66667,-32.08517 -71.66667,-71.66667c0,-39.5815 32.08517,-71.66667 71.66667,-71.66667z" fill="url(#color-1_BPFfi69JReUf_gr1)"></path><circle cx="24" cy="24" transform="scale(3.58333,3.58333)" r="3" fill="url(#color-2_BPFfi69JReUf_gr2)" opacity="0.3"></circle><circle cx="24" cy="24" transform="scale(3.58333,3.58333)" r="2" fill="#ffffff"></circle><circle cx="32" cy="24" transform="scale(3.58333,3.58333)" r="3" fill="url(#color-3_BPFfi69JReUf_gr3)" opacity="0.3"></circle><circle cx="32" cy="24" transform="scale(3.58333,3.58333)" r="2" fill="#ffffff"></circle><circle cx="16" cy="24" transform="scale(3.58333,3.58333)" r="3" fill="url(#color-4_BPFfi69JReUf_gr4)" opacity="0.3"></circle><circle cx="16" cy="24" transform="scale(3.58333,3.58333)" r="2" fill="#ffffff"></circle></g></g>
         </svg>
       </div>
-    </div>
-    <div [ngClass]="sidebarParams.contentColumnCommand" class="col-3 sidebar">
-      <app-sidebar [sidebarParams]="sidebarParams" ></app-sidebar>
+      <div [ngClass]="sidebarParams.contentColumnCommand" class="col-3 sidebar">
+        <app-sidebar [sidebarParams]="sidebarParams"></app-sidebar>
+      </div>
     </div>
   </div>
 

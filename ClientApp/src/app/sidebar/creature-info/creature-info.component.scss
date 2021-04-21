@@ -2,6 +2,10 @@
   overflow-y: hidden;
   max-height: 955px;
 }
+.CreatureInfoContainer{
+    min-height:100%;
+    overflow:hidden;
+}
 
 .CreatureInformation::-webkit-scrollbar-track {
   border: 1px solid #000;
@@ -42,7 +46,7 @@ img {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 10px;
+
 }
 
 textarea {
@@ -60,4 +64,8 @@ textarea {
 
 h3 {
   text-align: center;
+}
+.p{
+    max-height:25%;
+    overflow:auto;
 }

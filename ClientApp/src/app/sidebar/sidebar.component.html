@@ -1,4 +1,16 @@
 <div style="height:100%;">
+  <div class="wrapper"(click)="closeSideBar()">
+    <div class="close-button">
+      <div class="in">
+        <div class="close-button-block"></div>
+        <div class="close-button-block"></div>
+      </div>
+      <div class="out">
+        <div class="close-button-block"></div>
+        <div class="close-button-block"></div>
+      </div>
+    </div>
+  </div>
   <div style="height:100%;" [ngSwitch]="sidebarParams.selectedComponent" [ngClass]="sidebarParams.selectedAnimationClass">
     <app-creature-info *ngSwitchCase="'CreatureInformation'" [globalMatchupClicked]="globalMatchupClicked" [userMatchupClicked]="userMatchupClicked"></app-creature-info>
     <app-chat2 *ngSwitchCase="'Discussion'"></app-chat2>
