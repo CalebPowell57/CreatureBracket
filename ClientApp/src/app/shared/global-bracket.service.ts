@@ -42,17 +42,21 @@ export class GlobalBracketService {
       let firstRound = bracket.rounds[0];
 
       firstRound.matchups.forEach(matchup => {
-        matchup.contestants.forEach(x => creatureIds.push(x.creatureId));
+        if (matchup.contestants) {
+          matchup.contestants.forEach(x => creatureIds.push(x.creatureId));
+        }
       });
 
       this.imageService.getImages(EImageType.Creatures, creatureIds).subscribe(images => {
         bracket.rounds.forEach(round => {
           round.matchups.forEach(matchup => {
-            matchup.contestants.forEach(creature => {
-              const found = images.filter(y => y.key.toLowerCase() === creature.creatureId.toLowerCase());
+            if (matchup.contestants) {
+              matchup.contestants.forEach(creature => {
+                const found = images.filter(y => y.key.toLowerCase() === creature.creatureId.toLowerCase());
 
-              creature.image = found[0].base64;
-            });
+                creature.image = found[0].base64;
+              });
+            }
           });
         });
       });
@@ -76,21 +80,32 @@ export class GlobalBracketService {
       let firstRound = bracket.rounds[0];
 
       firstRound.matchups.forEach(matchup => {
-        creatureIds.push(matchup.creature1.creatureId);
-        creatureIds.push(matchup.creature2.creatureId);
+        if (matchup.creature1) {
+          creatureIds.push(matchup.creature1.creatureId);
+        }
+
+        if (matchup.creature2) {
+          creatureIds.push(matchup.creature2.creatureId);
+        }
       });
 
-      this.imageService.getImages(EImageType.Creatures, creatureIds).subscribe(images => {
-        bracket.rounds.forEach(round => {
-          round.matchups.forEach(matchup => {
-            const found1 = images.filter(y => y.key.toLowerCase() === matchup.creature1.creatureId.toLowerCase());
-            matchup.creature1.image = found1[0].base64;
+      if (creatureIds.length > 0) {
+        this.imageService.getImages(EImageType.Creatures, creatureIds).subscribe(images => {
+          bracket.rounds.forEach(round => {
+            round.matchups.forEach(matchup => {
+              if (matchup.creature1) {
+                const found1 = images.filter(y => y.key.toLowerCase() === matchup.creature1.creatureId.toLowerCase());
+                matchup.creature1.image = found1[0].base64;
+              }
 
-            const found2 = images.filter(y => y.key.toLowerCase() === matchup.creature2.creatureId.toLowerCase());
-            matchup.creature2.image = found2[0].base64;
+              if (matchup.creature2) {
+                const found2 = images.filter(y => y.key.toLowerCase() === matchup.creature2.creatureId.toLowerCase());
+                matchup.creature2.image = found2[0].base64;
+              }
+            });
           });
         });
-      });
+      }
 
       return bracket;
     }));

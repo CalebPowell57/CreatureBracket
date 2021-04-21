@@ -13,7 +13,16 @@
 }
 /*Chat Bubble*/
 .chatBubble {
-  transition: all 200ms ease-in-out;
+  z-index: 20;
+  cursor: pointer;
+  position: fixed;
+  bottom: 25px;
+  width: 75px;
+  animation-name: fadeIn;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+  transition: all 2s;
 }
 
 .chatBubble:hover {
@@ -21,46 +30,22 @@
 }
 
 .chatBubbleExpandedCol {
-  z-index:20;
-  cursor: pointer;
-  position: fixed;
-  bottom: 25px;
   right: 525px;
-  width: 75px;
-  animation-name: fadeInRight;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
-  animation-play-state: running;
 }
 
 .chatBubbleCollapsedCol {
-  z-index:20;
-  cursor: pointer;
-  position: fixed;
-  bottom: 25px;
-  right: 2%;
-  min-width: 75px;
-  animation-name: fadeIn;
-  animation-duration: 2s;
-  animation-fill-mode: forwards;
-  animation-play-state: running;
-}
-
-.bubble {
-  border-radius: 50%;
-  width: 50px;
+  right: 25px;
 }
 
 .closeColumn {
   animation-name: fadeOutRight;
-  animation-duration: 1s;
+  animation-duration: 2s;
   animation-fill-mode: forwards;
 }
 
-
 .init {
   animation-name: fadeInRight;
-  animation-duration: 1s;
+  animation-duration: 2s;
   animation-fill-mode: forwards;
 }
 
@@ -638,8 +623,19 @@ li.listItem {
   animation-play-state: running;
 }
 
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
 
-
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
 
 @keyframes fadeOut {
   from {

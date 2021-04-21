@@ -1,11 +1,8 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, TemplateRef } from '@angular/core';
-import { ICreatureDTO } from '../../../interfaces/CreatureDTO.interface';
+import { Component, Input, OnChanges, SimpleChanges, TemplateRef } from '@angular/core';
+import * as confetti from 'canvas-confetti';
 import { IGlobalBracketDTO } from '../../../interfaces/GlobalBracketDTO.interface';
 import { IGlobalCreatureDTO } from '../../../interfaces/GlobalCreatureDTO.interface';
 import { IGlobalRoundDTO } from '../../../interfaces/GlobalRoundDTO.interface';
-import { IUserBracketDTO } from '../../../interfaces/UserBracketDTO.interface';
-import { IUserRoundDTO } from '../../../interfaces/UserRoundDTO.interface';
-import * as confetti from 'canvas-confetti';
 
 @Component({
   selector: 'ngtt-single-elimination-tree',
@@ -107,9 +104,9 @@ export class SingleEliminationTreeComponent implements OnChanges {
               //wrapper.addEventListener('animationend', this.startConfetti);//only start for global
             }
           } else {
-            if (matchup.creature1.winner) {
+            if (matchup.creature1 && matchup.creature1.winner) {
               this.winner = matchup.creature1;
-            } else if (matchup.creature2.winner) {
+            } else if (matchup.creature2 && matchup.creature2.winner) {
               this.winner = matchup.creature2;
             }
           }

@@ -45,9 +45,8 @@
           </button>
         </div>
       </div>
-        <div *ngIf="!isGlobal" class="btn-group">
-          <button type="button" [class.userBracketSaveButtonCollapsedCol]="!colActive" [class.userBracketSaveButtonExpandedCol]="colActive" class="btn btn-primary" (click)="userBracketSaveClick($event)" [disabled]="!canEdit">Save</button>
-        </div>
+
+      <button type="button" [class.userBracketSaveButtonCollapsedCol]="!colActive" [class.userBracketSaveButtonExpandedCol]="colActive" class="btn btn-primary" (click)="userBracketSaveClick($event)" *ngIf="!isGlobal && canEdit">Save</button>
     </div>
   </div>
 </div>

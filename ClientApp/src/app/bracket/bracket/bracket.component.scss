@@ -9,8 +9,8 @@
 .userBracketSaveButtonExpandedCol {
   cursor: pointer;
   position: fixed;
-  bottom: 25px;
-  right: 32%;
+  bottom: 45px;
+  right: 625px;
   animation-name: fadeInRight;
   animation-duration: 1s;
   animation-fill-mode: forwards;
@@ -19,8 +19,8 @@
 .userBracketSaveButtonCollapsedCol {
   cursor: pointer;
   position: fixed;
-  bottom: 25px;
-  right: 9%;
+  bottom: 45px;
+  right: 145px;
   animation-name: fadeIn;
   animation-duration: 2s;
   animation-fill-mode: forwards;
@@ -58,7 +58,7 @@
 /*Zoom Buttons*/
 .zoomButtonsExpandedCol {
   position: fixed;
-  right: 26%;
+  right: 525px;
   top: 8%;
   animation-name: fadeInRight;
   animation-duration: 1s;

@@ -1,4 +1,4 @@
-<div class="container-fluid h-100" style="padding-top:15px; padding-bottom:15px">
+<div class="container-fluid h-100" style="padding-top:15px; padding-bottom:15px; padding-left: 0px; padding-right: 0px;">
   <div class="profile-main-loader" [class.fade-out]="loadingMessages !== null && !loadingMessages">
     <div class="loader">
       <svg class="circular-loader" viewBox="25 25 50 50">
@@ -25,20 +25,18 @@
       </ul>
     </div>
   </div>
-  <div class="row mt-auto">
-    <div class="col-12">
-      <form #form="ngForm"
-            (ngSubmit)="onSubmit(form)">
-        <input type="text"
-               [(ngModel)]="chatText"
-               name="message"
-               class="form-control"
-               autocomplete="off"
-               minLength="3"
-               placeholder="Type your message here"
-               [disabled]="loadingMessages" />
-      </form>
-    </div>
+  <div style="position:absolute; bottom: 0; width: 100%; padding-top:10px; padding-bottom:10px;">
+    <form #form="ngForm"
+          (ngSubmit)="onSubmit(form)">
+      <input type="text"
+              [(ngModel)]="chatText"
+              name="message"
+              class="form-control"
+              autocomplete="off"
+              minLength="3"
+              placeholder="Type your message here"
+              [disabled]="loadingMessages" />
+    </form>
   </div>
 </div>
 
