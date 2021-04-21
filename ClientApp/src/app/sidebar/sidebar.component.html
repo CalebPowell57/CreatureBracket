@@ -1,16 +1,14 @@
 <div style="height:100%;">
-  <div class="wrapper"(click)="closeSideBar()">
-    <div class="close-button">
-      <div class="in">
-        <div class="close-button-block"></div>
-        <div class="close-button-block"></div>
-      </div>
-      <div class="out">
-        <div class="close-button-block"></div>
-        <div class="close-button-block"></div>
-      </div>
-    </div>
+  <div class="close-tab" style="text-align:center;">
+    <button class="btn btn-outline-secondary" (click)="closeSideBar()" style="margin-top:10px; padding:4px; border: none; transform: rotate(90deg);">
+      <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+           width="32" height="32"
+           viewBox="0 0 172 172"
+           style=" fill:#000000;">
+      <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M69.70703,23.01172l-7.72656,7.72656l55.26172,55.26172l-55.26172,55.26172l7.72656,7.72656l59.125,-59.125l3.69531,-3.86328l-3.69531,-3.86328z"></path></g></g></svg>
+    </button>
   </div>
+
   <div style="height:100%;" [ngSwitch]="sidebarParams.selectedComponent" [ngClass]="sidebarParams.selectedAnimationClass">
     <app-creature-info *ngSwitchCase="'CreatureInformation'" [globalMatchupClicked]="globalMatchupClicked" [userMatchupClicked]="userMatchupClicked"></app-creature-info>
     <app-chat2 *ngSwitchCase="'Discussion'"></app-chat2>

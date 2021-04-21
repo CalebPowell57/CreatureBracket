@@ -12,8 +12,12 @@
 }
 
 .chat-bubble.current {
-    background-color: darkslategray;
-    margin-left: auto;
+  background-color: darkslategray;
+  margin-left: auto;
+}
+
+.chat-bubble:first-child {
+  margin-top: 10px;
 }
 
 .chat-bubble:not(:last-child) {
@@ -21,19 +25,21 @@
 }
 
 .chat-user {
-    font-weight: 700;
-    margin-right: 10px;
+  font-weight: 700;
+  margin-right: 10px;
 }
 
-.chat-date-time{
-    color: darkgray;
+.chat-date-time {
+  color: darkgray;
 }
+
 .chat {
-  height: 95%;
+  height: 100%;
   overflow: auto;
   padding-right: 0px;
   padding-left: 0px;
 }
+
 .chat::-webkit-scrollbar-track {
   border: 1px solid #000;
   padding: 2px 0;

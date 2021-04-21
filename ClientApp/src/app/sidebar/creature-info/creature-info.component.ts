@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { ICreatureDTO } from '../../interfaces/CreatureDTO.interface';
 import { IGlobalMatchupDTO } from '../../interfaces/GlobalMatchupDTO.interface';
 import { IUserMatchupDTO } from '../../interfaces/UserMatchupDTO.interface';
+import { SidebarService } from '../../shared/sidebar.service';
 
 @Component({
   selector: 'app-creature-info',
@@ -10,38 +11,54 @@ import { IUserMatchupDTO } from '../../interfaces/UserMatchupDTO.interface';
   styleUrls: ['./creature-info.component.scss']
 })
 export class CreatureInfoComponent implements OnInit {
-  constructor(private cdr: ChangeDetectorRef) { }
+  constructor(private cdr: ChangeDetectorRef, private sidebarService: SidebarService) { }
   @Input() globalMatchupClicked: IGlobalMatchupDTO;
   @Input() userMatchupClicked: IUserMatchupDTO;
 
   creature1: ICreatureDTO;
   creature2: ICreatureDTO;
-  ngOnInit() {
-    if (this.globalMatchupClicked === undefined) {
-      this.creature1 = {
-        Name: this.userMatchupClicked.creature1.name,
-        Bio: this.userMatchupClicked.creature1.bio,
-        Image: this.userMatchupClicked.creature1.image
-      };
 
-      this.creature2 = {
-        Name: this.userMatchupClicked.creature2.name,
-        Bio: this.userMatchupClicked.creature2.bio,
-        Image: this.userMatchupClicked.creature2.image
-      };
+  ngOnInit() {
+    if (this.userMatchupClicked) {
+      this.setUserCreatures(this.userMatchupClicked);
+    } else if (this.globalMatchupClicked) {
+      this.setGlobalCreatures(this.globalMatchupClicked);
     }
-    else {
-      this.creature1 = {
-        Name: this.globalMatchupClicked.contestants[0].name,
-        Bio: this.globalMatchupClicked.contestants[0].bio,
-        Image: this.globalMatchupClicked.contestants[0].image
-      }
-      this.creature2 = {
-        Name: this.globalMatchupClicked.contestants[1].name,
-        Bio: this.globalMatchupClicked.contestants[1].bio,
-        Image: this.globalMatchupClicked.contestants[1].image
-      }
-    }
+
+    this.sidebarService.onUserMatchupClicked$.subscribe(x => {
+      this.setUserCreatures(x);
+    });
+
+    this.sidebarService.onGlobalMatchupClicked$.subscribe(x => {
+      this.setGlobalCreatures(x);
+    });
   }
 
+  setUserCreatures(matchup: IUserMatchupDTO) {
+    this.creature1 = {
+      Name: matchup.creature1.name,
+      Bio: matchup.creature1.bio,
+      Image: matchup.creature1.image
+    };
+
+    this.creature2 = {
+      Name: matchup.creature2.name,
+      Bio: matchup.creature2.bio,
+      Image: matchup.creature2.image
+    };
+  }
+
+  setGlobalCreatures(matchup: IGlobalMatchupDTO) {
+    this.creature1 = {
+      Name: matchup.contestants[0].name,
+      Bio: matchup.contestants[0].bio,
+      Image: matchup.contestants[0].image
+    };
+
+    this.creature2 = {
+      Name: matchup.contestants[1].name,
+      Bio: matchup.contestants[1].bio,
+      Image: matchup.contestants[1].image
+    };
+  }
 }

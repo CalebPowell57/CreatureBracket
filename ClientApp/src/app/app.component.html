@@ -9,7 +9,7 @@
   <div class="row h-100">
     <div class="col-12" style="padding:0px;">
       <router-outlet></router-outlet>
-      <div [class.chatBubbleCollapsedCol]="!sidebarParams.colActive" [class.chatBubbleExpandedCol]="sidebarParams.colActive" (click)="onchatClick()">
+      <div class="chatBubbleContainer" [class.chatBubbleCollapsedCol]="!sidebarParams.colActive" [class.chatBubbleExpandedCol]="sidebarParams.colActive" (click)="onchatClick()">
         <svg class="chatBubble" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
              width="75" height="75"
              viewBox="0 0 172 172"

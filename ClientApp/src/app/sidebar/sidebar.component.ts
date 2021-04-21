@@ -1,6 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, Output } from '@angular/core';
-import { Subject } from 'rxjs';
-import { ICreatureDTO } from '../interfaces/CreatureDTO.interface';
+import { Component, Input, Output } from '@angular/core';
 import { IGlobalMatchupDTO } from '../interfaces/GlobalMatchupDTO.interface';
 import { ISidebarParams } from '../interfaces/sidebar.interface';
 import { IUserMatchupDTO } from '../interfaces/UserMatchupDTO.interface';
@@ -12,10 +10,7 @@ import { SidebarService } from '../shared/sidebar.service';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent  {
-  constructor(
-    private cdr: ChangeDetectorRef,
-    private sidebarService: SidebarService
-  ) {
+  constructor(private sidebarService: SidebarService) {
     this.subscribeToEvents();
   }
 

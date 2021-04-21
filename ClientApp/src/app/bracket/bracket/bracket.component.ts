@@ -87,7 +87,6 @@ export class BracketComponent {
   }
 
   public onMatchClick(matchup: any) {
-
     if (this.isGlobal) {
       this.sidebarService.onGlobalMatchClicked(matchup);
     }
