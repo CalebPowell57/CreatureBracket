@@ -23,6 +23,7 @@
 
 .CreatureInformation {
   overflow-y: auto;
+  margin-top: 20px;
 }
 
 p, h2 {
@@ -36,14 +37,12 @@ p {
 }
 
 img {
-  border-style: ridge;
-  border-color: black;
-  border-width: 5px;
   border-radius: 50%;
   width: 45%;
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 10px;
 }
 
 textarea {
@@ -59,5 +58,6 @@ textarea {
   height: 200px;
 }
 
-.ul, .li {
+h3 {
+  text-align: center;
 }

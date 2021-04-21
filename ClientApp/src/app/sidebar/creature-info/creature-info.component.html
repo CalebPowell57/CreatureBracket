@@ -1,44 +1,17 @@
-<div class="container-fluid h-100" style="padding-bottom:15px">
-  <div class="creature-col h-50" style="padding-top:15px">
-    <div class="row h-50">
-      <div class="col-12" style="padding-top:15px">
-        <img [src]="creature1?.Image" />
-        <ul>
-          <li>
-            <h3>{{creature1?.Name}}</h3>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="row h-50 CreatureInformation">
-      <div class="col-12">
-        <ul>
-          <li>
-            <p>{{creature1?.Bio}}</p>
-          </li>
-        </ul>
-      </div>
-    </div>
+<div style="overflow-y:auto;height:100%;">
+  <div style="padding-top:25px">
+    <img [src]="creature1?.Image" />
+
+    <h3>{{creature1?.Name}}</h3>
+
+    <p>{{creature1?.Bio}}</p>
   </div>
-  <div class="creature-col h-50" style="padding-top:15px">
-    <div class="row h-50">
-      <div class="col-12" style="padding-top:15px">
-        <img [src]="creature2?.Image" />
-        <ul>
-          <li>
-            <h3>{{creature2?.Name}}</h3>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="row h-50 CreatureInformation">
-      <div class="col-12">
-        <ul>
-          <li>
-            <p>{{creature2?.Bio}}</p>
-          </li>
-        </ul>
-      </div>
-    </div>
+
+  <div style="margin-top:25px">
+    <img [src]="creature2?.Image" />
+
+    <h3>{{creature2?.Name}}</h3>
+
+    <p>{{creature2?.Bio}}</p>
   </div>
 </div>

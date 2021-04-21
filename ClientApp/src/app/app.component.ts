@@ -45,9 +45,11 @@ export class AppComponent {
       }
     });
   }
+
   public onchatClick() {
      this.sidebarService.sidebarColumnState("Discussion", undefined, undefined);
   }
+
   private subscribeToEvents(): void {
     this.sidebarService.onSidebarParamsChanged$.subscribe((newSidebarParams: ISidebarParams) => {
       this.sidebarParams = newSidebarParams;
