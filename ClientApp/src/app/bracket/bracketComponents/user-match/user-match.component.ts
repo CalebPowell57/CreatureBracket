@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { Subject } from 'rxjs';
 import { IUserBracketDTO } from '../../../interfaces/UserBracketDTO.interface';
+import { IUserCreatureDTO } from '../../../interfaces/UserCreatureDTO.interface';
 @Component({
   selector: 'tt-user-match',
   templateUrl: './user-match.component.html',
@@ -10,6 +12,7 @@ export class UserMatchComponent {
   @Input() matchup: any;
   @Input() tournament: IUserBracketDTO;
   @Input() canEdit: boolean;
+  @Input() matchupUpdated: Subject<string>;
 
   private creatureVotedForId: string;
 
@@ -18,7 +21,7 @@ export class UserMatchComponent {
   ngOnInit() {
     if (this.matchup) {
       if (this.matchup.creature1 != null && this.matchup.creature1.winner ) {
-        this.creatureVotedForId = this.matchup.creature2.creatureId;
+        this.creatureVotedForId = this.matchup.creature1.creatureId;
       }
       else if (this.matchup.creature2 != null && this.matchup.creature2.winner) {
         this.creatureVotedForId = this.matchup.creature2.creatureId;
@@ -62,6 +65,8 @@ export class UserMatchComponent {
     else {
       //
     }
+
+    this.matchupUpdated.next(this.matchup.matchupId);
   }
 
   clearFutureMatches(matchup: any, creature: any) {

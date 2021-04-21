@@ -4,9 +4,9 @@
       <img [src]="matchup.creature1.image" width="35" height="35" class="ngtt__team-avatar" [class.loser]="!matchup.creature1.winner && !matchup.unset" />
       <h6 class="ngtt__team-title" [class.loser]="!matchup.creature1.winner && !matchup.unset">{{matchup.creature1.name}}</h6>
       <div class="voteDiv" name="vote" style="width:50px;height:100%" *ngIf="matchup.creature1 && matchup.creature2 && canEdit" >
-        <div class="checkBox"  (click)="select(matchup.creature1)">
+        <div class="checkBox"  (click)="select(matchup.creature1); $event.stopPropagation()">
         </div>
-        <div class="checkmark" [hidden]="creatureVotedForId !== matchup.creature1.creatureId">
+        <div class="checkmark" [hidden]="creatureVotedForId !== matchup.creature1.creatureId" (click)="$event.stopPropagation()">
         </div>
       </div>
     </div>
@@ -19,9 +19,9 @@
       <img [src]="matchup.creature2.image" width="35" height="35" class="ngtt__team-avatar" [class.loser]="!matchup.creature2.winner && !matchup.unset" />
       <h6 class="ngtt__team-title" [class.loser]="!matchup.creature2.winner && !matchup.unset">{{matchup.creature2.name}}</h6>
       <div class="voteDiv" name="vote" style="width:50px;height:100%;" *ngIf="matchup.creature1 && matchup.creature2 && canEdit">
-        <div class="checkBox" (click)="select(matchup.creature2)">
+        <div class="checkBox" (click)="select(matchup.creature2); $event.stopPropagation()">
         </div>
-        <div class="checkmark" [hidden]="creatureVotedForId !== matchup.creature2.creatureId">
+        <div class="checkmark" [hidden]="creatureVotedForId !== matchup.creature2.creatureId" (click)="$event.stopPropagation()">
         </div>
       </div>
     </div>

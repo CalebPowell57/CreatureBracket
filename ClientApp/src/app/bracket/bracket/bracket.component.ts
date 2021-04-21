@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angu
 import { Router } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
 import { ToastrService } from 'ngx-toastr';
+import { Subject } from 'rxjs';
 import { ICreatureDTO } from '../../interfaces/CreatureDTO.interface';
 import { IGlobalBracketDTO } from '../../interfaces/GlobalBracketDTO.interface';
 import { ISidebarParams } from '../../interfaces/sidebar.interface';
@@ -25,6 +26,8 @@ export class BracketComponent {
   @Output() zoomButtonClick: string;
   @Output() zoomEvent: EventEmitter<any> = new EventEmitter();
   @Input() isGlobal: boolean;
+
+  matchupUpdated = new Subject<string>();
 
   sidebarParams: ISidebarParams;
   Winner: ICreatureDTO;

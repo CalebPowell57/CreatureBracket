@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges, TemplateRef } from '@angular/core';
 import * as confetti from 'canvas-confetti';
+import { Subject } from 'rxjs';
 import { IGlobalBracketDTO } from '../../../interfaces/GlobalBracketDTO.interface';
 import { IGlobalCreatureDTO } from '../../../interfaces/GlobalCreatureDTO.interface';
 import { IGlobalRoundDTO } from '../../../interfaces/GlobalRoundDTO.interface';
@@ -19,14 +20,29 @@ export class SingleEliminationTreeComponent implements OnChanges {
   };
 
   @Input() matchTemplate: TemplateRef<any>;
-  @Input() tournament: IGlobalBracketDTO;
+  @Input() tournament: any;
   @Input() isGlobal: boolean;
   @Input('zoomInOut') zoomInOut: any;
+  @Input() matchupUpdated: Subject<string>;
 
   public rounds: IGlobalRoundDTO[] = [];
   public final: IGlobalRoundDTO = { matchups: [], rank: 0 };
 
   winner: IGlobalCreatureDTO;
+
+  ngOnInit() {
+    this.matchupUpdated.subscribe(x => {
+      const finalMatchup = this.tournament.rounds[this.tournament.rounds.length - 1].matchups[0];
+
+      if (finalMatchup.creature1 && finalMatchup.creature1.winner) {
+        this.winner = finalMatchup.creature1;
+      } else if (finalMatchup.creature2 && finalMatchup.creature2.winner) {
+        this.winner = finalMatchup.creature2;
+      } else {
+        this.winner = null;
+      }
+    });
+  }
 
   startConfetti() {
     if (!this.isGlobal) {

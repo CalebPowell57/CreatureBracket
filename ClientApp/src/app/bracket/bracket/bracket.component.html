@@ -17,13 +17,14 @@
             <ngtt-single-elimination-tree [tournament]="isGlobal === true ? bracket : userBracket"
                                           [matchTemplate]="matchTemplate"
                                           [isGlobal]="isGlobal"
-                                          [zoomInOut]="zoomInOut">
+                                          [zoomInOut]="zoomInOut"
+                                          [matchupUpdated]="matchupUpdated">
             </ngtt-single-elimination-tree>
           </ng-container>
 
           <ng-template #matchTemplate let-matchup let-tournament="tournament" let-isGlobal="isGlobal">
             <tt-match *ngIf="isGlobal" [matchup]="matchup" (click)="onMatchClick(matchup)"></tt-match>
-            <tt-user-match *ngIf="!isGlobal" [matchup]="matchup" [tournament]="tournament" (click)="onMatchClick(matchup)" [canEdit]="canEdit"></tt-user-match>
+            <tt-user-match *ngIf="!isGlobal" [matchup]="matchup" [tournament]="tournament" (click)="onMatchClick(matchup)" [canEdit]="canEdit" [matchupUpdated]="matchupUpdated"></tt-user-match>
           </ng-template>
         </div>
       </div>
