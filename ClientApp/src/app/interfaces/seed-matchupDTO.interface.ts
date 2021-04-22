@@ -1,6 +1,6 @@
 import { ICreatureDTO } from "./CreatureDTO.interface";
 
-export interface ImatchupSeed {
+export interface IMatchupSeed {
 
   Contestants: ICreatureDTO[];
   MatchupSeed: number;

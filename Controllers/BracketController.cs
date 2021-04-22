@@ -1,4 +1,5 @@
-﻿using CreatureBracket.Misc;
+﻿using CreatureBracket.DTOs.Responses;
+using CreatureBracket.Misc;
 using CreatureBracket.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -48,15 +49,14 @@ namespace CreatureBracket.Controllers
             return Ok();
         }
 
-        //cascade delete is on and we need to turn this off before we even think about uncommenting this.
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> Delete([FromRoute] Guid id)
-        //{
-        //    await _unitOfWork.BracketRepository.DeleteAsync(id);
-        //    await _unitOfWork.SaveAsync();
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        {
+            await _unitOfWork.BracketRepository.DeleteAsync(id);
+            await _unitOfWork.SaveAsync();
 
-        //    return Ok();
-        //}
+            return Ok();
+        }
 
         [HttpGet("Active")]
         public async Task<IActionResult> Active()
@@ -125,7 +125,7 @@ namespace CreatureBracket.Controllers
             return Ok(response);
         }
 
-        [HttpGet("StartBracket")]
+        [HttpPost("StartBracket")]
         public async Task<IActionResult> Approve()
         {
             await _unitOfWork.BracketRepository.StartAsync();

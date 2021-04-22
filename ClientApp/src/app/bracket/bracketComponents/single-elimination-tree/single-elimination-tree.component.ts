@@ -110,14 +110,12 @@ export class SingleEliminationTreeComponent implements OnChanges {
           const matchup : any = round.matchups[0];
 
           if (this.isGlobal) {
-            const winnerArray = matchup.contestants.filter(creature => creature.winner)
+            if (matchup.contestants) {
+              const winnerArray = matchup.contestants.filter(creature => creature.winner);
 
-            if (winnerArray.length > 0) {
-              this.winner = winnerArray[0];
-
-              //const wrapper = document.getElementById('wrapper');
-
-              //wrapper.addEventListener('animationend', this.startConfetti);//only start for global
+              if (winnerArray.length > 0) {
+                this.winner = winnerArray[0];
+              }
             }
           } else {
             if (matchup.creature1 && matchup.creature1.winner) {

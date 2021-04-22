@@ -42,6 +42,13 @@ export class NavMenuComponent {
     }
 
     this.bracketService.activeBracketStatus().subscribe(x => {
+      if (account) {
+        const roles = account.idTokenClaims.roles;
+        const isSuper = roles && roles.includes('super');
+
+        this.showBracketManager = isSuper;
+      }
+
       if (!x) {
         return;
       }
@@ -52,7 +59,6 @@ export class NavMenuComponent {
 
         this.showCreatureApproval = isSuper && x.status === EStatus.Open;
         this.showSeedTournament = isSuper && x.status === EStatus.Open;
-        this.showBracketManager = isSuper;
       }
 
       this.showCreatureSubmission = x.status === EStatus.Open;

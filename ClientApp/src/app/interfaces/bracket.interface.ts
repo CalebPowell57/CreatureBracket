@@ -1,12 +1,10 @@
-import { Guid } from "guid-typescript";
-
 export enum EStatus { Open, Started, Completed }
 
 export interface IBracket {
-  id: Guid;
+  id: string;
   title: string;
   status: EStatus;
-  BracketSubmissionDeadline: Date;
-  CompletedDateTime: Date;
-  winnerId: Guid;
+  bracketSubmissionDeadline: Date;
+  completedDateTime: Date;
+  winnerId: string;
 }

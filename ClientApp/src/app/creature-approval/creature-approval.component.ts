@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { ICreatureSubmission } from '../interfaces/creature-submission.interface';
+import { eCreatureSubmissionStatus, ICreatureSubmission } from '../interfaces/creature-submission.interface';
+import { NaviService } from '../shared/navi.service';
 import { CreatureApprovalService } from './creature-approval.service';
 
 @Component({
@@ -14,10 +15,13 @@ export class CreatureApprovalComponent {
 
   constructor(
     private creatureApprovalService: CreatureApprovalService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private naviService: NaviService
   ) { }
 
   ngOnInit() {
+    this.naviService.loadingChanged$.next(true);
+
     this.creatureApprovalService.getSubmissions().subscribe(x => {
       for (let creature of x) {
         if (creature.status === 0) {
@@ -27,6 +31,8 @@ export class CreatureApprovalComponent {
           this.approvedSubmissions.push(creature);
         }
       }
+
+      this.naviService.loadingChanged$.next(false);
     });
   }
 
@@ -36,7 +42,21 @@ export class CreatureApprovalComponent {
 
       this.pendingSubmissions = this.pendingSubmissions.filter(y => y.id !== submission.id);
 
+      submission.status = eCreatureSubmissionStatus.Approved;
+
       this.approvedSubmissions.push(submission);
+    });
+  }
+
+  onRemoveApprovalButtonClick(submission: ICreatureSubmission) {
+    this.creatureApprovalService.removeApproval(submission.id).subscribe(() => {
+      this.toastrService.success(`${submission.name} has been removed from the list of creatures approved for the tournament!`, 'Success');
+
+      this.approvedSubmissions = this.approvedSubmissions.filter(y => y.id !== submission.id);
+
+      submission.status = eCreatureSubmissionStatus.Pending;
+
+      this.pendingSubmissions.push(submission);
     });
   }
 }

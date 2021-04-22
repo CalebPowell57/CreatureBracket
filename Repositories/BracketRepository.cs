@@ -16,7 +16,7 @@ namespace CreatureBracket.Repositories
 
         public override async Task PostAsync(Bracket entity)
         {
-            if (await _context.Brackets.AnyAsync(x => x.Status != Bracket.EStatus.Completed))
+            if (!_context.Set<Bracket>().Any(e => e.Id == entity.Id) && await _context.Brackets.AnyAsync(x => x.Status != Bracket.EStatus.Completed))
             {
                 throw new ExpectedException("You can only have one active bracket at a time!");
             }

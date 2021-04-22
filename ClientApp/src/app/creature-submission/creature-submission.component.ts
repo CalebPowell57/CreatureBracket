@@ -32,11 +32,45 @@ export class CreatureSubmissionComponent {
   }
 
   onSubmit(form: NgForm) {
+    let error = '';
+
+    if (!this.croppedImage) {
+      error += 'Please add an image';
+    }
+
+    if (!this.input.name) {
+      error += error.length > 0 ? ' and a name' : 'Please add a name';
+    }
+
+    if (!this.input.bio) {
+      error += error.length > 0 ? ' and a bio' : 'Please add a bio';
+    }
+
+    if (error.length > 0) {
+      error += '.'
+
+      this.toastrService.error(error, 'Error');
+
+      return;
+    }
+
     this.naviService.loadingChanged$.next(true);
     this.creatureSubmissionService.create({ name: this.input.name, bio: this.input.bio, image: this.croppedImage })
       .subscribe(
         () => {
           this.toastrService.success(`${this.input.name} has been submitted!`, 'Success');
+
+          const newSubmission: ICreatureSubmission = {
+            bio: this.input.bio,
+            image: this.croppedImage,
+            name: this.input.name,
+            bracketId: null,
+            entryDate: null,
+            id: null,
+            status: null
+          };
+
+          this.submissions.push(newSubmission);
 
           this.input.name = "";
           this.input.bio = "";

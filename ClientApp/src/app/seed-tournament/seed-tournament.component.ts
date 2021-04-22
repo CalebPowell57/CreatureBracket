@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ImatchupSeed } from '../interfaces/seed-matchupDTO.interface';
+import { ToastrService } from 'ngx-toastr';
+import { IMatchupSeed } from '../interfaces/seed-matchupDTO.interface';
 import { SeedTournamentService } from './seed-tournament.service';
 
 @Component({
@@ -8,29 +9,26 @@ import { SeedTournamentService } from './seed-tournament.service';
   styleUrls: ['./seed-tournament.component.scss']
 })
 export class SeedTournamentComponent {
-
-  SeededMatchups: ImatchupSeed[];
-  constructor(private seedService: SeedTournamentService) { }
-
+  SeededMatchups: IMatchupSeed[];
+  constructor(private seedService: SeedTournamentService, private toastrService: ToastrService) { }
 
   ngOnInit() {
-    this.seedService.GetCurrentStandings().subscribe(CurrentStandings => {
-      this.SeededMatchups = CurrentStandings;
+    this.seedService.SeedCreatures().subscribe(seedings => {
+      this.SeededMatchups = seedings;
     })
   }
+
   public onSeedMatchups() {
-      this.seedService.SeedCreatures().subscribe(Round => {
-        this.SeededMatchups = Round;
-      })
+    this.seedService.SeedCreatures().subscribe(Round => {
+      this.SeededMatchups = Round;
+    });
   }
+
   public onStartBracket() {
     if (confirm("Are you sure you would like to start the bracket?")) {
       this.seedService.StartBracket().subscribe(response => {
-        if (response) {
-
-        }
-      })
+        this.toastrService.success('Bracket successfully started!');
+      });
     }
   }
-
 }

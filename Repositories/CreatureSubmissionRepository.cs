@@ -50,12 +50,24 @@ namespace CreatureBracket.Repositories
                 BracketId = submission.BracketId,
                 Name = submission.Name,
                 Image = submission.Image,
-                Seed = null
+                Seed = null,
+                CreatureSubmissionId = submission.Id
             };
 
             submission.Status = ECreatureSubmissionStatus.Approved;
 
             _context.Add(creature);
+        }
+
+        public async Task RemoveApprovalAsync(ApproveSubmissionRequestDTO dto)
+        {
+            var submission = await _context.CreatureSubmissions.SingleAsync(x => x.Id == dto.CreatureSubmissionId);
+
+            var creature = await _context.Creatures.SingleAsync(x => x.CreatureSubmissionId == submission.Id);
+
+            _context.Creatures.Remove(creature);
+
+            submission.Status = ECreatureSubmissionStatus.Pending;
         }
 
         public async Task<List<CreatureSubmission>> GetAllAsync()

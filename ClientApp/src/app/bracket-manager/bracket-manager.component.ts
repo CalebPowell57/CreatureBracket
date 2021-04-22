@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Guid } from 'guid-typescript';
 import { ToastrService } from 'ngx-toastr';
 import { EStatus, IBracket } from '../interfaces/bracket.interface';
@@ -7,24 +6,12 @@ import { BracketManagerService } from './bracket-manager.service';
 
 @Component({
   selector: 'app-bracket-manager',
-  templateUrl: './bracket-manager.component.html'
+  templateUrl: './bracket-manager.component.html',
+  styleUrls: ['./bracket-manager.component.scss']
 })
 export class BracketManagerComponent {
   brackets: IBracket[];
   filteredBrackets: IBracket[];
-  input: IInput = {
-    title: null
-  };
-  _selectedBracket: IBracket;
-  get selectedBracket(): IBracket {
-    return this._selectedBracket;
-  }
-  set selectedBracket(value: IBracket) {
-    this.onBracketSelected(value);
-  }
-  selectedBracketText = 'No bracket selected';
-  isAddingBracket = false;
-  showForm = true;
 
   _filterText: string;
   get filterText(): string {
@@ -34,8 +21,6 @@ export class BracketManagerComponent {
     this._filterText = value;
 
     this.filteredBrackets = this.filterText ? this.filterBrackets(this.filterText) : this.brackets;
-
-    this.selectedBracket = this.filteredBrackets[0];
   }
 
   constructor(
@@ -47,23 +32,7 @@ export class BracketManagerComponent {
       this.brackets = result;
 
       this.filteredBrackets = this.brackets;
-
-      this.selectedBracket = this.filteredBrackets.length ? this.filteredBrackets[0] : null;
-
-      this.isAddingBracket = this.filteredBrackets.length == 0;
-    }, error => console.error(error));
-  }
-
-  onBracketSelected(selected: IBracket) {
-    this.showForm = selected !== null;
-
-    this._selectedBracket = selected;
-
-    if (this._selectedBracket) {
-      this.input = { title: this._selectedBracket.title };
-    }
-
-    this.selectedBracketText = this.selectedBracket ? this.selectedBracket.title : 'No bracket selected';
+    });
   }
 
   filterBrackets(text: string): IBracket[] {
@@ -72,76 +41,44 @@ export class BracketManagerComponent {
   }
 
   onAddButtonClick() {
-    this.filterText = '';
+    let title = 'New Bracket';
+    let index = 0;
 
-    this.input = {
-      title: ""
-    };
+    while (this.brackets.some(x => x.title === title)) {
+      title = `New Bracket (${index})`;
 
-    this.isAddingBracket = true;
+      index++;
+    }
 
-    this.showForm = true;
-  }
-
-  onCancelButtonClick() {
-    this.input = { title: this._selectedBracket.title };
-
-    this.isAddingBracket = false;
-  }
-
-  onSubmit(form: NgForm) {
-    var adding = this.isAddingBracket;
-
-    let newBracket: IBracket = {
-      title: this.input.title,
-      id: Guid.create(),
+    const newBracket: IBracket = {
+      id: Guid.create().toString(),
+      bracketSubmissionDeadline: null,
+      completedDateTime: null,
       status: EStatus.Open,
-      winnerId: null,
-      BracketSubmissionDeadline: null,
-      CompletedDateTime: null
+      title: title,
+      winnerId: null
     };
 
-    if (form.valid) {
-      this.bracketService.postItem(newBracket)
-        .subscribe(
-          result => {
-            if (!this.isAddingBracket) {
-              this.brackets = this.brackets.filter(bracket => bracket.id !== this.selectedBracket.id);
-            }
+    this.bracketService.postItem(newBracket).subscribe(x => {
+      this.brackets.push(newBracket);
 
-            this.brackets.unshift(newBracket);
-
-            this.filteredBrackets = [];
-            this.filterText = this.filterText;//load filtered brackets now
-
-            this.selectedBracket = newBracket;
-          }, error => console.error(error));
-
-      if (adding) {
-        this.toastrService.success('Successfully added ' + this.selectedBracket.title, 'Success');
-      }
-      else {
-        this.toastrService.success('Successfully updated ' + this.selectedBracket.title, 'Success');
-      }
-    }
-    else {
-      this.toastrService.error('Please fix the errors above', 'Failure');
-    }
+      this.filterText = '';
+    });
   }
 
-  onDeleteButtonClick() {
-    if (this.selectedBracket && confirm('Are you sure you want to delete ' + this.selectedBracket.title + '?')) {
-      this.bracketService.deleteItem(this.selectedBracket.id.toString()).subscribe(result => {
-        this.brackets = this.brackets.filter(item => item !== this.selectedBracket);
+  onTitleFocusLost(bracketChanged: IBracket) {
+    this.bracketService.postItem(bracketChanged).subscribe();//really should add an update title endpoint
+  }
+
+  onDeleteButtonClick(bracketSelected: IBracket) {
+    if (confirm('Are you sure you want to delete ' + bracketSelected.title + '?')) {
+      this.bracketService.deleteItem(bracketSelected.id).subscribe(result => {
+        this.brackets = this.brackets.filter(item => item !== bracketSelected);
 
         this.filterText = this.filterText;
 
-        this.selectedBracket = this.filteredBrackets[0];
-      }, error => console.error(error));
+        bracketSelected = this.filteredBrackets[0];
+      });
     }
   }
-}
-
-interface IInput {
-  title: string;
 }

@@ -63,7 +63,7 @@ export class BracketComponent {
       this.bracketService.getBracketData().subscribe(data => {
         this.bracket = data;
         for (let round of data.rounds) {
-          if (round.matchups.length === 1) {
+          if (round.matchups.length === 1 && round.matchups[0].contestants) {
             for (let contestant of round.matchups[0].contestants) {
               if (contestant.winner) {
                 this.Winner = {

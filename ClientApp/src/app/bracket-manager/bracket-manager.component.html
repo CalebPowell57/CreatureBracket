@@ -1,19 +1,12 @@
-<div>
+<div style="padding: 20px;">
   <h2>Bracket Manager</h2>
 
-  <div >
-    <div style="width:20%">
+  <div style="padding: 20px;">
+    <div style="width:400px;">
       <div style="margin-bottom:10px;">
         <button class="btn btn-primary"
                 (click)="onAddButtonClick()">
           Add
-        </button>
-
-        <button class="btn btn-primary"
-                style="margin-left:10px;"
-                (click)="onDeleteButtonClick()"
-                *ngIf="selectedBracket && !isAddingBracket">
-          Delete
         </button>
       </div>
 
@@ -23,65 +16,20 @@
              class="form-control"
              placeholder="Search" />
       <ul>
-        <li *ngFor="let bracket of filteredBrackets"
-            class="selectableFilterItem"
-            [class.selected]="bracket.id === selectedBracket.id"
-            (click)="onBracketSelected(bracket)"
-            style="font-size:12pt;padding:10px;">
-          {{bracket.title}}
+        <li class="selectableFilterItem horizontalContainer" *ngFor="let bracket of filteredBrackets">
+          <input [(ngModel)]="bracket.title" (focusout)="onTitleFocusLost(bracket)" style="background: none; border: none; box-shadow: none; padding: 6px 14px 6px 14px; width: 100%; color: white;"/>
+
+          <button class="btn btn-outline-danger"
+                  (click)="onDeleteButtonClick(bracket)"
+                  style="padding:2px; margin: 6px; border: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                 width="26" height="26"
+                 viewBox="0 0 172 172"
+                 style=" fill:#000000;">
+            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M38.80078,31.07422l-7.72656,7.72656l47.19922,47.19922l-47.19922,47.19922l7.72656,7.72656l47.19922,-47.19922l47.19922,47.19922l7.72656,-7.72656l-47.19922,-47.19922l47.19922,-47.19922l-7.72656,-7.72656l-47.19922,47.19922z"></path></g></g></svg>
+          </button>
         </li>
       </ul>
     </div>
-
-    <form style="margin-left:20px;"
-          #form="ngForm"
-          (ngSubmit)="onSubmit(form)">
-      <h4>{{selectedBracketText}}</h4>
-
-      <div *ngIf="showForm">
-        <div class="form-group">
-          <label for="title">Title</label>
-
-          <input type="text"
-                 [(ngModel)]="input.title"
-                 name="title"
-                 class="form-control"
-                 required
-                 autocomplete="off"
-                 minLength="3"
-                 #titleField="ngModel"
-                 [class.field-error]="form.submitted && titleField.invalid" />
-          <div [hidden]="!form.submitted || titleField.valid"
-               style="font-size:10pt;color:red;">
-            Please enter a title that is at least 3 characters long.
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="creatureEntryDeadline">Creature Entry Deadline</label>
-
-          <input type="datetime-local"
-                 [(ngModel)]="input.creatureEntryDeadline"
-                 class="form-control"
-                 name="creatureEntryDeadline"
-                 required/>
-        </div>
-
-        <div>
-          <button type="submit"
-                  class="btn btn-primary"
-                  style="margin-top:10px;">
-            Save
-          </button>
-
-          <button type="button"
-                  class="btn btn-primary"
-                  style="margin-top:10px;margin-left:10px;"
-                  (click)="onCancelButtonClick()">
-            Cancel
-          </button>
-        </div>
-      </div>
-    </form>
   </div>
 </div>

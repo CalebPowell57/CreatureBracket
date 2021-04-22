@@ -43,6 +43,16 @@ namespace CreatureBracket.Controllers
             return Ok();
         }
 
+        [HttpPost("RemoveApproval")]
+        public async Task<IActionResult> RemoveApproval([FromBody] ApproveSubmissionRequestDTO dto)
+        {
+            await _unitOfWork.CreatureSubmissionRepository.RemoveApprovalAsync(dto);
+
+            await _unitOfWork.SaveAsync();
+
+            return Ok();
+        }
+
         [HttpGet]
         public async Task<IActionResult> Get()
         {
