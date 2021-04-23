@@ -32,7 +32,7 @@ export class UserMatchComponent {
   select(creature: any) {
     this.creatureVotedForId = creature.creatureId;
     creature.winner = true;
-    this.matchup.unset = true;
+    this.matchup.unset = false;
 
     let loser = this.matchup.creature1 === creature ? this.matchup.creature2 : this.matchup.creature1;
     loser.winner = false;

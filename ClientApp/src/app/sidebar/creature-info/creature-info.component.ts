@@ -35,6 +35,10 @@ export class CreatureInfoComponent implements OnInit {
   }
 
   setUserCreatures(matchup: IUserMatchupDTO) {
+    if (!matchup.creature1 || !matchup.creature2) {
+      return;
+    }
+
     this.creature1 = {
       Name: matchup.creature1.name,
       Bio: matchup.creature1.bio,
@@ -49,6 +53,10 @@ export class CreatureInfoComponent implements OnInit {
   }
 
   setGlobalCreatures(matchup: IGlobalMatchupDTO) {
+    if (!matchup.contestants || matchup.contestants.length !== 2) {
+      return;
+    }
+
     this.creature1 = {
       Name: matchup.contestants[0].name,
       Bio: matchup.contestants[0].bio,
