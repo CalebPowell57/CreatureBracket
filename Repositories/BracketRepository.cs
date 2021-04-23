@@ -320,7 +320,7 @@ namespace CreatureBracket.Repositories
 
                     var matchupDTO = new MatchupResponseDTO
                     {
-                        Current = round.VoteDeadline > DateTime.UtcNow && matchup.Winner != null,
+                        Current = round.VoteDeadline > DateTime.UtcNow,
                         MatchupId = matchup.Id,
                         Contestants = new List<CreatureResponseDTO>
                         {
