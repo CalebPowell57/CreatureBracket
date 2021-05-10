@@ -81,8 +81,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       auth: {
         clientId: '5c620c19-7513-4a48-9406-8bf19d31711b',
         authority: 'https://login.microsoftonline.com/eaad4fe4-754b-422e-8fa2-6df1b51005bb',
-        redirectUri: 'https://localhost:44316'
-        /*redirectUri: 'https://ferenginar:44670'*/
+        /*redirectUri: 'https://localhost:44316'*/
+        redirectUri: 'https://ferenginar:44670'
       },
       cache: {
         cacheLocation: 'localStorage',
